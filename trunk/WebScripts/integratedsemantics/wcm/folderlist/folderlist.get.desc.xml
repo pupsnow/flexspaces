@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces AVM folder list data</shortname>
+  <description>Gets properties of folders and docs in AVM folder for folder contents displaying</description>
+  <url>/flexspaces/wcm/folderlist?storeid={storeid}&amp;path={path}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

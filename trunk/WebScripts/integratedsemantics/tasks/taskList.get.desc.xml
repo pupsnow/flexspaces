@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces task list data</shortname>
+  <description>Gets task list data for the current user</description>
+  <url>/flexspaces/taskList</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

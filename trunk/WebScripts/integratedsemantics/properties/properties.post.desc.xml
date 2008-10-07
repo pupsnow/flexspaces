@@ -1,0 +1,10 @@
+<webscript>
+  <shortname>FlexSpaces set properties</shortname>
+  <description>Sets properties of a doc or folder</description>
+  <url>/flexspaces/setProperties?nodeid={nodeid}&amp;name={name?}&amp;title={title?}&amp;description={description?}&amp;author={author?}</url>
+  <url>/flexspaces/setProperties?storeid={storeid}&amp;path={path}&amp;name={name?}&amp;title={title?}&amp;description={description?}</url>
+  <url>/flexspaces/setProperties?path={path}&amp;name={name?}&amp;title={title?}&amp;description={description?}&amp;author={author?}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

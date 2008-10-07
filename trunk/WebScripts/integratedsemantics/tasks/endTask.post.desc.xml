@@ -1,0 +1,9 @@
+<webscript>
+  <shortname>FlexSpaces end task</shortname>
+  <description>Ends adhoc task or ends other tasks with given transitionId such as approve reject etc</description>
+  <url>/flexspaces/endTask?taskid={taskidAdhoc}</url>
+  <url>/flexspaces/endTask?taskid={taskid}&amp;transid={transitionId}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

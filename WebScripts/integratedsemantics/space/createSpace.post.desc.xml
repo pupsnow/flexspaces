@@ -1,0 +1,9 @@
+<webscript>
+  <shortname>Flexspaces Create Space</shortname>
+  <description>Creates a folder</description>
+  <url>/flexspaces/createSpace?parentid={parentNodeId}&amp;sn={spaceName}&amp;st={spaceTitle?}&amp;sd={spaceDesc?}&amp;t={templateId?}&amp;icon={iconName?}</url>
+  <url>/flexspaces/createSpace?parentpath={parentPath}&amp;sn={spaceName}&amp;st={spaceTitle?}&amp;sd={spaceDesc?}&amp;t={templateId?}&amp;icon={iconName?}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

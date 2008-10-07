@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces AVM Tree</shortname>
+  <description>Gets one level of folder children for given avm folder</description>
+  <url>/flexspaces/wcm/tree?storeid={storeid}&amp;path={path}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

@@ -1,0 +1,8 @@
+<webscript>
+   <shortname>FlexSpaces Make Versionable</shortname>
+   <description>Make document with given nodeid versionable</description>
+   <url>/flexspaces/makeVersionable?nodeid={nodeid}</url>
+   <format default="xml">argument</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+</webscript>

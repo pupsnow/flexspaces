@@ -1,0 +1,9 @@
+<webscript>
+  <shortname>FlexSpaces Search</shortname>
+  <description>Simple search for a text string</description>
+  <url>/flexspaces/search?text={simpleText}</url>
+  <url>/flexspaces/search?lucenequery={luceneFormatQuery}</url>
+  <format default="xml">extension</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

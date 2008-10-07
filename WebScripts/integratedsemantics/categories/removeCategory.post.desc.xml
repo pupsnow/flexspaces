@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces remove category</shortname>
+  <description>Remove category from a node</description>
+  <url>/flexspaces/removeCategory?noderef={noderef}&amp;categorynoderef={categoryNodeRef}</url>
+  <format default="xml"/>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

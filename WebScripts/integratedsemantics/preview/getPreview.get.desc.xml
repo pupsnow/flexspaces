@@ -1,0 +1,9 @@
+<webscript>
+  <shortname>FlexSpaces  get preview </shortname>
+  <description>Gets the flash preview associated with a doc</description>
+  <url>/flexspaces/getPreview?nodeid={nodeid}</url>
+  <url>/flexspaces/getPreview?nodepath={nodepath}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

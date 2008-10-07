@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces remove tag</shortname>
+  <description>Remove tag from a node</description>
+  <url>/flexspaces/removeTag?tag={tagName}&amp;noderef={nodeRef}</url>
+  <format default="xml"/>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces upload new</shortname>
+  <description>Uploads file content and creates a new document in the repository, see javascript file for field names</description>
+  <url>/flexspaces/uploadNew</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

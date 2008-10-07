@@ -1,0 +1,10 @@
+<webscript>
+  <shortname>FlexSpaces get properties data</shortname>
+  <description>Gets properties of a doc or folder</description>
+  <url>/flexspaces/getProperties?nodeid={nodeid}</url>
+  <url>/flexspaces/getProperties?storeid={storeid}&amp;path={path}</url>
+  <url>/flexspaces/getProperties?path={path}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

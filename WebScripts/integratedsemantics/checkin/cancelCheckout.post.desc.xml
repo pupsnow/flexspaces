@@ -1,0 +1,8 @@
+<webscript>
+   <shortname>FlexSpaces Cancel Checkout</shortname>
+   <description>Cancel checkout of document with given nodeid</description>
+   <url>/flexspaces/cancelCheckout?nodeid={nodeid}</url>
+   <format default="xml">argument</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+</webscript>

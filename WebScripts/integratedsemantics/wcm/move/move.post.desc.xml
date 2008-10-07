@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces WCM Move</shortname>
+  <description>Moves avm file or folder into the target avm folder</description>
+  <url>/flexspaces/wcm/move?sourcestoreid={sourceStoreId}&amp;sourcepath={sourcePath}&amp;targetstoreid={targetStoreId}&amp;targetpath={targetPath}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

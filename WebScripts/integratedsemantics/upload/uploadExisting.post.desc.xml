@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces upload existing</shortname>
+  <description>Uploads file content for existing document in the repository, see javascript file for field names</description>
+  <url>/flexspaces/uploadExisting</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

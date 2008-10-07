@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces add tag</shortname>
+  <description>Add new tag or add new/existing tag to node</description>
+  <url>/flexspaces/addTag?tag={tagName}&amp;noderef={nodeRef?}</url>
+  <format default="xml"/>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

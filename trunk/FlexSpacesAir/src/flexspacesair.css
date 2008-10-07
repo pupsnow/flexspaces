@@ -1,0 +1,33 @@
+/* CSS file */
+
+
+VBox
+{
+	horizontalGap:1; 
+	verticalGap:1;
+}
+
+HBox
+{
+	horizontalGap:1; 
+	verticalGap:1;
+}
+
+Application
+{
+	font-size: 12;
+}
+
+.mainApplication
+{
+	background-color: #000000; 
+	
+	border-thickness: 2;
+	border-style: solid;
+	border-color: #000000;
+}
+
+.lightBackground
+{
+	background-color: #ffffff;
+}

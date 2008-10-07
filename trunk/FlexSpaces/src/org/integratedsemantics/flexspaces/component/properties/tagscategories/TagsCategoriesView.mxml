@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tagscategories:TagsCategoriesViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:tags="org.integratedsemantics.flexspaces.component.tags.properties.*"   
+    xmlns:categories="org.integratedsemantics.flexspaces.component.categories.properties.*"   
+    xmlns:tagscategories="org.integratedsemantics.flexspaces.component.properties.tagscategories.*"
+    width="520" height="520" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("TagsCategoriesView")]</mx:Metadata>
+    
+    <mx:Style source="../../../framework/dialog/dialog.css"/>
+
+    <mx:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="400" styleName="mainArea" id="nameFormItem">    
+        <mx:Label id="nameLabel" width="250"/>
+    </mx:FormItem>
+    
+    <mx:Spacer height="5"/>
+    
+    <mx:TabNavigator creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" backgroundColor="#999999" styleName="mainArea" borderColor="#000000" borderStyle="outset">
+        
+        <tags:TagPropertiesView id="tagPropertiesView" />
+    
+        <categories:CategoryPropertiesView id="categoryPropertiesView" />
+        
+    </mx:TabNavigator>
+
+    <mx:Spacer height="5"/>
+    
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="closeBtn" label="{resourceManager.getString('TagsCategoriesView', 'closeBtn_label' )}"/>    
+    </mx:HBox> 
+
+</tagscategories:TagsCategoriesViewBase>

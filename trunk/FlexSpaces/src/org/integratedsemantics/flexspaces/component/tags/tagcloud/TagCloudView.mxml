@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TagCloudViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns="org.integratedsemantics.flexspaces.component.tags.tagcloud.*"
+    horizontalGap="0" verticalGap="0" horizontalAlign="left" verticalAlign="top">
+    
+    <mx:Metadata>[ResourceBundle("TagCloudView")]</mx:Metadata>
+  
+</TagCloudViewBase>

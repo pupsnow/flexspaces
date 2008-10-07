@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<taskspanel:TasksPanelViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:taskspanel="org.integratedsemantics.flexspaces.component.tasks.taskspanel.*"
+    xmlns:tasklist="org.integratedsemantics.flexspaces.component.tasks.tasklist.*"
+    xmlns:taskcontrol="org.integratedsemantics.flexspaces.component.tasks.taskcontrol.*"
+    xmlns:folderview="org.integratedsemantics.flexspaces.component.folderview.*">
+    
+    <mx:Metadata>[ResourceBundle("TasksPanelView")]</mx:Metadata>
+  
+    <tasklist:TaskListView id="taskListView" height="50%" width="100%"/>
+    
+    <mx:VBox height="50%" width="100%">
+    
+        <taskcontrol:TaskButtonsView id="taskButtonsView" />
+    
+        <folderview:FolderView id="taskAttachmentsView" />
+    
+    </mx:VBox>      
+
+</taskspanel:TasksPanelViewBase>                        

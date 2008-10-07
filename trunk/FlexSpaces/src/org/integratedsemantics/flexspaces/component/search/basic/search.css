@@ -1,0 +1,15 @@
+/* CSS file for Search form */
+
+.search
+{
+   border-style:solid;
+   border-thickness:0;
+   border-color:#FFFFFF;   
+}
+
+.advancedSeachLink
+{
+    color: #0E9EE5;
+    rollOverColor: #0E9EE5;
+    text-decoration: underline;
+}

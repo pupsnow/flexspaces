@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gridview:FolderGridViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:gridview="org.integratedsemantics.flexspaces.component.folderview.gridview.*"
+    xmlns:paging="org.integratedsemantics.flexspaces.component.folderview.paging.*"
+    height="100%" width="100%">    
+        
+    <mx:Metadata>[ResourceBundle("FolderGridView")]</mx:Metadata>
+
+    <paging:Pager id="pager" pageIndex="0" pageSize="{pageSize}" totalPages="{Math.max(Math.ceil(repoFolderCollection.length/pageSize),1)}" dataProvider="{repoFolderCollection}" />  
+    
+    <mx:VBox verticalGap="0" height="100%" width="100%">
+    
+        <mx:DataGrid id="folderGrid" height="100%" width="100%" rowHeight="25" headerRelease="pager.sortColumn(event.dataField);event.preventDefault()"
+            dataProvider="{pager.pageData}" styleName="DataGrid" doubleClickEnabled="true"         
+            dragEnabled="true" dropEnabled="true"  dragMoveEnabled="true" allowMultipleSelection="true">                
+    
+            <mx:columns>        
+                <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
+                    <mx:itemRenderer>
+                        <mx:Component>
+                            <mx:Image source="{data.icon16}" scaleContent="false"/>
+                        </mx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>             
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'nameColumn_headerText')}" dataField="name" width="200" id="dgcolumn0"/>      
+                <!--<mx:DataGridColumn headerText="Description" dataField="desc" width="100" /> -->            
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'typeColumn_headerText')}" dataField="type" width="100" id="dgcolumn1"/>      
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'sizeColumn_headerText')}" dataField="size" width="100" id="dgcolumn2"/>      
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'createdColumn_headerText')}" dataField="created" width="100" id="dgcolumn3"/>      
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'modifiedColumn_headerText')}" dataField="modified" id="dgcolumn4"/>      
+            </mx:columns>
+    
+        </mx:DataGrid>  
+    
+        <mx:HBox horizontalAlign="center" width="100%">
+            <mx:Label text="{resourceManager.getString('FolderGridView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('FolderGridView', 'pagenumLabel_of')} {pager.totalPages}" 
+                      color="0xFFFFFF" id="pagenumLabel"/>    
+            <mx:Spacer width="4"/>    
+            <paging:PagerBar id="pageBar"  pager="{pager}" totalPages="{pager.totalPages}"
+                             maxVisiblePages="10" buttonWidth="45" buttonMode="true"/>
+            <mx:Spacer width="4"/>                
+            <mx:Label text="{resourceManager.getString('FolderGridView', 'itemsPerPageLabel_text')}" color="0xFFFFFF" id="itemsPerPageLabel"/>
+            <mx:Spacer width="4"/>                
+            <mx:NumericStepper value="{this.pageSize}" change="this.pageSize = event.target.value" maximum="100" minimum="1" />
+        </mx:HBox>
+        
+    </mx:VBox>
+      
+</gridview:FolderGridViewBase>    

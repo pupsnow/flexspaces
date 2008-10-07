@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<folderview:FolderViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:folderview="org.integratedsemantics.flexspaces.component.folderview.*"
+    xmlns:breadcrumb="com.decoursey.components.*"
+    xmlns:gridview="org.integratedsemantics.flexspaces.component.folderview.gridview.*"
+    xmlns:iconview="org.integratedsemantics.flexspaces.component.folderview.iconview.*"
+    xmlns:coverflow="org.integratedsemantics.flexspaces.component.folderview.coverflow.*"
+    xmlns:viewmodebar="org.integratedsemantics.flexspaces.component.folderview.viewmodebar.*"
+    height="100%" width="100%">
+    
+    <mx:Metadata>[ResourceBundle("FolderView")]</mx:Metadata>
+
+    <mx:Metadata>
+    [Event(name="folderListContextMenu",type="org.integratedsemantics.flexspaces.component.folderview.event.FolderViewContextMenuEvent")]          
+    [Event(name="folderListOnDrop",type="org.integratedsemantics.flexspaces.component.folderview.event.FolderViewOnDropEvent")]          
+    [Event(name="folderListChangePath",type="org.integratedsemantics.flexspaces.component.folderview.event.FolderViewChangePathEvent")]          
+    [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.component.folderview.event.DoubleClickDocEvent")]          
+    [Event(name="clickNode",type="org.integratedsemantics.flexspaces.component.folderview.event.ClickNodeEvent")]          
+    </mx:Metadata>
+
+    <mx:VBox height="100%" width="100%">
+        
+        <!-- bread crumb and icon/grid view mode toggle buttons -->
+        <mx:HBox width="100%">
+            <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="left" id="breadCrumbAreaBox">
+                <breadcrumb:BreadcrumbDisplay id="breadCrumb" displayDivider="/" />
+            </mx:HBox>
+            <viewmodebar:ViewModeBarView id="viewModeBar" />
+        </mx:HBox>
+        
+        <!-- icon and grid views of folder  -->
+        <mx:ViewStack id="folderViewStack" width="100%" height="100%">
+        
+            <!-- folder icon view -->
+            <mx:Box height="100%" width="100%" visible="true">
+                <iconview:FolderIconView id="folderIconView"/>
+            </mx:Box>
+
+            <!-- folder grid view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <gridview:FolderGridView  id="folderGridView" />
+            </mx:Box>
+
+            <!-- coverflow view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <coverflow:CoverFlowView  id="coverFlowView" />
+            </mx:Box>
+
+        </mx:ViewStack>
+        
+    </mx:VBox>    
+
+</folderview:FolderViewBase>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<error:ErrorDialogViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:error="org.integratedsemantics.flexspaces.component.error.*"      
+    title="{resourceManager.getString('ErrorDialogView', 'title')}" width="800" height="600" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("ErrorDialogView")]</mx:Metadata>
+    
+    <mx:Style source="../../framework/dialog/dialog.css"/>
+
+    <mx:Form styleName="mainArea">
+
+        <mx:FormItem label=""  width="700"  styleName="mainArea">
+            <mx:Label id="message" width="100%" />
+        </mx:FormItem>
+
+        <mx:FormItem label=""  width="700"  styleName="mainArea">
+            <mx:TextArea id="stack" width="100%" height="400" />
+        </mx:FormItem>
+
+    </mx:Form>
+    
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="closeBtn" label="{resourceManager.getString('ErrorDialogView', 'closeBtn_label' )}"/>    
+    </mx:HBox> 
+    
+</error:ErrorDialogViewBase>

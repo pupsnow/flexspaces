@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+         verticalAlign="middle" horizontalAlign="center" width="100%" height="100%"
+         horizontalScrollPolicy="off" verticalScrollPolicy="off">
+
+    <mx:Metadata>[ResourceBundle("NodeView")]</mx:Metadata>
+  
+    <mx:Script>
+        <![CDATA[
+       
+        [Bindable] public var nodeName:String;
+
+        [Bindable] public var icon32:String;
+
+        [Bindable] public var isLocked:Boolean;
+
+        [Bindable] public var showThumbnail:Boolean;
+        [Bindable] public var thumbnailUrl:String;
+        
+        ]]>
+        
+    </mx:Script>                              
+
+    <mx:HBox verticalAlign="middle" horizontalAlign="center" height="100%" width="100%">
+        <mx:Image source="@Embed('images/icons/locked.gif')"  visible="{isLocked}" includeInLayout="{isLocked}"/>
+        <mx:Image height="32" width="32" source="{icon32}" visible="{!showThumbnail}" includeInLayout="{!showThumbnail}"/>                    
+        <mx:Image id="thumbnail" autoLoad="{showThumbnail}" source="{thumbnailUrl}" visible="{showThumbnail}" includeInLayout="{showThumbnail}"/>                    
+    </mx:HBox>     
+    <mx:Label width="125" textAlign="center" text="{nodeName}"  height="25" fontSize="10" truncateToFit="true" />
+</mx:VBox>                        

@@ -1,0 +1,25 @@
+/* CSS file for Login View */
+
+.login
+{
+    verticalGap: 0; 
+    horizontalGap: 0; 
+    alpha: 0;    
+}	
+
+.loginText
+{
+	color: #ffffff;
+	font-weight:bold;
+}
+
+.errorText
+{
+	color: #ea6363;
+	font-weight: bold;
+}
+
+.loginInputText
+{
+	color: #000000;
+}

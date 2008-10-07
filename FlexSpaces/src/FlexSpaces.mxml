@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+        verticalScrollPolicy="off"
+        layout="absolute" 
+        frameRate="99"
+        backgroundColor="#000000"
+        paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" 
+        verticalAlign="middle" horizontalAlign="center"                
+        styleName="mainApplication" 
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:business="org.integratedsemantics.flexspaces.control.delegate.*"
+        xmlns:control="org.integratedsemantics.flexspaces.control.*"
+        xmlns:view="org.integratedsemantics.flexspaces.view.*"
+        creationComplete="onCreationComplete(event)">
+    
+    <mx:Metadata>[ResourceBundle("FlexSpaces")]</mx:Metadata>  
+             
+    <mx:Script>
+        <![CDATA[
+
+        import org.integratedsemantics.flexspaces.model.AppModelLocator;        
+        import org.integratedsemantics.flexspaces.view.FlexSpacesPresenter;        
+        
+        
+        protected function onCreationComplete(event:Event):void
+        {
+            var model:AppModelLocator = AppModelLocator.getInstance();
+            var ticket:String = this.parameters.alf_ticket;
+            if ((ticket != null) && (ticket.length != 0))
+            {
+                model.loginTicket = ticket;
+            }
+            
+            var srcPath:String = this.parameters.srcPath;
+            if ((srcPath != null) && (srcPath.length != 0))
+            {
+                model.srcPath = srcPath;
+            }
+            
+            var doclib:String = this.parameters.doclib;
+            if ((doclib != null) && (doclib.length != 0))
+            {
+                model.showDocLib = (doclib == "true");
+            }
+            var search:String = this.parameters.search;
+            if ((search != null) && (search.length != 0))
+            {
+                model.showSearch = (search == "true");
+            }
+            var tasks:String = this.parameters.tasks;
+            if ((tasks != null) && (tasks.length != 0))
+            {
+                model.showTasks = (tasks == "true");
+            }
+            var wcm:String = this.parameters.wcm;
+            if ((wcm != null) && (wcm.length != 0))
+            {
+                model.showWCM = (wcm == "true");
+            }
+
+            var presenter:FlexSpacesPresenter = new FlexSpacesPresenter(flexSpacesView);
+        }
+        
+        ]]>
+    </mx:Script>                              
+
+    <mx:Style source="flexspaces.css"/>
+            
+    <business:Services id="services"/>
+
+    <control:AppController id="appController"/>
+
+    <view:FlexSpacesView id="flexSpacesView" width="100%" height="100%"/>
+
+</mx:Application>
+

@@ -72,7 +72,18 @@ package org.integratedsemantics.flexspaces.control.command
         {
             var model : AppModelLocator = AppModelLocator.getInstance();
                              
-            model.loginTicket = event.result;
+            if (model.isLiveCycleContentServices == true)
+            {               
+				var result:String = event.result;
+				var start:int = result.indexOf("<Assertion");
+				var end:int = result.indexOf("</ticket>");
+				var ticket:String = result.substring(start, end);   
+	            model.loginTicket = ticket;         
+            }
+            else
+            {
+				model.loginTicket = event.result;            	
+            }
             
             this.result(model.loginTicket);            
         }               

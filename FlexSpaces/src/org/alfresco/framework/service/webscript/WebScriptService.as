@@ -24,17 +24,17 @@
  */
  package org.alfresco.framework.service.webscript
 {
-	import mx.rpc.http.HTTPService;
-	import flash.events.Event;
 	import mx.rpc.AsyncToken;
-	import mx.controls.Alert;
-	import mx.rpc.events.ResultEvent;
-	import mx.rpc.events.FaultEvent;
-	import mx.rpc.events.InvokeEvent;
 	import mx.rpc.Fault;
-	import org.alfresco.framework.service.error.ErrorService;
+	import mx.rpc.events.FaultEvent;
+	import mx.rpc.events.ResultEvent;
+	import mx.rpc.http.HTTPService;
+	import mx.utils.Base64Encoder;
+	
 	import org.alfresco.framework.service.authentication.AuthenticationError;
 	import org.alfresco.framework.service.authentication.AuthenticationService;
+	import org.alfresco.framework.service.error.ErrorService;
+	import org.integratedsemantics.flexspaces.model.AppModelLocator;
 	
 	/**
 	 * Web script service.
@@ -171,21 +171,46 @@
 					parameters = new Object();
 				}
 				
-				if (this._ticketRequired == true)
+				// livecycle
+	            var model:AppModelLocator = AppModelLocator.getInstance();
+				
+				if (model.isLiveCycleContentServices == true)
 				{
-					// Get the ticket, using the AuthenticationService if required
-					var ticket:String = this._ticket;
-					if (ticket == null)
+					this.useProxy = true;
+	            	this.destination = "DefaultHTTP";
+	            	if (model.loginTicket != null)
+	            	{
+						var headerList:Array = new Array();
+
+	            		// basic auth header
+	            		var encoder:Base64Encoder = new Base64Encoder();
+	            		encoder.encode(model.loginUserName + ":" + model.loginPassword);
+	            		headerList["Authorization"] = "Basic " + encoder.toString();
+	            		
+	            		// saml assertion ticket header
+						headerList["ticket"] = model.loginTicket;
+						
+			            this.headers = headerList;						
+	            	}
+    			}
+            	else
+				{												
+					if (this._ticketRequired == true)
 					{
-						ticket = AuthenticationService.instance.ticket;
+						// Get the ticket, using the AuthenticationService if required
+						var ticket:String = this._ticket;
 						if (ticket == null)
 						{
-							throw new AuthenticationError("Unable to execute web script because required ticket is not available from the AuthenticationService.");	
+							ticket = AuthenticationService.instance.ticket;
+							if (ticket == null)
+							{
+								throw new AuthenticationError("Unable to execute web script because required ticket is not available from the AuthenticationService.");	
+							}
 						}
+						
+						// Add the ticket parameter to the web service call
+						parameters.alf_ticket = ticket;
 					}
-					
-					// Add the ticket parameter to the web service call
-					parameters.alf_ticket = ticket;
 				}
 				
 				// Tunnel methods as required

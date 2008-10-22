@@ -5,10 +5,12 @@ package org.integratedsemantics.flexspaces.component.tasks.startworkflow
     import mx.events.FlexEvent;
     import mx.formatters.DateFormatter;
     import mx.managers.PopUpManager;
+    import mx.resources.ResourceManager;
     import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.control.event.task.StartWorkflowEvent;
     import org.integratedsemantics.flexspaces.framework.dialog.DialogPresenter;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
 
 
@@ -60,6 +62,28 @@ package org.integratedsemantics.flexspaces.component.tasks.startworkflow
         override protected function onCreationComplete(event:FlexEvent):void
         {
             super.onCreationComplete(event);
+
+			var reviewAndApproveType:Object = new Object();
+			reviewAndApproveType.label = ResourceManager.getInstance().getString('StartWorkflowView', 'reviewAndApprove_label');
+			reviewAndApproveType.workflowType = "review";
+			reviewAndApproveType.id = "reviewAndApprove";			            
+			startWorkflowView.workflowTypes.addItem(reviewAndApproveType);
+            
+            var model : AppModelLocator = AppModelLocator.getInstance();                            
+            if (model.isLiveCycleContentServices == true)
+            {
+                startWorkflowView.assignToTextInput.text = "administrator/DefaultDom";
+                startWorkflowView.dueOnFormItem.visible = false;
+                startWorkflowView.dueOnFormItem.includeInLayout = false;
+            }
+            else
+            {
+				var adhocType:Object = new Object();
+				adhocType.label = ResourceManager.getInstance().getString('StartWorkflowView', 'adhocTask_label');
+				adhocType.workflowType = "adhoc";
+				adhocType.id = "adhocTask";			            
+				startWorkflowView.workflowTypes.addItem(adhocType);
+            }
         }
                 
         /**
@@ -99,8 +123,20 @@ package org.integratedsemantics.flexspaces.component.tasks.startworkflow
         {
             var workflowType:String = startWorkflowView.workflowTypeCombo.selectedItem.workflowType;
             var assignTo:String = startWorkflowView.assignToTextInput.text;            
+                       
             var desc:String = startWorkflowView.descTextArea.text;
-            var dueDate:String = startWorkflowView.dueDateField.text;
+            
+
+            var model : AppModelLocator = AppModelLocator.getInstance();                            
+            if (model.isLiveCycleContentServices == true)
+            {
+                var  dueDate:String = "";
+            }
+            else
+            {
+                dueDate = startWorkflowView.dueDateField.text;
+            }
+            
             var dateFormatted:String = null;
             if (dueDate != "")
             {

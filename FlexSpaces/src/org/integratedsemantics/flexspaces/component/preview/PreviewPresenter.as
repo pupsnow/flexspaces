@@ -197,7 +197,16 @@ package org.integratedsemantics.flexspaces.component.preview
             if (previewId != null && previewId != "")
             {                
                 var model : AppModelLocator = AppModelLocator.getInstance();                
-                var urlFlash:String = previewURL + "?alf_ticket=" + model.loginTicket;                  
+                
+                if (model.isLiveCycleContentServices == true)
+                {
+                    var urlFlash:String = previewURL;                      	
+                }   
+                else
+                {
+                    urlFlash = previewURL + "?alf_ticket=" + model.loginTicket;                       	
+                }             
+                            
                 previewView.swfLoader.source = urlFlash;        
                 previewView.contentPanel.title = repoNode.getPath();
                 this.havePreview = true;                              

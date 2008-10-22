@@ -21,7 +21,10 @@ package org.integratedsemantics.flexspaces.model
         // login
 		public var loginTicket:String = null;
 		public var loginUserName:String = null;
-		public var loginPassword:String = null; 
+		public var loginPassword:String = null;
+		
+		// what type of server (alfresco or livecycle content services es)
+		public var isLiveCycleContentServices:Boolean = false;				 
 		
 		// from config service
 		public var urlPrefix:String = null;

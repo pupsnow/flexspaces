@@ -24,21 +24,14 @@
  */
  package org.alfresco.framework.service.authentication
 {
-	import flash.events.Event;
-	import flash.profiler.showRedrawRegions;
-	
-	import mx.controls.Alert;
-	import mx.rpc.events.FaultEvent;
-	import mx.rpc.events.ResultEvent;
-	import mx.rpc.http.HTTPService;
-	import mx.rpc.soap.WebService;
-	
 	import flash.events.EventDispatcher;
+	
 	import org.alfresco.framework.service.error.ErrorService;
-	import org.alfresco.framework.service.webscript.SuccessEvent;
-	import org.alfresco.framework.service.webscript.FailureEvent;
 	import org.alfresco.framework.service.webscript.ConfigService;
+	import org.alfresco.framework.service.webscript.FailureEvent;
+	import org.alfresco.framework.service.webscript.SuccessEvent;
 	import org.alfresco.framework.service.webscript.WebScriptService;
+	import org.integratedsemantics.flexspaces.model.AppModelLocator;
 
 	/**
 	 * Authentication service class.
@@ -118,6 +111,12 @@
 			var url:String = ConfigService.instance.url + "/api/login";
 			var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onLoginSuccess, onLoginFailure, false);
 			
+			var model:AppModelLocator = AppModelLocator.getInstance();
+			if (model.isLiveCycleContentServices == true)
+			{
+				webScript.resultFormat = "e4x";
+			}
+			
 			// Build the parameter object
 			var params:Object = new Object();
 			params.u = userName;
@@ -133,9 +132,19 @@
 		public function logout():void
 		{
 			// Execute the logout web script
-			var url:String = ConfigService.instance.url + "/api/login/ticket/" + this._ticket;				
-			var webScript:WebScriptService = new WebScriptService(url, WebScriptService.DELETE, onLogoutSuccess);
-			webScript.execute();										
+			var model:AppModelLocator = AppModelLocator.getInstance();
+			if (model.isLiveCycleContentServices == false)
+			{
+				var url:String = ConfigService.instance.url + "/api/login/ticket/" + this._ticket;				
+				var webScript:WebScriptService = new WebScriptService(url, WebScriptService.DELETE, onLogoutSuccess);
+				webScript.execute();
+			}	
+			else
+			{
+				this._ticket = null;
+				this._userName = null;
+				dispatchEvent(new LogoutCompleteEvent(LogoutCompleteEvent.LOGOUT_COMPLETE));							
+			}									
 		}
 		
 		/**
@@ -157,7 +166,15 @@
 		public function onLoginSuccess(event:SuccessEvent):void
 		{
 			// Store the ticket in the authentication service
-			this._ticket = event.result.ticket;
+			var model:AppModelLocator = AppModelLocator.getInstance();
+			if (model.isLiveCycleContentServices == true)
+			{
+				this._ticket = event.result.toString();
+			}
+			else
+			{
+				this._ticket = event.result.ticket;
+			}
 			
 			// Raise on login success event
 			dispatchEvent(new LoginCompleteEvent(LoginCompleteEvent.LOGIN_COMPLETE, this._ticket, ""));

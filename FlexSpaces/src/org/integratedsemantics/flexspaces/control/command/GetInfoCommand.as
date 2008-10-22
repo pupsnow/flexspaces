@@ -53,11 +53,23 @@ package org.integratedsemantics.flexspaces.control.command
          */
         public function getInfo(event:GetInfoEvent):void
         {
-            // first validate ticket before getting info
+            
             var model : AppModelLocator = AppModelLocator.getInstance();
-            var handlers:Callbacks = new Callbacks(onValidateTicketSuccess, onValidateTicketFault);
-            var delegate:ValidateTicketDelegate = new ValidateTicketDelegate(handlers);
-            delegate.validateTicket(model.loginTicket);                             
+
+			if (model.isLiveCycleContentServices == false)
+			{
+				// first validate ticket before getting info
+	            var handlers:Callbacks = new Callbacks(onValidateTicketSuccess, onValidateTicketFault);
+	            var validateDelegate:ValidateTicketDelegate = new ValidateTicketDelegate(handlers);
+	            validateDelegate.validateTicket(model.loginTicket);
+            }
+            else
+            {
+				// skip ticket check on livecycle content services
+	            handlers = new Callbacks(onGetInfoSuccess, onGetInfoFault);
+	            var infoDelegate:InfoDelegate = new InfoDelegate(handlers);
+	            infoDelegate.getInfo();                                          				            	
+            }                             
         }
 
         /**

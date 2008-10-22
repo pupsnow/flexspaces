@@ -60,8 +60,14 @@ package org.integratedsemantics.flexspaces.component.playvideo
         protected function onCreationComplete(event:Event):void
         {
             var model:AppModelLocator = AppModelLocator.getInstance();
-            var url:String = repoNode.viewurl + "?alf_ticket=" + model.loginTicket;
-                        
+            if (model.isLiveCycleContentServices == true)
+			{
+                var url:String = repoNode.viewurl;				
+			}   
+			else
+			{         
+                url = repoNode.viewurl + "?alf_ticket=" + model.loginTicket;
+            }            
             playVideoView.videoDisplay.source = url;    
         }                 
                                                    

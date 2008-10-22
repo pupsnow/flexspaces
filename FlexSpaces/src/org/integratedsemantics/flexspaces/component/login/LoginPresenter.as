@@ -7,6 +7,7 @@ package org.integratedsemantics.flexspaces.component.login
 	
 	import org.integratedsemantics.flexspaces.control.event.LoginEvent;
 	import org.integratedsemantics.flexspaces.framework.presenter.Presenter;
+	import org.integratedsemantics.flexspaces.model.AppModelLocator;
 	
 	
 	/**
@@ -56,8 +57,17 @@ package org.integratedsemantics.flexspaces.component.login
 		 */
 		protected function onCreationComplete(event:Event):void
 		{			
+                    var model : AppModelLocator = AppModelLocator.getInstance();                            
+                    if (model.isLiveCycleContentServices == true)
+                    {
+                        loginView.username.text = "administrator";
+                        loginView.password.text = "password"; 
+                    }
+                    else
+                    {
 			// Focus the user input box
 			loginView.focusManager.setFocus(loginView.username);
+                    }            
 			
 			// add login btn and enter key handlers
             observeButtonClick(loginView.loginBtn, onLoginButton);                        

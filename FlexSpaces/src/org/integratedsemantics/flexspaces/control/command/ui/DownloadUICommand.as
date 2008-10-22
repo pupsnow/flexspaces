@@ -59,14 +59,22 @@ package org.integratedsemantics.flexspaces.control.command.ui
          */
         public function downloadFileUI(event:DownloadUIEvent):void
         {
-            var selectedItem:Object = event.selectedItem;
+            var selectedItem:Object = event.selectedItem;            
+            var model : AppModelLocator = AppModelLocator.getInstance();                            
             
             if (selectedItem != null && selectedItem.isFolder != true)
             {
                 // air seems to need ticket on url instead in the params data   
                 if (event.airMode == true)
                 {
-                    var viewurl:String = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                    if (model.isLiveCycleContentServices == true)
+                    {
+                        var viewurl:String = selectedItem.viewurl;
+                    }
+                    else
+                    {
+                        viewurl = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                    }                    
                     var request:URLRequest = new URLRequest(viewurl);
                 }
                 else
@@ -74,7 +82,10 @@ package org.integratedsemantics.flexspaces.control.command.ui
                     viewurl = selectedItem.viewurl;                
                     request = new URLRequest(viewurl);
                     var params:URLVariables = new URLVariables();
-                    params.alf_ticket = model.loginTicket;
+                    if (model.isLiveCycleContentServices == false)
+                    {
+                        params.alf_ticket = model.loginTicket;
+                    }    
                     request.data = params;
                 }                                
                 

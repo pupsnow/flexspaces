@@ -184,6 +184,42 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             }
         }
         
+        
+        /**
+         * Start LiveCycle Workflow (review and approval process)
+         * 
+         * @param repoNode doc node to start worklow on
+         * @param assigner user assigning the task
+         * @param reviewer user to do the review
+         * @param desc description
+         * 
+         */
+        public function startLiveCycleWorkflow(repoNode:IRepoNode, assigner:String, reviewer:String, desc:String):void
+        {
+            try
+            {                   
+                var url:String = ConfigService.instance.url +  "/flexspaces/livecycle/startWorkflow";
+                
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onStartWorkflowSuccess);
+                
+                var params:Object = new Object();
+                params.nodeid = repoNode.getId();
+                params.assigner = assigner;
+                params.reviewer = reviewer;
+                params.desc = desc;                
+                
+                // using e4x result format not default object format
+                webScript.resultFormat ="e4x";
+                
+                webScript.execute(params);
+            }
+            catch (error:Error)
+            {
+                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+            }
+        }
+        
+        
         /**
          * onStartWorkflowSuccess event handler
          * 

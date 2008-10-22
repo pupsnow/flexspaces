@@ -4,7 +4,10 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import com.universalmind.cairngorm.commands.Command;
     
     import flash.net.URLRequest;
+    import flash.net.URLRequestHeader;
     import flash.net.navigateToURL;
+    
+    import mx.utils.Base64Encoder;
     
     import org.integratedsemantics.flexspaces.control.event.ui.ViewNodeUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
@@ -58,8 +61,21 @@ package org.integratedsemantics.flexspaces.control.command.ui
             {
                 if (selectedItem.isFolder == false)
                 {
-                    var url:String = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
-                    var request:URLRequest = new URLRequest(url);
+                	var request:URLRequest;
+                    var model : AppModelLocator = AppModelLocator.getInstance();                            
+                    if (model.isLiveCycleContentServices == true)
+                    {
+                        var url:String = selectedItem.viewurl;
+                    	request = new URLRequest(url);                    	
+						var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.loginTicket);
+			            request.requestHeaders.push(ticketHeader);	                    	
+                    }
+                    else
+                    {
+                        url = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                    	request = new URLRequest(url);
+                    }                    
+
                     try 
                     {            
                         navigateToURL(request);

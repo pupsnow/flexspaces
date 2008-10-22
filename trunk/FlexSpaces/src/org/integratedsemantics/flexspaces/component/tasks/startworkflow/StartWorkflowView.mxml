@@ -11,14 +11,7 @@
     <mx:Form styleName="mainArea">
     
         <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'workflowFormItem_label' )}" width="400" styleName="mainArea" id="workflowFormItem">      
-            <mx:ComboBox id="workflowTypeCombo" width="249" styleName="combo">
-                <mx:dataProvider>
-                    <mx:ArrayCollection>
-                        <mx:Object label="{resourceManager.getString('StartWorkflowView', 'reviewAndApprove_label' )}" workflowType="review" id="reviewAndApprove"/>            
-                        <mx:Object label="{resourceManager.getString('StartWorkflowView', 'adhocTask_label' )}" workflowType="adhoc" id="adhocTask"/>            
-                    </mx:ArrayCollection>                                               
-                </mx:dataProvider>
-            </mx:ComboBox>
+            <mx:ComboBox id="workflowTypeCombo" width="249" styleName="combo" dataProvider="{workflowTypes}"/>
         </mx:FormItem>
 
         <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'assignToFormItem_label' )}" width="400" styleName="mainArea" id="assignToFormItem">  

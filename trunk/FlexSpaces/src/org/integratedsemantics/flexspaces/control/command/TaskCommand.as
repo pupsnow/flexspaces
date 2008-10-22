@@ -6,6 +6,7 @@ package org.integratedsemantics.flexspaces.control.command
     
     import org.integratedsemantics.flexspaces.control.delegate.webscript.TaskDelegate;
     import org.integratedsemantics.flexspaces.control.event.task.*;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
 
 	
 	/**
@@ -128,7 +129,16 @@ package org.integratedsemantics.flexspaces.control.command
         {
             var handlers:Callbacks = new Callbacks(onStartWorkflowSuccess, onFault);
             var delegate:TaskDelegate = new TaskDelegate(handlers);
-            delegate.startWorkflow(event.repoNode, event.workflowType, event.assignTo, event.desc, event.dueDate);                  
+
+            var model : AppModelLocator = AppModelLocator.getInstance();                            
+            if (model.isLiveCycleContentServices == true)
+            {
+                delegate.startLiveCycleWorkflow(event.repoNode, event.assignTo, event.assignTo, event.desc);
+            }
+            else
+            {
+                delegate.startWorkflow(event.repoNode, event.workflowType, event.assignTo, event.desc, event.dueDate);
+            }
         }
         
         /**

@@ -163,7 +163,13 @@ package org.integratedsemantics.flexspaces.view
             else
             {
                 observeCreation(mainView, onCreationComplete);            
-            }            
+            }     
+            
+            if (model.isLiveCycleContentServices == true)
+            {
+            	model.showTasks = false;
+            	model.showWCM = false;
+            }       
         }
         
         /**
@@ -465,8 +471,8 @@ package org.integratedsemantics.flexspaces.view
          */
         protected function onLoginDone(event:LoginDoneEvent):void
         {
-            viewStack.selectedIndex = GET_INFO_MODE_INDEX;         
-
+            viewStack.selectedIndex = GET_INFO_MODE_INDEX;  
+       
             var responder:Responder = new Responder(onGetInfoDone, onFaultAction);
             var getInfoEvent:GetInfoEvent = new GetInfoEvent(GetInfoEvent.GET_INFO, responder);
             getInfoEvent.dispatch();                                

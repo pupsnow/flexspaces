@@ -32,8 +32,6 @@ package org.alfresco.framework.service.webscript
 	import flash.xml.XMLDocument;
 	import flash.xml.XMLNode;
 	
-	import mx.controls.Alert;
-	
 	import org.alfresco.framework.service.error.ErrorService;
 	import org.integratedsemantics.flexspaces.model.AppModelLocator; 
     
@@ -147,14 +145,19 @@ package org.alfresco.framework.service.webscript
 				// sreiner: added having /alfresco/service configurable 
 				if (this.port!= null)
 				{
-						this._url = this._protocol + "://" + this._domain + ":" + this._port + this._alfrescoUrlPart;
+				    this._url = this._protocol + "://" + this._domain + ":" + this._port + this._alfrescoUrlPart;
 				}
 				else
 				{
-						this._url = this._protocol + "://" + this._domain + this._alfrescoUrlPart;
+				    this._url = this._protocol + "://" + this._domain + this._alfrescoUrlPart;
 				}
 				
-				//Alert.show("ConfigService xmlLoaded(), url: " + this._url);
+				var nodeServerElement:XMLNode = node.firstChild.nextSibling;
+				var model : AppModelLocator = AppModelLocator.getInstance();
+				if (nodeServerElement.attributes['livecycle'] == "true")
+				{
+					model.isLiveCycleContentServices = true;	
+				}				
 				
 				this.dispatchEvent(new ConfigCompleteEvent(ConfigCompleteEvent.CONFIG_COMPLETE));
 			}

@@ -10,16 +10,19 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import flash.events.SecurityErrorEvent;
     import flash.net.FileReference;
     import flash.net.URLRequest;
+    import flash.net.URLRequestHeader;
     import flash.net.URLRequestMethod;
     import flash.net.URLVariables;
     
     import mx.rpc.IResponder;
     import mx.rpc.events.ResultEvent;
+    import mx.utils.Base64Encoder;
     
     import org.alfresco.framework.service.authentication.AuthenticationService;
     import org.alfresco.framework.service.error.ErrorService;
     import org.alfresco.framework.service.webscript.ConfigService;
     import org.integratedsemantics.flexspaces.control.command.IUploadHandlers;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.util.FormatUtil;
 
@@ -80,9 +83,26 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             this.nodeType = nodeType;
             
             // setup the url request
-            var url:String = ConfigService.instance.url +  "/flexspaces/uploadNew" + "?alf_ticket=" + AuthenticationService.instance.ticket;
-            this.uploadURLRequest = new URLRequest(url);
+            var model:AppModelLocator = AppModelLocator.getInstance();
+            if (model.isLiveCycleContentServices == true)
+            {
+	            var url:String = ConfigService.instance.url +  "/flexspaces/uploadNew";
+            	this.uploadURLRequest = new URLRequest(url);
+	            //var encoder:Base64Encoder = new Base64Encoder();
+	            //encoder.encode(model.loginUserName + ":" + model.loginPassword);
+	            //var authHeader:URLRequestHeader = new URLRequestHeader("Authorization", "Basic " + encoder.toString());
+	            //uploadURLRequest.requestHeaders.push(authHeader);
+				var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.loginTicket);
+	            uploadURLRequest.requestHeaders.push(ticketHeader);	
+            }
+            else
+            {
+	            url = ConfigService.instance.url +  "/flexspaces/uploadNew" + "?alf_ticket=" + AuthenticationService.instance.ticket;
+            	this.uploadURLRequest = new URLRequest(url);            	
+            }
+
             uploadURLRequest.method = URLRequestMethod.POST;
+            
             folderPath = parentNode.getPath();
             
             pendingFiles = new Array();
@@ -123,7 +143,16 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             this.existingNode = repoNode;
             
             // setup the url request
-            var url:String = ConfigService.instance.url +  "/flexspaces/uploadExisting" + "?alf_ticket=" + AuthenticationService.instance.ticket;
+
+            var model:AppModelLocator = AppModelLocator.getInstance();
+            if (model.isLiveCycleContentServices == true)
+            {
+                var url:String = ConfigService.instance.url +  "/flexspaces/uploadExisting";
+            }
+            else
+            {
+                url = ConfigService.instance.url +  "/flexspaces/uploadExisting" + "?alf_ticket=" + AuthenticationService.instance.ticket;            	
+            }            
             this.uploadURLRequest = new URLRequest(url);
             uploadURLRequest.method = URLRequestMethod.POST;
             

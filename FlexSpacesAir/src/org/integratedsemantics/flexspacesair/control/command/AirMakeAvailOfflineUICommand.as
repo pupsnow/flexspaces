@@ -135,8 +135,17 @@ package org.integratedsemantics.flexspacesair.control.command
         protected function makeNodeAvailOffline(selectedItem:Object, offlinePath:String):void
         {
             if (selectedItem != null && selectedItem.isFolder == false)
-            {
-                var url:String = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+            {                
+                var model : AppModelLocator = AppModelLocator.getInstance();                            
+                if (model.isLiveCycleContentServices == true)
+                {
+                    var url:String = selectedItem.viewurl;
+                }
+                else
+                {
+                    url = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                }
+                                
                 var request:URLRequest = new URLRequest(url);
                 var urlLoader:URLLoader = new URLLoader();
                 urlLoader.dataFormat = URLLoaderDataFormat.BINARY;

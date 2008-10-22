@@ -80,13 +80,28 @@ package org.integratedsemantics.flexspacesair.control.command
             }
             
             var url:String = null;
+            var model : AppModelLocator = AppModelLocator.getInstance();                            
             if (existingNode == null)
             {
-                url = model.urlPrefix + "/flexspaces/uploadNew"  + "?alf_ticket=" + model.loginTicket;
+                if (model.isLiveCycleContentServices == true)
+                {
+                    url = model.urlPrefix + "/flexspaces/uploadNew";
+                }
+                else
+                {
+                    url = model.urlPrefix + "/flexspaces/uploadNew"  + "?alf_ticket=" + model.loginTicket;
+                }
             }
             else
             {
-                url = model.urlPrefix + "/flexspaces/uploadExisting" + "?alf_ticket=" + model.loginTicket;                 
+                if (model.isLiveCycleContentServices == true)
+                {
+                    url = model.urlPrefix + "/flexspaces/uploadExisting";                 
+                }
+                else
+                {
+                    url = model.urlPrefix + "/flexspaces/uploadExisting" + "?alf_ticket=" + model.loginTicket;                 
+                }
             }
             
             var request:URLRequest = new URLRequest(url);

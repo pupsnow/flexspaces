@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>FlexSpaces start livecycle workflow</shortname>
+  <description>Starts LiveCycle Content Sevices  Review and Approval process on document</description>
+  <url>/flexspaces/livecycle/startWorkflow?nodeid={nodeid}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+</webscript>

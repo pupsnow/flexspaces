@@ -40,8 +40,8 @@
         <menuitem label="Thumbnails" type="check" toggled="false"  data="thumbnails"/>        
         <menuitem type="separator" />
         <menuitem label="Local Files Browser" type="check" toggled="false"  data="localfiles"/>                    
-        <!--menuitem type="separator" -->
-        <!-- menuitem label="Ajax UI Example" type="check" toggled="false"  data="webscriptui" -->
+        <menuitem type="separator" />
+        <menuitem label="Version History" type="check" toggled="false"  data="versionhistory"/>
     </menuitem>
     <menuitem label="Tools">
         <menuitem label="Make PDF" data="makepdf" enabled="false"/>     

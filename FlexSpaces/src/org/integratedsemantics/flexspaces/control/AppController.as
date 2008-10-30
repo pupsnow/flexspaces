@@ -103,6 +103,8 @@ package org.integratedsemantics.flexspaces.control
             addCommand(UploadFilesEvent.UPLOAD_FILES, UploadFilesCommand);
             addCommand(UploadFilesEvent.UPLOAD_AVM_FILES, UploadFilesCommand);
             
+            addCommand(VersionListEvent.VERSION_LIST, VersionListCommand);    
+            
             addCommand(WcmFolderListEvent.WCM_FOLDER_LIST, WcmFolderListCommand);            
             addCommand(WcmTreeDataEvent.WCM_TREE_DATA, WcmTreeCommand);            
             addCommand(WcmTreeDataEvent.WCM_STORES_DATA, WcmTreeCommand);       

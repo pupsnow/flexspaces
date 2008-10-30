@@ -2,7 +2,7 @@ package org.integratedsemantics.flexspaces.component.wcm.browser
 {
     import org.integratedsemantics.flexspaces.component.browser.RepoBrowserPresenter;
     import org.integratedsemantics.flexspaces.component.browser.RepoBrowserViewBase;
-    
+    import org.integratedsemantics.flexspaces.component.versions.versionlist.VersionListPresenter;
     import org.integratedsemantics.flexspaces.component.wcm.folderview.WcmFolderViewPresenter;
     import org.integratedsemantics.flexspaces.component.wcm.tree.WcmTreePresenter;
 
@@ -34,7 +34,9 @@ package org.integratedsemantics.flexspaces.component.wcm.browser
         {
             this.treePresenter = new WcmTreePresenter(treeView);           
             this.folderViewPresenter1 = new WcmFolderViewPresenter(this.fileView1);     
-            this.folderViewPresenter2 = new WcmFolderViewPresenter(this.fileView2);                         
+            this.folderViewPresenter2 = new WcmFolderViewPresenter(this.fileView2); 
+            // todo need special wcm version list presenter?
+            versionListPresenter = new VersionListPresenter(this.versionListView);    
         }        
         
     }

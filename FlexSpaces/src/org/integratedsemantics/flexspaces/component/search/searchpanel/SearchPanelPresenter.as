@@ -127,7 +127,7 @@ package org.integratedsemantics.flexspaces.component.search.searchpanel
          * @param selectedFolderList selected folder presenter/view
          * 
          */
-        public function clearOtherSelections(selectedFolderList:NodeListViewPresenter):void
+        public function clearOtherSelections(selectedFolderList:Presenter):void
         {
             searchResultsPresenter.clearOtherSelections(selectedFolderList);
         }    

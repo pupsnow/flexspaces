@@ -2,7 +2,7 @@ package org.integratedsemantics.flexspaces.component.folderview.event
 {
 	import flash.events.Event;
 	
-	import org.integratedsemantics.flexspaces.component.folderview.NodeListViewPresenter;
+	import org.integratedsemantics.flexspaces.framework.presenter.Presenter;
 
 	/**
 	 * Click Node event object
@@ -15,7 +15,7 @@ package org.integratedsemantics.flexspaces.component.folderview.event
 		/** node clicked */
 		private var _item:Object;
 		
-		public var folderViewPresenter:NodeListViewPresenter;
+		public var folderViewPresenter:Presenter;
 		
 		/**
 		 * Constructor
@@ -25,7 +25,7 @@ package org.integratedsemantics.flexspaces.component.folderview.event
 		 * @param folderViewPresenter presenter of folder view
 		 * 
 		 */
-		public function ClickNodeEvent(type:String, item:Object, folderViewPresenter:NodeListViewPresenter)
+		public function ClickNodeEvent(type:String, item:Object, folderViewPresenter:Presenter)
 		{
 			super(type);
 			

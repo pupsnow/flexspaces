@@ -155,7 +155,7 @@ package org.integratedsemantics.flexspaces.component.tasks.taskspanel
          * @param selectedFolderList selected/current folder view
          * 
          */
-        public function clearOtherSelections(selectedFolderList:NodeListViewPresenter):void
+        public function clearOtherSelections(selectedFolderList:Presenter):void
         {
              taskAttachmentsPresenter.clearOtherSelections(selectedFolderList);
         }       

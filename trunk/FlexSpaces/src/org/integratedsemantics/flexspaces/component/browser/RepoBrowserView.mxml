@@ -2,23 +2,30 @@
 <browser:RepoBrowserViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:browser="org.integratedsemantics.flexspaces.component.browser.*"
     xmlns:tree="org.integratedsemantics.flexspaces.component.tree.*"         
-    xmlns:folderview="org.integratedsemantics.flexspaces.component.folderview.*">
+    xmlns:folderview="org.integratedsemantics.flexspaces.component.folderview.*"
+    xmlns:versionlist="org.integratedsemantics.flexspaces.component.versions.versionlist.*">
   
     <mx:Metadata>[ResourceBundle("RepoBrowserView")]</mx:Metadata>
     
     <!-- repository tree -->
     <tree:TreeView id="treeView" width="300" height="100%" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false" />
     
-    <!-- dual repository folder lists -->
-    <mx:HDividedBox width="100%" height="100%" resizeToContent="true" dividerThickness="10">
-        
-        <!-- folder view 1 ( details or icon view) -->
-        <folderview:FolderView id="fileView1" />
-        
-        <!-- folder view 2 ( details or icon view) -->
-        <folderview:FolderView id="fileView2" visible="false" includeInLayout="false"/>
-        
-    </mx:HDividedBox>
+    <mx:VDividedBox width="100%" height="100%">
+    	
+	    <!-- dual repository folder lists -->
+	    <mx:HDividedBox width="100%" height="100%" resizeToContent="true" dividerThickness="10">
+	        
+	        <!-- folder view 1 ( details or icon view) -->
+	        <folderview:FolderView id="fileView1" />
+	        
+	        <!-- folder view 2 ( details or icon view) -->
+	        <folderview:FolderView id="fileView2" visible="false" includeInLayout="false"/>
+	        
+	    </mx:HDividedBox>
+
+		<versionlist:VersionListView id="versionListView" visible="false" includeInLayout="false" />
+		 
+    </mx:VDividedBox>
     
 </browser:RepoBrowserViewBase>    
 

@@ -5,6 +5,7 @@ package org.integratedsemantics.flexspaces.component.browser
     
     import org.integratedsemantics.flexspaces.component.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.component.tree.TreeViewBase;
+    import org.integratedsemantics.flexspaces.component.versions.versionlist.VersionListViewBase;
     
 
     /**
@@ -16,6 +17,7 @@ package org.integratedsemantics.flexspaces.component.browser
         public var treeView:TreeViewBase;
         public var fileView1:FolderViewBase;
         public var fileView2:FolderViewBase;
+        public var versionListView:VersionListViewBase;
         
         /**
          * Constructor 

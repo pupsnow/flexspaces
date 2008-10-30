@@ -53,6 +53,7 @@ package org.integratedsemantics.flexspaces.view
     import org.integratedsemantics.flexspaces.component.search.searchpanel.SearchPanelPresenter;
     import org.integratedsemantics.flexspaces.component.tasks.taskspanel.TasksPanelPresenter;
     import org.integratedsemantics.flexspaces.component.tasks.taskspanel.TasksPanelViewBase;
+    import org.integratedsemantics.flexspaces.component.versions.versionlist.VersionListPresenter;
     import org.integratedsemantics.flexspaces.component.wcm.browser.WcmRepoBrowserPresenter;
     import org.integratedsemantics.flexspaces.control.event.CheckinEvent;
     import org.integratedsemantics.flexspaces.control.event.GetInfoEvent;
@@ -95,7 +96,7 @@ package org.integratedsemantics.flexspaces.view
         protected var browserPresenter:RepoBrowserPresenter; 
         protected var searchPanelPresenter:SearchPanelPresenter;
         protected var tasksPanelPresenter:TasksPanelPresenter;               
-        protected var wcmBrowserPresenter:WcmRepoBrowserPresenter;         
+        protected var wcmBrowserPresenter:WcmRepoBrowserPresenter;  
 
         // view modes
         protected static const GET_CONFIG_MODE_INDEX:int = 0;
@@ -590,13 +591,30 @@ package org.integratedsemantics.flexspaces.view
             
             if (event.folderViewPresenter != null)
             {
-                model.currentNodeList = event.folderViewPresenter.nodeCollection;
-                model.selectedItems = event.folderViewPresenter.getSelectedItems();
-                clearOtherSelections(event.folderViewPresenter);
-            }
-            
-            enableMenusAfterTabChange(tabNav.selectedIndex);
-            enableMenusAfterSelection(model.selectedItem);
+                if ( (event.folderViewPresenter is VersionListPresenter) == true )
+                {
+                	var versionListPresenter:VersionListPresenter = event.folderViewPresenter as VersionListPresenter;                 	
+	                model.currentNodeList = versionListPresenter.nodeCollection;
+	                model.selectedItems = versionListPresenter.getSelectedItems();
+	                clearOtherSelections(versionListPresenter);                         	
+
+		            enableMenusAfterTabChange(tabNav.selectedIndex);
+		            enableMenusAfterVersionSelection(model.selectedItem);                	
+                }
+                else if ( (event.folderViewPresenter is NodeListViewPresenter) == true )
+                {
+                	var nodeListPresenter:NodeListViewPresenter = event.folderViewPresenter as NodeListViewPresenter;                 	
+	                model.currentNodeList = nodeListPresenter.nodeCollection;
+	                model.selectedItems = nodeListPresenter.getSelectedItems();
+	                clearOtherSelections(nodeListPresenter);                         	
+
+	                // init version list when a main folder view node is selected
+                	browserPresenter.initVersionList(model.selectedItem);
+                	
+		            enableMenusAfterTabChange(tabNav.selectedIndex);
+		            enableMenusAfterSelection(model.selectedItem);                	
+                }
+            }            
         }        
 
         /**
@@ -630,7 +648,7 @@ package org.integratedsemantics.flexspaces.view
          * @param selectedFolderView current/selected folder ivew
          * 
          */
-        protected function clearOtherSelections(selectedFolderView:NodeListViewPresenter):void
+        protected function clearOtherSelections(selectedFolderView:Presenter):void
         {
             if (browserPresenter != null)
             {  
@@ -1196,6 +1214,26 @@ package org.integratedsemantics.flexspaces.view
             tabNav.invalidateDisplayList();
         }     
 
+
+        /**
+         * Toggle show / hide of version history list panel
+         * 
+         */
+        public function showHideVersionHistory():void
+        {
+            if (browserPresenter != null)
+            {  
+                browserPresenter.showHideVersionHistory();
+            }
+
+            if (wcmBrowserPresenter != null)
+            {  
+                // todo wcmBrowserPresenter.showHideVersionHistory();
+            }            
+            
+            tabNav.invalidateDisplayList();
+        }     
+
         /**
          * Handle chosen context menu item
          *  
@@ -1320,6 +1358,9 @@ package org.integratedsemantics.flexspaces.view
                 case "gotoParent":
                     gotoParentFolder(selectedItem);
                     break;
+                case "versionhistory":
+                    showHideVersionHistory();
+                    break; 
                 default:
                     break;
             }   
@@ -1483,8 +1524,8 @@ package org.integratedsemantics.flexspaces.view
                         mainView.tagsBtn.enabled = readPermission;                        
                         browserPresenter.enableContextMenuItem("rename", writePermission, fileContextMenu);  
                         browserPresenter.enableContextMenuItem("properties", readPermission, fileContextMenu);  
-                        browserPresenter.enableContextMenuItem("tags", readPermission, fileContextMenu);  
-                                            
+                        browserPresenter.enableContextMenuItem("tags", readPermission, fileContextMenu);
+                                                                    
                         if (selectedItem.isFolder != true)
                         {                            
                             // checkin
@@ -1612,6 +1653,58 @@ package org.integratedsemantics.flexspaces.view
                 }                                                                                              
             }
         }
+        
+        /**
+         * Enable / Disable menus after a version is selected in the version history panel
+         *  
+         * @param selectedItem node selected
+         * 
+         */
+        protected function enableMenusAfterVersionSelection(selectedItem:Object):void
+        {              
+            if ((selectedItem != null) && (mainMenu.configurationDone == true))
+            {
+                var node:Node = selectedItem as Node;                
+
+                var readPermission:Boolean = node.readPermission;                
+                                
+                // download, view, preview
+                mainMenu.menuBarCollection[0].menuitem[4].@enabled = readPermission;
+                mainMenu.menuBarCollection[0].menuitem[6].@enabled = readPermission;
+                mainMenu.menuBarCollection[0].menuitem[7].@enabled = false;                                        
+
+                if ( (browserPresenter != null) && (browserPresenter.versionListPresenter != null) )
+                {  
+                    browserPresenter.versionListPresenter.enableContextMenuItem("view", readPermission, true);
+                }  
+                
+                // cut, copy, paste, delete   
+                mainMenu.menuBarCollection[1].menuitem[0].@enabled = false;
+                mainMenu.menuBarCollection[1].menuitem[1].@enabled = false;
+                mainMenu.menuBarCollection[1].menuitem[2].@enabled = false;
+                mainMenu.menuBarCollection[1].menuitem[3].@enabled = false;
+                mainView.cutBtn.enabled = false;
+                mainView.copyBtn.enabled = false;
+                mainView.pasteBtn.enabled = false;                    
+                mainView.deleteBtn.enabled = false;
+
+                // rename, properties, tags
+                mainMenu.menuBarCollection[1].menuitem[11].@enabled = false;                        
+                mainMenu.menuBarCollection[1].menuitem[12].@enabled = false;                        
+                mainMenu.menuBarCollection[1].menuitem[13].@enabled = false;                        
+                mainView.tagsBtn.enabled = false;            
+                
+                // checkin menus
+                mainMenu.menuBarCollection[1].menuitem[5].@enabled = false;
+                mainMenu.menuBarCollection[1].menuitem[6].@enabled = false;
+                mainMenu.menuBarCollection[1].menuitem[7].@enabled = false;
+                mainMenu.menuBarCollection[1].menuitem[8].@enabled = false;
+                // make pdf, make flash, startworkflow    
+                mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
+                mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
+                mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;                        
+            }
+        }               
         
         /**
          * Enable / Disable menus after view switch with tabs

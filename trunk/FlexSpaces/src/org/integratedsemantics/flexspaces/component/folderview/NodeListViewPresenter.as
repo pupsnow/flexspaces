@@ -331,7 +331,7 @@ package org.integratedsemantics.flexspaces.component.folderview
          * @param selectedFolderList selected folder presenter/view
          * 
          */
-        public function clearOtherSelections(selectedFolderList:NodeListViewPresenter):void
+        public function clearOtherSelections(selectedFolderList:Presenter):void
         {
             if (selectedFolderList != this)
             {

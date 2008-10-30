@@ -10,10 +10,9 @@ package org.integratedsemantics.flexspaces.component.menu.contextmenu
     
     import mx.collections.XMLListCollection;
     
-    import org.integratedsemantics.flexspaces.component.folderview.FolderViewBase;
-    import org.integratedsemantics.flexspaces.component.folderview.NodeListViewPresenter;
     import org.integratedsemantics.flexspaces.component.folderview.event.FolderViewContextMenuEvent;
     import org.integratedsemantics.flexspaces.component.menu.event.MenuConfiguredEvent;
+    import org.integratedsemantics.flexspaces.framework.presenter.Presenter;
 
     
     /**
@@ -23,8 +22,8 @@ package org.integratedsemantics.flexspaces.component.menu.contextmenu
      */
     public class ConfigurableContextMenu
     {
-        protected var folderViewPresenter:NodeListViewPresenter
-        protected var folderView:FolderViewBase;
+        protected var folderViewPresenter:Presenter
+        protected var folderView:Object;
         
         public var contextMenu:ContextMenu;
         
@@ -47,7 +46,7 @@ package org.integratedsemantics.flexspaces.component.menu.contextmenu
          * @param folderView folder view
          * 
          */
-        public function ConfigurableContextMenu(folderViewPresenter:NodeListViewPresenter, folderView:FolderViewBase, configFilePath:String)
+        public function ConfigurableContextMenu(folderViewPresenter:Presenter, folderView:Object, configFilePath:String)
         {
             this.folderViewPresenter = folderViewPresenter;
             this.folderView = folderView;            

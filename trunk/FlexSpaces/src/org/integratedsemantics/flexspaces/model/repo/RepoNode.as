@@ -26,6 +26,9 @@ package org.integratedsemantics.flexspaces.model.repo
         public var writePermission:Boolean;
         public var deletePermission:Boolean;
         public var createChildrenPermission:Boolean;
+        
+        public var versionLabel:String;
+        public var creator:String;
 
 
         public function RepoNode()

@@ -7,7 +7,6 @@ package org.integratedsemantics.flexspaces.component.browser
     
     import org.integratedsemantics.flexspaces.component.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.component.folderview.FolderViewPresenter;
-    import org.integratedsemantics.flexspaces.component.folderview.NodeListViewPresenter;
     import org.integratedsemantics.flexspaces.component.folderview.event.ClickNodeEvent;
     import org.integratedsemantics.flexspaces.component.folderview.event.DoubleClickDocEvent;
     import org.integratedsemantics.flexspaces.component.folderview.event.FolderViewChangePathEvent;
@@ -15,6 +14,8 @@ package org.integratedsemantics.flexspaces.component.browser
     import org.integratedsemantics.flexspaces.component.folderview.event.FolderViewOnDropEvent;
     import org.integratedsemantics.flexspaces.component.tree.TreePresenter;
     import org.integratedsemantics.flexspaces.component.tree.TreeViewBase;
+    import org.integratedsemantics.flexspaces.component.versions.versionlist.VersionListPresenter;
+    import org.integratedsemantics.flexspaces.component.versions.versionlist.VersionListViewBase;
     import org.integratedsemantics.flexspaces.framework.presenter.Presenter;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
 
@@ -30,10 +31,12 @@ package org.integratedsemantics.flexspaces.component.browser
         protected var treeView:TreeViewBase;
         protected var fileView1:FolderViewBase;
         protected var fileView2:FolderViewBase;        
+        protected var versionListView:VersionListViewBase;
 
         public var treePresenter:TreePresenter;
         public var folderViewPresenter1:FolderViewPresenter;
         public var folderViewPresenter2:FolderViewPresenter;
+        public var versionListPresenter:VersionListPresenter;
 
         // Cairngorm model locator                
         [Bindable] protected var model : AppModelLocator = AppModelLocator.getInstance();
@@ -81,6 +84,7 @@ package org.integratedsemantics.flexspaces.component.browser
             this.treeView = browserView.treeView;
             this.fileView1 = browserView.fileView1;
             this.fileView2 = browserView.fileView2;
+            this.versionListView = browserView.versionListView;
                    
             setupPresenters();
             
@@ -98,7 +102,8 @@ package org.integratedsemantics.flexspaces.component.browser
         {
             treePresenter = new TreePresenter(treeView);           
             folderViewPresenter1 = new FolderViewPresenter(this.fileView1);     
-            folderViewPresenter2 = new FolderViewPresenter(this.fileView2);                         
+            folderViewPresenter2 = new FolderViewPresenter(this.fileView2);   
+            versionListPresenter = new VersionListPresenter(this.versionListView);                      
         }
         
         /**
@@ -111,6 +116,7 @@ package org.integratedsemantics.flexspaces.component.browser
         {
             fileView1.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);
             fileView2.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);            
+            versionListView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);            
         }
 
         /**
@@ -135,6 +141,7 @@ package org.integratedsemantics.flexspaces.component.browser
         {
             fileView1.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
             fileView2.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
+            versionListView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
         }
 
         /**
@@ -147,6 +154,7 @@ package org.integratedsemantics.flexspaces.component.browser
         {
             fileView1.addEventListener(ClickNodeEvent.CLICK_NODE, handler);            
             fileView2.addEventListener(ClickNodeEvent.CLICK_NODE, handler);                        
+            versionListView.addEventListener(ClickNodeEvent.CLICK_NODE, handler);                        
         }
 
         /**
@@ -234,8 +242,11 @@ package org.integratedsemantics.flexspaces.component.browser
         public function clearSelection():void
         {
             folderViewPresenter1.clearSelection();
-            folderViewPresenter2.clearSelection();            
-            model.clearSelection();   
+            folderViewPresenter2.clearSelection();     
+            model.clearSelection();
+            
+			// since no selection in main folder view, version list should be clear
+            versionListPresenter.initVersionList(null);			               
         }
         
         /**
@@ -245,10 +256,11 @@ package org.integratedsemantics.flexspaces.component.browser
          * @param selectedFolderList selected/current folder view
          * 
          */
-        public function clearOtherSelections(selectedFolderList:NodeListViewPresenter):void
+        public function clearOtherSelections(selectedFolderList:Presenter):void
         {
             folderViewPresenter1.clearOtherSelections(selectedFolderList);
             folderViewPresenter2.clearOtherSelections(selectedFolderList);  
+            versionListPresenter.clearOtherSelections(selectedFolderList);  
         }
         
         /**
@@ -264,7 +276,7 @@ package org.integratedsemantics.flexspaces.component.browser
             
             // select fileView1 and clear item selection
             model.currentNodeList = this.folderViewPresenter1.nodeCollection;
-            clearSelection();                       
+            clearSelection();                 
         }
         
         /**
@@ -279,6 +291,7 @@ package org.integratedsemantics.flexspaces.component.browser
         {
             folderViewPresenter1.enableContextMenuItem(data, enabled, fileMenu);
             folderViewPresenter2.enableContextMenuItem(data, enabled, fileMenu);
+            versionListPresenter.enableContextMenuItem(data, enabled, fileMenu);
         }
 
 
@@ -290,8 +303,41 @@ package org.integratedsemantics.flexspaces.component.browser
         public function showHideThumbnails():void
         {
             folderViewPresenter1.showHideThumbnails();
-            folderViewPresenter2.showHideThumbnails();            
+            folderViewPresenter2.showHideThumbnails(); 
         }
+
+
+        /**
+         * Toggle show / hide of version history list view  
+         * 
+         */
+        public function showHideVersionHistory():void
+        {
+            if (versionListView.visible == true)
+            {
+                versionListView.visible = false;
+                versionListView.includeInLayout = false;
+            }    
+            else
+            {
+                versionListView.visible = true;
+                versionListView.includeInLayout = true;
+                versionListPresenter.initVersionList(folderViewPresenter1.getSelectedItem());
+            }
+        }
+
+        /**
+		 * Initialize version list 
+		 * 
+		 * @param selectItem selected node to get version history on
+		 */
+		public function initVersionList(selectedItem:Object):void
+		{
+			if (versionListView.visible == true)
+			{
+				versionListPresenter.initVersionList(selectedItem);				
+			}                     			
+		}		
 
 
         /**

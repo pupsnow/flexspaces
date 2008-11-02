@@ -156,6 +156,7 @@ package org.integratedsemantics.flexspaces.component.categories.tree
                 rootNode.nodeRef = "rootCategory";  
                 rootNode.name = "Categories";                  
                 currentNode = rootNode;
+                loadingNode = rootNode;
                 treeView.dataProvider = rootNode;
             }
             else
@@ -176,10 +177,19 @@ package org.integratedsemantics.flexspaces.component.categories.tree
                     currentNode.children.addItem(childNode);
                 }
                 currentNode.hasBeenLoaded = true;
-                treeView.validateNow();
-                treeView.expandItem(currentNode, true, true);
+
+                treeView.callLater(expandLater);
             }                
         }        
+        
+		protected function expandLater():void
+		{
+			var isOpen:Boolean = treeView.isItemOpen(loadingNode);
+			if (isOpen == false)
+			{
+        		treeView.expandItem(loadingNode, true, false);
+   			}			
+		}
         
         /**
          * Handler called when server get categories returns fault
@@ -207,12 +217,12 @@ package org.integratedsemantics.flexspaces.component.categories.tree
             {
                 if (treeView.selectedItem == prevItem)
                 {
-                    expandItem(treeView.selectedItem, false, true);
+                    expandItem(treeView.selectedItem, false, false);
                 }
             } 
             else
             {
-                expandItem(treeView.selectedItem, true, true);
+                expandItem(treeView.selectedItem, true, false);
             }
             
             prevItem = treeView.selectedItem;

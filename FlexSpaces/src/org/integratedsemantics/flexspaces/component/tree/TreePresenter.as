@@ -67,7 +67,7 @@ package org.integratedsemantics.flexspaces.component.tree
             var path:String = "/";
             var responder:Responder = new Responder(onResultTreeData, onFaultTreeData);
             var treeDataEvent:TreeDataEvent = new TreeDataEvent(TreeDataEvent.TREE_DATA, responder, path); 
-            treeDataEvent.dispatch();                                            
+            treeDataEvent.dispatch();                                     
         }
         
         /**
@@ -97,28 +97,49 @@ package org.integratedsemantics.flexspaces.component.tree
          *  
          * @param path folder path of tree node to select
          * 
-         * todo: match on full folder path not just name at end of path
          */
         public function setPath(path:String):void
         {
-            var name:String = path.substr( path.lastIndexOf("/") + 1) ;
-            
-            if (name != "")
-            {
-                var foundAndSelected:Boolean = treeView.findString(name);
-                
-                if (foundAndSelected == true)
-                {
-                    var node:TreeNode = treeView.selectedItem as TreeNode;
-                    this.setLoadingNode(node);
-                    // get subfolder data for this selected node from the server
-                    var responder:Responder = new Responder(onResultTreeData, onFaultTreeData);
-                    var treeDataEvent:TreeDataEvent = new TreeDataEvent(TreeDataEvent.TREE_DATA, responder, path); 
-                    treeDataEvent.dispatch();                                                                
-                }
-            }
-        }    
-                
+        	var oldLabelField:String = treeView.labelField;
+        	treeView.labelField = "path";
+        	treeView.selectedIndex = -1;
+			var foundAndSelected:Boolean = treeView.findString(path);
+			treeView.labelField = oldLabelField;
+			
+			if (foundAndSelected == true)
+			{
+			    var node:TreeNode = treeView.selectedItem as TreeNode;
+			    
+			    if (node.path == path)
+			    {
+  			       getNodeChildren(node);
+			    }
+			    else
+			    {
+					//trace("TreePresenter.setPath: findString found wrong node " + path + " " + node.path);			
+			    }                                                                
+			}
+			else
+			{
+				//trace("TreePresenter.setPath: path not found " + path);			    					
+			}
+        } 
+        
+        /**
+         * refresh tree at folder currently selected in it 
+         * 
+         */
+        public function refreshCurrentFolder():void
+        {
+        	var node:TreeNode = treeView.selectedItem as TreeNode;
+        	if (node != null)
+        	{
+        		node.hasBeenLoaded = false;
+			    getNodeChildren(node);
+			    treeView.invalidateList();
+        	}	
+        }        
+                       
        /**
         * Get subfolder data for node from the server 
         * 
@@ -194,6 +215,8 @@ package org.integratedsemantics.flexspaces.component.tree
                 rootNode.createChildrenPermission = (result.folder.createChildrenPermission == "true");
 
                 currentNode = rootNode;
+                loadingNode = rootNode;
+
                 treeView.dataProvider = rootNode;
             }
             else
@@ -231,10 +254,19 @@ package org.integratedsemantics.flexspaces.component.tree
                     currentNode.children.addItem(childNode);
                 }
                 currentNode.hasBeenLoaded = true;
-                treeView.validateNow();
-                treeView.expandItem(currentNode, true, true);
+                
+                treeView.callLater(expandLater);
             }                
         }        
+
+		protected function expandLater():void
+		{
+			var isOpen:Boolean = treeView.isItemOpen(loadingNode);
+			if (isOpen == false)
+			{
+        		treeView.expandItem(loadingNode, true, false);
+   			}			
+		}
         
         /**
          * Handler called when server get tree data returns fault

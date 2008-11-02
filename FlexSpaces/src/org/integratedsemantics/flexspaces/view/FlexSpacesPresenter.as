@@ -443,10 +443,12 @@ package org.integratedsemantics.flexspaces.view
                 {
                     model.wcmMode = false;
                     this.browserPresenter.viewActive(true);
+                    this.wcmBrowserPresenter.viewActive(false);
                 }
                 else if (event.newIndex == WCM_TAB_INDEX)
                 { 
                     model.wcmMode = true;
+                    this.browserPresenter.viewActive(false);
                     this.wcmBrowserPresenter.viewActive(true);
                 }       
                 else if (event.newIndex == SEARCH_TAB_INDEX) 
@@ -454,11 +456,15 @@ package org.integratedsemantics.flexspaces.view
                     model.wcmMode = false;
                     model.currentNodeList = null;
                     searchPanelPresenter.refresh();
+                    this.browserPresenter.viewActive(false);
+                    this.wcmBrowserPresenter.viewActive(false);
                 }
                 else if (event.newIndex == TASKS_TAB_INDEX) 
                 {
                     model.wcmMode = false;
                     model.currentNodeList = null;
+                    this.browserPresenter.viewActive(false);
+                    this.wcmBrowserPresenter.viewActive(false);
                 }
                 
                 enableMenusAfterTabChange(event.newIndex);                

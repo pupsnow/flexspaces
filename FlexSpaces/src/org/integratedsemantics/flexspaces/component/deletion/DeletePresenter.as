@@ -10,6 +10,7 @@ package org.integratedsemantics.flexspaces.component.deletion
     import org.integratedsemantics.flexspaces.control.event.DeleteEvent;
     import org.integratedsemantics.flexspaces.framework.dialog.DialogPresenter;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.repo.RepoNode;
 
 
     /**
@@ -24,6 +25,8 @@ package org.integratedsemantics.flexspaces.component.deletion
         protected var wcmMode:Boolean = false;
         protected var onComplete:Function;
         protected var remainingItems:ArrayCollection;
+        protected var parentPath:String = null;
+        protected var folderDeletion:Boolean = false;
                         
         /**
          * Constructor 
@@ -77,6 +80,13 @@ package org.integratedsemantics.flexspaces.component.deletion
                     else
                     {
                         deleteView.filelist.text = deleteView.filelist.text + ", " + selectedItem.name; 
+                    }
+                    
+                    var repoNode:RepoNode = selectedItem as RepoNode;
+                    if (repoNode.isFolder == true)
+                    {
+                    	parentPath = repoNode.parentPath;
+                    	folderDeletion = true;
                     }
                 }
                 else
@@ -136,6 +146,12 @@ package org.integratedsemantics.flexspaces.component.deletion
             
             if (remainingItems.length == 0)
             {
+	            // notify repo browser to update the tree
+	            if ((folderDeletion == true) && (parentPath != null))
+	            {
+	            	var deletedFolderEvent:DeletedFolderEvent = new DeletedFolderEvent(DeletedFolderEvent.DELETED_FOLDER, parentPath);
+	            	dialogView.parentApplication.dispatchEvent(deletedFolderEvent);            
+            	}            	
                 PopUpManager.removePopUp(dialogView);
                 if (onComplete != null)
                 {

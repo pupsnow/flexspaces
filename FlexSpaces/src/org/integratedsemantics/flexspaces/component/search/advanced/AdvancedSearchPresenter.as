@@ -312,12 +312,12 @@ package org.integratedsemantics.flexspaces.component.search.advanced
             {
                 if (advSearchView.treeView.selectedItem == prevItem)
                 {
-                    treePresenter.expandItem(advSearchView.treeView.selectedItem, false, true);
+                    treePresenter.expandItem(advSearchView.treeView.selectedItem, false, false);
                 }
             } 
             else
             {
-                treePresenter.expandItem(advSearchView.treeView.selectedItem, true, true);
+                treePresenter.expandItem(advSearchView.treeView.selectedItem, true, false);
             }
             
             prevItem = advSearchView.treeView.selectedItem;

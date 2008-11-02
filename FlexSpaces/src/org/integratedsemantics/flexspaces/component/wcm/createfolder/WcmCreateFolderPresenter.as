@@ -6,6 +6,7 @@ package org.integratedsemantics.flexspaces.component.wcm.createfolder
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
+    import org.integratedsemantics.flexspaces.component.createspace.AddedFolderEvent;
     import org.integratedsemantics.flexspaces.control.event.FolderEvent;
     import org.integratedsemantics.flexspaces.framework.dialog.DialogPresenter;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
@@ -76,6 +77,12 @@ package org.integratedsemantics.flexspaces.component.wcm.createfolder
          */
         protected function onResultCreateAvmFolder(info:Object):void
         {
+            // notify wcm repo browser to update the tree
+            var parentPath:String = parentNode.getPath();
+            var path:String = parentPath + "/" + createFolderView.foldername.text;
+            var addedFolderEvent:AddedFolderEvent = new AddedFolderEvent(AddedFolderEvent.ADDED_FOLDER, parentPath, path);
+            createFolderView.parentApplication.dispatchEvent(addedFolderEvent);            
+
             PopUpManager.removePopUp(createFolderView);
             if (onComplete != null)
             {

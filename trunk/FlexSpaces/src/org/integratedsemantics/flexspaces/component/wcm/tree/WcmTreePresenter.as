@@ -52,26 +52,40 @@ package org.integratedsemantics.flexspaces.component.wcm.tree
          *  
          * @param path folder path of tree node to select
          * 
-         * todo: match on full folder path not just name at end of path
          */
         override public function setPath(path:String):void
         {
-            var name:String = path.substr( path.lastIndexOf("/") + 1) ;
-            
-            if (name != "")
-            {
-                var foundAndSelected:Boolean = treeView.findString(name);
-                
-                if (foundAndSelected == true)
-                {
-                    var node:WcmTreeNode = treeView.selectedItem as WcmTreeNode;
-                    if (path.length > 4)
-                    {
-                        getNodeChildren(node);                            
-                    }
-                }
-            }
-        }    
+        	var oldLabelField:String = treeView.labelField;
+        	treeView.labelField = "path";
+        	treeView.selectedIndex = -1;
+			var foundAndSelected:Boolean = treeView.findString(path);
+			treeView.labelField = oldLabelField;
+			
+			if (foundAndSelected == true)
+			{
+			    var node:WcmTreeNode = treeView.selectedItem as WcmTreeNode;
+			    
+			    if (node.path == path)
+			    {
+			    	if (node.hasBeenLoaded == false)
+			    	{
+	                    if (path.length > 4)
+	                    {
+	                        getNodeChildren(node);                            
+	                    }
+				    }
+			    }
+			    else
+			    {
+					//trace("WcmTreePresenter.setPath: findString found wrong node " + path + " " + node.path);			
+			    }                                                                
+			}
+			else
+			{
+				//trace("WcmTreePresenter.setPath: path not found " + path);			    					
+			}
+        } 
+
         
        /**
         * Get subfolder data for node from the server 
@@ -128,6 +142,7 @@ package org.integratedsemantics.flexspaces.component.wcm.tree
                 rootNode.createChildrenPermission = (result.folder.createChildrenPermission == "true");
 
                 currentNode = rootNode as WcmTreeNode;
+                loadingNode = rootNode as WcmTreeNode;
                 treeView.dataProvider = rootNode;
             }
             else
@@ -164,8 +179,8 @@ package org.integratedsemantics.flexspaces.component.wcm.tree
                     currentNode.children.addItem(childNode);
                 }
                 currentNode.hasBeenLoaded = true;
-                treeView.validateNow();
-                treeView.expandItem(currentNode, true, true);
+
+                treeView.callLater(expandLater);
             }                
         }
 
@@ -195,7 +210,12 @@ package org.integratedsemantics.flexspaces.component.wcm.tree
                 rootNode = new WcmTreeNode("AVM", "AVM", "AVM");
                 rootNode.path = "/AVM";
                 currentNode = rootNode as WcmTreeNode;
+                loadingNode = rootNode as WcmTreeNode;
                 treeView.dataProvider = rootNode;
+            }
+            else
+            {
+                currentNode = loadingNode as WcmTreeNode;
             }
        
             if (currentNode != null)
@@ -212,8 +232,8 @@ package org.integratedsemantics.flexspaces.component.wcm.tree
                     }
                 }
                 currentNode.hasBeenLoaded = true;
-                treeView.validateNow();
-                treeView.expandItem(currentNode, true, true);
+
+                treeView.callLater(expandLater);
             }                
         }
         

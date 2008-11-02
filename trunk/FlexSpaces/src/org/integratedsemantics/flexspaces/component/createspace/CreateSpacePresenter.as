@@ -138,7 +138,14 @@ package org.integratedsemantics.flexspaces.component.createspace
          */
         protected function onResultCreateSpace(info:Object):void
         {
-            PopUpManager.removePopUp(createSpaceView);
+            // notify repo browser to update the tree
+            var parentPath:String = parentNode.getPath();
+            var path:String = parentPath + "/" + createSpaceView.foldername.text;
+            var addedFolderEvent:AddedFolderEvent = new AddedFolderEvent(AddedFolderEvent.ADDED_FOLDER, parentPath, path);
+            createSpaceView.parentApplication.dispatchEvent(addedFolderEvent);            
+
+            PopUpManager.removePopUp(createSpaceView);                        
+            
             if (onComplete != null)
             {
                 onComplete();

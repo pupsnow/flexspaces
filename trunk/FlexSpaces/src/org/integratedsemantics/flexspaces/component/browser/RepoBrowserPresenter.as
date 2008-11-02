@@ -5,6 +5,8 @@ package org.integratedsemantics.flexspaces.component.browser
     import mx.events.FlexEvent;
     import mx.events.ListEvent;
     
+    import org.integratedsemantics.flexspaces.component.createspace.AddedFolderEvent;
+    import org.integratedsemantics.flexspaces.component.deletion.DeletedFolderEvent;
     import org.integratedsemantics.flexspaces.component.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.component.folderview.FolderViewPresenter;
     import org.integratedsemantics.flexspaces.component.folderview.event.ClickNodeEvent;
@@ -32,6 +34,7 @@ package org.integratedsemantics.flexspaces.component.browser
         protected var fileView1:FolderViewBase;
         protected var fileView2:FolderViewBase;        
         protected var versionListView:VersionListViewBase;
+        protected var activeView:Boolean = false;
 
         public var treePresenter:TreePresenter;
         public var folderViewPresenter1:FolderViewPresenter;
@@ -92,6 +95,9 @@ package org.integratedsemantics.flexspaces.component.browser
             treeView.addEventListener(ListEvent.ITEM_CLICK, treeClicked);           
             fileView1.addEventListener(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, onChangePathFolderList1);
             fileView2.addEventListener(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, onChangePathFolderList2);
+            
+            browserView.parentApplication.addEventListener(AddedFolderEvent.ADDED_FOLDER, onAddRemoveFolder);
+            browserView.parentApplication.addEventListener(DeletedFolderEvent.DELETED_FOLDER, onAddRemoveFolder);
         }
         
         /**
@@ -170,6 +176,8 @@ package org.integratedsemantics.flexspaces.component.browser
                 // select main folder pane when the repo browser view in switched to
                 model.currentNodeList = this.folderViewPresenter1.nodeCollection;
             }
+            
+            activeView = active;
             
             clearSelection();
         }
@@ -377,12 +385,12 @@ package org.integratedsemantics.flexspaces.component.browser
             {
                 if (treeView.selectedItem == prevItem)
                 {
-                    treePresenter.expandItem(treeView.selectedItem, false, true);
+                    treePresenter.expandItem(treeView.selectedItem, false, false);
                 }
             } 
             else
             {
-                treePresenter.expandItem(treeView.selectedItem, true, true);
+                treePresenter.expandItem(treeView.selectedItem, true, false);
             }
             
             prevItem = treeView.selectedItem;
@@ -412,7 +420,21 @@ package org.integratedsemantics.flexspaces.component.browser
             // select fileView2 and clear item selection
             model.currentNodeList = this.folderViewPresenter2.nodeCollection;
             clearSelection();           
-        }            
+        }  
+        
+        /**
+         * Handle add remove folder event by also refreshing selected folder parent in tree
+         *  
+         * @param event add or remove folder event
+         * 
+         */
+        protected function onAddRemoveFolder(event:Event):void
+        {
+        	if (activeView == true)
+        	{
+				treePresenter.refreshCurrentFolder();
+        	}
+        }          
 
     }
 }

@@ -531,7 +531,7 @@ package org.integratedsemantics.flexspaces.view
         {
             if (event.errorType == ErrorService.APPLICATION_ERROR)
             {
-                var msg:String = "Web Script Error: " + event.error.message;
+                var msg:String = event.error.message;
                 var errorDialogView:ErrorDialogView = new ErrorDialogView();
                 var errorDialogPresenter:ErrorDialogPresenter = new ErrorDialogPresenter(errorDialogView, msg, event.error.getStackTrace() ); 
                 PopUpManager.addPopUp(errorDialogView, mainView);                                

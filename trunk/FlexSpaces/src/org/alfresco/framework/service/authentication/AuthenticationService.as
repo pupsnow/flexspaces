@@ -26,6 +26,8 @@
 {
 	import flash.events.EventDispatcher;
 	
+	import mx.resources.ResourceManager;
+	
 	import org.alfresco.framework.service.error.ErrorService;
 	import org.alfresco.framework.service.webscript.ConfigService;
 	import org.alfresco.framework.service.webscript.FailureEvent;
@@ -193,18 +195,9 @@
 			var message:String = event.fault.faultString;
 			var details:String = event.fault.faultDetail;
 			
-			if (code == "403")
-			{
-				// Raise invalid credentials error	
-				ErrorService.instance.raiseError(InvalidCredentialsError.INVALID_CREDENTIALS, new InvalidCredentialsError());
-			}
-			else
-			{
-				// TODO extend the parameters provided here ...
-				
-				// Raise general authentication error
-				ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, new AuthenticationError(message));
-			}
+			message = ResourceManager.getInstance().getString('Services', 'login_error_message');
+			
+			ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, new AuthenticationError(message));
 		}
 	}
 }

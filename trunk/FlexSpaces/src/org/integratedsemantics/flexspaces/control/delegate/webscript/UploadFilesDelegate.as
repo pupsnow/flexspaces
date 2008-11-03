@@ -230,7 +230,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                                 
                 params.mimetype = FormatUtil.getMimeType(file);
                 
-                //params.thumbnails = "doclib";
+                params.thumbnails = "doclib";
                 
                 params.type = nodeType;                
                 

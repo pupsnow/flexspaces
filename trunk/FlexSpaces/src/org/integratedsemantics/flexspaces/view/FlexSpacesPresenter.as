@@ -42,6 +42,8 @@ package org.integratedsemantics.flexspaces.view
     import org.integratedsemantics.flexspaces.component.logout.LogoutViewBase;
     import org.integratedsemantics.flexspaces.component.menu.event.MenuConfiguredEvent;
     import org.integratedsemantics.flexspaces.component.menu.menubar.ConfigurableMenuBar;
+    import org.integratedsemantics.flexspaces.component.playvideo.PlayVideoPresenter;
+    import org.integratedsemantics.flexspaces.component.playvideo.PlayVideoView;
     import org.integratedsemantics.flexspaces.component.preview.PreviewPresenter;
     import org.integratedsemantics.flexspaces.component.preview.PreviewView;
     import org.integratedsemantics.flexspaces.component.search.advanced.AdvancedSearchEvent;
@@ -833,6 +835,39 @@ package org.integratedsemantics.flexspaces.view
         }
                 
         /**
+         * Play video
+         *  
+         * @param selectedItem selected node
+         * 
+         */
+        protected function playVideo(selectedItem:Object):void
+        {
+            if (selectedItem != null && selectedItem.isFolder == false)
+            {
+                if (model.wcmMode == false)
+                {
+                    // add tab for file
+                    var count:int = tabNav.numChildren;
+                    var tab:VBox = new VBox();
+                    tab.percentHeight = 100;
+                    tab.percentWidth = 100;
+                    tab.label = selectedItem.name;
+                    tab.id = selectedItem.name;
+                    tab.setStyle("backgroundColor", 0x000000);
+                    tabNav.addChild(tab);                       
+                    tabNav.selectedIndex = count;            
+                            
+                    // setup play video view in tab
+                    var view:PlayVideoView = new PlayVideoView();
+                    var presenter:PlayVideoPresenter = new PlayVideoPresenter(view, selectedItem as Node);
+                    view.percentWidth = 100;
+                    view.percentHeight = 100;
+                    tab.addChild(view);
+                }
+            }            
+        }
+
+        /**
          *  Edit a document node (checkout, then download
          *  
          * @param selectedItem selected node
@@ -1367,6 +1402,9 @@ package org.integratedsemantics.flexspaces.view
                 case "versionhistory":
                     showHideVersionHistory();
                     break; 
+                case 'playVideo':
+                    playVideo(selectedItem);
+                    break;                    
                 default:
                     break;
             }   

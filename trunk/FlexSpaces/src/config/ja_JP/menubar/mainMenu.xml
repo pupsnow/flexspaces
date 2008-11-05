@@ -37,7 +37,7 @@
         <menuitem type="separator" />
         <menuitem label="バージョンの履歴" type="check" toggled="false"  data="versionhistory"/>
     </menuitem>
-    <menuitem label="Tools">
+    <menuitem label="ツール">
         <menuitem label="PDFの作成" data="makepdf" enabled="false"/>     
         <menuitem label="Flashプレビューの作成" data="makepreview" enabled="false"/>     
         <menuitem type="separator" />

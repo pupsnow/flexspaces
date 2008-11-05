@@ -617,7 +617,10 @@ package org.integratedsemantics.flexspaces.view
 	                clearOtherSelections(nodeListPresenter);                         	
 
 	                // init version list when a main folder view node is selected
-                	browserPresenter.initVersionList(model.selectedItem);
+	                if (model.wcmMode == false)
+	                {
+                		browserPresenter.initVersionList(model.selectedItem);
+	                }
                 	
 		            enableMenusAfterTabChange(tabNav.selectedIndex);
 		            enableMenusAfterSelection(model.selectedItem);                	

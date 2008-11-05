@@ -157,7 +157,12 @@ package org.alfresco.framework.service.webscript
 				if (nodeServerElement.attributes['livecycle'] == "true")
 				{
 					model.isLiveCycleContentServices = true;	
-				}				
+				}
+				var nodeLocaleElement:XMLNode = nodeServerElement.nextSibling;
+				if ((nodeLocaleElement != null) && (nodeLocaleElement.attributes['default-locale'] != null))
+				{
+					model.locale = nodeLocaleElement.attributes['default-locale'];
+				}	
 				
 				this.dispatchEvent(new ConfigCompleteEvent(ConfigCompleteEvent.CONFIG_COMPLETE));
 			}

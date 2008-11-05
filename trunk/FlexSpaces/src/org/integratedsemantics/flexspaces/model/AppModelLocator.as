@@ -68,6 +68,9 @@ package org.integratedsemantics.flexspaces.model
         // thumbnail name
         public var thumbnailName:String = "doclib";
         
+        // locale for menu config path 
+        // note: curently resource bundle properties locale from project compile options
+        public var locale:String = "en_US";        
 
         public function clearSelection():void
         {

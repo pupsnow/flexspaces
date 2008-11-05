@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+    <menuitem label="Dokument">
+        <menuitem label="Arbeitsbereich erstellen" data="newspace" enabled="false"/>
+        <menuitem label="Inhalt erstellen" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Hochladen" data="upload" enabled="false"/>
+        <menuitem label="Runterladen" data="download" enabled="false"/>
+        <menuitem label="Ändern" data="edit" enabled="false"/>
+        <menuitem label="Ansicht" data="view" enabled="false"/>
+        <menuitem label="Voransicht" data="preview" enabled="false"/>
+    </menuitem>
+    <menuitem label="Bearbeiten">
+        <menuitem label="Ausschneiden" data="cut" enabled="false"/>
+        <menuitem label="Kopieren" data="copy" enabled="false"/>
+        <menuitem label="Einfügen" data="paste" enabled="false"/>
+        <menuitem label="Löschen" data="delete" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Check-In" data="checkin" enabled="false"/>
+        <menuitem label="Check-Out" data="checkout" enabled="false"/>
+        <menuitem label="Check-Out abbrechen" data="cancelcheckout" enabled="false"/>
+        <menuitem label="Versionierbar machen" data="makeversion" enabled="false"/>
+        <menuitem label="Aktualisieren" data="update" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Umbenennen" data="rename" enabled="false"/>
+        <menuitem label="Eigenschaften" data="properties" enabled="false"/>
+        <menuitem label="Schlagworte / Kategorien" data="tags" enabled="false"/>
+    </menuitem>
+    <menuitem label="Ansehen">
+        <menuitem label="Baumansicht" type="check" toggled="true"  data="repotree"/>
+        <menuitem label="2-Listen Ansicht" type="check" toggled="false"  data="secondrepofolder"/>
+        <menuitem type="separator" />
+        <menuitem label="WCM Baumansicht" type="check" toggled="true"  data="wcmrepotree" enabled="false"/>
+        <menuitem label="2-Listen WCM Ansicht" type="check" toggled="false"  data="wcmsecondrepofolder" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Miniaturansicht" type="check" toggled="false"  data="thumbnails"/>
+        <menuitem type="separator" />
+        <menuitem label="Versions-Historie" type="check" toggled="false"  data="versionhistory"/>        
+    </menuitem>
+    <menuitem label="Werkzeuge">
+        <menuitem label="PDF erstellen" data="makepdf" enabled="false"/>     
+        <menuitem label="Flash-Voransicht erstellen" data="makepreview" enabled="false"/>     
+        <menuitem type="separator" />
+        <menuitem label="Workflow starten" data="startworkflow" enabled="false"/>              
+        <menuitem type="separator" />
+        <menuitem label="Erweiterte Suche" data="advancedsearch"/>                                                        
+    </menuitem>
+</menu>    

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+     
+     <menuitem label="Ausschneiden" data="cut" />
+     <menuitem label="Kopieren" data="copy" />
+     <menuitem label="Einfügen" data="paste" />
+     <menuitem label="Löschen" data="delete" />
+     
+     <menuitem label="Check-In" data="checkin" seperatorBefore="true"/>
+     <menuitem label="Check-Out" data="checkout"/>
+     <menuitem label="Check-Out abbrechen" data="cancelcheckout"/>
+
+     <menuitem label="Umbennnen" data="rename" seperatorBefore="true" />
+     <menuitem label="Eigenschfaten" data="properties"/>
+     <menuitem label="Schlagworte / Kategorien" data="tags"/>
+     
+     <menuitem label="Ansicht" data="view" seperatorBefore="true" />
+     
+     <menuitem label="Video abspielen" data="playVideo"/>            
+</contextmenu>    

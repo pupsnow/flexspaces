@@ -1,10 +1,40 @@
 
-8/25/08
+11/04/08
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser release notes
+
+0.7
+
+1. UI strings in resource, Spanish translation (thanks Nuno Barrocas / OKHA Networks)
+2. German translation (thanks May Computer)
+3. Japanese translation (thanks Tetsuya Suga)
+4. (Flexspaces currently only built with English set of resource bundles. source code has all four languages)
+
+5. The locale/language set of menu xml files can be configured by setting default-locale in alfresco-config.xml
+
+6. Added paging support in folder views, search results
+
+7. Added play video support (only avail from context menu, which is always enabled) will launch video in a new tab view 
+with play, stop, pause buttons
+
+8. Added support for Adobe LiveCycle Content Services ES
+
+9. Added version history panel in doclib view (no wcm support) which shows versions of selected doc (if made versionable). 
+View / Version History menu toggle panel on/off
+
+10. tree fixes (select by path not name), refresh when add or delete folder
+
+11. friendlier error msg dialog (stack details collapsed down), Friendlier login error message.
+
+12. Although mainly support flash 9.x player. Did some testing with flash 10 player. Only issue: edit does checkout + download with
+flash 9.x player. With flash 10.x player, edit will only do the checkout. Can still do the download as a  separate step with flash 10.x player.
+
+13. Tested with Alfresco Enterprise 3.0 release
+
+
 
 0.6 Release
 

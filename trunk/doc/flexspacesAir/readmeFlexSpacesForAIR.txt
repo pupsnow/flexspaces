@@ -1,4 +1,4 @@
-8/25/08
+11/04/08
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
@@ -16,7 +16,9 @@ http://get.adobe.com/air/
 or alpha for Linux
 http://labs.adobe.com/technologies/air/
 
-Note tested with Alfresco 2.2.0 Enterprise, 2.90C_dev, 3.0 Labs (1032, 1066)
+Note tested with Alfresco 3.0 Enterprise
+previously test Alfresco 2.2.0 Enterprise, Labs 3b, 2.90C_dev, 
+and adobe livecycle content services es 8.2 update 1
 (min version for webscripts is 2.1)
 
 FlexSpaces+AIR Windows Installation
@@ -31,6 +33,12 @@ be c:\Program Files\FlexSpacesAIR
 4. the default localhost port 8080 can be changed in c:\Program Files\FlexSpacesAIR\alfresco-config.xml
 alfresco-config.xml has alfrescoUrlPart to set a different url for the "/alfresco/service"  part of the server url
 (NEW in 0.6, more of the url in alfresco-config.xml, "/alfresco/service" not just "/alfresco/)
+
+New in 0.7 in alfresco-config.xml
+a. <server livecycle="false"/> livecycle="false" for regular alfresco, livecycle="true" for livecycle content services es
+b. <locale default-locale="en_US"/> sets which locale/language menu set of xml files to load from the config dir
+(For ui strings other thean menus, flexspaces currently only built with English set of resource bundles. source code also has German,Spanish, Japanese)
+
 
 5. By default a shortcut icon FlexSpaceAir will be created on your desktop
 
@@ -58,11 +66,11 @@ FlexSpaces+AIR Notes:
 1. Flex Builder 3.0 projects with Flex and ActionScript source included in this release.
 The project for FlexSpacesAir depends on the FlexSpaces project
 
-2. 0.6 flexspaces+air client 
+2. 0.7 flexspaces+air client 
 a. tested on vista with AIR 1.1 (AIR did auto upgrade of AIR)
+prevously tested with
 b. tested pm Mac OSX 10.5.4 with AIR 1.1 (AIR did auto upgrade of AIR)
-3. Previous versions tested with
-   Linux Ubuntu 8.04 with AIR linux alpha
+c. Linux Ubuntu 8.04 with AIR linux alpha
 
 3.Native Drag/Drop and Native clipboard between shell and flexspacesair is supported one direction 
    (uploading to the repository) and as copy mode only

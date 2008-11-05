@@ -100,7 +100,7 @@ package org.integratedsemantics.flexspaces.component.versions.versionlist
          */
         protected function initContextMenu():void
         {
-            fileContextMenu = new ConfigurableContextMenu(this, versionListView, model.srcPath + "config/contextmenu/versionlist/fileContextMenu.xml");
+            fileContextMenu = new ConfigurableContextMenu(this, versionListView, model.srcPath + "config/" + model.locale + "/contextmenu/versionlist/fileContextMenu.xml");
             
             versionListView.versionListGrid.contextMenu = fileContextMenu.contextMenu;    
         }        

@@ -61,8 +61,8 @@ package org.integratedsemantics.flexspaces.component.tasks.attachments
          */
         override protected function initContextMenu():void
         {
-            fileContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/contextmenu/taskattachments/fileContextMenu.xml");
-            folderContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/contextmenu/taskattachments/folderContextMenu.xml");
+            fileContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/" + model.locale + "/contextmenu/taskattachments/fileContextMenu.xml");
+            folderContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/" + model.locale + "/contextmenu/taskattachments/folderContextMenu.xml");
             
             folderView.folderIconView.folderTileList.contextMenu = fileContextMenu.contextMenu;         
             folderView.folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;                    

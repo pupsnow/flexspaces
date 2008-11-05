@@ -71,7 +71,7 @@
                 
                     <!-- main menu toolbar -->
                     <flexlib:DockableToolBar id="menuToolbar" label="Menus" width="100%" backgroundColor="0xCCCCCC">                    
-                        <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" width="100%" height="25" configPath="{model.srcPath + 'config/menubar/mainMenu.xml'}"/>
+                        <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" width="100%" height="25" configPath="{model.srcPath + 'config/' + model.locale + '/menubar/mainMenu.xml'}"/>
                     </flexlib:DockableToolBar>    
                     
                     <!-- buttons toolbar -->

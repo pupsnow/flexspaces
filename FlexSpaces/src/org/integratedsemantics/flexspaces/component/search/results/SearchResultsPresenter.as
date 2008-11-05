@@ -68,8 +68,8 @@ package org.integratedsemantics.flexspaces.component.search.results
          */
         override protected function initContextMenu():void
         {
-            fileContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/contextmenu/searchresults/fileContextMenu.xml");
-            folderContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/contextmenu/searchresults/folderContextMenu.xml");
+            fileContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/" + model.locale + "/contextmenu/searchresults/fileContextMenu.xml");
+            folderContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/" + model.locale + "/contextmenu/searchresults/folderContextMenu.xml");
             
             folderView.folderIconView.folderTileList.contextMenu = fileContextMenu.contextMenu;         
             folderView.folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;                    

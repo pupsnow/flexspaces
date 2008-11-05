@@ -79,8 +79,8 @@ package org.integratedsemantics.flexspaces.component.folderview
          */
         override protected function initContextMenu():void
         {
-            fileContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/contextmenu/folderview/fileContextMenu.xml");
-            folderContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/contextmenu/folderview/folderContextMenu.xml");
+            fileContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/" + model.locale + "/contextmenu/folderview/fileContextMenu.xml");
+            folderContextMenu = new ConfigurableContextMenu(this, folderView, model.srcPath + "config/" + model.locale + "/contextmenu/folderview/folderContextMenu.xml");
             
             folderView.folderIconView.folderTileList.contextMenu = fileContextMenu.contextMenu;         
             folderView.folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;    

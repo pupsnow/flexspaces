@@ -2,4 +2,5 @@
 <alfresco-config>
     <url protocol="http" domain="localhost" port="8080" alfrescoUrlPart="/contentspace/service" />
     <server livecycle="true"/>
+    <locale default-locale="en_US"/>
 </alfresco-config>

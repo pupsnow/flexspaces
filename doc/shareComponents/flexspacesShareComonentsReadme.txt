@@ -1,7 +1,11 @@
-8/25/08
+11/04/08
+
 
 FlexSpaces page site components for Alfresco Share 3.0 / Surf
 
+Note for 0.7
+Prevously tested these page site componets with FlexSpaces 0.6 and earlier versions of alfesco 3.0 labs
+Need to test with with FlexSpaces 0.7, and with the released alfresco 3.0 enterprise share
 
 1. Install flexspaces integratedsemantics.zip webscripts per readme in webscripts only dir
 
@@ -45,17 +49,13 @@ site-webscripts/org/integratedsemantics/components/flexspaces-all/flexspaces-all
    from the "flexspaces-all" component
    
 
-6. 1032 7/31/08 alfresco 3.0 share labs release has a corrupt  <install dir>/bin/imconvert.exe file,
-a jira about this mentioned getting one from previous version of alfresco to work around this
+6. NOTE: in share/flexspaces copy of flexspaces+browser files, alfresco-config.xml also needs to be setup with host,etc.
 
+7. Tested share with flexspaces site components inside on vista+ie7, vista+firefox3
 
-7. NOTE: in share/flexspaces copy of flexspaces+browser files, alfresco-config.xml also needs to be setup with host,etc.
+8. No work yet to have shared/cached flex libraries/modules for site page components yet (memory, startup time)
 
-8. Tested share with flexspaces site components inside on vista+ie7, vista+firefox3
-
-9. No work yet to have shared/cached flex libraries/modules for site page components yet (memory, startup time)
-
-10. arg for background color in the future would make it look more seamless
+9. arg for background color in the future would make it look more seamless
 
 
 

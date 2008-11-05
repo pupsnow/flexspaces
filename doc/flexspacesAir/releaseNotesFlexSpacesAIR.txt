@@ -1,10 +1,19 @@
 
-8/25/08
+11/04/08
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+AIR release notes
+
+0.7 Release
+
+1. FlexSpacesAir has added browser tab running Share (can also be used for running other web page)
+Previously this feature was a separate experimental download
+(note: for blog/wiki saving  needs share in air final fix in alfreso 3.0 enterprise
+or labs 3.0 with checkin from from 10/2/08, in alfresco labs 3c)
+
+2. See releaseNotesFlexSpacesBrowser.txt for non air specific features added in 0.7
 
 
 0.6 Release

@@ -1,10 +1,15 @@
 
-8/25/08
+11/04/08
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces WebScripts release notes
+
+0.7
+1. type arg added to upLoadeNew web script
+2. Added livecycle/tasks/startWorkflow web script for LiveCycle Content Services ES
+3. Added versions/versionlist webscript for version history panel
 
 0.6
 1. Fixed to uploadNew, uploadExisitng to for pre 2.9 alfresco (tested 2.2.0 enterprise) (webscripts need 2.1 at least)

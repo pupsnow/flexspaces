@@ -8,6 +8,6 @@
      
      <menuitem label="名前の変更" data="rename" seperatorBefore="true" />
      <menuitem label="プロパティ" data="properties"/>
-     <menuitem label="タグ・カチEリ" data="tags"/>
+     <menuitem label="タグ・カテゴリ" data="tags"/>
           
 </contextmenu>    

@@ -88,7 +88,7 @@ package org.integratedsemantics.flexspacesair.view
             super.onRepoBrowserCreated(event);
             
             // swap in different menu for FlexSpacesAir
-            mainMenu.configPath = model.srcPath + "config/menubar/mainMenuAir.xml";
+            mainMenu.configPath = model.srcPath + "config/" + model.locale + "/menubar/mainMenuAir.xml";
             mainMenu.addEventListener(MenuConfiguredEvent.MENU_CONFIGURED, onMenuConfigured);
             mainMenu.load();
                                                 

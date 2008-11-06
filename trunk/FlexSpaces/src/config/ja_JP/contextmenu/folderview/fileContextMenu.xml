@@ -16,5 +16,5 @@
      
      <menuitem label="見る" data="view" seperatorBefore="true" />
      
-     <menuitem label="ビデオの再生 Video" data="playVideo"/>            
+     <menuitem label="ビデオの再生" data="playVideo"/>            
 </contextmenu>    

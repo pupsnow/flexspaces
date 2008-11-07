@@ -444,29 +444,53 @@ package org.integratedsemantics.flexspaces.view
                 if (event.newIndex == DOC_LIB_TAB_INDEX)
                 {
                     model.wcmMode = false;
-                    this.browserPresenter.viewActive(true);
-                    this.wcmBrowserPresenter.viewActive(false);
+                    if (browserPresenter != null)
+                    {
+                    	browserPresenter.viewActive(true);
+                    }
+                    if (wcmBrowserPresenter != null)
+                    {
+                    	this.wcmBrowserPresenter.viewActive(false);
+                    }
                 }
                 else if (event.newIndex == WCM_TAB_INDEX)
                 { 
                     model.wcmMode = true;
-                    this.browserPresenter.viewActive(false);
-                    this.wcmBrowserPresenter.viewActive(true);
+                    if (browserPresenter != null)
+                    {
+                    	this.browserPresenter.viewActive(false);
+                    }
+                    if (wcmBrowserPresenter != null)
+                    {
+                    	this.wcmBrowserPresenter.viewActive(true);
+                    }
                 }       
                 else if (event.newIndex == SEARCH_TAB_INDEX) 
                 {
                     model.wcmMode = false;
                     model.currentNodeList = null;
                     searchPanelPresenter.refresh();
-                    this.browserPresenter.viewActive(false);
-                    this.wcmBrowserPresenter.viewActive(false);
+                    if (browserPresenter != null)
+                    {
+                    	this.browserPresenter.viewActive(false);
+                    }
+                    if (wcmBrowserPresenter != null)
+                    {
+                    	this.wcmBrowserPresenter.viewActive(false);
+                    }
                 }
                 else if (event.newIndex == TASKS_TAB_INDEX) 
                 {
                     model.wcmMode = false;
                     model.currentNodeList = null;
-                    this.browserPresenter.viewActive(false);
-                    this.wcmBrowserPresenter.viewActive(false);
+                    if (browserPresenter != null)
+                    {
+                    	this.browserPresenter.viewActive(false);
+                    }
+                    if (wcmBrowserPresenter != null)
+                    {
+                    	this.wcmBrowserPresenter.viewActive(false);
+                    }
                 }
                 
                 enableMenusAfterTabChange(event.newIndex);                
@@ -617,7 +641,7 @@ package org.integratedsemantics.flexspaces.view
 	                clearOtherSelections(nodeListPresenter);                         	
 
 	                // init version list when a main folder view node is selected
-	                if (model.wcmMode == false)
+	                if ( (model.wcmMode == false) && (browserPresenter != null) )
 	                {
                 		browserPresenter.initVersionList(model.selectedItem);
 	                }

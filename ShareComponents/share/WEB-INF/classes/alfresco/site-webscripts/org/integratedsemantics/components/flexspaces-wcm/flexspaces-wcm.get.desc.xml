@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>FlexSpaces WCM webscript</shortname>
+  <description>FlexSpaces wcm view component webscript</description>
+  <url>/components/flexspaces/flexspaces-wcm</url>
+</webscript>

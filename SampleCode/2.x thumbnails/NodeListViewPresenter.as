@@ -86,6 +86,10 @@ package org.integratedsemantics.flexspaces.component.folderview
             folderView.folderIconView.repoFolderCollection = this.nodeCollection;                                                                        
             
             serverVersionNum = model.serverVersionNum();
+            
+            // change for thumbnails from thumbnails forge project
+            serverVersionNum = 3.0;
+            
             if (serverVersionNum >= 3.0)
             {
                 folderView.coverFlowView.coverFlowDataGrid.addEventListener(ListEvent.ITEM_DOUBLE_CLICK , folderListDoubleClick);
@@ -347,30 +351,38 @@ package org.integratedsemantics.flexspaces.component.folderview
         public function showHideThumbnails():void
         {
             var model:AppModelLocator = AppModelLocator.getInstance();
-            var serverVersionNum:Number = model.serverVersionNum();
-            // chanage for thumbnails from thumbnails forge project
-            //if (serverVersionNum >= 3.0)
-            //{
+            
+            // change for thumbnails from thumbnails forge project
+            //var serverVersionNum:Number = model.serverVersionNum();
+            
+            if (serverVersionNum >= 3.0)
+            {
                 folderView.showThumbnails = ! folderView.showThumbnails;
                 folderView.folderIconView.showThumbnails = folderView.showThumbnails;
 
                 var rowHeight:int;
+                var columnWidth:int;
                 if (folderView.showThumbnails == true)
                 {
-                    rowHeight = 125;
+					// change for thumbnails from thumbnails forge project (medium 160 plus label)               	
+                    //rowHeight = 125;
+                    rowHeight = 185;
+                    columnWidth = 185;
                 }
                 else
                 {
                     rowHeight = 85;
+                    columnWidth = 125;
                 }
                 folderView.folderIconView.folderTileList.rowHeight = rowHeight;
+                folderView.folderIconView.folderTileList.columnWidth = columnWidth;
                 
                 // set showThumbnail flags on nodes
                 for each (var node:Node in nodeCollection)
                 {
                     node.showThumbnail = folderView.showThumbnails;
                 }
-            //}
+            }
         }        
                        
     }

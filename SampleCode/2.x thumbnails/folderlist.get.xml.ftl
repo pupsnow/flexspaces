@@ -39,7 +39,7 @@
        <#assign isWorkingCopy = "${ c.hasAspect('cm:workingcopy')?string('true', 'false') }" >
        <#assign createChildrenPermission = "false">
        <#if c.childAssocs["tn:thumbnails"]?? >       
-          <#assign thumbnailUrl = '${url.serviceContext}/api/node/content/${c.childAssocs["tn:thumbnails"][1].nodeRef.storeRef.protocol}/${c.childAssocs["tn:thumbnails"][1].nodeRef.storeRef.identifier}/${c.childAssocs["tn:thumbnails"][1].nodeRef.id}/${c.childAssocs["tn:thumbnails"][1].name?url}' >                              
+          <#assign thumbnailUrl = '${absurl(url.serviceContext)}/api/node/content/${c.childAssocs["tn:thumbnails"][1].nodeRef.storeRef.protocol}/${c.childAssocs["tn:thumbnails"][1].nodeRef.storeRef.identifier}/${c.childAssocs["tn:thumbnails"][1].nodeRef.id}/${c.childAssocs["tn:thumbnails"][1].name?url}' >                              
        <#else>
           <#assign thumbnailUrl = "">
       </#if>

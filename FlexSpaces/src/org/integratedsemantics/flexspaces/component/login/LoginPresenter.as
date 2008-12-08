@@ -13,7 +13,7 @@ package org.integratedsemantics.flexspaces.component.login
 	/**
 	 * Login form for user to login to alfresco server
 	 * 
-	 * Presenter/Controller of passive view LoginViewBase views
+	 * Presenter/Controller of passive view ILoginView views
 	 *  
 	 */
     public class LoginPresenter extends Presenter
@@ -24,17 +24,17 @@ package org.integratedsemantics.flexspaces.component.login
 		 * @param loginView login view to control
 		 * 
 		 */
-		public function LoginPresenter(loginView:LoginViewBase)
+		public function LoginPresenter(loginView:ILoginView)
 		{
 		    super(loginView);
 		    
-		    if (loginView.initialized == true)
+		    if (loginView.view.initialized == true)
 		    {
 		        onCreationComplete(new Event(""));
 	        }
 	        else
 	        {
-                observeCreation(loginView, onCreationComplete);            
+                observeCreation(loginView.view, onCreationComplete);            
 	        }
 		}
 		
@@ -44,9 +44,9 @@ package org.integratedsemantics.flexspaces.component.login
          * @return the view
          * 
          */
-        protected function get loginView():LoginViewBase
+        protected function get loginView():ILoginView
         {
-            return this.view as LoginViewBase;            
+            return this.view as ILoginView;            
         }       
 
 		/**
@@ -57,17 +57,17 @@ package org.integratedsemantics.flexspaces.component.login
 		 */
 		protected function onCreationComplete(event:Event):void
 		{			
-                    var model : AppModelLocator = AppModelLocator.getInstance();                            
-                    if (model.isLiveCycleContentServices == true)
-                    {
-                        loginView.username.text = "administrator";
-                        loginView.password.text = "password"; 
-                    }
-                    else
-                    {
-			// Focus the user input box
-			loginView.focusManager.setFocus(loginView.username);
-                    }            
+			var model : AppModelLocator = AppModelLocator.getInstance();                            
+			if (model.isLiveCycleContentServices == true)
+			{
+			    loginView.username.text = "administrator";
+			    loginView.password.text = "password"; 
+			}
+			else
+			{
+				// Focus the user input box
+				loginView.view.focusManager.setFocus(loginView.username);
+			}            
 			
 			// add login btn and enter key handlers
             observeButtonClick(loginView.loginBtn, onLoginButton);                        
@@ -115,7 +115,7 @@ package org.integratedsemantics.flexspaces.component.login
 			loginView.errorMessage.text = " ";
 		
             var loginDoneEvent:LoginDoneEvent = new LoginDoneEvent(LoginDoneEvent.LOGIN_DONE);
-            var dispatched:Boolean = loginView.dispatchEvent(loginDoneEvent);                        
+            var dispatched:Boolean = loginView.view.dispatchEvent(loginDoneEvent);                        
 		}
 		
         /**

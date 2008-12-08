@@ -1,5 +1,7 @@
 package org.integratedsemantics.flexspaces.component.tags.tagcloud
 {
+    import com.adobe.rtc.util.ISO9075;
+    
     import flash.events.MouseEvent;
     
     import mx.collections.XMLListCollection;
@@ -130,7 +132,8 @@ package org.integratedsemantics.flexspaces.component.tags.tagcloud
                 var tagName:String = linkButton.label;
                 
                 // search on nodes with this tag
-                var query:String = 'PATH:\"/cm:categoryRoot/cm:taggable/cm:' + tagName + '/member\"';                   
+                var escapedTagName:String = ISO9075.encode(tagName);
+                var query:String = 'PATH:\"/cm:categoryRoot/cm:taggable/cm:' + escapedTagName + '/member\"';                   
                 var responder:Responder = new Responder(onResultSearch, onFaultSearch);
                 var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query);
                 searchEvent.dispatch();

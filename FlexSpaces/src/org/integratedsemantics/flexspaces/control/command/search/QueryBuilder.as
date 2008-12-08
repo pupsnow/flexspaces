@@ -718,7 +718,7 @@ package org.integratedsemantics.flexspaces.control.command.search
          * @return   escaped string
          * 
          */
-        protected static function luceneQueryParserEscape(s:String):String
+        public static function luceneQueryParserEscape(s:String):String
         {
             var sb:String = new String();
             for (var i:int = 0; i < s.length; i++)

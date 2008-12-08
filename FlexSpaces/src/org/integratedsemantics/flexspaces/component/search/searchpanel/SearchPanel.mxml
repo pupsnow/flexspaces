@@ -5,6 +5,7 @@
     xmlns:tags="org.integratedsemantics.flexspaces.component.tags.tagcloud.*" 
     xmlns:categories="org.integratedsemantics.flexspaces.component.categories.tree.*"   
     xmlns:search="org.integratedsemantics.flexspaces.component.search.basic.*"
+    xmlns:map="org.integratedsemantics.flexspaces.component.semantictags.map.*"
     xmlns:flexlib="flexlib.containers.*">
     
     <mx:Metadata>[ResourceBundle("SearchPanel")]</mx:Metadata>
@@ -13,6 +14,13 @@
 
         <mx:Box label="{resourceManager.getString('SearchPanel', 'searchQuerySection_label' )}" height="100%" width="100%" id="searchQuerySection">      
             <search:SearchView id="searchView2" width="100%" backgroundColor="0x000000"/>      
+        </mx:Box>
+
+        <tags:TagCloudView id="semanticTagCloudView" label="{resourceManager.getString('SearchPanel', 'semanticTagCloudView_label' )}" width="100%" height="100%"/>  
+        <tags:TagCloudView id="companySemanticTagCloudView" label="{resourceManager.getString('SearchPanel', 'companySemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+        <tags:TagCloudView id="personSemanticTagCloudView" label="{resourceManager.getString('SearchPanel', 'personSemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+
+        <mx:Box label="{resourceManager.getString('SearchPanel', 'mapSection_label' )}" height="100%" width="100%" id="mapSection">      
         </mx:Box>
 
         <tags:TagCloudView id="tagCloudView" label="{resourceManager.getString('SearchPanel', 'tagCloudView_label' )}" width="100%" height="100%"/>  

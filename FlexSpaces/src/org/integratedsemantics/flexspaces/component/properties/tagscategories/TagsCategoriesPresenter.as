@@ -6,6 +6,7 @@ package org.integratedsemantics.flexspaces.component.properties.tagscategories
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.component.categories.properties.CategoryPropertiesPresenter;
+    import org.integratedsemantics.flexspaces.component.semantictags.properties.SemanticTagPropertiesPresenter;
     import org.integratedsemantics.flexspaces.component.tags.properties.TagPropertiesPresenter;
     import org.integratedsemantics.flexspaces.framework.dialog.DialogPresenter;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
@@ -25,6 +26,7 @@ package org.integratedsemantics.flexspaces.component.properties.tagscategories
         protected var onComplete:Function;
         protected var tagPropertiesPresenter:TagPropertiesPresenter;
         protected var categoryPropertiesPresenter:CategoryPropertiesPresenter;
+        protected var semanticTagPropertiesPresenter:SemanticTagPropertiesPresenter;
         
                
         /**
@@ -77,7 +79,13 @@ package org.integratedsemantics.flexspaces.component.properties.tagscategories
             if (version >= 2.9)
             {
                 tagPropertiesPresenter = new TagPropertiesPresenter(tagsCategoriesView.tagPropertiesView, repoNode);                   
-            }              
+            }   
+            
+            // only setup semantic tags if Calias tagging features enabling has been configured
+            if (model.enableCalias == true)
+            {
+                semanticTagPropertiesPresenter = new SemanticTagPropertiesPresenter(tagsCategoriesView.semanticTagPropertiesView, repoNode);                   		    	        	
+            }                       
         }
         
         /**

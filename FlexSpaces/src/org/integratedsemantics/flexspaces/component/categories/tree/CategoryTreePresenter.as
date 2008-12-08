@@ -1,5 +1,7 @@
 package org.integratedsemantics.flexspaces.component.categories.tree
 {
+    import com.adobe.rtc.util.ISO9075;
+    
     import flash.events.Event;
     
     import mx.collections.ArrayCollection;
@@ -245,7 +247,8 @@ package org.integratedsemantics.flexspaces.component.categories.tree
                     var categoryName:String = selectedNode.name;
                 
                     // search on nodes with this category
-                    var query:String = 'PATH:\"/cm:generalclassifiable//cm:' + categoryName + '/member\"';                   
+					var escapedCat:String = ISO9075.encode(categoryName);                     
+                    var query:String = 'PATH:\"/cm:generalclassifiable//cm:' + escapedCat + '/member\"';                   
                     var responder:Responder = new Responder(onResultSearch, onFaultSearch);
                     var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query);
                     searchEvent.dispatch();

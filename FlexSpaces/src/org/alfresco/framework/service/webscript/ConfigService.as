@@ -152,8 +152,10 @@ package org.alfresco.framework.service.webscript
 				    this._url = this._protocol + "://" + this._domain + this._alfrescoUrlPart;
 				}
 				
-				var nodeServerElement:XMLNode = node.firstChild.nextSibling;
 				var model : AppModelLocator = AppModelLocator.getInstance();
+
+				var nodeServerElement:XMLNode = node.firstChild.nextSibling;
+				
 				if (nodeServerElement.attributes['livecycle'] == "true")
 				{
 					model.isLiveCycleContentServices = true;	
@@ -164,6 +166,39 @@ package org.alfresco.framework.service.webscript
 					model.locale = nodeLocaleElement.attributes['default-locale'];
 				}	
 				
+				var nodeCalaisElement:XMLNode = nodeLocaleElement.nextSibling;
+				if (nodeCalaisElement != null)
+				{
+					if (nodeCalaisElement.attributes['enable'] == "true")
+					{
+						model.enableCalias = true;
+					}
+					
+					if (nodeCalaisElement.attributes['key'] != null)
+					{
+						model.calaisKey = nodeCalaisElement.attributes['key'];
+					}	
+				}	
+
+				var nodeGoogleMapElement:XMLNode = nodeCalaisElement.nextSibling;
+				if (nodeGoogleMapElement != null)
+				{
+					if (nodeGoogleMapElement.attributes['enable'] == "true")
+					{
+						model.enableGoogleMap = true;
+					}
+					
+					if (nodeGoogleMapElement.attributes['url'] != null)
+					{
+						model.googleMapUrl = nodeGoogleMapElement.attributes['url'];
+					}	
+
+					if (nodeGoogleMapElement.attributes['key'] != null)
+					{
+						model.googleMapKey = nodeGoogleMapElement.attributes['key'];
+					}	
+				}	
+
 				this.dispatchEvent(new ConfigCompleteEvent(ConfigCompleteEvent.CONFIG_COMPLETE));
 			}
 			catch (error:Error)

@@ -43,6 +43,9 @@
         <menuitem type="separator" />
         <menuitem label="ワークフローの開始" data="startworkflow" enabled="false"/>              
         <menuitem type="separator" />
-        <menuitem label="詳細な検索" data="advancedsearch"/>                                                        
+        <menuitem label="詳細な検索" data="advancedsearch"/>       
+        <menuitem type="separator" />
+        <menuitem label="Automatically Tag with Calais" data="autoTag"/>                                                        
+        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                                 
     </menuitem>
 </menu>    

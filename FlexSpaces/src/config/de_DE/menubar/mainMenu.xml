@@ -6,15 +6,15 @@
         <menuitem type="separator" />
         <menuitem label="Hochladen" data="upload" enabled="false"/>
         <menuitem label="Runterladen" data="download" enabled="false"/>
-        <menuitem label="Ändern" data="edit" enabled="false"/>
+        <menuitem label="ï¿½ndern" data="edit" enabled="false"/>
         <menuitem label="Ansicht" data="view" enabled="false"/>
         <menuitem label="Voransicht" data="preview" enabled="false"/>
     </menuitem>
     <menuitem label="Bearbeiten">
         <menuitem label="Ausschneiden" data="cut" enabled="false"/>
         <menuitem label="Kopieren" data="copy" enabled="false"/>
-        <menuitem label="Einfügen" data="paste" enabled="false"/>
-        <menuitem label="Löschen" data="delete" enabled="false"/>
+        <menuitem label="Einfï¿½gen" data="paste" enabled="false"/>
+        <menuitem label="Lï¿½schen" data="delete" enabled="false"/>
         <menuitem type="separator" />
         <menuitem label="Check-In" data="checkin" enabled="false"/>
         <menuitem label="Check-Out" data="checkout" enabled="false"/>
@@ -44,5 +44,8 @@
         <menuitem label="Workflow starten" data="startworkflow" enabled="false"/>              
         <menuitem type="separator" />
         <menuitem label="Erweiterte Suche" data="advancedsearch"/>                                                        
+        <menuitem type="separator" />
+        <menuitem label="Automatisch Schlagwort mit Calais" data="autoTag"/>        
+        <menuitem label="Suggest Schlagworte mit Calais" data="suggestTags"/>                                                                                                                               
     </menuitem>
 </menu>    

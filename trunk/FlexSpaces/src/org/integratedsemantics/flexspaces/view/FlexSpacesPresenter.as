@@ -53,6 +53,8 @@ package org.integratedsemantics.flexspaces.view
     import org.integratedsemantics.flexspaces.component.search.basic.SearchViewBase;
     import org.integratedsemantics.flexspaces.component.search.event.SearchResultsEvent;
     import org.integratedsemantics.flexspaces.component.search.searchpanel.SearchPanelPresenter;
+    import org.integratedsemantics.flexspaces.component.semantictags.suggest.SemanticTagSuggestPresenter;
+    import org.integratedsemantics.flexspaces.component.semantictags.suggest.SemanticTagSuggestView;
     import org.integratedsemantics.flexspaces.component.tasks.taskspanel.TasksPanelPresenter;
     import org.integratedsemantics.flexspaces.component.tasks.taskspanel.TasksPanelViewBase;
     import org.integratedsemantics.flexspaces.component.versions.versionlist.VersionListPresenter;
@@ -60,6 +62,7 @@ package org.integratedsemantics.flexspaces.view
     import org.integratedsemantics.flexspaces.control.event.CheckinEvent;
     import org.integratedsemantics.flexspaces.control.event.GetInfoEvent;
     import org.integratedsemantics.flexspaces.control.event.MakePdfEvent;
+    import org.integratedsemantics.flexspaces.control.event.SemanticTagsEvent;
     import org.integratedsemantics.flexspaces.control.event.preview.MakePreviewEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
     import org.integratedsemantics.flexspaces.framework.presenter.Presenter;
@@ -1303,6 +1306,46 @@ package org.integratedsemantics.flexspaces.view
         }     
 
         /**
+         * Auto-Tag selected documents using Calias 
+         *  
+         * @param selectedItems selected nodes
+         * 
+         */
+        protected function autoTag(selectedItems:Array):void
+        {
+            if (selectedItems != null && selectedItems.length > 0)
+            {
+                for each (var selectedItem:Object in selectedItems)
+                {
+                    if (selectedItem != null && selectedItem.isFolder != true)
+                    {
+		                if (model.wcmMode == false)
+		                {
+				            var responder:Responder = new Responder(onResultAction, onFaultAction);
+				            var tagsEvent:SemanticTagsEvent = new SemanticTagsEvent(SemanticTagsEvent.AUTO_SEMANTIC_TAG, responder, selectedItem as IRepoNode);
+				            tagsEvent.dispatch();                        		                	
+		                }
+                    }
+                }                   
+            }            
+        }
+        
+        /**
+         * Display UI for semantic tag suggestions add/edit
+         *  
+         * @param selectedItem selected node
+         * 
+         */
+        protected function suggestTags(selectedItem:Object):void
+        {
+            if (selectedItem != null)
+            {
+                var view:SemanticTagSuggestView = SemanticTagSuggestView(PopUpManager.createPopUp(mainView, SemanticTagSuggestView, false));
+                var presenter:SemanticTagSuggestPresenter = new SemanticTagSuggestPresenter(view, selectedItem as IRepoNode, redraw);                                      
+            }            
+        }
+
+        /**
          * Handle chosen context menu item
          *  
          * @param event menu event
@@ -1432,6 +1475,12 @@ package org.integratedsemantics.flexspaces.view
                 case 'playVideo':
                     playVideo(selectedItem);
                     break;                    
+                case 'autoTag':
+                    autoTag(selectedItems);
+                    break;                    
+                case 'suggestTags':
+                    suggestTags(selectedItem);
+                    break;                    
                 default:
                     break;
             }   
@@ -1541,7 +1590,7 @@ package org.integratedsemantics.flexspaces.view
                     mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
                     mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
                     mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;
-                    
+                                        
                     fileContextMenu = false;
                 }
                 else
@@ -1626,7 +1675,22 @@ package org.integratedsemantics.flexspaces.view
                             // make pdf, make flash, startworkflow
                             mainMenu.menuBarCollection[3].menuitem[0].@enabled = createChildrenPermission;
                             mainMenu.menuBarCollection[3].menuitem[1].@enabled = createChildrenPermission;
-                            mainMenu.menuBarCollection[3].menuitem[3].@enabled = readPermission;
+                            mainMenu.menuBarCollection[3].menuitem[3].@enabled = readPermission;  
+                            
+		                    // auto-tag, suggest tags
+			                if ((model.enableCalias == true) && (writePermission == true))
+			                {
+			                	if (model.airMode == false)
+				                {
+					                mainMenu.menuBarCollection[3].menuitem[7].@enabled = true;                	
+					                mainMenu.menuBarCollection[3].menuitem[8].@enabled = true;
+								}
+								else
+								{
+					                mainMenu.menuBarCollection[3].menuitem[10].@enabled = true;                	
+					                mainMenu.menuBarCollection[3].menuitem[11].@enabled = true;							
+								}                	
+			                }                                                                                  
                         }
                         break;        
                                      
@@ -1831,6 +1895,18 @@ package org.integratedsemantics.flexspaces.view
                 mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
                 mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
                 mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;
+                
+                // auto-tag, suggest tags
+            	if (model.airMode == false)
+                {
+	                mainMenu.menuBarCollection[3].menuitem[7].@enabled = false;                	
+	                mainMenu.menuBarCollection[3].menuitem[8].@enabled = false;
+				}
+				else
+				{
+	                mainMenu.menuBarCollection[3].menuitem[10].@enabled = false;                	
+	                mainMenu.menuBarCollection[3].menuitem[11].@enabled = false;							
+				}                	
     
                 switch(tabIndex)
                 {

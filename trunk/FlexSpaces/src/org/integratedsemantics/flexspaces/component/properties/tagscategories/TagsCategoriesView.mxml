@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tagscategories:TagsCategoriesViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:semantictags="org.integratedsemantics.flexspaces.component.semantictags.properties.*"   
     xmlns:tags="org.integratedsemantics.flexspaces.component.tags.properties.*"   
     xmlns:categories="org.integratedsemantics.flexspaces.component.categories.properties.*"   
     xmlns:tagscategories="org.integratedsemantics.flexspaces.component.properties.tagscategories.*"
-    width="520" height="520" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog" showCloseButton="true">
+    width="520" height="600" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog" showCloseButton="true">
 
     <mx:Metadata>[ResourceBundle("TagsCategoriesView")]</mx:Metadata>
     
@@ -20,6 +21,8 @@
         <tags:TagPropertiesView id="tagPropertiesView" />
     
         <categories:CategoryPropertiesView id="categoryPropertiesView" />
+
+        <semantictags:SemanticTagPropertiesView id="semanticTagPropertiesView" />
         
     </mx:TabNavigator>
 

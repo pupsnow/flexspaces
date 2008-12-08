@@ -83,6 +83,15 @@ package org.integratedsemantics.flexspaces.control
             addCommand(GetPropertiesEvent.GET_AVM_PROPERTIES, PropertiesCommand);
             addCommand(SetPropertiesEvent.SET_AVM_PROPERTIES, PropertiesCommand);            
 
+            addCommand(SemanticTagsEvent.GET_SEMANTIC_TAGS, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.ADD_SEMANTIC_TAG, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.REMOVE_SEMANTIC_TAG, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.AUTO_SEMANTIC_TAG, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.GET_SEMANTIC_TAG_TREE, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.GET_NODE_SEMANTIC_TAGS, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.SUGGEST_SEMANTIC_TAGS, SemanticTagsCommand);            
+            addCommand(SemanticTagsEvent.ADD_NEW_SEMANTIC_TAG, SemanticTagsCommand);            
+
             addCommand(SearchEvent.ADVANCED_SEARCH, SearchCommand);            
             addCommand(SearchEvent.SEARCH, SearchCommand);            
 

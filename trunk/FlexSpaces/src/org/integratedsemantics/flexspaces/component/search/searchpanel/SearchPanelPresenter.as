@@ -3,9 +3,11 @@ package org.integratedsemantics.flexspaces.component.search.searchpanel
     import mx.events.FlexEvent;
     
     import org.integratedsemantics.flexspaces.component.categories.tree.CategoryTreePresenter;
-    import org.integratedsemantics.flexspaces.component.folderview.NodeListViewPresenter;
     import org.integratedsemantics.flexspaces.component.search.event.SearchResultsEvent;
     import org.integratedsemantics.flexspaces.component.search.results.SearchResultsPresenter;
+    import org.integratedsemantics.flexspaces.component.semantictags.map.SemanticTagMapPresenter;
+    import org.integratedsemantics.flexspaces.component.semantictags.map.SemanticTagMapView;
+    import org.integratedsemantics.flexspaces.component.semantictags.semantictagcloud.SemanticTagCloudPresenter;
     import org.integratedsemantics.flexspaces.component.tags.tagcloud.TagCloudPresenter;
     import org.integratedsemantics.flexspaces.framework.presenter.Presenter;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
@@ -24,6 +26,11 @@ package org.integratedsemantics.flexspaces.component.search.searchpanel
         protected var tagCloudPresenter:TagCloudPresenter;
         protected var categoryTreePresenter:CategoryTreePresenter;
         
+        protected var semanticTagCloudPresenter:SemanticTagCloudPresenter;
+        protected var companySemanticTagCloudPresenter:SemanticTagCloudPresenter;
+        protected var personSemanticTagCloudPresenter:SemanticTagCloudPresenter;
+        protected var mapPresenter:SemanticTagMapPresenter;
+
         
         public function SearchPanelPresenter(searchPanel:SearchPanelBase)
         {
@@ -74,8 +81,35 @@ package org.integratedsemantics.flexspaces.component.search.searchpanel
             {
                 tagCloudPresenter = new TagCloudPresenter(searchPanel.tagCloudView);            
                 searchPanel.tagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
-                tagCloudPresenter.doSearchOnClick = true;                                    
+                tagCloudPresenter.doSearchOnClick = true;
             }
+            
+            if (model.enableCalias == true)
+            {    
+                semanticTagCloudPresenter = new SemanticTagCloudPresenter(searchPanel.semanticTagCloudView, null);            
+                searchPanel.semanticTagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
+                semanticTagCloudPresenter.doSearchOnClick = true;                                    
+                
+                companySemanticTagCloudPresenter = new SemanticTagCloudPresenter(searchPanel.companySemanticTagCloudView, "Company");            
+                searchPanel.companySemanticTagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
+                companySemanticTagCloudPresenter.doSearchOnClick = true;                                    
+
+                personSemanticTagCloudPresenter = new SemanticTagCloudPresenter(searchPanel.personSemanticTagCloudView, "Person");            
+                searchPanel.personSemanticTagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
+                personSemanticTagCloudPresenter.doSearchOnClick = true;      
+                
+                if (model.enableGoogleMap == true)
+                {
+					searchPanel.semanticTagMapView = new SemanticTagMapView();
+					searchPanel.semanticTagMapView.id = "semanticTagMapView";
+					searchPanel.semanticTagMapView.percentHeight = 100;
+					searchPanel.semanticTagMapView.percentWidth = 100;
+					searchPanel.mapSection.addChild(searchPanel.semanticTagMapView);					                	
+	                mapPresenter = new SemanticTagMapPresenter(searchPanel.semanticTagMapView);                              
+	                searchPanel.semanticTagMapView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
+	                mapPresenter.doSearchOnClick = true;
+                } 
+            }                                                    
         }
 
         /**
@@ -99,7 +133,25 @@ package org.integratedsemantics.flexspaces.component.search.searchpanel
             {
                 tagCloudPresenter.refresh();
             }
+            
             categoryTreePresenter.refresh();
+            
+            if (semanticTagCloudPresenter != null)
+            {
+                semanticTagCloudPresenter.refresh();
+            }
+            if (companySemanticTagCloudPresenter != null)
+            {
+                companySemanticTagCloudPresenter.refresh();
+            }
+            if (personSemanticTagCloudPresenter != null)
+            {
+                personSemanticTagCloudPresenter.refresh();
+            }       
+            if (mapPresenter != null)
+            {
+            	mapPresenter.refresh();
+            }     
         }
         
         /**

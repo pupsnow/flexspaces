@@ -9,7 +9,7 @@
     
     <mx:Style source="../../../framework/dialog/dialog.css"/>
 
-    <mx:FormItem label="{resourceManager.getString('CategoryPropertiesView', 'categoriesFormItem_label' )}" direction="horizontal" width="425" styleName="mainArea" id="categoriesFormItem">
+    <mx:FormItem label="{resourceManager.getString('CategoryPropertiesView', 'categoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" id="categoriesFormItem">
 
         <mx:List id="categoryList" dataProvider="{categories}" labelField="{resourceManager.getString('CategoryPropertiesView', 'categoryList_labelField')}" height="92" styleName="list" width="100%"/>
     
@@ -17,7 +17,7 @@
 
     </mx:FormItem>    
     
-    <mx:FormItem label="{resourceManager.getString('CategoryPropertiesView', 'allCategoriesFormItem_label' )}" direction="horizontal" width="400" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+    <mx:FormItem label="{resourceManager.getString('CategoryPropertiesView', 'allCategoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
 
         <tree:CategoryTreeView id="categoriesTreeView" height="217" width="100%"/>
     

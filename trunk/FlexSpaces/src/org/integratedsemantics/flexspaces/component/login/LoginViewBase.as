@@ -4,18 +4,20 @@ package org.integratedsemantics.flexspaces.component.login
     import mx.controls.Button;
     import mx.controls.Text;
     import mx.controls.TextInput;
+    import mx.core.Container;
     
         
     /**
      * Base class for login views  
      * 
      */
-    public class LoginViewBase extends VBox
+    public class LoginViewBase  extends VBox implements ILoginView
     {
-        public var errorMessage:Text;
-        public var username:TextInput;
-        public var password:TextInput;
-        public var loginBtn:Button;
+    	// ILoginView
+        [Bindable] public var errorMessage:Text;
+        [Bindable] public var username:TextInput;
+        [Bindable] public var password:TextInput;
+        [Bindable] public var loginBtn:Button;
         
         /**
          * Constructor 
@@ -23,6 +25,17 @@ package org.integratedsemantics.flexspaces.component.login
         public function LoginViewBase()
         {
             super();
-        }        
+        }   
+            
+		/**
+		 * getter of view for ILoginView
+		 * 
+		 * @return the view
+		 * 
+		 */
+		public function get view():Container
+		{
+			return this;
+		}                  				    			             
     }
 }

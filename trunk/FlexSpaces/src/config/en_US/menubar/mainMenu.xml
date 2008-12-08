@@ -44,5 +44,8 @@
         <menuitem label="Start Workflow" data="startworkflow" enabled="false"/>              
         <menuitem type="separator" />
         <menuitem label="Advanced Search" data="advancedsearch"/>                                                        
+        <menuitem type="separator" />
+        <menuitem label="Automatically Tag with Calais" data="autoTag"/>                                                        
+        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                        
     </menuitem>
 </menu>    

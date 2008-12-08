@@ -3,4 +3,6 @@
     <url protocol="http" domain="localhost" port="8080" alfrescoUrlPart="/alfresco/service" />
     <server livecycle="false"/>
     <locale default-locale="en_US"/>
+	<calais enable="false" key=""/>
+	<googlemap enable="false" url="" key=""/>    
 </alfresco-config>

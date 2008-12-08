@@ -6,7 +6,7 @@
     <mx:Metadata>[ResourceBundle("LoginView")]</mx:Metadata>
   
     <mx:Style source="login.css"/> 
-
+        
 	<mx:Box width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 		<mx:HBox width="85%" height="75%">
 			<mx:VBox id="errorVBox" width="100%" height="100%">

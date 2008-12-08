@@ -18,6 +18,9 @@ package org.integratedsemantics.flexspaces.model
 
         public var srcPath:String = "";
         
+        // running in AIR
+        public var airMode:Boolean = false;
+        
         // login
 		public var loginTicket:String = null;
 		public var loginUserName:String = null;
@@ -70,7 +73,17 @@ package org.integratedsemantics.flexspaces.model
         
         // locale for menu config path 
         // note: curently resource bundle properties locale from project compile options
-        public var locale:String = "en_US";        
+        public var locale:String = "en_US";     
+        
+        // semantics / calais
+        public var enableCalias:Boolean = false;
+        public var calaisKey:String = null;
+        
+        // google map
+        public var enableGoogleMap:Boolean = false;
+        public var googleMapUrl:String = null;
+        public var googleMapKey:String = null;
+           
 
         public function clearSelection():void
         {

@@ -53,5 +53,8 @@
         <menuitem type="separator" />
         <menuitem label="Poner a disposición fuera de línea" data="availoffline" enabled="false"/>                                    
         <menuitem label="Fuera de línea de carga" data="offlineupload" enabled="false"/>        
+        <menuitem type="separator" />
+        <menuitem label="Etiqueta automáticamente con Calais" data="autoTag"/>        
+        <menuitem label="Sugerir etiquetas con Calais" data="suggestTags"/>                                                                                                               
     </menuitem>
 </menu>    

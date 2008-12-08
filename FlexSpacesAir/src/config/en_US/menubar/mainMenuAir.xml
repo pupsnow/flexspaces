@@ -53,5 +53,8 @@
         <menuitem type="separator" />
         <menuitem label="Make Available Offline" data="availoffline" enabled="false"/>                                    
         <menuitem label="Offline Upload" data="offlineupload" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Automatically Tag with Calais" data="autoTag"/>        
+        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                               
     </menuitem>
 </menu>    

@@ -17,11 +17,16 @@
         
     <mx:Script>
         <![CDATA[
+        	import org.integratedsemantics.flexspaces.model.AppModelLocator;
         
         import org.integratedsemantics.flexspacesair.view.FlexSpacesAirPresenter;       
         
         protected function onCreationComplete(event:Event):void
         {
+            var model:AppModelLocator = AppModelLocator.getInstance();
+			
+			model.airMode = true;
+			
             var presenter:FlexSpacesAirPresenter = new FlexSpacesAirPresenter(flexSpacesView);
         }
         

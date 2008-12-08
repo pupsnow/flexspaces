@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <menu>
     <menuitem label="ファイル">
         <menuitem label="スペースの作成" data="newspace" enabled="false"/>
@@ -53,5 +53,8 @@
         <menuitem type="separator" />
         <menuitem label="オフライン編集をする" data="availoffline" enabled="false"/>                                    
         <menuitem label="オフライン編集をアップロードする" data="offlineupload" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Automatically Tag with Calais" data="autoTag"/>        
+        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                               
     </menuitem>
 </menu>    

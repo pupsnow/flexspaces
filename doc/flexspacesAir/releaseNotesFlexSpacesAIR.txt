@@ -1,10 +1,15 @@
 
-11/04/08
+12/08/08
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+AIR release notes
+
+0.8 Release
+1. No new AIR specific features, see new 0.8 features (semantic tagging, maps) in releaseNotesFlexSpacesBrowser.txt
+2. See readmeFlexSpacesForAir.txt for additional info on enabling/configuring Calais and Google Map api keys
+3. Tested with both AIR 1.1 and AIR 1.5 with Alfresco Enterprise 3.0
 
 0.7 Release
 

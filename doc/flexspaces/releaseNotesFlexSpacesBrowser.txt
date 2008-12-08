@@ -1,12 +1,22 @@
 
-11/04/08
+12/08/08
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser release notes
 
-0.7
+0.8 Release
+1. Added semantic tagging / Calais features:
+a. tools/auto-tag menu
+b. tools/suggest tags menu/dialog
+c. semantic tags tab to tags/categories dialog
+d. multiple semantic tag clouds in search view
+e. geo-location tag map in search view
+2. general google map component
+3. fixed getting tag cloud and category tree search results with tags/categories with spaces in them
+
+0.7 Release
 
 1. UI strings in resource, Spanish translation (thanks Nuno Barrocas / OKHA Networks)
 2. German translation (thanks May Computer)

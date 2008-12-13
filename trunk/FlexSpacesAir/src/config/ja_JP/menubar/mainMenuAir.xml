@@ -54,7 +54,7 @@
         <menuitem label="オフライン編集をする" data="availoffline" enabled="false"/>                                    
         <menuitem label="オフライン編集をアップロードする" data="offlineupload" enabled="false"/>
         <menuitem type="separator" />
-        <menuitem label="Automatically Tag with Calais" data="autoTag"/>        
-        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                               
+        <menuitem label="Calaisによるタグの自動付加" data="autoTag"/>        
+        <menuitem label="Calaisによるタグの補完" data="suggestTags"/>                                                                                                               
     </menuitem>
 </menu>    

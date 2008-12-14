@@ -45,7 +45,7 @@
         <menuitem type="separator" />
         <menuitem label="詳細な検索" data="advancedsearch"/>       
         <menuitem type="separator" />
-        <menuitem label="Automatically Tag with Calais" data="autoTag"/>                                                        
-        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                                 
+        <menuitem label="Calaisによるタグの自動付加" data="autoTag"/>                                                        
+        <menuitem label="Calaisによるサジェスト タグ" data="suggestTags"/>                                                                                                                 
     </menuitem>
 </menu>    

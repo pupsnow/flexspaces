@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ajaxwebscript:AjaxWebScriptViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:ajaxwebscript="org.integratedsemantics.flexspacesair.component.ajaxwebscript.*"
-    backgroundColor="#000000">
-    <mx:HTML width="50%" height="100%" id="html1" />
-    <mx:HTML width="50%" height="100%" id="html2" />    
-</ajaxwebscript:AjaxWebScriptViewBase >

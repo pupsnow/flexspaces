@@ -1,55 +1,19 @@
-package org.integratedsemantics.flexspaces.framework.presenter
+package org.integratedsemantics.flexspaces.framework.presmodel
 {
-    import mx.controls.Button;
-    import mx.controls.TextInput;
-    import mx.core.UIComponent;
-    
-    import org.integratedsemantics.flexspaces.util.ObserveUtil;
+	import mx.containers.Form;
+	import mx.controls.Button;
+	import mx.controls.TextInput;
+	import mx.core.UIComponent;
+	
+	import org.integratedsemantics.flexspaces.util.ObserveUtil;
 
-
-    /**
-     * Base Implementation for Presenters 
-     *  1. Supervising Presenter/Controller for views with model binding (View)
-     *  2. Presenter/Controller for views without model binding (Passive View)  
-     * 
-     */
-    public class Presenter implements IPresenter
-    {
-        protected var view:Object;
-        
-        /**
-         * Constructor
-         *  
-         * @param viewComponent view to control
-         * 
-         */
-        public function Presenter(view:Object)
-        {
-           this.view = view;
-        }
-
-        /**
-         * Get view under control
-         *  
-         * @return the view 
-         * 
-         */
-        public function getView():Object
-        {
-            return view;
-        }
-        
-        /**
-         * Set the view under control
-         *  
-         * @param view the view
-         * 
-         */
-        public function setView(view:Object):void
-        {
-            this.view = view;
-        }
-
+	public class FormBase extends Form
+	{
+		public function FormBase()
+		{
+			super();
+		}
+		
         /**
          * Hook up event listener for a button click
          *  
@@ -85,6 +49,6 @@ package org.integratedsemantics.flexspaces.framework.presenter
         {
             ObserveUtil.observeCreation(uiComponent, handler);
         }                               
-                        
-    }
+		
+	}
 }

@@ -11,12 +11,13 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import mx.rpc.IResponder;
     import mx.rpc.Responder;
     
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusPresenter;
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusView;
     import org.integratedsemantics.flexspaces.control.event.UpdateNodeEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.UpdateNodeUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.upload.UploadStatusPresModel;
+    import org.integratedsemantics.flexspaces.view.upload.UploadStatusView;
     
 
     /**
@@ -26,7 +27,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class UpdateNodeUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
         protected var repoNode:IRepoNode;
         protected var fileRef:FileReference
         protected var handlers:IResponder;
@@ -92,18 +93,19 @@ package org.integratedsemantics.flexspaces.control.command.ui
             var fileReferences:Array = new Array();
             fileReferences.push(this.fileRef);
             var uploadStatusView:UploadStatusView = UploadStatusView(PopUpManager.createPopUp(parent, UploadStatusView, false));
-            var uploadStatusPresenter:UploadStatusPresenter = new UploadStatusPresenter(uploadStatusView, fileReferences);
+            var uploadStatusPresModel:UploadStatusPresModel = new UploadStatusPresModel(fileReferences);
+            uploadStatusView.uploadStatusPresModel = uploadStatusPresModel;
                       
             if (model.wcmMode == false)
             {
                 var responder:Responder = new Responder(handlers.result, handlers.fault);
-                var updateNodeEvent:UpdateNodeEvent = new UpdateNodeEvent(UpdateNodeEvent.UPDATE_NODE, responder, repoNode, fileRef, uploadStatusPresenter);
+                var updateNodeEvent:UpdateNodeEvent = new UpdateNodeEvent(UpdateNodeEvent.UPDATE_NODE, responder, repoNode, fileRef, uploadStatusView);
                 updateNodeEvent.dispatch();                                    
             }                        
             else
             {
                 responder = new Responder(handlers.result, handlers.fault);
-                updateNodeEvent = new UpdateNodeEvent(UpdateNodeEvent.UPDATE_AVM_NODE, responder, repoNode, fileRef, uploadStatusPresenter);
+                updateNodeEvent = new UpdateNodeEvent(UpdateNodeEvent.UPDATE_AVM_NODE, responder, repoNode, fileRef, uploadStatusView);
                 updateNodeEvent.dispatch();                                    
             }
         }

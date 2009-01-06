@@ -5,10 +5,11 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.deletion.DeletePresenter;
-    import org.integratedsemantics.flexspaces.component.deletion.DeleteView;
     import org.integratedsemantics.flexspaces.control.event.ui.DeleteNodesUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
+    import org.integratedsemantics.flexspaces.presmodel.deletion.DeletePresModel;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.view.deletion.DeleteView;
     
 
     /**
@@ -17,7 +18,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class DeleteUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
 
         /**
          * Constructor
@@ -58,8 +59,10 @@ package org.integratedsemantics.flexspaces.control.command.ui
             
             if (selectedItems != null && selectedItems.length > 0)
             {
+                var deletePresModel:DeletePresModel = new DeletePresModel(selectedItems, model.wcmMode);
                 var deleteView:DeleteView = DeleteView(PopUpManager.createPopUp(event.parent, DeleteView, false));
-                var deletePresenter:DeletePresenter = new DeletePresenter(deleteView, selectedItems, model.wcmMode, event.onComplete);
+                deleteView.deletePresModel = deletePresModel;
+                deleteView.onComplete = event.onComplete;
             }
         }
         

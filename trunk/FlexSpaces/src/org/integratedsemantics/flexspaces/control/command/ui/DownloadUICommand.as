@@ -67,13 +67,13 @@ package org.integratedsemantics.flexspaces.control.command.ui
                 // air seems to need ticket on url instead in the params data   
                 if (event.airMode == true)
                 {
-                    if (model.isLiveCycleContentServices == true)
+                    if (model.ecmServerConfig.isLiveCycleContentServices == true)
                     {
                         var viewurl:String = selectedItem.viewurl;
                     }
                     else
                     {
-                        viewurl = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                        viewurl = selectedItem.viewurl + "?alf_ticket=" + model.userInfo.loginTicket;
                     }                    
                     var request:URLRequest = new URLRequest(viewurl);
                 }
@@ -82,9 +82,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
                     viewurl = selectedItem.viewurl;                
                     request = new URLRequest(viewurl);
                     var params:URLVariables = new URLVariables();
-                    if (model.isLiveCycleContentServices == false)
+                    if (model.ecmServerConfig.isLiveCycleContentServices == false)
                     {
-                        params.alf_ticket = model.loginTicket;
+                        params.alf_ticket = model.userInfo.loginTicket;
                     }    
                     request.data = params;
                 }                                

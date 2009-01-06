@@ -66,15 +66,7 @@ package org.integratedsemantics.flexspaces.control.command
          */
         protected function onGetPreviewSuccess(event:*):void
         {            
-            if (event.result is XML)
-            {
-                var result:XML = event.result as XML;
-                var previewId:String = result.previewid;
-                var previewURL:String = result.previewurl;
-    
-                trace("onGetPreviewSuccess");
-                this.result(event.result);                
-            }
+	        this.result(event.result);                
         }
         
         /**

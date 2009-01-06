@@ -84,7 +84,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             
             // setup the url request
             var model:AppModelLocator = AppModelLocator.getInstance();
-            if (model.isLiveCycleContentServices == true)
+            if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
 	            var url:String = ConfigService.instance.url +  "/flexspaces/uploadNew";
             	this.uploadURLRequest = new URLRequest(url);
@@ -92,7 +92,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 	            //encoder.encode(model.loginUserName + ":" + model.loginPassword);
 	            //var authHeader:URLRequestHeader = new URLRequestHeader("Authorization", "Basic " + encoder.toString());
 	            //uploadURLRequest.requestHeaders.push(authHeader);
-				var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.loginTicket);
+				var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.userInfo.loginTicket);
 	            uploadURLRequest.requestHeaders.push(ticketHeader);	
             }
             else
@@ -145,7 +145,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             // setup the url request
 
             var model:AppModelLocator = AppModelLocator.getInstance();
-            if (model.isLiveCycleContentServices == true)
+            if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
                 var url:String = ConfigService.instance.url +  "/flexspaces/uploadExisting";
             }

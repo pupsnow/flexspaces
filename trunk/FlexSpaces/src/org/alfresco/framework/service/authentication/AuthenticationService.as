@@ -114,7 +114,7 @@
 			var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onLoginSuccess, onLoginFailure, false);
 			
 			var model:AppModelLocator = AppModelLocator.getInstance();
-			if (model.isLiveCycleContentServices == true)
+			if (model.ecmServerConfig.isLiveCycleContentServices == true)
 			{
 				webScript.resultFormat = "e4x";
 			}
@@ -135,7 +135,7 @@
 		{
 			// Execute the logout web script
 			var model:AppModelLocator = AppModelLocator.getInstance();
-			if (model.isLiveCycleContentServices == false)
+			if (model.ecmServerConfig.isLiveCycleContentServices == false)
 			{
 				var url:String = ConfigService.instance.url + "/api/login/ticket/" + this._ticket;				
 				var webScript:WebScriptService = new WebScriptService(url, WebScriptService.DELETE, onLogoutSuccess);
@@ -169,7 +169,7 @@
 		{
 			// Store the ticket in the authentication service
 			var model:AppModelLocator = AppModelLocator.getInstance();
-			if (model.isLiveCycleContentServices == true)
+			if (model.ecmServerConfig.isLiveCycleContentServices == true)
 			{
 				this._ticket = event.result.toString();
 			}

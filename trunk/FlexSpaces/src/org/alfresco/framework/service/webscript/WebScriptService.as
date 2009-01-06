@@ -174,21 +174,21 @@
 				// livecycle
 	            var model:AppModelLocator = AppModelLocator.getInstance();
 				
-				if (model.isLiveCycleContentServices == true)
+				if (model.ecmServerConfig.isLiveCycleContentServices == true)
 				{
 					this.useProxy = true;
 	            	this.destination = "DefaultHTTP";
-	            	if (model.loginTicket != null)
+	            	if (model.userInfo.loginTicket != null)
 	            	{
 						var headerList:Array = new Array();
 
 	            		// basic auth header
 	            		var encoder:Base64Encoder = new Base64Encoder();
-	            		encoder.encode(model.loginUserName + ":" + model.loginPassword);
+	            		encoder.encode(model.userInfo.loginUserName + ":" + model.userInfo.loginPassword);
 	            		headerList["Authorization"] = "Basic " + encoder.toString();
 	            		
 	            		// saml assertion ticket header
-						headerList["ticket"] = model.loginTicket;
+						headerList["ticket"] = model.userInfo.loginTicket;
 						
 			            this.headers = headerList;						
 	            	}

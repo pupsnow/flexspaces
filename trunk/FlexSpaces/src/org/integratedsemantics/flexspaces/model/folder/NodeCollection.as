@@ -13,7 +13,7 @@ package org.integratedsemantics.flexspaces.model.folder
     public class NodeCollection extends ArrayCollection
     {              
        // nodes
-       protected var nodeCollection:ArrayCollection;         
+       public var nodeCollection:ArrayCollection;         
 
         /**
          * Constructor
@@ -31,12 +31,12 @@ package org.integratedsemantics.flexspaces.model.folder
          * @return  thumbnail webscript url
          * 
          */
-        protected function getThumbnailUrl(node:Node):String
+        public function getThumbnailUrl(node:Node):String
         {
             // 3.0 only
             var model:AppModelLocator = AppModelLocator.getInstance();
-            var url:String = model.urlPrefix + "/api/node/" + node.storeProtocol + "/" + node.storeId + "/" + node.id;
-            url += "/content/thumbnails/" + model.thumbnailName + "?qc=true&ph=true" + "&alf_ticket=" + model.loginTicket;
+            var url:String = model.ecmServerConfig.urlPrefix + "/api/node/" + node.storeProtocol + "/" + node.storeId + "/" + node.id;
+            url += "/content/thumbnails/" + model.thumbnailConfig.thumbnailName + "?qc=true&ph=true" + "&alf_ticket=" + model.userInfo.loginTicket;
             return url;
         }
                                        

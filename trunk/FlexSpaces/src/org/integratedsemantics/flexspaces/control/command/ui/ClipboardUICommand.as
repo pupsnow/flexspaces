@@ -11,6 +11,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
     
 
     /**
@@ -21,7 +22,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class ClipboardUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var flexSpacesPresModel:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
 
         /**
          * Constructor
@@ -68,15 +69,15 @@ package org.integratedsemantics.flexspaces.control.command.ui
             
             if ( (selectedItems != null) && (selectedItems.length > 0))
             {
-                model.cut = selectedItems;
-                model.copy = null; 
-                if (model.wcmMode == true)
+                flexSpacesPresModel.cut = selectedItems;
+                flexSpacesPresModel.copy = null; 
+                if (flexSpacesPresModel.wcmMode == true)
                 {
-                    model.wcmCutCopy = true;
+                    flexSpacesPresModel.wcmCutCopy = true;
                 }
                 else
                 {
-                    model.wcmCutCopy = false;                    
+                    flexSpacesPresModel.wcmCutCopy = false;                    
                 }
             }
         }
@@ -92,15 +93,15 @@ package org.integratedsemantics.flexspaces.control.command.ui
             
             if ( (selectedItems != null) && (selectedItems.length > 0))
             {
-                model.cut = null;
-                model.copy = selectedItems; 
-                if (model.wcmMode == true)
+                flexSpacesPresModel.cut = null;
+                flexSpacesPresModel.copy = selectedItems; 
+                if (flexSpacesPresModel.wcmMode == true)
                 {
-                    model.wcmCutCopy = true;
+                    flexSpacesPresModel.wcmCutCopy = true;
                 }
                 else
                 {
-                    model.wcmCutCopy = false;                    
+                    flexSpacesPresModel.wcmCutCopy = false;                    
                 }
             }            
         }
@@ -113,28 +114,28 @@ package org.integratedsemantics.flexspaces.control.command.ui
          */
         public function paste(event:ClipboardUIEvent):void
         {            
-            if ( (model.currentNodeList != null) && (model.currentNodeList is Folder))
+            if ( (flexSpacesPresModel.currentNodeList != null) && (flexSpacesPresModel.currentNodeList is Folder))
             {
-                var folder:Folder = model.currentNodeList as Folder;
+                var folder:Folder = flexSpacesPresModel.currentNodeList as Folder;
                 var parentNode:IRepoNode = folder.folderNode;
                 var responder:Responder = new Responder(event.responder.result, event.responder.fault);
                 
-                if (model.cut != null)
+                if (flexSpacesPresModel.cut != null)
                 {
-                    for each (var cutItem:Object in model.cut)
+                    for each (var cutItem:Object in flexSpacesPresModel.cut)
                     {
                         if ( (cutItem != null) && (cutItem is IRepoNode) )
                         {
                             var cutNode:IRepoNode = cutItem as IRepoNode;
 
-                            if ( (model.wcmCutCopy == false) && (model.wcmMode == false) )
+                            if ( (flexSpacesPresModel.wcmCutCopy == false) && (flexSpacesPresModel.wcmMode == false) )
                             {
                                 //  cut adm -> adm
                                 var copyMoveEvent:CopyMoveEvent = new CopyMoveEvent(CopyMoveEvent.MOVE, responder, cutNode, parentNode);
                                 copyMoveEvent.dispatch();                    
                                 
                             }
-                            else if ( (model.wcmCutCopy == true) && (model.wcmMode == true) )
+                            else if ( (flexSpacesPresModel.wcmCutCopy == true) && (flexSpacesPresModel.wcmMode == true) )
                             {
                                 // cut avm -> avm                                
                                 copyMoveEvent = new CopyMoveEvent(CopyMoveEvent.AVM_MOVE, responder, cutNode, parentNode); 
@@ -147,23 +148,23 @@ package org.integratedsemantics.flexspaces.control.command.ui
                             }                        
                         }
                     }
-                    model.cut = null;
+                    flexSpacesPresModel.cut = null;
                 }
-                else if (model.copy != null)
+                else if (flexSpacesPresModel.copy != null)
                 {
-                    for each (var copyItem:Object in model.copy)
+                    for each (var copyItem:Object in flexSpacesPresModel.copy)
                     {
                         if ( (copyItem != null) && (copyItem is IRepoNode) )
                         {
                             var copyNode:IRepoNode = copyItem as IRepoNode;
 
-                            if  ( (model.wcmCutCopy == false) && (model.wcmMode == false) )
+                            if  ( (flexSpacesPresModel.wcmCutCopy == false) && (flexSpacesPresModel.wcmMode == false) )
                             {
                                 //  copy adm -> adm
                                 copyMoveEvent = new CopyMoveEvent(CopyMoveEvent.COPY, responder, copyNode, parentNode);
                                 copyMoveEvent.dispatch();                    
                             }
-                            else if ( (model.wcmCutCopy == true) && (model.wcmMode == true) )
+                            else if ( (flexSpacesPresModel.wcmCutCopy == true) && (flexSpacesPresModel.wcmMode == true) )
                             {
                                 // copy  avm -> avm
                                 copyMoveEvent = new CopyMoveEvent(CopyMoveEvent.AVM_COPY, responder, copyNode, parentNode); 
@@ -171,7 +172,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
                             }
                             else
                             {
-                                if (model.wcmCutCopy == true)
+                                if (flexSpacesPresModel.wcmCutCopy == true)
                                 {
                                     // avm -> adm                                
                                     mx.controls.Alert.show("Only copy from ADM to AVM seems to work on Alfresco, not AVM to ADM");

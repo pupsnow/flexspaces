@@ -10,6 +10,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import org.integratedsemantics.flexspaces.control.event.ui.DropNodesUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
     
 
     /**
@@ -20,7 +21,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class DragDropUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
 
         /**
          * Constructor

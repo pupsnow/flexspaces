@@ -11,12 +11,13 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import mx.rpc.IResponder;
     import mx.rpc.Responder;
     
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusPresenter;
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusView;
     import org.integratedsemantics.flexspaces.control.event.UploadFilesEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.UploadFilesUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.upload.UploadStatusPresModel;
+    import org.integratedsemantics.flexspaces.view.upload.UploadStatusView;
     
 
     /**
@@ -25,7 +26,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class UploadFilesUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
         protected var parentNode:IRepoNode;
         protected var fileRefList:FileReferenceList;
         protected var handlers:IResponder;
@@ -89,18 +90,19 @@ package org.integratedsemantics.flexspaces.control.command.ui
             //trace("selectHandler: " + this.fileRefList.fileList.length + " files");
 
           var uploadStatusView:UploadStatusView = UploadStatusView(PopUpManager.createPopUp(parent, UploadStatusView, false));
-          var uploadStatusPresenter:UploadStatusPresenter = new UploadStatusPresenter(uploadStatusView, fileRefList.fileList);
+          var uploadStatusPresModel:UploadStatusPresModel = new UploadStatusPresModel(fileRefList.fileList);
+          uploadStatusView.uploadStatusPresModel = uploadStatusPresModel;
           
           if (model.wcmMode == false)
             {
                 var responder:Responder = new Responder(handlers.result, handlers.fault);
-                var uploadFilesEvent:UploadFilesEvent = new UploadFilesEvent(UploadFilesEvent.UPLOAD_FILES, responder, parentNode, fileRefList, uploadStatusPresenter);
+                var uploadFilesEvent:UploadFilesEvent = new UploadFilesEvent(UploadFilesEvent.UPLOAD_FILES, responder, parentNode, fileRefList, uploadStatusView);
                 uploadFilesEvent.dispatch();                                    
             }                        
             else
             {
                 responder = new Responder(handlers.result, handlers.fault);
-                uploadFilesEvent = new UploadFilesEvent(UploadFilesEvent.UPLOAD_AVM_FILES, responder, parentNode, fileRefList, uploadStatusPresenter);
+                uploadFilesEvent = new UploadFilesEvent(UploadFilesEvent.UPLOAD_AVM_FILES, responder, parentNode, fileRefList, uploadStatusView);
                 uploadFilesEvent.dispatch();                                    
             }
         }

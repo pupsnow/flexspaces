@@ -53,10 +53,10 @@ package org.integratedsemantics.flexspaces.control.command
         {
             var model : AppModelLocator = AppModelLocator.getInstance();
             
-            model.urlPrefix = ConfigService.instance.url;
+            model.ecmServerConfig.urlPrefix = ConfigService.instance.url;
 
-            model.loginUserName = event.userName;
-            model.loginPassword = event.password;
+            model.userInfo.loginUserName = event.userName;
+            model.userInfo.loginPassword = event.password;
             
             var handlers:Callbacks = new Callbacks(onLoginSuccess, onLoginFault);
             var delegate:LoginDelegate = new LoginDelegate(handlers);
@@ -72,20 +72,20 @@ package org.integratedsemantics.flexspaces.control.command
         {
             var model : AppModelLocator = AppModelLocator.getInstance();
                              
-            if (model.isLiveCycleContentServices == true)
+            if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {               
 				var result:String = event.result;
 				var start:int = result.indexOf("<Assertion");
 				var end:int = result.indexOf("</ticket>");
 				var ticket:String = result.substring(start, end);   
-	            model.loginTicket = ticket;         
+	            model.userInfo.loginTicket = ticket;         
             }
             else
             {
-				model.loginTicket = event.result;            	
+				model.userInfo.loginTicket = event.result;            	
             }
             
-            this.result(model.loginTicket);            
+            this.result(model.userInfo.loginTicket);            
         }               
         
         /**

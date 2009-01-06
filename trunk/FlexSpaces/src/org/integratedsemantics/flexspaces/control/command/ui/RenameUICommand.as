@@ -5,11 +5,12 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.rename.RenamePresenter;
-    import org.integratedsemantics.flexspaces.component.rename.RenameView;
     import org.integratedsemantics.flexspaces.control.event.ui.RenameNodeUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.rename.RenamePresModel;
+    import org.integratedsemantics.flexspaces.view.rename.RenameView;
 
     
 
@@ -19,7 +20,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class RenameUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
 
         /**
          * Constructor
@@ -60,7 +61,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
             if (selectedItem != null)
             {
                 var renameView:RenameView = RenameView(PopUpManager.createPopUp(event.parent, RenameView, false));
-                var renamePresenter:RenamePresenter = new RenamePresenter(renameView, selectedItem as IRepoNode, model.wcmMode, event.onComplete);                                      
+                var renamePresModel:RenamePresModel = new RenamePresModel(selectedItem as IRepoNode, model.wcmMode);
+                renameView.renamePresModel = renamePresModel;                                      
+                renameView.onComplete = event.onComplete;
             }            
         }
         

@@ -5,11 +5,12 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.properties.basic.PropertiesPresenter;
-    import org.integratedsemantics.flexspaces.component.properties.basic.PropertiesView;
     import org.integratedsemantics.flexspaces.control.event.ui.PropertiesUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
+    import org.integratedsemantics.flexspaces.view.properties.basic.PropertiesView;
 
 
     /**
@@ -18,7 +19,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class PropertiesUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
 
         /**
          * Constructor
@@ -60,7 +61,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
             if (selectedItem != null)
             {
                 var propertiesView:PropertiesView = PropertiesView(PopUpManager.createPopUp(event.parent, PropertiesView, false));
-                var propertiesPresenter:PropertiesPresenter = new PropertiesPresenter(propertiesView, selectedItem as IRepoNode, model.wcmMode, event.onComplete);
+                var propertiesPresModel:PropertiesPresModel = new PropertiesPresModel(selectedItem as IRepoNode, model.wcmMode);
+                propertiesView.propPresModel = propertiesPresModel;
+                propertiesView.onComplete = event.onComplete;
             }
                        
         }

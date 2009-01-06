@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="init()">
+    <mx:Script>
+        <![CDATA[
+            import org.integratedsemantics.flexspacesair.view.browser.CustomHtmlHost;
+            
+            public var location:String;
+
+                        
+            private function go():void
+            {
+                location = urlTextInput.text;
+                html.location = location;
+            }
+            
+            private function loadComplete(event:Event):void 
+            {
+                urlTextInput.text = html.location;
+                location = html.location;
+            }  
+                        
+            private function goBack():void
+            {
+                html.historyBack();
+            }
+            
+            private function goForward():void
+            {
+                html.historyForward();
+            }
+            
+            private function init():void
+            {
+                html.htmlHost = new CustomHtmlHost();
+                html.location = location;
+                urlTextInput.text = location;
+            }
+        ]]>
+    </mx:Script>
+        
+    <mx:HBox width="100%"> 
+        <mx:Button id="backBtn" icon="@Embed(source='images/air/back_arrow.png')" click="goBack()"/>
+        <mx:Spacer width="3"/>
+        <mx:Button id="forwardBtn" icon="@Embed(source='images/air/forward_arrow.png')" click="goForward()"/>
+        <mx:Spacer width="3"/>
+        <mx:TextInput id="urlTextInput" width="50%" />    
+        <mx:Spacer width="3"/>
+        <mx:Button label="Go" click="go()"/>    
+    </mx:HBox>    
+    <mx:HTML id="html" width="100%" height="100%"  complete="loadComplete(event)" />    
+    
+</mx:VBox>

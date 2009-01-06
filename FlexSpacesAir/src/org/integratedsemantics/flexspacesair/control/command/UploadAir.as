@@ -28,7 +28,7 @@ package org.integratedsemantics.flexspacesair.control.command
      */
     public class UploadAir
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:AppModelLocator = AppModelLocator.getInstance();
         protected var onComplete:Function;
         protected var statusHandlers:IUploadHandlers;
 
@@ -83,24 +83,24 @@ package org.integratedsemantics.flexspacesair.control.command
             var model : AppModelLocator = AppModelLocator.getInstance();                            
             if (existingNode == null)
             {
-                if (model.isLiveCycleContentServices == true)
+                if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
-                    url = model.urlPrefix + "/flexspaces/uploadNew";
+                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadNew";
                 }
                 else
                 {
-                    url = model.urlPrefix + "/flexspaces/uploadNew"  + "?alf_ticket=" + model.loginTicket;
+                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadNew"  + "?alf_ticket=" + model.userInfo.loginTicket;
                 }
             }
             else
             {
-                if (model.isLiveCycleContentServices == true)
+                if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
-                    url = model.urlPrefix + "/flexspaces/uploadExisting";                 
+                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadExisting";                 
                 }
                 else
                 {
-                    url = model.urlPrefix + "/flexspaces/uploadExisting" + "?alf_ticket=" + model.loginTicket;                 
+                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadExisting" + "?alf_ticket=" + model.userInfo.loginTicket;                 
                 }
             }
             
@@ -109,7 +109,7 @@ package org.integratedsemantics.flexspacesair.control.command
 
             if (existingNode != null)
             {
-                if (model.wcmMode == false)
+                if (model.flexSpacesPresModel.wcmMode == false)
                 {
                     params.nodeid = existingNode.getId();
                     params.checkin = checkin.toString().toLowerCase();
@@ -122,7 +122,7 @@ package org.integratedsemantics.flexspacesair.control.command
             }
             else
             {
-                if (model.wcmMode == false)
+                if (model.flexSpacesPresModel.wcmMode == false)
                 {
                     params.path = parentNode.getPath();         
                 }

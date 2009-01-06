@@ -11,11 +11,12 @@ package org.integratedsemantics.flexspacesair.control.command
     import mx.events.CloseEvent;
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusPresenter;
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusView;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.upload.UploadStatusPresModel;
+    import org.integratedsemantics.flexspaces.view.upload.UploadStatusView;
     import org.integratedsemantics.flexspacesair.control.event.AirOfflineUploadUIEvent;
 
 
@@ -30,7 +31,7 @@ package org.integratedsemantics.flexspacesair.control.command
      */
     public class AirOfflineUploadUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var flexSpacesPresModel:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
         
         protected var selectedItem:Object;
         protected var checkin:Boolean;
@@ -76,7 +77,7 @@ package org.integratedsemantics.flexspacesair.control.command
          */
         public function airOfflineUpload(event:AirOfflineUploadUIEvent):void
         {            
-            if (model.currentNodeList is Folder)
+            if (flexSpacesPresModel.currentNodeList is Folder)
             {
                 this.selectedItem = event.selectedItem;
                 this.checkin = event.checkin;
@@ -105,7 +106,7 @@ package org.integratedsemantics.flexspacesair.control.command
         {
             if (event.detail == Alert.YES) 
             {
-                var folder:Folder = model.currentNodeList as Folder;
+                var folder:Folder = flexSpacesPresModel.currentNodeList as Folder;
                 var parentNode:IRepoNode = folder.folderNode;
 
                 // get offline file
@@ -116,10 +117,11 @@ package org.integratedsemantics.flexspacesair.control.command
                 var fileReferences:Array = new Array();
                 fileReferences.push(offlineFile);
                 var uploadStatusView:UploadStatusView = UploadStatusView(PopUpManager.createPopUp(parent, UploadStatusView, false));
-                var uploadStatusPresenter:UploadStatusPresenter = new UploadStatusPresenter(uploadStatusView, fileReferences);
+                var uploadStatusPresModel:UploadStatusPresModel = new UploadStatusPresModel(fileReferences);
+                uploadStatusView.uploadStatusPresModel = uploadStatusPresModel;
                 
                 // upload offline file into existing object
-                var uploadAir:UploadAir = new UploadAir(uploadStatusPresenter);
+                var uploadAir:UploadAir = new UploadAir(uploadStatusView);
                 uploadAir.uploadAir(offlineFile, parentNode, onComplete, selectedItem as IRepoNode, checkin);
             }
         }        

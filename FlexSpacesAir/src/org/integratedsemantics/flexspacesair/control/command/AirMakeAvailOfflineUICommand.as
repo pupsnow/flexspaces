@@ -37,7 +37,7 @@ package org.integratedsemantics.flexspacesair.control.command
      */
     public class AirMakeAvailOfflineUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();        
+        protected var model:AppModelLocator = AppModelLocator.getInstance();        
         
         protected var selectedItems:Array;
 
@@ -85,7 +85,7 @@ package org.integratedsemantics.flexspacesair.control.command
             // confirm with user
             if ((selectedItems.length > 0) && selectedItems[0] != null)
             {
-                var offlinePath:String = AirOfflineUtil.offlineFolderPathForNode(selectedItems[0], model.wcmMode);
+                var offlinePath:String = AirOfflineUtil.offlineFolderPathForNode(selectedItems[0], model.flexSpacesPresModel.wcmMode);
                 var localDir:File = AirOfflineUtil.makeOfflineDirForPath(offlinePath);
                 var msg:String = "Ok to download selected files and possibly overwrite files with same names within " + localDir.nativePath + " ?";
                 var a:Alert = Alert.show(msg, "Confirmation",  Alert.YES|Alert.NO, event.parent as Sprite, onConfirm, confirmIcon, Alert.NO);                                
@@ -106,7 +106,7 @@ package org.integratedsemantics.flexspacesair.control.command
                 {
                     if (selectedItem != null)
                     {
-                        var offlinePath:String = AirOfflineUtil.offlineFolderPathForNode(selectedItem, model.wcmMode);
+                        var offlinePath:String = AirOfflineUtil.offlineFolderPathForNode(selectedItem, model.flexSpacesPresModel.wcmMode);
                         
                         if (selectedItem.isFolder == true)
                         {
@@ -137,13 +137,13 @@ package org.integratedsemantics.flexspacesair.control.command
             if (selectedItem != null && selectedItem.isFolder == false)
             {                
                 var model : AppModelLocator = AppModelLocator.getInstance();                            
-                if (model.isLiveCycleContentServices == true)
+                if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
                     var url:String = selectedItem.viewurl;
                 }
                 else
                 {
-                    url = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                    url = selectedItem.viewurl + "?alf_ticket=" + model.userInfo.loginTicket;
                 }
                                 
                 var request:URLRequest = new URLRequest(url);

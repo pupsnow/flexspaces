@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<createhtml:CreateHtmlViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:createhtml="org.integratedsemantics.flexspacesair.view.create.html.*"
+    width="750" height="600" title="Create Content - HTML" styleName="dialog" showCloseButton="true">
+
+    <mx:Style source="../create.css"/>
+    
+    <mx:Form styleName="mainArea">
+        <mx:FormItem label="Name:"  width="400"  styleName="mainArea">
+            <mx:TextInput id="nodename" width="250" text="New HTML Doc.html" styleName="input"/>
+        </mx:FormItem>
+    </mx:Form>
+    
+    <mx:HTML id="htmlControl" width="703" height="406" styleName="input"/>
+    
+    <mx:Spacer height="20"/>
+                  
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="okBtn" label="OK"/> 
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="Cancel"/>
+    </mx:HBox> 
+    
+</createhtml:CreateHtmlViewBase>

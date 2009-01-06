@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<upload:UploadStatusViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:upload="org.integratedsemantics.flexspaces.view.upload.*"
+    title="{resourceManager.getString('UploadStatusView', 'title')}" 
+    width="400" height="450" styleName="dialog" showCloseButton="true">
+   
+    <mx:Metadata>[ResourceBundle("UploadStatusView")]</mx:Metadata>
+    
+    <mx:Style source="../../framework/presmodel/dialog.css"/>
+
+    <mx:VBox id="progressBarsArea" width="100%" height="100%" styleName="mainArea"/>
+    
+    <mx:ControlBar width="100%" styleName="buttonArea"> 
+    
+        <mx:Button id="closeBtn" label="{resourceManager.getString('UploadStatusView', 'closeBtn_label' )}"/>
+    
+    </mx:ControlBar> 
+    
+</upload:UploadStatusViewBase>

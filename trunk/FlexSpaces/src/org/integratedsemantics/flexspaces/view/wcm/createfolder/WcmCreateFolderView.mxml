@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<createfolder:WcmCreateFolderViewBase xmlns:mx="http://www.adobe.com/2006/mxml"  
+    xmlns:createfolder="org.integratedsemantics.flexspaces.view.wcm.createfolder.*"
+    title="{resourceManager.getString('WcmCreateFolderView', 'title')}"
+    width="462" height="270" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("WcmCreateFolderView")]</mx:Metadata>
+    
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <mx:Spacer height="10"/>
+    
+    <mx:Form width="388" height="133" styleName="mainArea">
+        <mx:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'nameItem_label' )}" id="nameItem" width="348" styleName="mainArea">      
+            <mx:TextInput id="foldername" width="250" text="" styleName="input"
+            	change="wcmCreateFolderPresModel.updateFolderName(foldername.text)"/>
+        </mx:FormItem> 
+        <mx:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'titleItem_label' )}" id="titleItem" width="346" styleName="mainArea">      
+            <mx:TextInput id="nodetitle" width="250" styleName="input"
+            	change="wcmCreateFolderPresModel.updateTitle(nodetitle.text)"/>
+        </mx:FormItem>
+        <mx:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'descriptionItem_label' )}" id="descriptionItem" width="346" styleName="mainArea">      
+            <mx:TextInput id="description" width="250" styleName="input"
+            	change="wcmCreateFolderPresModel.updateDescription(description.text)"/>
+        </mx:FormItem>        
+    </mx:Form>
+    
+    <mx:HBox horizontalAlign="center" width="100%" borderStyle="solid" borderThickness="0"> 
+        <mx:Button id="okBtn" label="{resourceManager.getString('WcmCreateFolderView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="{resourceManager.getString('WcmCreateFolderView', 'cancelBtn_label' )}"/>    
+    </mx:HBox> 
+    
+</createfolder:WcmCreateFolderViewBase>
+

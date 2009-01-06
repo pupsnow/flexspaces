@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rename:RenameViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:rename="org.integratedsemantics.flexspaces.view.rename.*"
+    width="468" height="170" title="{resourceManager.getString('RenameView', 'title')}" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("RenameView")]</mx:Metadata>
+    
+    <mx:Style source="../../framework/presmodel/dialog.css"/>
+
+    <mx:Form styleName="mainArea">
+        <mx:FormItem label="{resourceManager.getString('RenameView', 'nameItem_label' )}" id="nameItem" width="400" styleName="mainArea">      
+            <mx:TextInput id="nodename" text="{this.renamePresModel.vo.name}" width="250" styleName="input"
+            	change="renamePresModel.updateName(nodename.text)" editable="{renamePresModel.nameEditable}"/>
+        </mx:FormItem>
+    </mx:Form>
+    
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="okBtn" label="{resourceManager.getString('RenameView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="{resourceManager.getString('RenameView', 'cancelBtn_label' )}"/>    
+    </mx:HBox> 
+
+</rename:RenameViewBase>

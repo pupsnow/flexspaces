@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<upload:UploadProgressBarBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:upload="org.integratedsemantics.flexspaces.view.upload.*"
+    styleName="mainArea" width="100%">
+    
+    <mx:Metadata>[ResourceBundle("UploadProgressBar")]</mx:Metadata>    
+
+    <mx:Style source="../../framework/presmodel/dialog.css"/>
+
+    <mx:Label id="filenameLabel" text="" />
+
+    <mx:ProgressBar id="progressBar" mode="manual" minimum="0" labelPlacement="bottom" label="" trackHeight="15" width="100%"/>  
+        
+    <mx:Spacer height="10"/>      
+
+</upload:UploadProgressBarBase>

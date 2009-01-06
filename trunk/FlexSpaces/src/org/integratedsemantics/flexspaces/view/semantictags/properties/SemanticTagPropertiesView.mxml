@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties:SemanticTagPropertiesViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:properties="org.integratedsemantics.flexspaces.view.semantictags.properties.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.semantictags.tree.*"
+    label="{resourceManager.getString('SemanticTagPropertiesView', 'title' )}" 
+    creationComplete="onCreationComplete(event)" 
+    styleName="mainArea" height="100%" width="100%" creationPolicy="all" borderColor="#000000">
+    
+    <mx:Metadata>[ResourceBundle("SemanticTagPropertiesView")]</mx:Metadata>
+    
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <mx:FormItem label="{resourceManager.getString('SemanticTagPropertiesView', 'categoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" id="categoriesFormItem">
+
+        <mx:List id="categoryList" dataProvider="{semanticTagPropertiesPresModel.categories}" labelField="{resourceManager.getString('SemanticTagPropertiesView', 'categoryList_labelField')}" height="92" styleName="list" width="100%"
+        	change="onChangeSemanticTagList(event)"/>
+    
+        <mx:Button label="{resourceManager.getString('SemanticTagPropertiesView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"
+        	enabled="{semanticTagPropertiesPresModel.enableRemove}" visible="{semanticTagPropertiesPresModel.enableRemove}"/>
+
+    </mx:FormItem>    
+    
+    <mx:FormItem label="{resourceManager.getString('SemanticTagPropertiesView', 'allCategoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+
+        <tree:SemanticTagTreeView id="semanticTagTreeView" semanticTagTreePresModel="{semanticTagPropertiesPresModel.semanticTagTreePresModel}" height="217" width="100%"/>
+    
+        <mx:Button label="{resourceManager.getString('SemanticTagPropertiesView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"
+        	enabled="{semanticTagPropertiesPresModel.enableAdd}" visible="{semanticTagPropertiesPresModel.enableAdd}"/>
+
+    </mx:FormItem>
+        
+</properties:SemanticTagPropertiesViewBase>

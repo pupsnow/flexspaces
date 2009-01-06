@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<searchpanel:SearchPanelBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:searchpanel="org.integratedsemantics.flexspaces.view.search.searchpanel.*"    
+    xmlns:results="org.integratedsemantics.flexspaces.view.search.results.*"
+    xmlns:tags="org.integratedsemantics.flexspaces.view.tags.tagcloud.*" 
+    xmlns:semantictags="org.integratedsemantics.flexspaces.view.semantictags.semantictagcloud.*" 
+    xmlns:categories="org.integratedsemantics.flexspaces.view.categories.tree.*"   
+    xmlns:search="org.integratedsemantics.flexspaces.view.search.basic.*"
+    xmlns:map="org.integratedsemantics.flexspaces.view.semantictags.map.*"
+    xmlns:flexlib="flexlib.containers.*"
+    creationComplete="onCreationComplete(event)">
+    
+    <mx:Metadata>[ResourceBundle("SearchPanel")]</mx:Metadata>
+  
+    <mx:Accordion height="100%" width="28%">
+
+        <mx:Box label="{resourceManager.getString('SearchPanel', 'searchQuerySection_label' )}" height="100%" width="100%" id="searchQuerySection">      
+            <search:SearchView id="searchView2" searchPresModel="{searchPanelPresModel.searchPresModel}" width="100%" backgroundColor="0x000000"/>      
+        </mx:Box>
+
+        <semantictags:SemanticTagCloudView id="semanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.semanticTagCloudPresModel}" 
+            label="{resourceManager.getString('SearchPanel', 'semanticTagCloudView_label' )}" width="100%" height="100%"/>  
+        <semantictags:SemanticTagCloudView  id="companySemanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.companySemanticTagCloudPresModel}"
+        	label="{resourceManager.getString('SearchPanel', 'companySemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+        <semantictags:SemanticTagCloudView id="personSemanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.personSemanticTagCloudPresModel}"
+        	label="{resourceManager.getString('SearchPanel', 'personSemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+
+        <mx:Box label="{resourceManager.getString('SearchPanel', 'mapSection_label' )}" height="100%" width="100%" id="mapSection">      
+        </mx:Box>
+
+        <tags:TagCloudView id="tagCloudView" tagCloudPresModel="{searchPanelPresModel.tagCloudPresModel}" 
+        	label="{resourceManager.getString('SearchPanel', 'tagCloudView_label' )}" width="100%" height="100%"/>  
+    
+        <mx:Box label="{resourceManager.getString('SearchPanel', 'categoriesSection_label' )}" height="100%" width="100%" id="categoriesSection">      
+            <categories:CategoryTreeView id="categoriesTreeView" categoryTreePresModel="{searchPanelPresModel.categoryTreePresModel}" height="100%" width="100%"/>
+        </mx:Box>
+
+    </mx:Accordion>
+    
+    <results:SearchResultsView id="searchResultsView" searchResultsPresModel="{searchPanelPresModel.searchResultsPresModel}" height="100%" width="75%" />
+        
+</searchpanel:SearchPanelBase>

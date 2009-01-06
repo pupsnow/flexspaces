@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tagscategories:TagsCategoriesViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:semantictags="org.integratedsemantics.flexspaces.view.semantictags.properties.*"   
+    xmlns:tags="org.integratedsemantics.flexspaces.view.tags.properties.*"   
+    xmlns:categories="org.integratedsemantics.flexspaces.view.categories.properties.*"   
+    xmlns:tagscategories="org.integratedsemantics.flexspaces.view.properties.tagscategories.*"
+    width="520" height="600" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("TagsCategoriesView")]</mx:Metadata>
+    
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <mx:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="400" styleName="mainArea" id="nameFormItem">    
+        <mx:Label id="nameLabel" width="250"/>
+    </mx:FormItem>
+    
+    <mx:Spacer height="5"/>
+    
+    <mx:TabNavigator creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" backgroundColor="#999999" styleName="mainArea" borderColor="#000000" borderStyle="outset">
+        
+        <tags:TagPropertiesView id="tagPropertiesView" tagPropertiesPresModel="{tagCategoriesPresModel.tagPropertiesPresModel}" />
+    
+        <categories:CategoryPropertiesView categoryPropertiesPresModel="{tagCategoriesPresModel.categoryPropertiesPresModel}" id="categoryPropertiesView" />
+
+        <semantictags:SemanticTagPropertiesView semanticTagPropertiesPresModel="{tagCategoriesPresModel.semanticTagPropertiesPresModel}" id="semanticTagPropertiesView" />
+        
+    </mx:TabNavigator>
+
+    <mx:Spacer height="5"/>
+    
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="closeBtn" label="{resourceManager.getString('TagsCategoriesView', 'closeBtn_label' )}"/>    
+    </mx:HBox> 
+
+</tagscategories:TagsCategoriesViewBase>

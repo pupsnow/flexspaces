@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tree:CategoryTreeViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.categories.tree.*"
+    dataProvider="{categoryTreePresModel.rootNode}" creationComplete="onCreationComplete(event)">
+   
+   <mx:Metadata>[ResourceBundle("CategoryTreeView")]</mx:Metadata>
+
+</tree:CategoryTreeViewBase>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<deletion:DeleteViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:deletion="org.integratedsemantics.flexspaces.view.deletion.*"
+    width="514" height="292" title="{resourceManager.getString('DeleteView', 'title')}" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("DeleteView")]</mx:Metadata>
+    
+    <mx:Style source="../../framework/presmodel/dialog.css"/>
+    
+    <mx:VBox height="160" width="470" styleName="mainArea">
+        <mx:Text text="{resourceManager.getString('DeleteView', 'confirmMessage_text')}" width="450" height="40" id="confirmMessage"/>    
+        <mx:Spacer height="15"/>
+        <mx:Text id="filelist" width="450" height="77" text="{resourceManager.getString('DeleteView', 'filelist_text')}"/>    
+    </mx:VBox>
+    
+    <mx:Spacer height="15"/>
+
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="okBtn" label="{resourceManager.getString('DeleteView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="{resourceManager.getString('DeleteView', 'cancelBtn_label' )}"/>    
+    </mx:HBox> 
+
+</deletion:DeleteViewBase>

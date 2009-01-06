@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tasklist:TaskListViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:tasklist="org.integratedsemantics.flexspaces.view.tasks.tasklist.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">
+
+    <mx:Metadata>[ResourceBundle("TaskListView")]</mx:Metadata>
+
+    <mx:Metadata>
+    [Event(name="clickTask",type="org.integratedsemantics.flexspaces.view.tasks.event.ClickTaskEvent")]          
+    </mx:Metadata>
+                
+    <mx:Button id="refeshTasks" label="{resourceManager.getString('TaskListView', 'refeshTasks_label' )}"/>
+    
+    <mx:DataGrid dataProvider="{taskListPresModel.taskList}" id="taskGrid" styleName="DataGrid"        
+        height="100%" width="100%" rowHeight="25">
+        
+        <mx:columns>
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'descriptionColumn_headerText')}" dataField="description" width="200" id="descriptionColumn"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'typeColumn_headerText')}" dataField="type" width="175" id="typeColumn"/>      
+            <!--mx:DataGridColumn headerText="Task Id" dataField="taskId" width=50" /-->
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'startDateColumn_headerText')}" dataField="startDate" width="170" id="startDateColumn"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'dueDateColumn_headerText')}" dataField="dueDate" width="150" id="dueDateColumn"/>      
+            <!--mx:DataGridColumn headerText="Due Today" dataField="dueToday"/-->
+            <!--mx:DataGridColumn headerText="Overdue" dataField="overdue"/-->
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'priorityColumn_headerText')}" dataField="priority" id="priorityColumn"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'statusColumn_headerText')}" dataField="status" width="150" id="statusColumn"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('TaskListView', 'percentCompleteColumn_headerText')}" dataField="percentComplete" id="percentCompleteColumn"/>      
+        </mx:columns>
+        
+    </mx:DataGrid>  
+
+</tasklist:TaskListViewBase>          

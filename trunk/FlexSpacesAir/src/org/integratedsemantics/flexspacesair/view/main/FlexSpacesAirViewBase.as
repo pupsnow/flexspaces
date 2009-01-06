@@ -1,10 +1,9 @@
-package org.integratedsemantics.flexspacesair.view
+package org.integratedsemantics.flexspacesair.view.main
 {
     import flash.desktop.Clipboard;
     import flash.desktop.ClipboardFormats;
     import flash.desktop.NativeDragActions;
     import flash.desktop.NativeDragManager;
-    import flash.events.Event;
     import flash.events.NativeDragEvent;
     import flash.filesystem.File;
     import flash.filesystem.FileMode;
@@ -13,58 +12,51 @@ package org.integratedsemantics.flexspacesair.view
     import flexlib.controls.tabBarClasses.SuperTab;
     
     import mx.containers.VBox;
+    import mx.events.FlexEvent;
     import mx.managers.DragManager;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
     import org.alfresco.framework.service.webscript.ConfigService;
-    import org.integratedsemantics.flexspaces.component.folderview.FolderView;
-    import org.integratedsemantics.flexspaces.component.folderview.FolderViewPresenter;
-    import org.integratedsemantics.flexspaces.component.menu.event.MenuConfiguredEvent;
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusPresenter;
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusView;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
-    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
-    import org.integratedsemantics.flexspaces.view.FlexSpacesPresenter;
-    import org.integratedsemantics.flexspaces.view.FlexSpacesViewBase;
-    import org.integratedsemantics.flexspaces.view.event.RepoBrowserCreatedEvent;
-    import org.integratedsemantics.flexspacesair.component.ajaxwebscript.AjaxWebScriptPresenter;
-    import org.integratedsemantics.flexspacesair.component.ajaxwebscript.AjaxWebScriptView;
-    import org.integratedsemantics.flexspacesair.component.browser.Browser;
-    import org.integratedsemantics.flexspacesair.component.create.html.CreateHtmlPresenter;
-    import org.integratedsemantics.flexspacesair.component.create.html.CreateHtmlView;
-    import org.integratedsemantics.flexspacesair.component.create.text.CreateTextPresenter;
-    import org.integratedsemantics.flexspacesair.component.create.text.CreateTextView;
-    import org.integratedsemantics.flexspacesair.component.create.xml.CreateXmlPresenter;
-    import org.integratedsemantics.flexspacesair.component.create.xml.CreateXmlView;
-    import org.integratedsemantics.flexspacesair.component.localfiles.LocalFilesBrowserPresenter;
-    import org.integratedsemantics.flexspacesair.component.localfiles.LocalFilesBrowserView;
+    import org.integratedsemantics.flexspaces.presmodel.folderview.FolderViewPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.upload.UploadStatusPresModel;
+    import org.integratedsemantics.flexspaces.view.folderview.FolderViewBase;
+    import org.integratedsemantics.flexspaces.view.main.FlexSpacesViewBase;
+    import org.integratedsemantics.flexspaces.view.menu.event.MenuConfiguredEvent;
+    import org.integratedsemantics.flexspaces.view.upload.UploadStatusView;
     import org.integratedsemantics.flexspacesair.control.command.UploadAir;
     import org.integratedsemantics.flexspacesair.control.event.*;
+    import org.integratedsemantics.flexspacesair.presmodel.create.CreateHtmlPresModel;
+    import org.integratedsemantics.flexspacesair.presmodel.create.CreateTextPresModel;
+    import org.integratedsemantics.flexspacesair.presmodel.create.CreateXmlPresModel;
+    import org.integratedsemantics.flexspacesair.presmodel.localfiles.LocalFilesBrowserPresModel;
+    import org.integratedsemantics.flexspacesair.presmodel.main.FlexSpacesAirPresModel;
     import org.integratedsemantics.flexspacesair.util.AirOfflineUtil;
+    import org.integratedsemantics.flexspacesair.view.browser.Browser;
+    import org.integratedsemantics.flexspacesair.view.create.html.CreateHtmlView;
+    import org.integratedsemantics.flexspacesair.view.create.text.CreateTextView;
+    import org.integratedsemantics.flexspacesair.view.create.xml.CreateXmlView;
+    import org.integratedsemantics.flexspacesair.view.localfiles.LocalFilesBrowserView;
 
 
     /**
-     * Presenter for FlexSpacesAir overall main view 
-     * 
-     * Supervising Presenter/Controller of FlexSpaceViewBase type views
+     * Base for FlexSpacesAir overall main view 
      * 
      */
-    public class FlexSpacesAirPresenter extends FlexSpacesPresenter
+    public class FlexSpacesAirViewBase extends FlexSpacesViewBase
     {
         // local files browser
         protected var localFilesView:LocalFilesBrowserView;
         
-        // ajax web script ui example
-        protected var ajaxWebScriptView:AjaxWebScriptView;
-        
         // create html content dialog (keep after first use to avoid recreation errors with
         // tinymce and webkit html air control)
         protected var createHtmlView:CreateHtmlView;
-        protected var createHtmlPresenter:CreateHtmlPresenter;
+        protected var createHtmlPresModel:CreateHtmlPresModel;
 
         protected var shareTabIndex:int = -1;
         
@@ -72,56 +64,61 @@ package org.integratedsemantics.flexspacesair.view
         /**
          * Constructor 
          * 
-         * @mainView view to control
          */
-        public function FlexSpacesAirPresenter(mainView:FlexSpacesViewBase)
+        public function FlexSpacesAirViewBase()
         {
-            super(mainView);
+            super();
         }
+        
+		[Bindable]
+        public function get flexSpacesAirPresModel():FlexSpacesAirPresModel
+        {
+        	return this.flexSpacesPresModel as FlexSpacesAirPresModel;
+        }
+
+    	public function set flexSpacesAirPresModel(flexSpacesAirPresModel:FlexSpacesAirPresModel):void
+        {
+            this.flexSpacesPresModel = flexSpacesAirPresModel;            
+        }               
         
         /**
          * Handle creation complete with doc library 
          * 
          */
-        override protected function onRepoBrowserCreated(event:RepoBrowserCreatedEvent):void
+        override protected function onRepoBrowserCreated(event:FlexEvent):void
         {      
             super.onRepoBrowserCreated(event);
             
-            // swap in different menu for FlexSpacesAir
-            mainMenu.configPath = model.srcPath + "config/" + model.locale + "/menubar/mainMenuAir.xml";
-            mainMenu.addEventListener(MenuConfiguredEvent.MENU_CONFIGURED, onMenuConfigured);
-            mainMenu.load();
-                                                
             //Native Drag-and-drop listeners
             
-            if (model.showDocLib == true)
+            if (flexSpacesAirPresModel.showDocLib == true)
             {
-                var folderView1:FolderView = browserPresenter.folderViewPresenter1.getView() as FolderView;
+                var folderView1:FolderViewBase = browserView.fileView1;                
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn1);
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop1);
     
-                var folderView2:FolderView = browserPresenter.folderViewPresenter2.getView() as FolderView;
+                var folderView2:FolderViewBase = browserView.fileView2;                
                 folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn2);
                 folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                 folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop2);           
             }
 
-            if (model.showWCM == true)
+            if (flexSpacesAirPresModel.showWCM == true)
             {
-                var wcmFolderView1:FolderView = wcmBrowserPresenter.folderViewPresenter1.getView() as FolderView;
+                var wcmFolderView1:FolderViewBase = wcmBrowserView.fileView1;                
                 wcmFolderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onWcmDragIn1);
                 wcmFolderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                 wcmFolderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onWcmDrop1);
                 
-                var wcmFolderView2:FolderView = wcmBrowserPresenter.folderViewPresenter2.getView() as FolderView;
+                var wcmFolderView2:FolderViewBase = wcmBrowserView.fileView2;                
                 wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onWcmDragIn2);
                 wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                 wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onWcmDrop2);
             }           
                         
             // tab for share 3.0
-            if ((model.serverVersionNum() >= 3.0) && (model.showShare == true))
+            if ((model.ecmServerConfig.serverVersionNum() >= 3.0) && (flexSpacesAirPresModel.showShare == true))
             {
                 // add tab after other tabs
                 this.shareTabIndex = tabNav.numChildren;
@@ -140,7 +137,7 @@ package org.integratedsemantics.flexspacesair.view
                 browser.percentHeight = 100;
                 var urlBegin:String;
                 urlBegin = ConfigService.instance.protocol + "://" + ConfigService.instance.domain + ":" + ConfigService.instance.port + "/share/";
-                browser.location = urlBegin + "login?username=" + model.loginUserName + "&password=" + model.loginPassword + "&success=" + urlBegin + "&failure=" + urlBegin;
+                browser.location = urlBegin + "login?username=" + model.userInfo.loginUserName + "&password=" + model.userInfo.loginPassword + "&success=" + urlBegin + "&failure=" + urlBegin;
                 tab.addChild(browser);
                 browser.visible = true;
                 browser.includeInLayout = true;
@@ -154,13 +151,15 @@ package org.integratedsemantics.flexspacesair.view
          * @param event menu configured event
          * 
          */
-        protected function onMenuConfigured(event:Event):void
+        override protected function onMainMenuConfigured(event:MenuConfiguredEvent):void
         {
+        	super.onMainMenuConfigured(event);
+        	
             // enable paste right away if user has copied files to native external clipboard
             // before starting flexspacesair
             var enablePaste:Boolean = formatToPaste();
             mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-            mainView.pasteBtn.enabled = enablePaste;                    
+            this.pasteBtn.enabled = enablePaste;                    
 
             // TODO: also need to add check for formatToPaste when switching/activating the flexpacesair window 
             // for now have to switch tabs or select nodes for the paste menu enabling to be updated            
@@ -178,10 +177,17 @@ package org.integratedsemantics.flexspacesair.view
          * @param selectedItems selected nodes
          * 
          */
-        override protected function cutNodes(selectedItems:Array):void
+        override public function cutNodes(selectedItems:Array):void
         {
-            var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_CUT, null, mainView, selectedItems);
-            event.dispatch();                                            
+            var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_CUT, null, this, selectedItems);
+            event.dispatch(); 
+
+            // enable paste menu                                        
+            var tabIndex:int = tabNav.selectedIndex;
+            if ((tabIndex == DOC_LIB_TAB_INDEX) || (tabIndex == WCM_TAB_INDEX))
+            {
+                mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
+            }                                                                                                           
         }
         
         /**
@@ -191,10 +197,17 @@ package org.integratedsemantics.flexspacesair.view
          * @param selectedItems selected nodes
          * 
          */
-        override protected function copyNodes(selectedItems:Array):void
+        override public function copyNodes(selectedItems:Array):void
         {
-            var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_COPY, null, mainView, selectedItems);
-            event.dispatch();                                            
+            var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_COPY, null, this, selectedItems);
+            event.dispatch(); 
+            
+            // enable paste menu                                        
+            var tabIndex:int = tabNav.selectedIndex;
+            if ((tabIndex == DOC_LIB_TAB_INDEX) || (tabIndex == WCM_TAB_INDEX))
+            {
+                mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
+            }                                                                                                           
         }        
             
         /**
@@ -202,13 +215,12 @@ package org.integratedsemantics.flexspacesair.view
          * or files from native clipboard
          * 
          */
-        override protected function pasteNodes():void
+        public function pasteNodes():void
         {
-            var responder:Responder = new Responder(onResultAction, onFaultAction);
-            var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_PASTE, responder, mainView, null, redraw);
+            var responder:Responder = new Responder(flexSpacesAirPresModel.onResultAction, flexSpacesAirPresModel.onFaultAction);
+            var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_PASTE, responder, this, null, redraw);
             event.dispatch();                                            
         }
-
         
         //
         // AIR View Doc (Automatic Make Available Offline, Webkit tab)
@@ -229,8 +241,7 @@ package org.integratedsemantics.flexspacesair.view
             var event:AirViewNodeUIEvent = new AirViewNodeUIEvent(AirViewNodeUIEvent.AIR_VIEW_NODE, null, selectedItem, tabNav);
             event.dispatch();                                                                     
         }
-        
-        
+                
         //
         // Native Drag Drop
         //                
@@ -243,7 +254,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onDragIn1(event:NativeDragEvent):void
         {
-            onDragIn(event, browserPresenter.folderViewPresenter1);    
+            onDragIn(event, browserView.fileView1);    
         }
                 
         /**
@@ -254,7 +265,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onDragIn2(event:NativeDragEvent):void
         {
-            onDragIn(event, browserPresenter.folderViewPresenter2);    
+            onDragIn(event, browserView.fileView2);    
         }
 
         /**
@@ -265,7 +276,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onWcmDragIn1(event:NativeDragEvent):void
         {
-            onDragIn(event, wcmBrowserPresenter.folderViewPresenter1);    
+            onDragIn(event, wcmBrowserView.fileView1);    
         }
                 
         /**
@@ -276,7 +287,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onWcmDragIn2(event:NativeDragEvent):void
         {
-            onDragIn(event, wcmBrowserPresenter.folderViewPresenter2);    
+            onDragIn(event, wcmBrowserView.fileView2);    
         }
 
        /**
@@ -284,10 +295,10 @@ package org.integratedsemantics.flexspacesair.view
         * tell the Native Drag Manager that the component can take the drop.
         * 
         * @param event native drag event
-        * @param targetFolderList target folder view presenter
+        * @param targetFolderView target folder view
         * 
         */  
-        protected function onDragIn(event:NativeDragEvent, targetFolderList:FolderViewPresenter):void
+        protected function onDragIn(event:NativeDragEvent, targetFolderView:FolderViewBase):void
         {
             //trace("Drag enter event.");
             var transferable:Clipboard = event.clipboard;
@@ -295,7 +306,7 @@ package org.integratedsemantics.flexspacesair.view
             if (transferable.hasFormat(ClipboardFormats.FILE_LIST_FORMAT) ||
                 transferable.hasFormat("items") )
             {
-                NativeDragManager.acceptDragDrop(targetFolderList.getView() as FolderView );
+                NativeDragManager.acceptDragDrop(targetFolderView);
                 NativeDragManager.dropAction = NativeDragActions.COPY
             } 
             else 
@@ -333,7 +344,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onDrop1(event:NativeDragEvent):void
         {
-            onDrop(event, browserPresenter.folderViewPresenter1);
+            onDrop(event, browserView.fileView1);
         }
         
         /**
@@ -344,7 +355,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onDrop2(event:NativeDragEvent):void
         {
-            onDrop(event, browserPresenter.folderViewPresenter2);
+            onDrop(event, browserView.fileView2);
         }
 
         /**
@@ -355,7 +366,7 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onWcmDrop1(event:NativeDragEvent):void
         {
-            onDrop(event, wcmBrowserPresenter.folderViewPresenter1);
+            onDrop(event, wcmBrowserView.fileView1);
         }
         
         /**
@@ -366,16 +377,16 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function onWcmDrop2(event:NativeDragEvent):void
         {
-            onDrop(event, wcmBrowserPresenter.folderViewPresenter2);
+            onDrop(event, wcmBrowserView.fileView2);
         }
 
         /**
          * Handler for onDrop event
          * 
          * @param event native drag event
-         * @param targetFolderList target folder view presenter
+         * @param targetFolderView target folder view
          */
-        protected function onDrop(event:NativeDragEvent, targetFolderList:FolderViewPresenter):void
+        protected function onDrop(event:NativeDragEvent, targetFolderView:FolderViewBase):void
         {
             //trace("Drag drop event.");
             var data:Clipboard = event.clipboard;
@@ -383,13 +394,14 @@ package org.integratedsemantics.flexspacesair.view
             {
                 var dropfiles:Array = data.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
                 
-                var uploadStatusView:UploadStatusView = UploadStatusView(PopUpManager.createPopUp(mainView, UploadStatusView, false));
-                var uploadStatusPresenter:UploadStatusPresenter = new UploadStatusPresenter(uploadStatusView, dropfiles);
+                var uploadStatusView:UploadStatusView = UploadStatusView(PopUpManager.createPopUp(this, UploadStatusView, false));
+                var uploadStatusPresModel:UploadStatusPresModel = new UploadStatusPresModel(dropfiles);
+                uploadStatusView.uploadStatusPresModel = uploadStatusPresModel;
                 
                 for each (var file:File in dropfiles)
                 {
-                    var uploadAir:UploadAir = new UploadAir(uploadStatusPresenter);
-                    uploadAir.uploadAir(file, targetFolderList.currentFolderNode, redraw);
+                    var uploadAir:UploadAir = new UploadAir(uploadStatusView);
+                    uploadAir.uploadAir(file, targetFolderView.folderViewPresModel.currentFolderNode, redraw);
                 }
             }
             else if (data.hasFormat("items"))
@@ -401,7 +413,7 @@ package org.integratedsemantics.flexspacesair.view
                 }          
                 
                 var dropItems:Array = data.getData("items") as Array;
-                onDropItems(targetFolderList, action, dropItems);
+                onDropItems(targetFolderView.folderViewPresModel, action, dropItems);
             }
         }
               
@@ -409,12 +421,12 @@ package org.integratedsemantics.flexspacesair.view
          * Handle dropping internal node items or 
          * external files from desktop into flexspacesair 
          *  
-         * @param targetFolderList target folder view presenter
+         * @param targetFolderList target folder view
          * @param action move ar copy 
          * @param items items to drop
          * 
          */
-        override protected function onDropItems(targetFolderList:FolderViewPresenter, action:String, items:Array):void
+        override protected function onDropItems(targetFolderList:FolderViewPresModel, action:String, items:Array):void
         {    
             for each (var item:Object in items)
             {
@@ -446,11 +458,20 @@ package org.integratedsemantics.flexspacesair.view
          */
         override protected function handleBothKindsOfMenus(data:String):void
         {    
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;   
+            var selectedItems:Array = flexSpacesPresModel.selectedItems; 
+
             switch(data)
             {
-                case "webscriptui":
-                    showHideWebScriptAjaxUI();
-                    break;
+                case 'paste':
+                   pasteNodes();
+                   break;
+                case 'view':
+                   viewNode(selectedItem);
+                   break;
+                case 'download':
+                    downloadFile(selectedItem);
+                    break;                   
                 case "localfiles":
                     showHideLocalFilesBrowser();
                     break;                    
@@ -479,36 +500,6 @@ package org.integratedsemantics.flexspacesair.view
         } 
         
         /**
-         * Toggle showing web script / ajax UI example pane 
-         * 
-         */
-        protected function showHideWebScriptAjaxUI():void
-        {
-            if ( (ajaxWebScriptView != null) && (ajaxWebScriptView.visible == true) )
-            {
-                ajaxWebScriptView.visible = false;
-                ajaxWebScriptView.includeInLayout = false;
-                mainView.flexspacesviews.percentHeight = 100;
-            }    
-            else
-            {
-                if (ajaxWebScriptView == null)
-                {
-                    this.ajaxWebScriptView = new AjaxWebScriptView();
-                    ajaxWebScriptView.percentWidth = 100;
-                    ajaxWebScriptView.percentHeight = 30;
-                    mainView.addChild(ajaxWebScriptView);
-                    var ajaxWebScriptPresenter:AjaxWebScriptPresenter = new AjaxWebScriptPresenter(ajaxWebScriptView);                    
-                }
-                ajaxWebScriptView.visible = true;
-                ajaxWebScriptView.includeInLayout = true;
-                mainView.flexspacesviews.percentHeight = 70;
-                ajaxWebScriptView.percentHeight = 30;            
-            }
-            mainView.invalidateDisplayList();
-        }
-
-        /**
          * Toggle showing local files browser pane 
          * 
          */
@@ -518,7 +509,7 @@ package org.integratedsemantics.flexspacesair.view
             {
                 localFilesView.visible = false;
                 localFilesView.includeInLayout = false;
-                mainView.flexspacesviews.percentHeight = 100;
+                this.flexspacesviews.percentHeight = 100;
             }    
             else
             {
@@ -527,15 +518,16 @@ package org.integratedsemantics.flexspacesair.view
                     this.localFilesView = new LocalFilesBrowserView();
                     localFilesView.percentWidth = 100;
                     localFilesView.percentHeight = 20;
-                    mainView.addChild(localFilesView);
-                    var localFilesPresenter:LocalFilesBrowserPresenter = new LocalFilesBrowserPresenter(localFilesView);                         
+                    this.addChild(localFilesView);
+                    var localFilesPresModel:LocalFilesBrowserPresModel = new LocalFilesBrowserPresModel();
+                    localFilesView.presModel = localFilesPresModel;                         
                 }
                 localFilesView.visible = true;
                 localFilesView.includeInLayout = true;
-                mainView.flexspacesviews.percentHeight = 80;
+                this.flexspacesviews.percentHeight = 80;
                 localFilesView.percentHeight = 20;            
             }
-            mainView.invalidateDisplayList();
+            this.invalidateDisplayList();
         }
         
 
@@ -555,9 +547,9 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function makeAvailOffline():void
         {
-            var selectedItems:Array = model.selectedItems;  
+            var selectedItems:Array = flexSpacesAirPresModel.selectedItems;  
 
-            var event:AirMakeAvailOfflineUIEvent = new AirMakeAvailOfflineUIEvent(AirMakeAvailOfflineUIEvent.AIR_MAKE_AVAIL_OFFLINE, null, selectedItems, mainView);
+            var event:AirMakeAvailOfflineUIEvent = new AirMakeAvailOfflineUIEvent(AirMakeAvailOfflineUIEvent.AIR_MAKE_AVAIL_OFFLINE, null, selectedItems, this);
             event.dispatch();                                                                    
         }
         
@@ -576,8 +568,8 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function offlineUpload(checkin:Boolean):void
         {
-            var selectedItem:Object = model.selectedItem;
-            var event:AirOfflineUploadUIEvent = new AirOfflineUploadUIEvent(AirOfflineUploadUIEvent.AIR_OFFLINE_UPLOAD, null, selectedItem, checkin, mainView, redraw);
+            var selectedItem:Object = flexSpacesAirPresModel.selectedItem;
+            var event:AirOfflineUploadUIEvent = new AirOfflineUploadUIEvent(AirOfflineUploadUIEvent.AIR_OFFLINE_UPLOAD, null, selectedItem, checkin, this, redraw);
             event.dispatch();                                                                    
         }
         
@@ -592,9 +584,9 @@ package org.integratedsemantics.flexspacesair.view
          * @param selectedItem selected node item
          *  
          */
-        override protected function downloadFile(selectedItem:Object):void
+        protected function downloadFile(selectedItem:Object):void
         {
-            var event:DownloadUIEvent = new DownloadUIEvent(DownloadUIEvent.DOWNLOAD_UI, null, selectedItem, mainView, true);
+            var event:DownloadUIEvent = new DownloadUIEvent(DownloadUIEvent.DOWNLOAD_UI, null, selectedItem, this, true);
             event.dispatch();                    
         }                
         
@@ -608,8 +600,10 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function createText():void
         {
-            var createTextView:CreateTextView = CreateTextView(PopUpManager.createPopUp(mainView, CreateTextView, false));
-            var createTextPresenter:CreateTextPresenter = new CreateTextPresenter(createTextView, createContentDialogComplete);
+            var createTextView:CreateTextView = CreateTextView(PopUpManager.createPopUp(this, CreateTextView, false));
+            var createTextPresModel:CreateTextPresModel = new CreateTextPresModel();
+            createTextView.presModel = createTextPresModel;
+            createTextView.onComplete = createContentDialogComplete;
         }
         
         /**
@@ -618,8 +612,10 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function createXML():void
         {
-            var createXmlView:CreateXmlView = CreateXmlView(PopUpManager.createPopUp(mainView, CreateXmlView, false));
-            var createXmlPresenter:CreateXmlPresenter = new CreateXmlPresenter(createXmlView, createContentDialogComplete);
+            var createXmlView:CreateXmlView = CreateXmlView(PopUpManager.createPopUp(this, CreateXmlView, false));
+            var createXmlPresModel:CreateXmlPresModel = new CreateXmlPresModel();
+            createXmlView.presModel = createXmlPresModel;
+            createXmlView.onComplete = createContentDialogComplete
         }
         
         /**
@@ -631,13 +627,15 @@ package org.integratedsemantics.flexspacesair.view
         {
             if (this.createHtmlView == null)
             {
-                createHtmlView = CreateHtmlView(PopUpManager.createPopUp(mainView, CreateHtmlView, false));
-                createHtmlPresenter = new CreateHtmlPresenter(createHtmlView, createContentDialogComplete);
+                createHtmlView = CreateHtmlView(PopUpManager.createPopUp(this, CreateHtmlView, false));
+                createHtmlPresModel = new CreateHtmlPresModel();
+                createHtmlView.presModel = createHtmlPresModel;
+                createHtmlView.onComplete = createContentDialogComplete;
             }   
             else
             {
-               PopUpManager.addPopUp(createHtmlView, mainView);
-               createHtmlPresenter.setContent("");
+               PopUpManager.addPopUp(createHtmlView, this);
+               createHtmlView.setContent("");
             }
         }
 
@@ -651,9 +649,9 @@ package org.integratedsemantics.flexspacesair.view
          */
         protected function createContentDialogComplete(filename:String, content:String):void
         {
-            if (model.currentNodeList is Folder)
+            if (flexSpacesAirPresModel.currentNodeList is Folder)
             {
-                var folder:Folder = model.currentNodeList as Folder;
+                var folder:Folder = flexSpacesAirPresModel.currentNodeList as Folder;
                 var parentNode:IRepoNode = folder.folderNode;
             
                 var localDir:File = AirOfflineUtil.makeOfflineDirForPath(folder.currentPath);
@@ -687,9 +685,9 @@ package org.integratedsemantics.flexspacesair.view
             if ((selectedItem != null) && (mainMenu.configurationDone == true))
             {
                 var createChildrenPermission:Boolean = false;                                       
-                if ( (model.currentNodeList != null) && (model.currentNodeList is Folder))
+                if ( (flexSpacesAirPresModel.currentNodeList != null) && (flexSpacesAirPresModel.currentNodeList is Folder))
                 {
-                    var folder:Folder = model.currentNodeList as Folder;
+                    var folder:Folder = flexSpacesAirPresModel.currentNodeList as Folder;
                     var parentNode:Node = folder.folderNode;
                     if (parentNode != null)
                     {
@@ -709,8 +707,8 @@ package org.integratedsemantics.flexspacesair.view
                     case DOC_LIB_TAB_INDEX:  
                         // paste                        
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-                        browserPresenter.enableContextMenuItem("paste", enablePaste, true);  
-                        mainView.pasteBtn.enabled = enablePaste;                    
+                        browserView.enableContextMenuItem("paste", enablePaste, true);  
+                        this.pasteBtn.enabled = enablePaste;                    
                         // make avail offline, offline upload
                         mainMenu.menuBarCollection[3].menuitem[7].@enabled = readPermission;
                         mainMenu.menuBarCollection[3].menuitem[8].@enabled = writePermission;                         
@@ -724,8 +722,8 @@ package org.integratedsemantics.flexspacesair.view
                     case WCM_TAB_INDEX:
                         // paste
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-                        wcmBrowserPresenter.enableContextMenuItem("paste", enablePaste, true);  
-                        mainView.pasteBtn.enabled = enablePaste;                    
+                        wcmBrowserView.enableContextMenuItem("paste", enablePaste, true);  
+                        this.pasteBtn.enabled = enablePaste;                    
                         // make avail offline, offline upload
                         mainMenu.menuBarCollection[3].menuitem[7].@enabled = readPermission;
                         mainMenu.menuBarCollection[3].menuitem[8].@enabled = writePermission;                         
@@ -751,9 +749,9 @@ package org.integratedsemantics.flexspacesair.view
                 mainMenu.menuBarCollection[3].menuitem[8].@enabled = false;
     
                 var createChildrenPermission:Boolean = false;                                       
-                if ( (model.currentNodeList != null) && (model.currentNodeList is Folder))
+                if ( (flexSpacesAirPresModel.currentNodeList != null) && (flexSpacesAirPresModel.currentNodeList is Folder))
                 {
-                    var folder:Folder = model.currentNodeList as Folder;
+                    var folder:Folder = flexSpacesAirPresModel.currentNodeList as Folder;
                     var parentNode:Node = folder.folderNode;
                     if (parentNode != null)
                     {
@@ -769,8 +767,8 @@ package org.integratedsemantics.flexspacesair.view
                         mainMenu.menuBarCollection[0].menuitem[1].@enabled = createChildrenPermission;
                         // paste
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-                        browserPresenter.enableContextMenuItem("paste", enablePaste, true);  
-                        mainView.pasteBtn.enabled = enablePaste;                    
+                        browserView.enableContextMenuItem("paste", enablePaste, true);  
+                        this.pasteBtn.enabled = enablePaste;                    
                         break;                     
                     case SEARCH_TAB_INDEX:
                     case TASKS_TAB_INDEX:
@@ -782,8 +780,8 @@ package org.integratedsemantics.flexspacesair.view
                         mainMenu.menuBarCollection[0].menuitem[1].@enabled = false;
                         // paste
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-                        wcmBrowserPresenter.enableContextMenuItem("paste", enablePaste, true);  
-                        mainView.pasteBtn.enabled = enablePaste;                    
+                        wcmBrowserView.enableContextMenuItem("paste", enablePaste, true);  
+                        this.pasteBtn.enabled = enablePaste;                    
                         break;  
                     case this.shareTabIndex:
                         // create content          
@@ -791,11 +789,11 @@ package org.integratedsemantics.flexspacesair.view
                         // create space, upload          
                         mainMenu.menuBarCollection[0].menuitem[0].@enabled = false;
                         mainMenu.menuBarCollection[0].menuitem[3].@enabled = false;
-                        mainView.createSpaceBtn.enabled = false;
-                        mainView.uploadFileBtn.enabled = false;
+                        this.createSpaceBtn.enabled = false;
+                        this.uploadFileBtn.enabled = false;
                         // paste
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = false;
-                        mainView.pasteBtn.enabled = false;                    
+                        this.pasteBtn.enabled = false;                    
                         // tree, dual panes, wcm tree, dual wcm panes
                         mainMenu.menuBarCollection[2].menuitem[0].@enabled = false;
                         mainMenu.menuBarCollection[2].menuitem[1].@enabled = false;
@@ -817,7 +815,7 @@ package org.integratedsemantics.flexspacesair.view
         protected function formatToPaste():Boolean
         {
             var data:Clipboard = Clipboard.generalClipboard;
-            if ( data.hasFormat(ClipboardFormats.FILE_LIST_FORMAT) || data.hasFormat(AppModelLocator.FLEXSPACES_FORMAT) )
+            if ( data.hasFormat(ClipboardFormats.FILE_LIST_FORMAT) || data.hasFormat(FlexSpacesPresModel.FLEXSPACES_FORMAT) )
             {
                 return true;
             }                

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:FlexSpacesAirViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:view="org.integratedsemantics.flexspacesair.view.main.*"
+    xmlns:flexlib="flexlib.containers.*"
+    xmlns:menu="org.integratedsemantics.flexspaces.view.menu.menubar.*"
+    xmlns:logout="org.integratedsemantics.flexspaces.view.logout.*" 
+    xmlns:login="org.integratedsemantics.flexspaces.view.login.*" 
+    xmlns:search="org.integratedsemantics.flexspaces.view.search.basic.*"
+    xmlns:repobrowser="org.integratedsemantics.flexspaces.view.browser.*"
+    xmlns:wcmrepobrowser="org.integratedsemantics.flexspaces.view.wcm.browser.*"
+    xmlns:folderview="org.integratedsemantics.flexspaces.view.folderview.*"
+    xmlns:searchpanel="org.integratedsemantics.flexspaces.view.search.searchpanel.*"
+    xmlns:taskspanel="org.integratedsemantics.flexspaces.view.tasks.taskspanel.*"
+    creationComplete="onCreationComplete(event)" backgroundColor="#000000">
+
+    <mx:Metadata>[ResourceBundle("FlexSpacesView")]</mx:Metadata>
+
+    <mx:VBox width="100%" height="100%" id="flexspacesviews">
+                    
+        <mx:ViewStack id="viewStack" width="100%" height="100%">
+        
+            <!-- before login, getting config -->
+            <mx:VBox width="100%" height="100%"/>
+
+            <!-- login view mode -->
+            <mx:VBox width="100%" height="100%" id="loginPage" visible="false">
+                <!-- top header area-->
+                <mx:HBox width="100%" height="40">
+                    <!-- alfresco logo -->
+                    <mx:HBox width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
+                        <mx:Image source="@Embed(source='/images/flexspaces/alfrescologo35_black.png')"/>
+                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLoginLabel_text')}" color="#FFFFFF" fontSize="16" id="alfrescoLoginLabel"/>            
+                    </mx:HBox>
+                    <!-- flexspaces, integrated semantics logos -->
+                    <mx:HBox width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
+                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLoginLabel_text')}" color="#FFFFFF" fontSize="16" id="flexspacesLoginLabel"/>            
+                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLoginLabel_text')}" color="#FFFFFF" fontSize="16" fontStyle="italic" id="integratedsemanticsLoginLabel"/>            
+                    </mx:HBox>
+                </mx:HBox>
+                <!-- login panel -->
+                <mx:Box id="loginPanel" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+                    <login:LoginView id="loginView" loginPresModel="{flexSpacesPresModel.loginPresModel}" creationComplete="onLoginViewCreated(event)"/>
+                </mx:Box>
+            </mx:VBox>
+
+            <!-- after login, getting info -->
+            <mx:VBox width="100%" height="100%"/>
+                              
+            <!-- after login, after get info, main view mode -->
+            <mx:VBox width="100%" height="100%">
+                
+                <!-- logos, search, logout -->
+                <mx:HBox id="header" width="100%" height="40">
+                    <!-- alfresco logo -->
+                    <mx:HBox width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
+                        <mx:Image source="@Embed(source='/images/flexspaces/alfrescologo35_black.png')"/>
+                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLabel_text')}" color="#FFFFFF" fontSize="16" id="alfrescoLabel"/>            
+                    </mx:HBox>
+                    <!-- one box search -->   
+                    <search:SearchView id="searchView" searchPresModel="{flexSpacesPresModel.searchPresModel}" height="100%" horizontalAlign="right" minWidth="330"/>      
+                    <!-- logout link  -->   
+                    <logout:LogoutView id="logoutView" logoutPresModel="{flexSpacesPresModel.logoutPresModel}" height="100%" horizontalAlign="right" minWidth="100"/>
+                    <!-- flexspaces, integrated semantics logos -->
+                    <mx:HBox width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
+                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLabel_text')}" color="#FFFFFF" fontSize="16" id="flexspacesLabel"/>            
+                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLabel_text')}" color="#FFFFFF" fontSize="16" fontStyle="italic" id="integratedsemanticsLabel"/>            
+                    </mx:HBox>
+                </mx:HBox>
+
+                <!-- docking for toolbars -->
+                <flexlib:Docker id="docker" horizontalScrollPolicy="off" height="100%" width="100%">
+                
+                    <!-- main menu toolbar -->
+                    <flexlib:DockableToolBar id="menuToolbar" label="Menus" width="100%" backgroundColor="0xCCCCCC">                    
+                        <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" width="100%" height="25" configPath="{model.appConfig.srcPath + 'config/' + model.appConfig.locale + '/menubar/mainMenuAir.xml'}"/>
+                    </flexlib:DockableToolBar>    
+                    
+                    <!-- buttons toolbar -->
+                    <flexlib:DockableToolBar id="toolbar1" label="Toolbar 1" width="100%" backgroundColor="0xCCCCCC">                    
+                        <mx:Button id="cutBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'cutBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/cut.gif')"/>            
+                        <mx:Button id="copyBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'copyBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/copy.gif')"/>            
+                        <mx:Button id="pasteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'pasteBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/paste.gif')"/>            
+                        <mx:Button id="deleteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'deleteBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/delete.gif')"/>            
+                        <mx:Spacer width="10"/>
+                        <mx:Button id="createSpaceBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/create_space.gif')"/>            
+                        <mx:Spacer width="10"/>
+                        <mx:Button id="uploadFileBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/add_item.gif')"/>            
+                        <mx:Spacer width="10"/>
+                        <mx:Button id="tagsBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'tagsBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/add_category.gif')"/>            
+                    </flexlib:DockableToolBar>    
+
+                    <!-- tabs -->            
+                    <flexlib:SuperTabNavigator id="tabNav" creationPolicy="all" width="100%" height="100%" backgroundColor="#FFFFFF" >
+        
+                        <!-- Doc Libary Tab: Repository Browser with Tree and Dual Folder Panes -->
+                        <mx:VBox id="browserTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
+                                 height="100%" width="100%" backgroundColor="#000000" creationComplete="onRepoBrowserCreated(event)">
+                            <repobrowser:RepoBrowserView repoBrowserPresModel="{flexSpacesPresModel.browserPresModel}" id="browserView" height="100%" width="100%" backgroundColor="#000000"/>
+                        </mx:VBox>
+        
+                        <!-- Search Tab -->
+                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
+                                 id="searchTab" backgroundColor="#000000">              
+                            <searchpanel:SearchPanel id="searchPanel" searchPanelPresModel="{flexSpacesPresModel.searchPanelPresModel}" height="100%" width="100%"/>
+                        </mx:VBox>
+                        
+                        <!-- Task Tab -->
+                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'tasksTab_label' )}" 
+                                 id="tasksTab" backgroundColor="#000000">              
+                            <taskspanel:TasksPanelView id="tasksPanelView" tasksPanelPresModel="{flexSpacesPresModel.tasksPanelPresModel}" height="100%" width="100%" />
+                        </mx:VBox>
+                        
+                        <!-- WCM Tab -->
+                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'wcmTab_label' )}" 
+                                 id="wcmTab" backgroundColor="#000000">              
+                            <wcmrepobrowser:WcmRepoBrowserView id="wcmBrowserView" wcmRepoBrowserPresModel="{flexSpacesPresModel.wcmBrowserPresModel}" height="100%" width="100%" backgroundColor="#000000"/>
+                        </mx:VBox>
+        
+                    </flexlib:SuperTabNavigator>  
+    
+                </flexlib:Docker>
+            </mx:VBox>
+
+        </mx:ViewStack>    
+        
+    </mx:VBox>
+    
+</view:FlexSpacesAirViewBase>

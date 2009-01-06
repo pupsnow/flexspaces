@@ -9,12 +9,12 @@ package org.integratedsemantics.flexspacesair.control.command
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusPresenter;
-    import org.integratedsemantics.flexspaces.component.upload.UploadStatusView;
     import org.integratedsemantics.flexspaces.control.command.ui.ClipboardUICommand;
-    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.upload.UploadStatusPresModel;
+    import org.integratedsemantics.flexspaces.view.upload.UploadStatusView;
     import org.integratedsemantics.flexspacesair.control.event.AirClipboardUIEvent;
     
 
@@ -87,7 +87,7 @@ package org.integratedsemantics.flexspacesair.control.command
         { 
             var transferObject:Clipboard = new Clipboard;
             // todo: check if mainView is the right thing to register
-            transferObject.setData(AppModelLocator.FLEXSPACES_FORMAT, view, false); 
+            transferObject.setData(FlexSpacesPresModel.FLEXSPACES_FORMAT, view, false); 
             for each(var format:String in transferObject.formats)
             {
                 Clipboard.generalClipboard.setData(format, transferObject.getData(format), false);
@@ -120,9 +120,9 @@ package org.integratedsemantics.flexspacesair.control.command
          */
         public function airPaste(event:AirClipboardUIEvent):void
         {            
-            if (model.currentNodeList is Folder)
+            if (flexSpacesPresModel.currentNodeList is Folder)
             {
-                var folder:Folder = model.currentNodeList as Folder;
+                var folder:Folder = flexSpacesPresModel.currentNodeList as Folder;
                 var parentNode:IRepoNode = folder.folderNode;
                                 
                 var data:Clipboard = Clipboard.generalClipboard;
@@ -131,15 +131,16 @@ package org.integratedsemantics.flexspacesair.control.command
                     var files:Array = data.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
 
                     var uploadStatusView:UploadStatusView = UploadStatusView(PopUpManager.createPopUp(event.view, UploadStatusView, false));
-                    var uploadStatusPresenter:UploadStatusPresenter = new UploadStatusPresenter(uploadStatusView, files);
+                    var uploadStatusPresModel:UploadStatusPresModel = new UploadStatusPresModel(files);
+                    uploadStatusView.uploadStatusPresModel = uploadStatusPresModel;
                     
                     for each (var file:File in files)
                     {
-                        var uploadAir:UploadAir = new UploadAir(uploadStatusPresenter);
+                        var uploadAir:UploadAir = new UploadAir(uploadStatusView);
                         uploadAir.uploadAir(file, parentNode, event.onComplete);
                     }
                 }                
-                else if (data.hasFormat(AppModelLocator.FLEXSPACES_FORMAT))
+                else if (data.hasFormat(FlexSpacesPresModel.FLEXSPACES_FORMAT))
                 {
                     super.paste(event);  
                 }  

@@ -38,7 +38,7 @@ package org.integratedsemantics.flexspacesair.control.command
      */
     public class AirViewNodeUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:AppModelLocator = AppModelLocator.getInstance();
         protected var container:ViewStack;
         
 
@@ -82,14 +82,13 @@ package org.integratedsemantics.flexspacesair.control.command
 
             if (selectedItem != null && selectedItem.isFolder == false)
             {    
-                var model : AppModelLocator = AppModelLocator.getInstance();                            
-                if (model.isLiveCycleContentServices == true)
+                if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
                     var url:String = selectedItem.viewurl;                
                 }
                 else
                 {
-                    url = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;                                	
+                    url = selectedItem.viewurl + "?alf_ticket=" + model.userInfo.loginTicket;                                	
                 }
 
                 var request:URLRequest = new URLRequest(url);
@@ -126,7 +125,7 @@ package org.integratedsemantics.flexspacesair.control.command
                     
                     var filename:String = selectedItem.name;
  
-                    var offlinePath:String = AirOfflineUtil.offlineFolderPathForNode(selectedItem, model.wcmMode);
+                    var offlinePath:String = AirOfflineUtil.offlineFolderPathForNode(selectedItem, model.flexSpacesPresModel.wcmMode);
                     
                     // download within Viewed directory to protect main make available offline area
                     offlinePath = "/Viewed" + offlinePath;

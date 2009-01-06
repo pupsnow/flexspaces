@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localfiles:LocalFilesBrowserViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:localfiles="org.integratedsemantics.flexspacesair.view.localfiles.*"
+    xmlns:breadcrumb="com.decoursey.components.*" backgroundColor="#000000"
+    creationComplete="onCreationComplete(event)"> 
+
+    <!-- air local files tree -->
+    <mx:FileSystemTree id="localfilestree" width="300" height="100%" enumerationMode="directoriesOnly"
+        change="localFileGrid.directory = File(localfilestree.selectedItem);">                
+    </mx:FileSystemTree>  
+          
+    <!-- air local files folder list/grid with navigation buttons -->
+    <mx:VBox id="localfilesfolderlist" width="100%" height="100%">
+
+        <!-- navigation buttons -->
+        <mx:HBox>
+            <mx:FileSystemHistoryButton id="backBtn" icon="@Embed(source='images/air/back_arrow.png')" dataProvider="{localFileGrid.backHistory}" 
+                enabled="{localFileGrid.canNavigateBack}" click="localFileGrid.navigateBack();" 
+                itemClick="localFileGrid.navigateBack(event.index)"/>
+            
+            <mx:Spacer width="5"/>
+            
+            <mx:FileSystemHistoryButton id="forwardBtn" icon="@Embed(source='images/air/forward_arrow.png')" dataProvider="{localFileGrid.forwardHistory}"            
+                 enabled="{localFileGrid.canNavigateForward}" click="localFileGrid.navigateForward();"
+                 itemClick="localFileGrid.navigateForward(event.index)"/>
+            
+            <mx:Spacer width="5"/>
+            
+            <mx:Button id="upBtn" icon="@Embed(source='images/air/up_arrow.png')" enabled="{localFileGrid.canNavigateUp}"
+                click="localFileGrid.navigateUp();"/>
+            
+            <mx:Spacer width="10"/>
+            
+            <breadcrumb:BreadcrumbDisplay id="localFileBreadCrumb" displayDivider="{File.separator}" delimeter="{File.separator}"/>
+        </mx:HBox>
+        
+        <!-- folder file grid -->        
+        <mx:FileSystemDataGrid id="localFileGrid" width="100%" height="100%" dragEnabled="true" dropEnabled="false"
+            dragMoveEnabled="true" allowMultipleSelection="true" directory="{File.documentsDirectory}"/>
+
+    </mx:VBox>  
+
+</localfiles:LocalFilesBrowserViewBase>

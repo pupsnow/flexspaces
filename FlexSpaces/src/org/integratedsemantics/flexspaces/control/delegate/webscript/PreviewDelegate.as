@@ -9,6 +9,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.SuccessEvent;
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.vo.PreviewInfoVO;
 
 
     /**
@@ -63,23 +64,25 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
          * @param event success event
          */
         protected function onGetPreviewSuccess(event:SuccessEvent):void
-        {            
+        {   
+            var previewInfo:PreviewInfoVO = new PreviewInfoVO();
+        	         
             try
             {   
                 if (event.result is XML)
                 {
                     var result:XML = event.result as XML;
-                    var previewId:String = result.previewid;
-                    var previewURL:String = result.previewurl;
-                    notifyCaller(event.result, event);
-                    //trace("onGetPreviewSuccess");
+
+		            previewInfo.previewId = result.previewid;
+        		    previewInfo.previewUrl = result.previewurl;
                 }
             }
             catch (error:Error)
             {
-                // ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error.message);    
-                trace("onGetPreviewSuccess error");
-            }                       
+                //trace("onGetPreviewSuccess error");
+            }
+            
+            notifyCaller(previewInfo, event);                                   
         }
         
         /**

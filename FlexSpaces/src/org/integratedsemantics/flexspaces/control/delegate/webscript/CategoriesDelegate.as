@@ -2,6 +2,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 {
     import com.universalmind.cairngorm.business.Delegate;
     
+    import mx.collections.ArrayCollection;
     import mx.rpc.IResponder;
     
     import org.alfresco.framework.service.error.ErrorService;
@@ -9,6 +10,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.SuccessEvent;
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.tree.TreeNode;
+    import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
 
 
     /**
@@ -41,7 +44,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/flexspaces/categories";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onCategoriesSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetCategoriesSuccess);
                 
                 var params:Object = new Object();
                 
@@ -69,7 +72,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/flexspaces/categoryProperties";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onCategoriesSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onCategoryPropertiesSuccess);
                 
                 var params:Object = new Object();
                 
@@ -146,14 +149,59 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             }
         }
 
-         /**
+        /**
          * onCategoriesSuccess event handler
          * 
          * @param event success event
          */
         protected function onCategoriesSuccess(event:SuccessEvent):void
-        {
+        {            
             notifyCaller(event.result, event);
+        }
+
+        /**
+         * onGetCategoriesSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onGetCategoriesSuccess(event:SuccessEvent):void
+        {            
+            var currentNode:TreeNode = new TreeNode("", "");
+
+            currentNode.children = new ArrayCollection();
+
+            for each (var category:XML in event.result.category)
+            {
+                var childNode:TreeNode = new TreeNode(category.name, category.id);
+                childNode.nodeRef = category.noderef;
+                childNode.name = category.name;    
+                childNode.qnamePath = category.qnamePath;                
+                currentNode.children.addItem(childNode);
+            }
+            currentNode.hasBeenLoaded = true;
+        	
+            notifyCaller(currentNode, event);
+        }
+
+         /**
+         * onCategoryPropertiesSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onCategoryPropertiesSuccess(event:SuccessEvent):void
+        {
+        	var categoryCollection:ArrayCollection = new ArrayCollection();
+        	
+ 			for each (var categoryXML:XML in event.result.categories.category)
+ 			{
+ 				var category:CategoryVO = new CategoryVO();
+ 				category.name = categoryXML.name;
+ 				category.id = categoryXML.id;
+ 				category.nodeRef = categoryXML.noderef;
+ 				categoryCollection.addItem(category);
+ 			} 
+            
+            notifyCaller(categoryCollection, event);
         }
 
    }

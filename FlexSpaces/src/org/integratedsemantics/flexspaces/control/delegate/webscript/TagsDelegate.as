@@ -9,6 +9,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.SuccessEvent;
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.vo.GetTagsVO;
+    import org.integratedsemantics.flexspaces.model.vo.TagVO;
 
 
     /**
@@ -40,7 +42,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/flexspaces/getTags";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetTagsSuccess);
                 
                 var params:Object = new Object();
                 
@@ -72,7 +74,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/flexspaces/addTag";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onAddTagSuccess);
                 
                 var params:Object = new Object();
                 
@@ -105,7 +107,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/flexspaces/removeTag";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onRemoveTagSuccess);
                 
                 var params:Object = new Object();
                 
@@ -127,13 +129,46 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         }
 
         /**
-         * onTagsDataSuccess event handler
+         * onAddTagSuccess event handler
          * 
          * @param event success event
          */
-        protected function onTagsDataSuccess(event:SuccessEvent):void
+        protected function onAddTagSuccess(event:SuccessEvent):void
         {
             notifyCaller(event.result, event);
+        }
+
+        /**
+         * onRemoveTagSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onRemoveTagSuccess(event:SuccessEvent):void
+        {
+            notifyCaller(event.result, event);
+        }
+
+        /**
+         * onGetTagsSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onGetTagsSuccess(event:SuccessEvent):void
+        {
+        	var getTagsVO:GetTagsVO = new GetTagsVO();
+        	            
+            getTagsVO.countMin = event.result.countMin;
+            getTagsVO.countMax = event.result.countMax;
+            
+            for each (var tagXML:XML in event.result.tags.tag)
+            {
+            	var tag:TagVO = new TagVO();
+            	tag.name = tagXML.name;
+            	tag.count = tagXML.count;
+                getTagsVO.tags.addItem(tag);     
+            }                       
+            
+            notifyCaller(getTagsVO, event);
         }
         
     }

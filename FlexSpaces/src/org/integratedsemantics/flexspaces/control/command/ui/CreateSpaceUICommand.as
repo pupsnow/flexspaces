@@ -5,13 +5,14 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.createspace.CreateSpacePresenter;
-    import org.integratedsemantics.flexspaces.component.createspace.CreateSpaceView;
-    import org.integratedsemantics.flexspaces.component.wcm.createfolder.WcmCreateFolderPresenter;
-    import org.integratedsemantics.flexspaces.component.wcm.createfolder.WcmCreateFolderView;
     import org.integratedsemantics.flexspaces.control.event.ui.CreateSpaceUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.presmodel.createspace.CreateSpacePresModel;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.wcm.createfolder.WcmCreateFolderPresModel;
+    import org.integratedsemantics.flexspaces.view.createspace.CreateSpaceView;
+    import org.integratedsemantics.flexspaces.view.wcm.createfolder.WcmCreateFolderView;
     
 
     /**
@@ -20,7 +21,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
      */
     public class CreateSpaceUICommand extends Command
     {
-        protected var model : AppModelLocator = AppModelLocator.getInstance();
+        protected var model:FlexSpacesPresModel = AppModelLocator.getInstance().flexSpacesPresModel;
 
         /**
          * Constructor
@@ -62,12 +63,16 @@ package org.integratedsemantics.flexspaces.control.command.ui
             if (model.wcmMode == false)
             {
                 var createSpaceView:CreateSpaceView = CreateSpaceView(PopUpManager.createPopUp(event.parent, CreateSpaceView, false));
-                var createSpacePresenter:CreateSpacePresenter = new CreateSpacePresenter(createSpaceView, parentNode, event.onComplete);
+                var createSpacePresModel:CreateSpacePresModel = new CreateSpacePresModel(parentNode);
+                createSpaceView.createSpacePresModel = createSpacePresModel; 
+                createSpaceView.onComplete = event.onComplete;
             }                        
             else
             {
-                var createFolderView:WcmCreateFolderView = WcmCreateFolderView(PopUpManager.createPopUp(event.parent, WcmCreateFolderView, false));
-                var createFolderPresenter:WcmCreateFolderPresenter = new WcmCreateFolderPresenter(createFolderView, parentNode, event.onComplete);
+                var wcmCreateFolderView:WcmCreateFolderView = WcmCreateFolderView(PopUpManager.createPopUp(event.parent, WcmCreateFolderView, false));
+                var wcmCreateFolderPresModel:WcmCreateFolderPresModel = new WcmCreateFolderPresModel(parentNode);
+                wcmCreateFolderView.wcmCreateFolderPresModel = wcmCreateFolderPresModel; 
+                wcmCreateFolderView.onComplete = event.onComplete;
             }                   
         }
         

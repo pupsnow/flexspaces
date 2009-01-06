@@ -63,16 +63,16 @@ package org.integratedsemantics.flexspaces.control.command.ui
                 {
                 	var request:URLRequest;
                     var model : AppModelLocator = AppModelLocator.getInstance();                            
-                    if (model.isLiveCycleContentServices == true)
+                    if (model.ecmServerConfig.isLiveCycleContentServices == true)
                     {
                         var url:String = selectedItem.viewurl;
                     	request = new URLRequest(url);                    	
-						var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.loginTicket);
+						var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.userInfo.loginTicket);
 			            request.requestHeaders.push(ticketHeader);	                    	
                     }
                     else
                     {
-                        url = selectedItem.viewurl + "?alf_ticket=" + model.loginTicket;
+                        url = selectedItem.viewurl + "?alf_ticket=" + model.userInfo.loginTicket;
                     	request = new URLRequest(url);
                     }                    
 

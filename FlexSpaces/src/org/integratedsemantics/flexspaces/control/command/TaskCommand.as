@@ -131,7 +131,7 @@ package org.integratedsemantics.flexspaces.control.command
             var delegate:TaskDelegate = new TaskDelegate(handlers);
 
             var model : AppModelLocator = AppModelLocator.getInstance();                            
-            if (model.isLiveCycleContentServices == true)
+            if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
                 delegate.startLiveCycleWorkflow(event.repoNode, event.assignTo, event.assignTo, event.desc);
             }

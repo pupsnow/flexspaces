@@ -5,10 +5,10 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.search.advanced.AdvancedSearchPresenter;
-    import org.integratedsemantics.flexspaces.component.search.advanced.AdvancedSearchView;
     import org.integratedsemantics.flexspaces.control.event.ui.AdvancedSearchUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
+    import org.integratedsemantics.flexspaces.presmodel.search.advanced.AdvancedSearchPresModel;
+    import org.integratedsemantics.flexspaces.view.search.advanced.AdvancedSearchView;
     
 
     /**
@@ -55,7 +55,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
         public function advancedSearchUI(event:AdvancedSearchUIEvent):void
         {
             var advSearchView:AdvancedSearchView = AdvancedSearchView(PopUpManager.createPopUp(event.parent, AdvancedSearchView, false));
-            var advSearchPresenter:AdvancedSearchPresenter = new AdvancedSearchPresenter(advSearchView, event.onComplete); 
+            var advSearchPresModel:AdvancedSearchPresModel = new AdvancedSearchPresModel();
+            advSearchView.advancedSearchPresModel = advSearchPresModel;
+            advSearchView.onComplete = event.onComplete;
         }
         
     }

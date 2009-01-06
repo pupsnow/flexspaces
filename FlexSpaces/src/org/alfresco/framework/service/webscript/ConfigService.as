@@ -106,7 +106,7 @@ package org.alfresco.framework.service.webscript
 
                 var model:AppModelLocator = AppModelLocator.getInstance();
 
-				XML_URL = model.srcPath + CONFIG_FILE;
+				XML_URL = model.appConfig.srcPath + CONFIG_FILE;
 
 				myXMLURL = new URLRequest(XML_URL);
 				myLoader = new URLLoader(myXMLURL); 
@@ -158,12 +158,12 @@ package org.alfresco.framework.service.webscript
 				
 				if (nodeServerElement.attributes['livecycle'] == "true")
 				{
-					model.isLiveCycleContentServices = true;	
+					model.ecmServerConfig.isLiveCycleContentServices = true;	
 				}
 				var nodeLocaleElement:XMLNode = nodeServerElement.nextSibling;
 				if ((nodeLocaleElement != null) && (nodeLocaleElement.attributes['default-locale'] != null))
 				{
-					model.locale = nodeLocaleElement.attributes['default-locale'];
+					model.appConfig.locale = nodeLocaleElement.attributes['default-locale'];
 				}	
 				
 				var nodeCalaisElement:XMLNode = nodeLocaleElement.nextSibling;
@@ -171,12 +171,12 @@ package org.alfresco.framework.service.webscript
 				{
 					if (nodeCalaisElement.attributes['enable'] == "true")
 					{
-						model.enableCalias = true;
+						model.calaisConfig.enableCalias = true;
 					}
 					
 					if (nodeCalaisElement.attributes['key'] != null)
 					{
-						model.calaisKey = nodeCalaisElement.attributes['key'];
+						model.calaisConfig.calaisKey = nodeCalaisElement.attributes['key'];
 					}	
 				}	
 
@@ -185,17 +185,17 @@ package org.alfresco.framework.service.webscript
 				{
 					if (nodeGoogleMapElement.attributes['enable'] == "true")
 					{
-						model.enableGoogleMap = true;
+						model.googleMapConfig.enableGoogleMap = true;
 					}
 					
 					if (nodeGoogleMapElement.attributes['url'] != null)
 					{
-						model.googleMapUrl = nodeGoogleMapElement.attributes['url'];
+						model.googleMapConfig.googleMapUrl = nodeGoogleMapElement.attributes['url'];
 					}	
 
 					if (nodeGoogleMapElement.attributes['key'] != null)
 					{
-						model.googleMapKey = nodeGoogleMapElement.attributes['key'];
+						model.googleMapConfig.googleMapKey = nodeGoogleMapElement.attributes['key'];
 					}	
 				}	
 

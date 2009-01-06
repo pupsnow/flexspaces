@@ -30,7 +30,9 @@ package org.integratedsemantics.flexspaces.model.repo
         public var versionLabel:String;
         public var creator:String;
 
-
+		public var createdDate:String;
+		
+		
         public function RepoNode()
         {
         }

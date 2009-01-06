@@ -2,6 +2,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 {
     import com.universalmind.cairngorm.business.Delegate;
     
+    import mx.collections.ArrayCollection;
     import mx.rpc.IResponder;
     
     import org.alfresco.framework.service.error.ErrorService;
@@ -9,6 +10,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.SuccessEvent;
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.vo.TemplateVO;
 
 
     /**
@@ -156,7 +158,17 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
          */
         protected function onSpaceTemplatesSuccess(event:SuccessEvent):void
         {
-            notifyCaller(event.result, event);
+        	var templateCollection:ArrayCollection = new ArrayCollection();
+       	
+ 			for each (var templateXML:XML in event.result.template)
+ 			{
+ 				var template:TemplateVO = new TemplateVO();
+ 				template.name = templateXML.name;
+ 				template.id = templateXML.id;
+ 				templateCollection.addItem(template);
+ 			} 
+
+            notifyCaller(templateCollection, event);
         }        
         
     }

@@ -1,8 +1,7 @@
 package org.integratedsemantics.flexspaces.model.tasks
 {
-    import mx.collections.ArrayCollection;
-    import mx.collections.XMLListCollection;
-
+	import mx.collections.ArrayCollection;
+	
     
     /**
      * Model with collection of TaskItems 
@@ -12,7 +11,7 @@ package org.integratedsemantics.flexspaces.model.tasks
     [Bindable]
     public class TaskListCollection extends ArrayCollection
     {       
-        protected var taskItemCollection:ArrayCollection;
+        public var taskItemCollection:ArrayCollection;
          
         /**
          * Constructor 
@@ -30,31 +29,10 @@ package org.integratedsemantics.flexspaces.model.tasks
          */
         public function initData(data:Object):void
         {
-            var result:XML = data as XML;
+            var result:TaskListCollection = data as TaskListCollection;
             
-            var itemXMLCollection:XMLListCollection = new XMLListCollection(result.taskitem);
-            
-            this.taskItemCollection = new ArrayCollection();
-            
-            for each (var xmlItem:XML in itemXMLCollection)
-            {
-                var item:TaskItem = new TaskItem();
-                
-                item.taskId = xmlItem.taskid;
-                item.type = xmlItem.type;
-                item.description = xmlItem.description;
-
-                item.startDate = xmlItem.startdate;
-                item.dueDate = xmlItem.duedate;
-                item.dueToday = xmlItem.duetoday == "true";
-                item.overdue = xmlItem.overdue == "true";
-
-                item.priority = xmlItem.priority;
-                item.status = xmlItem.status;
-                item.percentComplete = xmlItem.percentcomplete;
-
-                taskItemCollection.addItem(item);
-            }
+			this.taskItemCollection = result.taskItemCollection;                
+            result.taskItemCollection = null;
             
             this.source = taskItemCollection.source;
             this.refresh();

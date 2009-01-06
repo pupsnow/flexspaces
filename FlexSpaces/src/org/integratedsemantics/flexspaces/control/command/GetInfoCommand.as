@@ -56,12 +56,12 @@ package org.integratedsemantics.flexspaces.control.command
             
             var model : AppModelLocator = AppModelLocator.getInstance();
 
-			if (model.isLiveCycleContentServices == false)
+			if (model.ecmServerConfig.isLiveCycleContentServices == false)
 			{
 				// first validate ticket before getting info
 	            var handlers:Callbacks = new Callbacks(onValidateTicketSuccess, onValidateTicketFault);
 	            var validateDelegate:ValidateTicketDelegate = new ValidateTicketDelegate(handlers);
-	            validateDelegate.validateTicket(model.loginTicket);
+	            validateDelegate.validateTicket(model.userInfo.loginTicket);
             }
             else
             {
@@ -108,30 +108,30 @@ package org.integratedsemantics.flexspaces.control.command
             {
                 var result:XML = event.result as XML;
                 
-                model.urlPrefix = ConfigService.instance.url;
+                model.ecmServerConfig.urlPrefix = ConfigService.instance.url;
                 
-                model.serverEdition = result.serverEdition;
-                model.serverVersion = result.serverVersion;
+                model.ecmServerConfig.serverEdition = result.serverEdition;
+                model.ecmServerConfig.serverVersion = result.serverVersion;
         
-                model.userName = result.userName;
-                model.firstName = result.firstName;
-                model.lastName = result.lastName;
+                model.userInfo.userName = result.userName;
+                model.userInfo.firstName = result.firstName;
+                model.userInfo.lastName = result.lastName;
         
-                model.companyHome = new RepoNode();
-                model.companyHome.nodeRef = result.companyHome.noderef;
-                model.companyHome.name = result.companyHome.name;
-                model.companyHome.path = result.companyHome.path;
-                model.companyHome.storeProtocol = result.companyHome.storeProtocol;
-                model.companyHome.storeId = result.companyHome.storeId;
-                model.companyHome.id = result.companyHome.id
+                model.userInfo.companyHome = new RepoNode();
+                model.userInfo.companyHome.nodeRef = result.companyHome.noderef;
+                model.userInfo.companyHome.name = result.companyHome.name;
+                model.userInfo.companyHome.path = result.companyHome.path;
+                model.userInfo.companyHome.storeProtocol = result.companyHome.storeProtocol;
+                model.userInfo.companyHome.storeId = result.companyHome.storeId;
+                model.userInfo.companyHome.id = result.companyHome.id
 
-                model.userHome = new RepoNode();               
-                model.userHome.nodeRef = result.userHome.noderef;
-                model.userHome.name = result.userHome.name;
-                model.userHome.path = result.userHome.path;
-                model.userHome.storeProtocol = result.userHome.storeProtocol;
-                model.userHome.storeId = result.userHome.storeId;
-                model.userHome.id = result.userHome.id
+                model.userInfo.userHome = new RepoNode();               
+                model.userInfo.userHome.nodeRef = result.userHome.noderef;
+                model.userInfo.userHome.name = result.userHome.name;
+                model.userInfo.userHome.path = result.userHome.path;
+                model.userInfo.userHome.storeProtocol = result.userHome.storeProtocol;
+                model.userInfo.userHome.storeId = result.userHome.storeId;
+                model.userInfo.userHome.id = result.userHome.id
                 
                 this.result(event.result);     
             }            

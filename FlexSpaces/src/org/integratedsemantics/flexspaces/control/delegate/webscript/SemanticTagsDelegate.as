@@ -2,6 +2,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 {
     import com.universalmind.cairngorm.business.Delegate;
     
+    import mx.collections.ArrayCollection;
     import mx.rpc.IResponder;
     
     import org.alfresco.framework.service.error.ErrorService;
@@ -10,6 +11,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.tree.SemanticTagTreeNode;
+    import org.integratedsemantics.flexspaces.model.tree.TreeNode;
+    import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
+    import org.integratedsemantics.flexspaces.model.vo.GetTagsVO;
+    import org.integratedsemantics.flexspaces.model.vo.TagVO;
 
 
     /**
@@ -42,7 +48,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/semantics/getSemanticTags";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetSemanticTagsSuccess);
                 
                 var params:Object = new Object();
                                
@@ -73,7 +79,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/semantics/nodeSemanticTags";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetNodeSemanticTagsSuccess);
                 
                 var params:Object = new Object();
                 
@@ -108,7 +114,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.noderef = repoNode.getNodeRef();
                 
 				var model:AppModelLocator = AppModelLocator.getInstance();                                
-                params.key = model.calaisKey;
+                params.key = model.calaisConfig.calaisKey;
                 
                 params.autoTag = "true";
                 
@@ -134,14 +140,14 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/semantics/tagSuggestList";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onSuggestTagsSuccess);
                 
                 var params:Object = new Object();
                 
                 params.noderef = repoNode.getNodeRef();
                 
 				var model:AppModelLocator = AppModelLocator.getInstance();                                
-                params.key = model.calaisKey;
+                params.key = model.calaisConfig.calaisKey;
                 
                 // using e4x instead of default object result format
                 webScript.resultFormat = "e4x";
@@ -300,7 +306,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/semantics/semanticTagTree";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onTagsDataSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetSemanticTagTreeSuccess);
                 
                 var params:Object = new Object();
                 
@@ -326,6 +332,123 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             notifyCaller(event.result, event);
         }
-        
+      
+        /**
+         * onGetNodeSemanticTagsSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onGetNodeSemanticTagsSuccess(event:SuccessEvent):void
+        {
+        	var categoryCollection:ArrayCollection = new ArrayCollection();
+        	
+ 			for each (var categoryXML:XML in event.result.tags.tag)
+ 			{
+ 				var category:CategoryVO = new CategoryVO();
+ 				category.name = categoryXML.name;
+ 				category.id = categoryXML.id;
+ 				category.nodeRef = categoryXML.noderef;
+ 				categoryCollection.addItem(category);
+ 			} 
+        	
+            notifyCaller(categoryCollection, event);
+        }
+
+        /**
+         * onGetSemanticTagsSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onGetSemanticTagsSuccess(event:SuccessEvent):void
+        {
+        	var getTagsVO:GetTagsVO = new GetTagsVO();
+        	            
+            getTagsVO.countMin = event.result.countMin;
+            getTagsVO.countMax = event.result.countMax;
+            
+            for each (var tagXML:XML in event.result.tags.tag)
+            {
+            	var tag:TagVO = new TagVO();
+            	tag.name = tagXML.name;
+            	tag.count = tagXML.count;
+            	tag.latitude = tagXML.latitude;
+            	tag.longitude = tagXML.longitude;
+                getTagsVO.tags.addItem(tag);     
+            }                       
+            
+            notifyCaller(getTagsVO, event);
+        }
+           
+        /**
+         * onGetSemanticTagTreeSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onGetSemanticTagTreeSuccess(event:SuccessEvent):void
+        {            
+            var currentNode:TreeNode = new TreeNode("", "");
+
+            currentNode.children = new ArrayCollection();
+
+            for each (var category:XML in event.result.category)
+            {
+                var childNode:TreeNode = new TreeNode(category.name, category.id);
+                childNode.nodeRef = category.noderef;
+                childNode.name = category.name;    
+                childNode.qnamePath = category.qnamePath;                
+                currentNode.children.addItem(childNode);
+            }
+            currentNode.hasBeenLoaded = true;
+        	
+            notifyCaller(currentNode, event);
+        }                          
+
+        /**
+         * onSuggestTagsSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onSuggestTagsSuccess(event:SuccessEvent):void
+        {            
+            var rootNode:SemanticTagTreeNode = new SemanticTagTreeNode("", "rootCategory");
+            rootNode.nodeRef = "rootCategory";  
+
+            for each (var category:XML in event.result.type)
+            {
+            	var typeName:String = category.@name;
+                var typeNode:SemanticTagTreeNode = new SemanticTagTreeNode(typeName, typeName);
+                typeNode.name = typeName;    
+                rootNode.children.addItem(typeNode);
+
+                for each (var tag:XML in category.tag)
+                {
+                	var tagName:String = tag.name;
+                	if (tag.normalized != "")
+                	{
+						tagName = tag.normalized;	                		
+                	}
+                    var tagNode:SemanticTagTreeNode = new SemanticTagTreeNode(tagName, tag.nameURI);
+                    
+                    tagNode.name = tag.name;    
+                    tagNode.uri = tag.nameURI;
+                    tagNode.relevance = tag.relevance;
+                    tagNode.normalizedName = tag.normalized;
+                    tagNode.latitude = tag.latitude;
+                    tagNode.longitude = tag.longitude;
+                    tagNode.website = tag.website;
+                    tagNode.ticker = tag.ticker;
+                    tagNode.semanticCategoryName = typeName;
+                    
+                    typeNode.children.addItem(tagNode);
+                }
+            }
+            
+            notifyCaller(rootNode, event);
+        }
+                      
     }
 }
+
+
+
+

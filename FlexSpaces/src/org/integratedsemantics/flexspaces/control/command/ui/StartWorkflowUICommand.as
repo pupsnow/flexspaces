@@ -5,8 +5,8 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.tasks.startworkflow.StartWorkflowPresenter;
-    import org.integratedsemantics.flexspaces.component.tasks.startworkflow.StartWorkflowView;
+    import org.integratedsemantics.flexspaces.presmodel.tasks.startworkflow.StartWorkflowPresModel;
+    import org.integratedsemantics.flexspaces.view.tasks.startworkflow.StartWorkflowView;
     import org.integratedsemantics.flexspaces.control.event.ui.StartWorkflowUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
@@ -62,7 +62,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
                 if (selectedItem.isFolder != true)
                 {
                     var startWorkflowView:StartWorkflowView = StartWorkflowView(PopUpManager.createPopUp(event.parent, StartWorkflowView, false));
-                    var startWorkflowPresenter:StartWorkflowPresenter = new StartWorkflowPresenter(startWorkflowView, selectedItem  as IRepoNode, event.onComplete);
+                    var startWorkflowPresModel:StartWorkflowPresModel = new StartWorkflowPresModel(selectedItem  as IRepoNode);
+                    startWorkflowView.startWorkflowPresModel = startWorkflowPresModel;
+                    startWorkflowView.onComplete = event.onComplete;
                 }
             }
         }

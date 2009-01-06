@@ -9,6 +9,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.SuccessEvent;
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
+    import org.integratedsemantics.flexspaces.model.vo.CheckoutVO;
 
 
     /**
@@ -70,7 +71,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             {                   
                 var url:String = ConfigService.instance.url +  "/flexspaces/checkout";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onDocActionSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCheckoutSuccess);
                 
                 var params:Object = new Object();
                 
@@ -153,6 +154,27 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         protected function onDocActionSuccess(event:SuccessEvent):void
         {
             notifyCaller(event.result, event);
+        }
+
+        /**
+         * onCheckoutSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onCheckoutSuccess(event:SuccessEvent):void
+        {
+        	var result:XML = event.result as XML;
+        	
+            var checkoutVO:CheckoutVO = new CheckoutVO();
+            
+            checkoutVO.name = result.workingCopy.name;
+            checkoutVO.nodeRef = result.workingCopy.noderef;
+            checkoutVO.storeProtocol = result.workingCopy.storeProtocol;
+            checkoutVO.storeId = result.workingCopy.storeId;
+            checkoutVO.id = result.workingCopy.id;
+            checkoutVO.viewUrl = result.workingCopy.viewurl;
+            
+            notifyCaller(checkoutVO, event);
         }
         
     }

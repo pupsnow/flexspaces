@@ -30,6 +30,7 @@ package org.integratedsemantics.flexspaces.control
         public function AppController()
         {
             super();
+            
             registerAllCommands();
         }
         

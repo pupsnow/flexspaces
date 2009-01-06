@@ -5,8 +5,8 @@ package org.integratedsemantics.flexspaces.control.command.ui
     
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.component.properties.tagscategories.TagsCategoriesPresenter;
-    import org.integratedsemantics.flexspaces.component.properties.tagscategories.TagsCategoriesView;
+    import org.integratedsemantics.flexspaces.presmodel.properties.tagscategories.TagsCategoriesPresModel;
+    import org.integratedsemantics.flexspaces.view.properties.tagscategories.TagsCategoriesView;
     import org.integratedsemantics.flexspaces.control.event.ui.TagsCategoriesUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
@@ -59,7 +59,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
             if (selectedItem != null)
             {
                 var tagsCategoriesView:TagsCategoriesView = TagsCategoriesView(PopUpManager.createPopUp(event.parent, TagsCategoriesView, false));
-                var tagsCategoriesPresenter:TagsCategoriesPresenter = new TagsCategoriesPresenter(tagsCategoriesView, selectedItem as IRepoNode, event.onComplete);                                      
+                var tagsCategoriesPresModel:TagsCategoriesPresModel = new TagsCategoriesPresModel(selectedItem as IRepoNode);
+                tagsCategoriesView.tagCategoriesPresModel = tagsCategoriesPresModel;
+                tagsCategoriesView.onComplete = event.onComplete;                                       
             }            
         }
         

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties:CategoryPropertiesViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:properties="org.integratedsemantics.flexspaces.view.categories.properties.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.categories.tree.*"
+    label="{resourceManager.getString('CategoryPropertiesView', 'title' )}" 
+    styleName="mainArea" height="100%" width="100%" creationPolicy="all" borderColor="#000000"
+    creationComplete="onCreationComplete(event)">
+    
+    <mx:Metadata>[ResourceBundle("CategoryPropertiesView")]</mx:Metadata>
+    
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <mx:FormItem label="{resourceManager.getString('CategoryPropertiesView', 'categoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" id="categoriesFormItem">
+
+        <mx:List id="categoryList" dataProvider="{categoryPropertiesPresModel.categories}" labelField="name" 
+            change="onChangeCategoryList(event)" height="92" styleName="list" width="100%"/>
+    
+        <mx:Button label="{resourceManager.getString('CategoryPropertiesView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"
+        	enabled="{categoryPropertiesPresModel.enableRemove}" visible="{categoryPropertiesPresModel.enableRemove}"/>
+
+    </mx:FormItem>    
+    
+    <mx:FormItem label="{resourceManager.getString('CategoryPropertiesView', 'allCategoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+
+        <tree:CategoryTreeView id="categoriesTreeView" categoryTreePresModel="{categoryPropertiesPresModel.categoryTreePresModel}" height="217" width="100%"/>
+    
+        <mx:Button label="{resourceManager.getString('CategoryPropertiesView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"
+            enabled="{categoryPropertiesPresModel.enableAdd}" visible="{categoryPropertiesPresModel.enableAdd}"/>
+
+    </mx:FormItem>
+        
+</properties:CategoryPropertiesViewBase>

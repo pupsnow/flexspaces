@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<playvideo:PlayVideoViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:playvideo="org.integratedsemantics.flexspaces.view.playvideo.*"
+    creationComplete="onCreationComplete(event)" verticalGap="4" borderStyle="solid" verticalAlign="middle">
+
+    <mx:Metadata>[ResourceBundle("PlayVideoView")]</mx:Metadata>
+  
+    <mx:Canvas width="100%" height="100%" horizontalScrollPolicy="off">
+        <mx:Panel title="" id="contentPanel" width="100%"  height="100%" horizontalScrollPolicy="off"> 
+            <mx:VideoDisplay id="videoDisplay" width="100%" height="100%"/>   
+        </mx:Panel> 
+    </mx:Canvas>
+
+    <mx:HBox width="100%" id="videoTabbar" color="#ffffff" backgroundColor="#777777"  height="40" borderStyle="solid" verticalAlign="middle">                         
+        <mx:HBox horizontalGap="0" verticalCenter="0">
+            <mx:Button id="playBtn" label="{resourceManager.getString('PlayVideoView', 'playBtn_label' )}" click="videoDisplay.play();"/>      
+            <mx:Spacer width="5"/>
+            <mx:Button id="pauseBtn" label="{resourceManager.getString('PlayVideoView', 'pauseBtn_label' )}" click="videoDisplay.pause();"/>      
+            <mx:Spacer width="5"/>
+            <mx:Button id="stopBtn" label="{resourceManager.getString('PlayVideoView', 'stopBtn_label' )}" click="videoDisplay.stop();"/>      
+        </mx:HBox>
+    </mx:HBox> 
+
+</playvideo:PlayVideoViewBase>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<attachments:TaskAttachmentsViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:attachments="org.integratedsemantics.flexspaces.view.tasks.attachments.*"
+    xmlns:breadcrumb="com.decoursey.components.*"
+    xmlns:gridview="org.integratedsemantics.flexspaces.view.folderview.gridview.*"
+    xmlns:iconview="org.integratedsemantics.flexspaces.view.folderview.iconview.*"
+    xmlns:coverflow="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
+    xmlns:viewmodebar="org.integratedsemantics.flexspaces.view.folderview.viewmodebar.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">
+    
+    <mx:Metadata>[ResourceBundle("FolderView")]</mx:Metadata>
+
+    <mx:Metadata>
+    [Event(name="folderListContextMenu",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewContextMenuEvent")]          
+    [Event(name="folderListOnDrop",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent")]          
+    [Event(name="folderListChangePath",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewChangePathEvent")]          
+    [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
+    [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
+    </mx:Metadata>
+
+    <mx:VBox height="100%" width="100%">
+        
+        <!-- bread crumb area and icon/grid view mode toggle buttons -->
+        <mx:HBox width="100%">
+            <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="left" id="breadCrumbAreaBox">
+            </mx:HBox>
+            <viewmodebar:ViewModeBarView id="viewModeBar" />
+        </mx:HBox>
+        
+        <!-- icon and grid views of folder  -->
+        <mx:ViewStack id="folderViewStack" width="100%" height="100%">
+        
+            <!-- folder icon view -->
+            <mx:Box height="100%" width="100%" visible="true">
+                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{taskAttachmentsPresModel}"/>
+            </mx:Box>
+
+            <!-- folder grid view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{taskAttachmentsPresModel}"/>
+            </mx:Box>
+
+            <!-- coverflow view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{taskAttachmentsPresModel}" />
+            </mx:Box>
+
+        </mx:ViewStack>
+        
+    </mx:VBox>    
+
+</attachments:TaskAttachmentsViewBase>

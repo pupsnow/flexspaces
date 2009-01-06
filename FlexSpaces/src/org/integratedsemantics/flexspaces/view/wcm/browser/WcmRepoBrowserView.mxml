@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browser:WcmRepoBrowserViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:browser="org.integratedsemantics.flexspaces.view.wcm.browser.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.wcm.tree.*"         
+    xmlns:folderview="org.integratedsemantics.flexspaces.view.wcm.folderview.*"
+    xmlns:versionlist="org.integratedsemantics.flexspaces.view.versions.versionlist.*"
+    creationComplete="onCreationComplete(event)">
+  
+    <mx:Metadata>[ResourceBundle("RepoBrowserView")]</mx:Metadata>
+    
+    <!-- repository tree -->
+    <tree:WcmTreeView id="treeView" treePresModel="{wcmRepoBrowserPresModel.wcmTreePresModel}" width="300" height="100%" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false"
+    	 visible="{wcmRepoBrowserPresModel.showTree}" includeInLayout="{wcmRepoBrowserPresModel.showTree}" />
+    
+    <mx:VDividedBox width="100%" height="100%">
+    	
+	    <!-- dual repository folder lists -->
+	    <mx:HDividedBox width="100%" height="100%" resizeToContent="true" dividerThickness="10">
+	        
+	        <!-- folder view 1 ( details or icon view) -->
+	        <folderview:WcmFolderView id="fileView1" folderViewPresModel="{wcmRepoBrowserPresModel.wcmFolderViewPresModel1}" />
+	        
+	        <!-- folder view 2 ( details or icon view) -->
+	        <folderview:WcmFolderView id="fileView2" folderViewPresModel="{wcmRepoBrowserPresModel.wcmFolderViewPresModel2}"
+	        	visible="{wcmRepoBrowserPresModel.showDualFolders}" includeInLayout="{wcmRepoBrowserPresModel.showDualFolders}"/>
+	        
+	    </mx:HDividedBox>
+
+		<versionlist:VersionListView id="versionListView" versionListPresModel="{wcmRepoBrowserPresModel.versionListPresModel}" 
+			visible="{wcmRepoBrowserPresModel.showVersionHistory}" includeInLayout="{wcmRepoBrowserPresModel.showVersionHistory}"/>
+		 
+    </mx:VDividedBox>
+    
+</browser:WcmRepoBrowserViewBase>    
+

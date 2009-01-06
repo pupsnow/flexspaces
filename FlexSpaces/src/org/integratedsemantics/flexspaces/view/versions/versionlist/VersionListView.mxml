@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gridview:VersionListViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:gridview="org.integratedsemantics.flexspaces.view.versions.versionlist.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">    
+        
+    <mx:Metadata>[ResourceBundle("VersionListView")]</mx:Metadata>
+
+    <mx:Metadata>
+    [Event(name="folderListContextMenu",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewContextMenuEvent")]          
+    [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
+    [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
+    </mx:Metadata>
+        
+    <mx:DataGrid id="versionListGrid" height="100%" width="100%" rowHeight="25" 
+        dataProvider="{versionListPresModel.nodeCollection}" styleName="DataGrid" doubleClickEnabled="true"         
+        dragEnabled="false" dropEnabled="false"  dragMoveEnabled="false" allowMultipleSelection="false">                
+
+        <mx:columns>        
+            <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
+                <mx:itemRenderer>
+                    <mx:Component>
+                        <mx:Image source="{data.icon16}" scaleContent="false"/>
+                    </mx:Component>
+                </mx:itemRenderer>
+            </mx:DataGridColumn>             
+            <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'nameColumn_headerText')}" dataField="name" width="200" id="dgcolumn0"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'versionColumn_headerText')}" dataField="versionLabel" width="100" />            
+            <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'authorColumn_headerText')}" dataField="creator" width="100" id="dgcolumn1"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'sizeColumn_headerText')}" dataField="size" width="100" id="dgcolumn2"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'createdColumn_headerText')}" dataField="created" width="100" id="dgcolumn3"/>      
+            <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'modifiedColumn_headerText')}" dataField="modified" id="dgcolumn4"/>      
+        </mx:columns>
+
+    </mx:DataGrid>  
+                  
+</gridview:VersionListViewBase>    

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<createspace:CreateSpaceViewBase xmlns:mx="http://www.adobe.com/2006/mxml"  
+    xmlns:createspace="org.integratedsemantics.flexspaces.view.createspace.*"
+    width="462" height="378" styleName="dialog" title="{resourceManager.getString('CreateSpaceView', 'title')}" showCloseButton="true">
+    
+    <mx:Metadata>[ResourceBundle("CreateSpaceView")]</mx:Metadata>
+    
+    <mx:Style source="../../framework/presmodel/dialog.css"/>
+    
+    <mx:Spacer height="10"/>
+    
+    <mx:Form width="388" styleName="mainArea" height="226">
+
+        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'spaceNameFormItem_label' )}" width="348" styleName="mainArea" id="spaceNameFormItem">      
+            <mx:TextInput id="foldername" width="250" text="{resourceManager.getString('CreateSpaceView', 'foldername_text')}" styleName="input"
+            	change="createSpacePresModel.updateFolderName(foldername.text)"/>      
+        </mx:FormItem>
+ 
+        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'titleFormItem_label' )}" width="346" styleName="mainArea" id="titleFormItem">      
+            <mx:TextInput id="nodetitle" width="250" styleName="input"
+            	change="createSpacePresModel.updateTitle(nodetitle.text)"/>                  
+        </mx:FormItem>
+
+        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'descriptionFormItem_label' )}" width="346" styleName="mainArea" id="descriptionFormItem">      
+            <mx:TextInput id="description" width="250" styleName="input"
+            	change="createSpacePresModel.updateDescription(description.text)"/>                  
+        </mx:FormItem>
+        
+        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'templateFormItem_label' )}" styleName="mainArea" id="templateFormItem">      
+            <mx:ComboBox width="250" id="templatecombo"  labelField="name" dataProvider="{createSpacePresModel.templates}" styleName="combo"
+            	change="createSpacePresModel.changeSelectedTemplate(templatecombo.selectedItem)"/>
+        </mx:FormItem>
+
+        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'iconFormItem_label' )}" styleName="mainArea" id="iconFormItem">     
+            <mx:TileList width="250" id="iconlist"  dataProvider="{createSpacePresModel.icons}" height="81" selectedIndex="0"
+            	change="createSpacePresModel.changeSelectedIcon(iconlist.selectedItem)">
+                <mx:itemRenderer>
+                    <mx:Component>
+                        <mx:Image width="32" height="32" source="{data.iconPath}"/>
+                    </mx:Component>
+                </mx:itemRenderer>            
+            </mx:TileList>
+        </mx:FormItem>
+
+    </mx:Form>
+
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="okBtn" label="{resourceManager.getString('CreateSpaceView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="{resourceManager.getString('CreateSpaceView', 'cancelBtn_label' )}"/>    
+    </mx:HBox>
+ 
+</createspace:CreateSpaceViewBase>
+

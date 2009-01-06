@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<tree:TreeViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:tree="org.integratedsemantics.flexspaces.component.tree.*">
-    
-    <mx:Metadata>[ResourceBundle("TreeView")]</mx:Metadata>
-  
-</tree:TreeViewBase>

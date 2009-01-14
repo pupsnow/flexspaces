@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<main:MainViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:main="org.integratedsemantics.sampleapp.view.main.*"
+    xmlns:flexlib="flexlib.containers.*"
+    xmlns:logout="org.integratedsemantics.flexspaces.view.logout.*" 
+    xmlns:login="org.integratedsemantics.flexspaces.view.login.*" 
+    xmlns:search="org.integratedsemantics.flexspaces.view.search.basic.*"
+    xmlns:repobrowser="org.integratedsemantics.flexspaces.view.browser.*"
+    xmlns:results="org.integratedsemantics.flexspaces.view.search.results.*"
+    xmlns:taskspanel="org.integratedsemantics.flexspaces.view.tasks.taskspanel.*"
+    creationComplete="onCreationComplete(event)" backgroundColor="#000000">
+
+    <mx:Metadata>[ResourceBundle("FlexSpacesView")]</mx:Metadata>
+
+    <mx:VBox width="100%" height="100%" id="flexspacesviews">
+                    
+        <mx:ViewStack id="viewStack" width="100%" height="100%">
+        
+            <!-- before login, getting config -->
+            <mx:VBox width="100%" height="100%"/>
+
+            <!-- login view mode -->
+            <mx:VBox width="100%" height="100%" id="loginPage" visible="false">
+                <!-- login panel -->
+                <mx:Box id="loginPanel" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+                    <login:LoginView id="loginView" loginPresModel="{sampleAppPresModel.loginPresModel}" creationComplete="onLoginViewCreated(event)"/>
+                </mx:Box>
+            </mx:VBox>
+
+            <!-- after login, getting info -->
+            <mx:VBox width="100%" height="100%"/>
+                              
+            <!-- after login, after get info, main view mode -->
+            <mx:VBox width="100%" height="100%">
+                
+                <!-- search, logout -->
+                <mx:HBox id="header" width="100%" height="40">
+                                        
+                    <!-- one box search -->   
+                    <search:SearchView id="searchView" searchPresModel="{sampleAppPresModel.searchPresModel}" height="100%" horizontalAlign="right" minWidth="330"/>      
+                    <!-- logout link  -->   
+                    <logout:LogoutView id="logoutView" logoutPresModel="{sampleAppPresModel.logoutPresModel}" height="100%" horizontalAlign="right" minWidth="100"/>
+                </mx:HBox>
+
+                    <!-- tabs -->            
+                    <flexlib:SuperTabNavigator id="tabNav" creationPolicy="all" width="100%" height="100%" backgroundColor="#FFFFFF" >
+        
+                        <!-- Company Home / Doc Libary View Mode: Repository Browser with Tree and Dual Folder Panes -->
+                        <mx:VBox id="browserTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
+                                 height="100%" width="100%" backgroundColor="#000000" creationComplete="onRepoBrowserCreated(event)">
+                            <repobrowser:RepoBrowserView repoBrowserPresModel="{sampleAppPresModel.browserPresModel}" id="browserView" height="100%" width="100%" backgroundColor="#000000"/>
+                        </mx:VBox>
+        
+                        <!-- Search View -->
+                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
+                                 id="searchTab" backgroundColor="#000000">              
+                            <results:SearchResultsView id="searchResultsView" searchResultsPresModel="{sampleAppPresModel.searchPanelPresModel.searchResultsPresModel}" height="100%" width="100%" />
+                        </mx:VBox>
+                                        
+                    </flexlib:SuperTabNavigator>  
+    
+            </mx:VBox>
+
+        </mx:ViewStack>    
+        
+    </mx:VBox>
+    
+</main:MainViewBase>

@@ -133,7 +133,7 @@ package org.integratedsemantics.flexspaces.view.main
         [Bindable]
         public var flexSpacesPresModel:FlexSpacesPresModel;
         
-        protected var searchResultsView:SearchResultsViewBase;               
+        public var searchResultsView:SearchResultsViewBase;               
         protected var advSearchView:AdvancedSearchView = null;
 
         // embedded mode when passed login ticket

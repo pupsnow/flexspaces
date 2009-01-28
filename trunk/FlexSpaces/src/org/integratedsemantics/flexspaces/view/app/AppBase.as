@@ -13,29 +13,41 @@ package org.integratedsemantics.flexspaces.view.app
 	import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
 	import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
 	import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
-        
-        
+	import org.springextensions.actionscript.context.support.XMLApplicationContext;
+	
+	        
 	public class AppBase extends Application
 	{
         protected var model:AppModelLocator = AppModelLocator.getInstance();
-	        
+            
         // make sure config service initialization is started soon so alfresco-config.xml loaded 
         // and config config complete gets called soon (before config info is needed) 
         protected var configService:ConfigService = ConfigService.instance;  
-
+        
         [Bindable]
         protected var flexSpacesPresModel:FlexSpacesPresModel;
-
-		
-		public function AppBase()
-		{
-			super();
+        
+        protected var applicationContext:XMLApplicationContext;
+        
+        [Bindable]
+        protected var applicationContextComplete:Boolean = false;
+        
+        
+        public function AppBase()
+        {
+            super();
 			
             // Register interest in the error service events
             ErrorService.instance.addEventListener(ErrorRaisedEvent.ERROR_RAISED, onErrorRaised);            
-           
-            configService.addEventListener(ConfigCompleteEvent.CONFIG_COMPLETE, onConfigComplete);	              
-		}
+            
+            // alfresco framework config           
+            configService.addEventListener(ConfigCompleteEvent.CONFIG_COMPLETE, onConfigComplete);
+            
+            // spring actionscript config
+            //applicationContext = new XMLApplicationContext("applicationContext.xml");
+            //applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
+            //applicationContext.load();            	              
+        }
 
         protected function onCreationComplete(event:Event):void
         {        	        	
@@ -106,7 +118,13 @@ package org.integratedsemantics.flexspaces.view.app
                 errorDialogView.errorDialogPresModel = errorDialogPresModel;
                 PopUpManager.addPopUp(errorDialogView, this);                                
             }
-        } 
+        }         
+        
+        protected function onApplicationContextComplete(event:Event):void
+        {
+            //trace("onApplicationContextComplete");
+            applicationContextComplete = true;  			
+        }
         		
 	}
 }

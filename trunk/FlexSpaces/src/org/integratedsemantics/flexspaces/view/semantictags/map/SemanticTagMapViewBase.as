@@ -67,7 +67,10 @@ package org.integratedsemantics.flexspaces.view.semantictags.map
          */
         public function refresh():void
         {
-            clearOverlays();
+            if (this.isLoaded())
+            {
+            	clearOverlays();
+            }
 
             var responder:Responder = new Responder(onResultGetTags, onFaultGetTags);
 

@@ -10,7 +10,6 @@ package org.integratedsemantics.flexspaces.presmodel.main
     import org.integratedsemantics.flexspaces.control.event.preview.MakePreviewEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
-    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.folder.NodeCollection;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
@@ -47,6 +46,8 @@ package org.integratedsemantics.flexspaces.presmodel.main
         public var showTasks:Boolean = true;
         public var showWCM:Boolean = true;
         public var showShare:Boolean = true;
+        
+        public var showHeader:Boolean = true;
 
         // clipboard format flag for doc/folder nodes within flexspaces (air only)
         public static const FLEXSPACES_FORMAT:String = "FLEXSPACES";

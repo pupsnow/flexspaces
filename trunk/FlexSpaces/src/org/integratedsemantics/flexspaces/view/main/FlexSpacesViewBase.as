@@ -162,6 +162,7 @@ package org.integratedsemantics.flexspaces.view.main
             if ((model.userInfo.loginTicket != null) && (model.userInfo.loginTicket.length != 0))
             {
                 embeddedMode = true;
+                flexSpacesPresModel.showHeader = false;
                 AuthenticationService.instance.ticket = model.userInfo.loginTicket;                
                 onLoginDone(new LoginDoneEvent(LoginDoneEvent.LOGIN_DONE));
             }
@@ -223,7 +224,7 @@ package org.integratedsemantics.flexspaces.view.main
             this.searchResultsView = this.searchPanel.searchResultsView;
 
             // init header section
-            if (embeddedMode == true)
+            if (flexSpacesPresModel.showHeader == false)
             {
                 this.header.visible = false;
                 this.header.includeInLayout = false;
@@ -569,10 +570,10 @@ package org.integratedsemantics.flexspaces.view.main
             { 
                 wcmBrowserView.redraw();
             }       
-            else if (tabIndex == SEARCH_TAB_INDEX) 
+            else if (tabIndex == SEARCH_TAB_INDEX)
             {
                 // todo need to keep search query around and redo search 
-                // searchPanel.searchResultsView.redraw();
+                // searchPanel.searchResultsView.redraw();                
             }
             else if (tabIndex == TASKS_TAB_INDEX) 
             {

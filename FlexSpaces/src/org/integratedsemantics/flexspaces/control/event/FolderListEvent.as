@@ -14,6 +14,9 @@ package org.integratedsemantics.flexspaces.control.event
 
         public var path:String;
         
+        public var pageSize:int;
+        public var pageNum:int;
+
         		
         /**
          * Constructor
@@ -21,13 +24,18 @@ package org.integratedsemantics.flexspaces.control.event
          * @param eventType event name
          * @param handlers handlers responder with result and fault handlers
          * @param path path of adm folder to list contents for
+         * @param pageSize num of items in each page (0 for no paging)
+         * @param pageNum  0 based page number to return
          * 
          */
-        public function FolderListEvent(eventType:String, handlers:IResponder, path:String)
+        public function FolderListEvent(eventType:String, handlers:IResponder, path:String, pageSize:int=0, pageNum:int=0)
         {
             super(eventType, handlers);
             
             this.path = path;
+            
+            this.pageSize = pageSize;
+            this.pageNum = pageNum;               
         }       
 				
 	}

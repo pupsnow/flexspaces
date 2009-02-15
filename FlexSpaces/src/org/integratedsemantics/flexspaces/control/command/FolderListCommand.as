@@ -50,7 +50,7 @@ package org.integratedsemantics.flexspaces.control.command
 		{
             var handlers:Callbacks = new Callbacks(onFolderListSuccess, onFault);
             var delegate:FolderListDelegate = new FolderListDelegate(handlers);
-            delegate.getFolderList(event.path);                  
+            delegate.getFolderList(event.path, event.pageSize, event.pageNum);                  
 		}
 		
 		/**

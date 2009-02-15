@@ -53,7 +53,7 @@ package org.integratedsemantics.flexspaces.control.command.search
 		{
             var handlers:Callbacks = new Callbacks(onSearchSuccess, onFault);
             var delegate:SearchDelegate = new SearchDelegate(handlers);
-            delegate.search(event.searchText);                  
+            delegate.search(event.searchText, event.pageSize, event.pageNum);                  
 		}
 		
 		/**
@@ -75,7 +75,7 @@ package org.integratedsemantics.flexspaces.control.command.search
         {
             var handlers:Callbacks = new Callbacks(onAdvancedSearchSuccess, onFault);
             var delegate:SearchDelegate = new SearchDelegate(handlers);
-            delegate.advancedSearch(event.searchText);                  
+            delegate.advancedSearch(event.searchText, event.pageSize, event.pageNum);                  
         }
         
         /**

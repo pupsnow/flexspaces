@@ -11,7 +11,8 @@ package org.integratedsemantics.flexspaces.model.searchresults
     [Bindable] 
     public class SearchResultsCollection extends NodeCollection
     {   
-    	public var totalResults:int;
+    	// for re-query when paging
+    	public var query:String = "";
     	    
         /**
          * Constructor
@@ -31,7 +32,10 @@ package org.integratedsemantics.flexspaces.model.searchresults
         {
             var result:SearchResultsCollection = data as SearchResultsCollection;
 
-            this.totalResults = result.totalResults;
+            this.totalSize = result.totalSize;
+            this.pageSize = result.pageSize;
+            this.pageNum = result.pageNum;
+            this.query = result.query;
 
 			this.nodeCollection = result.nodeCollection;                
             result.nodeCollection = null;   

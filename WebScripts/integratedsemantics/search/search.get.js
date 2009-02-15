@@ -12,5 +12,27 @@ else if ((args.lucenequery) && (args.lucenequery != ""))
 
 var results = search.luceneSearch(query);
 
-model.results = results;
-model.totalResults = results.length;
+model.totalSize = results.length;
+
+model.query = query;
+
+if ((args.pagesize != undefined) && (args.pagenum != undefined))
+{
+   var pageSize = parseInt(args.pagesize);
+   var pageNum = parseInt(args.pagenum);
+
+   var begin = pageNum * pageSize;
+   var end = begin + pageSize;
+   model.results = results.slice(begin, end);
+   
+   model.pageSize = pageSize;
+   model.pageNum = pageNum;
+}
+else
+{
+   model.results = results;
+   
+   model.pageSize = 0;
+   model.pageNum = 0;   
+}   
+

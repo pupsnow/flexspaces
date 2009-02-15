@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <folder>
+   <totalSize>${totalSize}</totalSize>
+   <pageSize>${pageSize}</pageSize>
+   <pageNum>${pageNum}</pageNum>
 
    <name>${node.name}</name>
 
@@ -18,7 +21,7 @@
    <createChildrenPermission>${ node.hasPermission("CreateChildren")?string("true", "false") }</createChildrenPermission>
    
 
-<#list node.children as c>
+<#list children as c>
    
    <#if c.isContainer>
        <#assign isFolder="true">
@@ -28,7 +31,7 @@
        <#assign isLocked = "false">
        <#assign isWorkingCopy = "false">
        <#assign createChildrenPermission = "${ c.hasPermission('CreateChildren')?string('true', 'false') }" >
-
+       <#assign mimetype="">
    <#else>
        <#assign isFolder="false">
        <#assign type="Document">
@@ -37,6 +40,7 @@
        <#assign isLocked = "${ c.isLocked?string('true', 'false') }" >
        <#assign isWorkingCopy = "${ c.hasAspect('cm:workingcopy')?string('true', 'false') }" >
        <#assign createChildrenPermission = "false">
+       <#assign mimetype=c.properties.content.mimetype!>       
    </#if>
 
    <node>
@@ -58,6 +62,7 @@
 
       <isFolder>${isFolder}</isFolder>
       <type>${type}</type>
+      <mimetype>${mimetype}</mimetype>
 
       <desc>${c.properties.description!}</desc>
 

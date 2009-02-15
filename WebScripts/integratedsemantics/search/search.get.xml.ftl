@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <searchResults>
-   <totalResults>${totalResults}</totalResults>
+   <totalSize>${totalSize}</totalSize>
+   <pageSize>${pageSize}</pageSize>
+   <pageNum>${pageNum}</pageNum>
+   <query>${query}</query>
 
 <#list results as node>
    <#if node.isContainer>
@@ -11,6 +14,7 @@
        <#assign isLocked = "false">
        <#assign isWorkingCopy = "false">
        <#assign createChildrenPermission = "${ node.hasPermission('CreateChildren')?string('true', 'false') }" >
+       <#assign mimetype="">
    <#else>
        <#assign isFolder="false">
        <#assign type="Document">
@@ -19,6 +23,7 @@
        <#assign isLocked = "${ node.isLocked?string('true', 'false') }" >
        <#assign isWorkingCopy = "${ node.hasAspect('cm:workingcopy')?string('true', 'false') }" >
        <#assign createChildrenPermission = "false">
+       <#assign mimetype=node.properties.content.mimetype!>
    </#if>
 
    <node>
@@ -40,6 +45,7 @@
       
       <isFolder>${isFolder}</isFolder>
       <type>${type}</type>
+      <mimetype>${mimetype}</mimetype>
       
       <desc>${node.properties.description!}</desc>
       

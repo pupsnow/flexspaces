@@ -12,6 +12,7 @@ package org.integratedsemantics.flexspaces.presmodel.main
     import org.integratedsemantics.flexspaces.control.event.preview.MakePreviewEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.folder.NodeCollection;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
@@ -507,9 +508,15 @@ package org.integratedsemantics.flexspaces.presmodel.main
         {
             if (selectedItem != null)
             {
-                var responder:Responder = new Responder(onResultAction, onFaultAction);
-                var favoritesEvent:FavoritesEvent = new FavoritesEvent(FavoritesEvent.NEW_FAVORITE, responder, selectedItem as IRepoNode);
-                favoritesEvent.dispatch();                    
+                // currently the add favorite webscript may be using javascript
+                // api added in alfresco 3.0
+                var model:AppModelLocator = AppModelLocator.getInstance();
+                if (model.ecmServerConfig.serverVersionNum() >= 3.0)
+                {
+                    var responder:Responder = new Responder(onResultAction, onFaultAction);
+                    var favoritesEvent:FavoritesEvent = new FavoritesEvent(FavoritesEvent.NEW_FAVORITE, responder, selectedItem as IRepoNode);
+                    favoritesEvent.dispatch();
+                }                    
             }
         }
         

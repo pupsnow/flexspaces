@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+   <shortname>Add new favorite</shortname>
+   <description>Add new favorite shortcut to folder/doc for current user</description>
+   <url>/flexspaces/favorites/newFavorite?nodeid={nodeId}</url>
+   <format default="xml">extension</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+</webscript>

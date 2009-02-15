@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+   <shortname>Delete favorite</shortname>
+   <description>Delete favorite shortcut to a doc/folder</description>
+   <url>/flexspaces/favorites/deleteFavorite?nodeid={nodeId}</url>
+   <format default="xml">extension</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+</webscript>

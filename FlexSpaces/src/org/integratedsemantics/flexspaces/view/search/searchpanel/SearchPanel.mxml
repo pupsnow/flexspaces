@@ -7,6 +7,7 @@
     xmlns:categories="org.integratedsemantics.flexspaces.view.categories.tree.*"   
     xmlns:search="org.integratedsemantics.flexspaces.view.search.basic.*"
     xmlns:map="org.integratedsemantics.flexspaces.view.semantictags.map.*"
+    xmlns:favorites="org.integratedsemantics.flexspaces.view.favorites.*"
     xmlns:flexlib="flexlib.containers.*"
     creationComplete="onCreationComplete(event)">
     
@@ -33,6 +34,10 @@
     
         <mx:Box label="{resourceManager.getString('SearchPanel', 'categoriesSection_label' )}" height="100%" width="100%" id="categoriesSection">      
             <categories:CategoryTreeView id="categoriesTreeView" categoryTreePresModel="{searchPanelPresModel.categoryTreePresModel}" height="100%" width="100%"/>
+        </mx:Box>
+
+        <mx:Box label="{resourceManager.getString('SearchPanel', 'favoritesSection_label' )}" height="100%" width="100%" id="favoritesSection">      
+            <favorites:FavoritesView id="favoritesView" favoritesPresModel="{searchPanelPresModel.favoritesPresModel}" height="100%" width="100%"/>
         </mx:Box>
 
     </mx:Accordion>

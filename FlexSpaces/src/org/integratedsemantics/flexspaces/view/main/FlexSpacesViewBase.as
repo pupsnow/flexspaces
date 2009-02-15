@@ -32,6 +32,7 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.vo.CheckoutVO;
+    import org.integratedsemantics.flexspaces.presmodel.favorites.FavoritesPresModel;
     import org.integratedsemantics.flexspaces.presmodel.folderview.FolderViewPresModel;
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
     import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
@@ -42,6 +43,7 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.presmodel.versions.versionlist.VersionListPresModel;
     import org.integratedsemantics.flexspaces.view.browser.RepoBrowserChangePathEvent;
     import org.integratedsemantics.flexspaces.view.browser.RepoBrowserViewBase;
+    import org.integratedsemantics.flexspaces.view.favorites.FavoritesView;
     import org.integratedsemantics.flexspaces.view.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent;
@@ -138,8 +140,8 @@ package org.integratedsemantics.flexspaces.view.main
 
         // embedded mode when passed login ticket
         protected var embeddedMode:Boolean = false;
-
-                  
+      
+                          
         /**
          * Constructor 
          * 
@@ -210,7 +212,7 @@ package org.integratedsemantics.flexspaces.view.main
         public function onGetInfoDone(info:Object):void
         {
             // Switch from get info to (main view in view stack 
-            viewStack.selectedIndex = MAIN_VIEW_MODE_INDEX;         
+            viewStack.selectedIndex = MAIN_VIEW_MODE_INDEX;                 
         }
                 
         /**
@@ -279,6 +281,7 @@ package org.integratedsemantics.flexspaces.view.main
                 browserView.setDoubleClickDocHandler(onDoubleClickDoc);
                 browserView.setClickNodeHandler(onClickNode);                                    
                 browserView.addEventListener(RepoBrowserChangePathEvent.REPO_BROWSER_CHANGE_PATH, onBrowserChangePath);
+                browserView.initPaging();                
             }
             
             // init wcm view
@@ -301,6 +304,17 @@ package org.integratedsemantics.flexspaces.view.main
                 var searchView2:SearchViewBase = searchPanel.searchView2;
                 searchView2.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
                 searchView2.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
+                
+                // favorites
+                searchPanel.favoritesView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
+                searchPanel.favoritesView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
+                searchPanel.favoritesView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);     
+                searchPanel.favoritesView.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, onFavoritesOnDrop);                      
+                // get initial display of favorites
+                if (searchPanel.searchPanelPresModel.favoritesPresModel != null)
+                {
+                    searchPanel.searchPanelPresModel.favoritesPresModel.redraw();
+                }                                                             
             }
 
             // init wcm view
@@ -354,7 +368,7 @@ package org.integratedsemantics.flexspaces.view.main
                 tabIndex = WCM_TAB_INDEX;
             }            
             tabNav.invalidateDisplayList();
-            tabNav.selectedIndex = tabIndex;            
+            tabNav.selectedIndex = tabIndex;                          
         }
                 
         /**
@@ -572,13 +586,12 @@ package org.integratedsemantics.flexspaces.view.main
             }       
             else if (tabIndex == SEARCH_TAB_INDEX)
             {
-                // todo need to keep search query around and redo search 
-                // searchPanel.searchResultsView.redraw();                
+                searchPanel.redraw();
             }
             else if (tabIndex == TASKS_TAB_INDEX) 
             {
                 tasksPanelView.taskAttachmentsView.redraw();
-            }
+            }            
         }
 
         /**
@@ -1089,6 +1102,12 @@ package org.integratedsemantics.flexspaces.view.main
                 case 'suggestTags':
                     suggestTags(selectedItem);
                     break;                    
+                case 'addfavorite':
+                    flexSpacesPresModel.newFavorite(selectedItem);
+                    break;
+                case 'deletefavorite':
+                    flexSpacesPresModel.deleteFavorite(selectedItem);
+                    break;
                 default:
                     break;
             }   
@@ -1119,7 +1138,7 @@ package org.integratedsemantics.flexspaces.view.main
          */         
         protected function onFolderViewOnDrop(event:FolderViewOnDropEvent):void
         {
-            var targetFolderList:FolderViewBase = event.targetFolderList;
+            var targetFolderList:FolderViewBase = event.targetFolderList as FolderViewBase;
             var source:Array = event.dragSource.dataForFormat("items");
             onDropItems(targetFolderList.folderViewPresModel, event.dragAction, source);
         }
@@ -1650,7 +1669,24 @@ package org.integratedsemantics.flexspaces.view.main
         protected function onTagsBtn(event:MouseEvent):void
         {
             flexSpacesPresModel.tags(flexSpacesPresModel.selectedItem, this);
-        }               
+        }     
+        
+        /**
+         *  DragDrop event handler for favorites as the drop target
+         * 
+         * @event folder view on drop event
+         */         
+        protected function onFavoritesOnDrop(event:FolderViewOnDropEvent):void
+        {
+            var items:Array = event.dragSource.dataForFormat("items");
+            for each (var item:Object in items)
+            {
+                if (item is IRepoNode)
+                {
+                    flexSpacesPresModel.newFavorite(item);
+                }
+            }
+        }                   
 
     }
 }

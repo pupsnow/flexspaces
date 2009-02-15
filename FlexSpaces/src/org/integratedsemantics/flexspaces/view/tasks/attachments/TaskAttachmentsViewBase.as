@@ -65,7 +65,14 @@ package org.integratedsemantics.flexspaces.view.tasks.attachments
         public function redraw():void
         {
         	taskAttachmentsPresModel.setTask(taskAttachmentsPresModel.taskItem);	
-        }      
+        }    
+        
+        protected function onPageSizeChange(event:Event):void
+        {
+            taskAttachmentsPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize = event.target.value;            
+            pageBar.curPageIndex = 0;
+        }
+          
 		
 	}
 }

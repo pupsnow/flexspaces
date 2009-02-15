@@ -4,6 +4,7 @@ package org.integratedsemantics.flexspaces.view.folderview
     
     import flash.events.Event;
     
+    import mx.binding.utils.ChangeWatcher;
     import mx.events.DragEvent;
     import mx.managers.DragManager;
     
@@ -12,6 +13,7 @@ package org.integratedsemantics.flexspaces.view.folderview
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewChangePathEvent;
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    import org.integratedsemantics.flexspaces.view.wcm.folderview.WcmFolderViewBase;
 
 
     /**
@@ -64,9 +66,15 @@ package org.integratedsemantics.flexspaces.view.folderview
             if (folderViewPresModel.serverVersionNum >= 3.0)
             {
                 coverFlowView.coverFlowDataGrid.addEventListener(DragEvent.DRAG_DROP, doDragDropCoverFlowDataGrid);
-            }
+            }               
         }
 
+        public function initPaging():void
+        {
+            ChangeWatcher.watch(pageBar, "curPageIndex", onPageChange);            
+            pager.clientSidePage = false;             
+        }
+        
         /**
          * Initialize context menus 
          * 
@@ -99,9 +107,7 @@ package org.integratedsemantics.flexspaces.view.folderview
             {            	
                 folderViewPresModel.currentPath = newPath;
            
-                folderGridView.pager.pageIndex = 0;    
-                folderIconView.pager.pageIndex = 0;
-                coverFlowView.pager.pageIndex = 0;                          
+                pager.pageIndex = 0;    
             }
         }
 
@@ -218,6 +224,21 @@ package org.integratedsemantics.flexspaces.view.folderview
             var e:FolderViewOnDropEvent = new FolderViewOnDropEvent(FolderViewOnDropEvent.FOLDERLIST_ONDROP, action,
                                                                     event.dragSource, this);
             var dispatched:Boolean = dispatchEvent(e);            
+        }
+        
+        override protected function requery():void
+        {
+            var pageSize:int = folderViewPresModel.model.flexSpacesPresModel.docLibPageSize;
+            var pageNum:int = pageBar.curPageIndex;
+            folderViewPresModel.requery(pageSize, pageNum);                
+        }
+
+        protected function onPageSizeChange(event:Event):void
+        {
+            folderViewPresModel.model.flexSpacesPresModel.docLibPageSize = event.target.value;
+            
+            pageBar.curPageIndex = 0;
+            requery();
         }
         
     }

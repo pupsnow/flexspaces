@@ -4,7 +4,7 @@ package org.integratedsemantics.flexspaces.view.folderview.event
 	
 	import mx.core.DragSource;
 	
-	import org.integratedsemantics.flexspaces.view.folderview.FolderViewBase;
+	import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
 
 	/**
 	 * Folder List OnDrop complete event object
@@ -21,7 +21,7 @@ package org.integratedsemantics.flexspaces.view.folderview.event
 		private var dragsource:DragSource;
 	
 		/** drag target folder list */
-		private var targetfolderlist:FolderViewBase;
+		private var targetfolderlist:NodeListViewBase;
 		
 		/**
 		 * Constructor
@@ -32,7 +32,7 @@ package org.integratedsemantics.flexspaces.view.folderview.event
 		 * @param targetFolderList folder list target of drop
 		 * 
 		 */
-		public function FolderViewOnDropEvent(type:String, action:String, dragSource:DragSource, targetFolderList:FolderViewBase)
+		public function FolderViewOnDropEvent(type:String, action:String, dragSource:DragSource, targetFolderList:NodeListViewBase)
 		{
 			super(type);
 			
@@ -60,7 +60,7 @@ package org.integratedsemantics.flexspaces.view.folderview.event
         /**
          * Getter for the target folder list
          */
-        public function get targetFolderList():FolderViewBase
+        public function get targetFolderList():NodeListViewBase
         {
             return this.targetfolderlist;
         }

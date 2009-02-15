@@ -19,7 +19,9 @@ package org.integratedsemantics.flexspaces.view.folderview.paging
 		private var _pager:Pager;		
 		
 		private var _totalPages:Number = 1;
-		private var curPageIndex:int = 0;  
+		
+		[Bindable]
+		public var curPageIndex:int = 0;  
 
         // button selection status
 		private var firstDisplayed:int = 0;

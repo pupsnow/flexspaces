@@ -7,6 +7,7 @@ package org.integratedsemantics.flexspaces.view.folderview
     import mx.containers.Canvas;
     import mx.containers.HBox;
     import mx.containers.ViewStack;
+    import mx.controls.ComboBox;
     import mx.controls.ToggleButtonBar;
     import mx.events.IndexChangedEvent;
     import mx.events.ItemClickEvent;
@@ -21,6 +22,8 @@ package org.integratedsemantics.flexspaces.view.folderview
     import org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent;
     import org.integratedsemantics.flexspaces.view.folderview.gridview.FolderGridViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.iconview.FolderIconViewBase;
+    import org.integratedsemantics.flexspaces.view.folderview.paging.Pager;
+    import org.integratedsemantics.flexspaces.view.folderview.paging.PagerBar;
     import org.integratedsemantics.flexspaces.view.folderview.viewmodebar.ViewModeBarViewBase;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
 
@@ -49,8 +52,12 @@ package org.integratedsemantics.flexspaces.view.folderview
 
         [Bindable]
         public var nodeListViewPresModel:NodeListViewPresModel;
-                
         
+        [Bindable] public var pager:Pager;
+        public var pageBar:PagerBar;
+        public var pageSizeCombo:ComboBox;        
+        
+                  
         /**
          * Constructor 
          * 
@@ -93,7 +100,7 @@ package org.integratedsemantics.flexspaces.view.folderview
                 //  remove coverflow view mode button (no 3.0 thumbnails service)
                 var viewModes:ToggleButtonBar = viewModeBar.toggleButtonBar;              
                 viewModes.dataProvider.removeItemAt(2);
-            }                                                                                                  
+            }             
         }
         
         /**
@@ -306,15 +313,21 @@ package org.integratedsemantics.flexspaces.view.folderview
                 folderIconView.showThumbnails = nodeListViewPresModel.showThumbnails;
 
                 var rowHeight:int;
+                var columnWidth:int;
                 if (nodeListViewPresModel.showThumbnails == true)
                 {
                     rowHeight = 125;
+                    columnWidth = 125;
+                    //rowHeight = 175;
+                    //columnWidth = 200;                    
                 }
                 else
                 {
                     rowHeight = 85;
+                    columnWidth = 125;
                 }
                 folderIconView.folderTileList.rowHeight = rowHeight;
+                folderIconView.folderTileList.columnWidth = columnWidth;
                 
                 // set showThumbnail flags on nodes
                 for each (var node:Node in nodeListViewPresModel.nodeCollection)
@@ -322,7 +335,17 @@ package org.integratedsemantics.flexspaces.view.folderview
                     node.showThumbnail = nodeListViewPresModel.showThumbnails;
                 }
             }
-        }        
+        }  
+
+        protected function onPageChange(event:Event):void
+        {
+            requery();     
+        }
+
+        protected function requery():void
+        {
+            // placeholder for override
+        }     
         
     }
 }

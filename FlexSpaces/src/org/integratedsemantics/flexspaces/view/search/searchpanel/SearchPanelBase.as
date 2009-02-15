@@ -7,6 +7,7 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
     import org.integratedsemantics.flexspaces.presmodel.search.searchpanel.SearchPanelPresModel;
     import org.integratedsemantics.flexspaces.view.categories.tree.CategoryTreeViewBase;
+    import org.integratedsemantics.flexspaces.view.favorites.FavoritesViewBase;
     import org.integratedsemantics.flexspaces.view.search.basic.SearchViewBase;
     import org.integratedsemantics.flexspaces.view.search.event.SearchResultsEvent;
     import org.integratedsemantics.flexspaces.view.search.results.SearchResultsViewBase;
@@ -31,6 +32,8 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
 
         public var searchResultsView:SearchResultsViewBase;
         
+        public var favoritesView:FavoritesViewBase;
+
         [Bindable]
         public var searchPanelPresModel:SearchPanelPresModel;
         
@@ -56,7 +59,7 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
             var version:Number = searchPanelPresModel.model.ecmServerConfig.serverVersionNum();
             
             // only setup tag cloud if 2.9 or greater since tagging content model added in 2.9
-            if (version >= 2.9)
+            if ((version >= 2.9) && (tagCloudView != null))
             {
                 tagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
             }
@@ -153,7 +156,17 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
         public function clearOtherSelections(selectedFolderList:PresModel):void
         {
             searchResultsView.clearOtherSelections(selectedFolderList);
-        }            
-                
+        }   
+        
+        public function redraw():void
+        {
+            // todo need to have search results redraw only if use rename 
+            // searchResultsView.requery();    
+            
+            if (favoritesView.favoritesPresModel != null)
+            {
+                favoritesView.favoritesPresModel.redraw();
+            }                     
+        }        
     }
 }

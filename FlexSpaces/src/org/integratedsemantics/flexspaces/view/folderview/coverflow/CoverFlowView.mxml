@@ -2,19 +2,15 @@
 <coverflowview:CoverFlowViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:coverflowview="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
     xmlns:coverflow="com.dougmccune.containers.*"
-    xmlns:paging="org.integratedsemantics.flexspaces.view.folderview.paging.*"
-    height="100%" width="100%">    
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">    
     
-    <paging:Pager id="pager" pageIndex="0" pageSize="{pageSize}" totalPages="{Math.max(Math.ceil(nodeListViewPresModel.nodeCollection.length/pageSize),1)}" 
-    	dataProvider="{nodeListViewPresModel.nodeCollection}" />  
-
     <mx:Metadata>[ResourceBundle("CoverFlowView")]</mx:Metadata>
     
     <mx:VDividedBox width="100%" height="100%">
     
         <coverflow:CoverFlowContainer id="coverFlowContainer" backgroundColor="0x000000" width="100%" height="40%"
                                       horizontalGap="40" borderStyle="inset" segments="6" reflectionEnabled="false">       
-            <mx:Repeater id="coverFlowRepeater" dataProvider="{pager.pageData}">
+            <mx:Repeater id="coverFlowRepeater" dataProvider="{dataProvider}">
                 <mx:VBox width="200" height="175" verticalAlign="middle" horizontalAlign="center" backgroundColor="0xffffff" horizontalScrollPolicy="off" verticalScrollPolicy="off">                    
                     <mx:HBox verticalAlign="middle" horizontalAlign="center" height="100%" width="100%">
                         <mx:Image source="@Embed('images/icons/locked.gif')"  visible="{coverFlowRepeater.currentItem.isLocked}" includeInLayout="{coverFlowRepeater.currentItem.isLocked}"/>
@@ -25,8 +21,8 @@
             </mx:Repeater>
         </coverflow:CoverFlowContainer>    
             
-        <mx:DataGrid id="coverFlowDataGrid" height="60%" width="100%" rowHeight="25" headerRelease="pager.sortColumn(event.dataField);event.preventDefault()"
-            dataProvider="{pager.pageData}" styleName="DataGrid" doubleClickEnabled="true"         
+        <mx:DataGrid id="coverFlowDataGrid" height="60%" width="100%" rowHeight="25"
+            dataProvider="{dataProvider}" styleName="DataGrid" doubleClickEnabled="true"         
             dragEnabled="true" dropEnabled="true"  dragMoveEnabled="true" allowMultipleSelection="true"             
             change="onChange(event)">
             <mx:columns>        
@@ -46,17 +42,4 @@
         </mx:DataGrid>  
       
     </mx:VDividedBox>
-
-    <mx:HBox horizontalAlign="center" width="100%">
-        <mx:Label text="{resourceManager.getString('CoverFlowView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('CoverFlowView', 'pagenumLabel_of')} {pager.totalPages}" 
-                  color="0xFFFFFF" id="pagenumLabel"/>    
-        <mx:Spacer width="4"/>    
-        <paging:PagerBar id="pageBar"  pager="{pager}" totalPages="{pager.totalPages}"
-                         maxVisiblePages="10" buttonWidth="45" buttonMode="true"/>
-        <mx:Spacer width="4"/>                
-        <mx:Label text="{resourceManager.getString('CoverFlowView', 'itemsPerPageLabel_text')}" color="0xFFFFFF" id="itemsPerPageLabel"/>
-        <mx:Spacer width="4"/>                
-        <mx:NumericStepper value="{this.pageSize}" change="this.pageSize = event.target.value" maximum="100" minimum="1" />
-    </mx:HBox>
-
 </coverflowview:CoverFlowViewBase>    

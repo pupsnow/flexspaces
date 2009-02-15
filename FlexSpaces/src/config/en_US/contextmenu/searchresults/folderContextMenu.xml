@@ -7,6 +7,8 @@
      <menuitem label="Properties" data="properties"/>
      <menuitem label="Tags / Categories" data="tags"/>
      
-    <menuitem label="Open Containing Folder" data="gotoParent" seperatorBefore="true" />
+     <menuitem label="Open Containing Folder" data="gotoParent" seperatorBefore="true" />
+
+	 <menuitem label="Add Favorite" data="addfavorite" />     
          
 </contextmenu>    

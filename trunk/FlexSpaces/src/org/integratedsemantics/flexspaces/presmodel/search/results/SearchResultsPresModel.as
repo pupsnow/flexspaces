@@ -1,6 +1,9 @@
  
 package org.integratedsemantics.flexspaces.presmodel.search.results
 {
+    import mx.rpc.Responder;
+    
+    import org.integratedsemantics.flexspaces.control.event.SearchEvent;
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.searchresults.SearchResultsCollection;
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
@@ -47,14 +50,24 @@ package org.integratedsemantics.flexspaces.presmodel.search.results
 		    
             // update result count readout
             // todo i18n
-            resultsCountLabel = resultsCollection.totalResults + " results";		
+            resultsCountLabel = resultsCollection.totalSize + " results";		
             
             // set showThumbnail flags on nodes
             for each (var node:Node in nodeCollection)
             {
                 node.showThumbnail = showThumbnails;
             }                                
-		}		
+		}
+		
+		public function requery(responder:Responder, pageSize:int, pageNum:int):void
+		{
+		    var resultsCollection:SearchResultsCollection = this.nodeCollection as SearchResultsCollection; 
+            if (resultsCollection.query != "")
+            {
+                var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, resultsCollection.query, pageSize, pageNum);
+                searchEvent.dispatch();
+            }
+		}		    		
 		
      }
 }

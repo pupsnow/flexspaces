@@ -2,9 +2,11 @@ package org.integratedsemantics.flexspaces.presmodel.main
 {
     import flash.display.DisplayObject;
     
+    import mx.collections.ArrayCollection;
     import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.control.event.CheckinEvent;
+    import org.integratedsemantics.flexspaces.control.event.FavoritesEvent;
     import org.integratedsemantics.flexspaces.control.event.MakePdfEvent;
     import org.integratedsemantics.flexspaces.control.event.SemanticTagsEvent;
     import org.integratedsemantics.flexspaces.control.event.preview.MakePreviewEvent;
@@ -58,11 +60,11 @@ package org.integratedsemantics.flexspaces.presmodel.main
         public var wcmCutCopy:Boolean = false;
 
         // subview presenation models 
-        public var browserPresModel:RepoBrowserPresModel = new RepoBrowserPresModel(); 
-        public var searchPanelPresModel:SearchPanelPresModel = new SearchPanelPresModel();
-        public var tasksPanelPresModel:TasksPanelPresModel = new TasksPanelPresModel();               
-        public var wcmBrowserPresModel:WcmRepoBrowserPresModel = new WcmRepoBrowserPresModel();  
-        public var advSearchPresModel:AdvancedSearchPresModel = new AdvancedSearchPresModel();
+        public var browserPresModel:RepoBrowserPresModel; 
+        public var searchPanelPresModel:SearchPanelPresModel;
+        public var tasksPanelPresModel:TasksPanelPresModel;               
+        public var wcmBrowserPresModel:WcmRepoBrowserPresModel;  
+        public var advSearchPresModel:AdvancedSearchPresModel;
         
         public var loginPresModel:LoginPresModel = new LoginPresModel();
         public var searchPresModel:SearchPresModel = new SearchPresModel();
@@ -71,7 +73,16 @@ package org.integratedsemantics.flexspaces.presmodel.main
         // update / redraw function;
         public var updateFunction:Function;
         
-     
+        // page sizes for views
+        public var docLibPageSize:int = 10;
+        public var wcmPageSize:int = 10;
+        public var searchPageSize:int = 10;
+        public var taskAttachmentsPageSize:int = 10;
+        public var versionsPageSize:int = 10;
+        public var favoritesPageSize:int = 10;
+        // list of pages sizes, todo make configurable
+        public var pageSizeList:ArrayCollection = new ArrayCollection(new Array("10", "20", "30", "40", "50"));
+        
         /**
          * Constructor
          *  
@@ -81,7 +92,17 @@ package org.integratedsemantics.flexspaces.presmodel.main
         public function FlexSpacesPresModel()
         {
         	super();
+        	setupSubPresModels();
         }   
+        
+        protected function setupSubPresModels():void
+        {
+            browserPresModel = new RepoBrowserPresModel(); 
+            searchPanelPresModel = new SearchPanelPresModel();
+            tasksPanelPresModel = new TasksPanelPresModel();               
+            wcmBrowserPresModel = new WcmRepoBrowserPresModel();  
+            advSearchPresModel = new AdvancedSearchPresModel();
+        }
         
         public function clearSelection():void
         {
@@ -473,6 +494,40 @@ package org.integratedsemantics.flexspaces.presmodel.main
                     }
                 }                   
             }            
+        }
+        
+        /**
+         * Add favorite/shortcut for the current user for the selected node
+         *  
+         * @param selectedItem selected node
+         * 
+         * 
+         */
+        public function newFavorite(selectedItem:Object):void
+        {
+            if (selectedItem != null)
+            {
+                var responder:Responder = new Responder(onResultAction, onFaultAction);
+                var favoritesEvent:FavoritesEvent = new FavoritesEvent(FavoritesEvent.NEW_FAVORITE, responder, selectedItem as IRepoNode);
+                favoritesEvent.dispatch();                    
+            }
+        }
+        
+        /**
+         * Delete favorite/shortcut for current user for the selected node
+         *  
+         * @param selectedItem selected node
+         * 
+         * 
+         */
+        public function deleteFavorite(selectedItem:Object):void
+        {
+            if (selectedItem != null)
+            {
+                var responder:Responder = new Responder(onResultAction, onFaultAction);
+                var favoritesEvent:FavoritesEvent = new FavoritesEvent(FavoritesEvent.DELETE_FAVORITE, responder, selectedItem as IRepoNode);
+                favoritesEvent.dispatch();                    
+            }
         }
                 
     }

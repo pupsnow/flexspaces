@@ -7,6 +7,7 @@ package org.integratedsemantics.flexspaces.presmodel.search.advanced
     import org.integratedsemantics.flexspaces.control.command.search.QueryBuilder;
     import org.integratedsemantics.flexspaces.control.event.SearchEvent;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.RepoNode;
     import org.integratedsemantics.flexspaces.model.repo.RepoQName;
     import org.integratedsemantics.flexspaces.model.tree.TreeNode;
@@ -224,7 +225,10 @@ package org.integratedsemantics.flexspaces.presmodel.search.advanced
 
             var query:String = queryBuilder.buildQuery(3);
                         
-            var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query);
+            var model:AppModelLocator = AppModelLocator.getInstance();
+            var pageSize:int = model.flexSpacesPresModel.searchPageSize;
+                        
+            var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query, pageSize, 0);
             searchEvent.dispatch();                                 
         }
          

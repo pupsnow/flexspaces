@@ -3,6 +3,7 @@ package org.integratedsemantics.flexspaces.presmodel.search.searchpanel
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.presmodel.categories.tree.CategoryTreePresModel;
+    import org.integratedsemantics.flexspaces.presmodel.favorites.FavoritesPresModel;
     import org.integratedsemantics.flexspaces.presmodel.search.basic.SearchPresModel;
     import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
     import org.integratedsemantics.flexspaces.presmodel.semantictags.map.SemanticTagMapPresModel;
@@ -32,7 +33,9 @@ package org.integratedsemantics.flexspaces.presmodel.search.searchpanel
 
         public var model:AppModelLocator = AppModelLocator.getInstance();
 
-        
+        public var favoritesPresModel:FavoritesPresModel;                         
+
+                
         public function SearchPanelPresModel()
         {
             super();
@@ -81,7 +84,14 @@ package org.integratedsemantics.flexspaces.presmodel.search.searchpanel
 	                mapPresModel = new SemanticTagMapPresModel();                              
 	                mapPresModel.doSearchOnClick = true;
                 } 
-            }                                                    
+            } 
+            
+            // currently one of the webscripts for favorites may be using javascript
+            // api added in alfresco 3.0
+            if (version >= 3.0)
+            {
+                favoritesPresModel = new FavoritesPresModel();
+            }                                                                           
         }
         
         /**

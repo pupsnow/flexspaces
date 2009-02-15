@@ -37,7 +37,8 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
         override public function initModel():void
         {
             this.nodeCollection = new Folder();
-            this.currentPath = "/";
+            //this.currentPath = "/";
+            this.currentPath = model.userInfo.userHome.path;                
         }
         
 
@@ -55,13 +56,22 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
                 var folder:Folder = this.nodeCollection as Folder;
                 folder.currentPath = newPath; 
                 this.breadCrumbPath = newPath;
+
+	            var pageSize:int = model.flexSpacesPresModel.docLibPageSize;
                 
                 var responder:Responder = new Responder(onResultGetFolderList, onFaultGetFolderList);
-                var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, responder, newPath);
+                var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, responder, newPath, pageSize, 0);
                 folderListEvent.dispatch();                  
             }
         }
         
+		public function requery(pageSize:int, pageNum:int):void
+		{
+            var responder:Responder = new Responder(onResultGetFolderList, onFaultGetFolderList);
+            var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, responder, curPath, pageSize, pageNum);
+            folderListEvent.dispatch();                  
+		}		    		
+
         /**
          * Getter for current folder path
          * 

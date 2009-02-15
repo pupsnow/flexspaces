@@ -66,6 +66,10 @@ package org.integratedsemantics.flexspaces.control
             addCommand(FolderEvent.SPACE_TEMPLATES, FolderCommand);            
             addCommand(FolderEvent.CREATE_AVM_FOLDER, FolderCommand);            
 
+            addCommand(FavoritesEvent.LIST_FAVORITES, FavoritesCommand);            
+            addCommand(FavoritesEvent.NEW_FAVORITE, FavoritesCommand);            
+            addCommand(FavoritesEvent.DELETE_FAVORITE, FavoritesCommand);            
+
             addCommand(FolderListEvent.FOLDER_LIST, FolderListCommand);            
 
             addCommand(GetInfoEvent.GET_INFO, GetInfoCommand);

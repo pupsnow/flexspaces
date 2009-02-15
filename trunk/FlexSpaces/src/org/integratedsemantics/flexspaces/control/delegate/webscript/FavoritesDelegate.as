@@ -11,15 +11,16 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import org.alfresco.framework.service.webscript.SuccessEvent;
     import org.alfresco.framework.service.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
+    import org.integratedsemantics.flexspaces.model.favorites.FavoritesCollection;
     import org.integratedsemantics.flexspaces.model.folder.Node;
-    import org.integratedsemantics.flexspaces.model.searchresults.SearchResultsCollection;
+    import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
 
 
     /**
-     * Provides basic and advanced search query support via web scripts 
+     * Provides favorites/shortcuts operations via web scripts 
      * 
      */
-    public class SearchDelegate extends Delegate
+    public class FavoritesDelegate extends Delegate
     {
         /**
          * Constructor
@@ -28,71 +29,24 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
          * @param serviceName  service name
          * 
          */
-        public function SearchDelegate(commandHandlers:IResponder=null, serviceName:String="")
+        public function FavoritesDelegate(commandHandlers:IResponder=null, serviceName:String="")
         {
             super(commandHandlers, serviceName);
         }
 
         /**
-         * Searches adm with simple text query
+         * Gets list of favorites
          * 
-         * @param searchText word or phase to search for
-         * @param pageSize num of items in each page (0 for no paging)
-         * @param pageNum  0 based page number to return
          */
-        public function search(searchText:String, pageSize:int=0, pageNum:int=0):void
-        {
-            try
-            {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/search";
-                
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onSearchSuccess);
-                
-                var params:Object = new Object();
-                
-                params.text = searchText;
-                
-                if (pageSize != 0)
-                {
-                    params.pagesize = pageSize;
-                    params.pagenum = pageNum;
-                }
-
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-
-                webScript.execute(params);
-            }
-            catch (error:Error)
-            {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
-            }
-        }
-        
-        /**
-         * Perform advanced adm search with alfresco lucene format query
-         * 
-         * @param luceneQuery  alfresco lucene format query
-         * @param pageSize num of items in each page (0 for no paging)
-         * @param pageNum  0 based page number to return
-         */
-        public function advancedSearch(luceneQuery:String, pageSize:int=0, pageNum:int=0):void
+        public function getFavoritesList():void
         {
             try
             {                
-                var url:String = ConfigService.instance.url +  "/flexspaces/search";
+                var url:String = ConfigService.instance.url +  "/flexspaces/favorites/favoritesList";
                 
-                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onSearchSuccess);
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onFavoritesListSuccess);
                 
                 var params:Object = new Object();
-
-                params.lucenequery = luceneQuery;
-
-                if (pageSize != 0)
-                {
-                    params.pagesize = pageSize;
-                    params.pagenum = pageNum;
-                }
                 
                 // using e4x result format not default object format
                 webScript.resultFormat ="e4x";
@@ -106,26 +60,21 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         }
         
         /**
-         * onSearchSuccess event handler
+         * onFavoritesListSuccess event handler
          * 
          * @param event success event
          */
-        protected function onSearchSuccess(event:SuccessEvent):void
+        protected function onFavoritesListSuccess(event:SuccessEvent):void
         {
             var xmlData:XML = event.result as XML;
             
             var model:AppModelLocator = AppModelLocator.getInstance();            
             
-            var searchResultsCollection:SearchResultsCollection = new SearchResultsCollection();
-            
-            searchResultsCollection.totalSize = xmlData.totalSize;
-            searchResultsCollection.pageSize = xmlData.pageSize;
-            searchResultsCollection.pageNum = xmlData.pageNum;            
-            searchResultsCollection.query = xmlData.query;            
-            
+            var favoritesCollection:FavoritesCollection = new FavoritesCollection();
+                        
             var nodeXMLCollection:XMLListCollection = new XMLListCollection(xmlData.node);
             
-            searchResultsCollection.nodeCollection = new ArrayCollection();
+            favoritesCollection.nodeCollection = new ArrayCollection();
             
             for each (var xmlNode:XML in nodeXMLCollection)
             {
@@ -177,14 +126,90 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 }
                 else
                 {
-                    node.thumbnailUrl = searchResultsCollection.getThumbnailUrl(node);    
+                    node.thumbnailUrl = favoritesCollection.getThumbnailUrl(node);    
                 }
 
-                searchResultsCollection.nodeCollection.addItem(node);
+                favoritesCollection.nodeCollection.addItem(node);
             }
         	
-            notifyCaller(searchResultsCollection, event);
+            notifyCaller(favoritesCollection, event);
         }
+        
+        /**
+         * Add new favorite / shortcut for node for current user
+         * 
+         * @param repoNode node to add favorite for
+         */
+        public function newFavorite(repoNode:IRepoNode):void
+        {
+            try
+            {                   
+                var url:String = ConfigService.instance.url +  "/flexspaces/favorites/newFavorite";
+                
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.PUT, onAddActionSuccess);
+                
+                var params:Object = new Object();
+                                
+                params.nodeid = repoNode.getId();
+
+                // using e4x result format not default object format
+                webScript.resultFormat ="e4x";
+                
+                webScript.execute(params);
+            }
+            catch (error:Error)
+            {
+                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+            }
+        }
+
+        /**
+         * onAddActionSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onAddActionSuccess(event:SuccessEvent):void
+        {
+            notifyCaller(event.result, event);            
+        }        
+
+        /**
+         * Delete favorite / shortcut for node for current user
+         * 
+         * @param repoNode node to delete favorite for
+         */
+        public function deleteFavorite(repoNode:IRepoNode):void
+        {
+            try
+            {                   
+                var url:String = ConfigService.instance.url +  "/flexspaces/favorites/deleteFavorite";
+                
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.DELETE, onDeleteActionSuccess);
+                
+                var params:Object = new Object();
+                                
+                params.nodeid = repoNode.getId();
+
+                // using e4x result format not default object format
+                webScript.resultFormat ="e4x";
+                
+                webScript.execute(params);
+            }
+            catch (error:Error)
+            {
+                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+            }
+        }
+        
+        /**
+         * onDeleteActionSuccess event handler
+         * 
+         * @param event success event
+         */
+        protected function onDeleteActionSuccess(event:SuccessEvent):void
+        {
+            notifyCaller(event.result, event);            
+        }                
         
     }
 }

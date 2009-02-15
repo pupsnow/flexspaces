@@ -37,8 +37,10 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
          * Gets list of nodes for given adm folder path
          * 
          * @param path adm folder path to list contents 
+         * @param pageSize num of items in each page (0 for no paging)
+         * @param pageNum  0 based page number to return
          */
-        public function getFolderList(path:String):void
+        public function getFolderList(path:String, pageSize:int=0, pageNum:int=0):void
         {
             try
             {                   
@@ -50,6 +52,12 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.path = path;
                 
+                if (pageSize != 0)
+                {
+                    params.pagesize = pageSize;
+                    params.pagenum = pageNum;
+                }
+
                 // using e4x result format not default object format
                 webScript.resultFormat ="e4x";
                 
@@ -72,6 +80,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         	var model:AppModelLocator = AppModelLocator.getInstance();
         	
             var folder:Folder = new Folder();
+ 
+            folder.totalSize = result.totalSize;
+            folder.pageSize = result.pageSize;
+            folder.pageNum = result.pageNum;            
+ 
             folder.folderNode = new Node();
             
             folder.folderNode.name = String(result.name); 
@@ -120,6 +133,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 
                 node.isFolder = xmlNode.isFolder == "true";
                 node.type = xmlNode.type;
+                node.mimetype = xmlNode.mimetype;
                 
                 node.desc = xmlNode.desc;
                 

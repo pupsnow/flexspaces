@@ -16,6 +16,9 @@ package org.integratedsemantics.flexspaces.control.event
 		
 		public var searchText:String;
 
+        public var pageSize:int;
+        public var pageNum:int;
+        
 		
         /**
          * Constructor
@@ -23,13 +26,18 @@ package org.integratedsemantics.flexspaces.control.event
          * @param eventType event name
          * @param handlers handlers responder with result and fault handlers
          * @param searchText simple text phrase or alfresco/lucene format query
+         * @param pageSize num of items in each page (0 for no paging)
+         * @param pageNum  0 based page number to return
          * 
          */
-        public function SearchEvent(eventType:String, handlers:IResponder, searchText:String)
+        public function SearchEvent(eventType:String, handlers:IResponder, searchText:String, pageSize:int=0, pageNum:int=0)
         {
             super(eventType, handlers);
             
             this.searchText = searchText;
+            
+            this.pageSize = pageSize;
+            this.pageNum = pageNum;   
         }       
 						
 	}

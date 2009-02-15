@@ -1,8 +1,8 @@
 <webscript>
   <shortname>FlexSpaces folder list data</shortname>
   <description>Gets properties of folders and docs in folder for folder contents displaying</description>
-  <url>/flexspaces/folderlist?nodeid={nodeid}</url>
-  <url>/flexspaces/folderlist?path={path}</url>
+  <url>/flexspaces/folderlist?nodeid={nodeid}&amp;pagesize={pageSize?}&amp;pagenum={pageNum?}</url>
+  <url>/flexspaces/folderlist?path={path}&amp;pagesize={pageSize?}&amp;pagenum={pageNum?}</url>
   <format default="xml">argument</format>
   <authentication>user</authentication>
   <transaction>required</transaction>

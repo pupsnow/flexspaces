@@ -1,8 +1,8 @@
 <webscript>
   <shortname>FlexSpaces Search</shortname>
   <description>Simple search for a text string</description>
-  <url>/flexspaces/search?text={simpleText}</url>
-  <url>/flexspaces/search?lucenequery={luceneFormatQuery}</url>
+  <url>/flexspaces/search?text={simpleText}&amp;pagesize={pageSize?}&amp;pagenum={pageNum?}</url>
+  <url>/flexspaces/search?lucenequery={luceneFormatQuery}&amp;pagesize={pageSize?}&amp;pagenum={pageNum?}</url>
   <format default="xml">extension</format>
   <authentication>user</authentication>
   <transaction>required</transaction>

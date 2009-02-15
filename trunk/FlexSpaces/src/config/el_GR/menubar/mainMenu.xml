@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+    <menuitem label="Φάκελος">
+        <menuitem label="Δημιουργία Χώρου" data="newspace" enabled="false"/>
+        <menuitem label="Δημιουργία Περιεχομένου" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Ανέβασμα Φακέλου" data="upload" enabled="false"/>
+        <menuitem label="Μεταφόρτωση Φακέλου" data="download" enabled="false"/>
+        <menuitem label="Επεξεργασία Φακέλου" data="edit" enabled="false"/>
+        <menuitem label="Εμφάνιση Φακέλου" data="view" enabled="false"/>
+        <menuitem label="Προεπισκόπηση Φακέλου" data="preview" enabled="false"/>
+    </menuitem>
+    <menuitem label="Επεξεργασία">
+        <menuitem label="Αποκοπή" data="cut" enabled="false"/>
+        <menuitem label="Αντιγραφή" data="copy"  enabled="false"/>
+        <menuitem label="Επικόλληση" data="paste" enabled="false"/>
+        <menuitem label="Διαγραφή" data="delete" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Αποδέσμευση" data="checkin" enabled="false"/>
+        <menuitem label="Δέσμευση" data="checkout" enabled="false"/>
+        <menuitem label="Ακύρωση Δέσμευσης" data="cancelcheckout" enabled="false"/>
+        <menuitem label="Versionable" data="makeversion" enabled="false"/>
+        <menuitem label="Ανανέωση" data="update" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Μετονομάσία" data="rename" enabled="false"/>
+        <menuitem label="Ιδιότητες" data="properties" enabled="false"/>
+        <menuitem label="Ετικέτες / Κατηγορίες" data="tags" enabled="false"/>
+    </menuitem>
+    <menuitem label="Εμφάνιση">
+        <menuitem label="Tree" type="check" toggled="true"  data="repotree"/>
+        <menuitem label="Dual Panes" type="check" toggled="false"  data="secondrepofolder"/>
+        <menuitem type="separator" />
+        <menuitem label="WCM Tree" type="check" toggled="true"  data="wcmrepotree" enabled="false"/>
+        <menuitem label="Dual WCM Panes" type="check" toggled="false"  data="wcmsecondrepofolder" enabled="false"/>
+        <menuitem type="separator" />
+        <menuitem label="Thumbnails" type="check" toggled="false"  data="thumbnails"/>
+        <menuitem type="separator" />
+        <menuitem label="Ιστορικό" type="check" toggled="false"  data="versionhistory"/>
+    </menuitem>
+    <menuitem label="Εργαλεία">
+        <menuitem label="Μετατροπη σε PDF" data="makepdf" enabled="false"/>     
+        <menuitem label="Μετατροπή σε Προεπισκόπηση Flash" data="makepreview" enabled="false"/>     
+        <menuitem type="separator" />
+        <menuitem label="Έναρξη Ροής Εργασίας" data="startworkflow" enabled="false"/>              
+        <menuitem type="separator" />
+        <menuitem label="Προηγμένη Αναζήτηση" data="advancedsearch"/>    
+        <menuitem type="separator" />
+        <menuitem label="Automatically Tag with Calais" data="autoTag"/>                                                        
+        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                
+    </menuitem>
+</menu>    

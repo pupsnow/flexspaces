@@ -86,12 +86,7 @@ package org.integratedsemantics.flexspaces.presmodel.search.searchpanel
                 } 
             } 
             
-            // currently one of the webscripts for favorites may be using javascript
-            // api added in alfresco 3.0
-            if (version >= 3.0)
-            {
-                favoritesPresModel = new FavoritesPresModel();
-            }                                                                           
+            favoritesPresModel = new FavoritesPresModel();
         }
         
         /**

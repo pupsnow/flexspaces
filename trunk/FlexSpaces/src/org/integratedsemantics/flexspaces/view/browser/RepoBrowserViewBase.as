@@ -109,6 +109,12 @@ package org.integratedsemantics.flexspaces.view.browser
             versionListView.addEventListener(ClickNodeEvent.CLICK_NODE, handler);                        
         }
         
+        public function initPaging():void
+        {
+            fileView1.initPaging();
+            fileView2.initPaging();
+        }
+
         /**
          * Handle toggling the showing the second folder pane 
          * 

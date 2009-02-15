@@ -68,5 +68,16 @@ package org.integratedsemantics.flexspaces.view.wcm.folderview
             folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;                    
         }        
 
+        override public function initPaging():void
+        {
+            // wcm currently uses clientside paging so paging init related to server side paging not needed
+        }
+        
+        override protected function onPageSizeChange(event:Event):void
+        {
+            folderViewPresModel.model.flexSpacesPresModel.wcmPageSize = event.target.value;            
+            pageBar.curPageIndex = 0;            
+        }
+        
     }
 }

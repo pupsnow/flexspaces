@@ -2,8 +2,11 @@ package org.integratedsemantics.flexspaces.view.folderview.coverflow
 {
     import com.dougmccune.containers.CoverFlowContainer;
     
+    import flash.events.Event;
+    
     import mx.containers.VBox;
     import mx.controls.DataGrid;
+    import mx.controls.NumericStepper;
     import mx.core.Repeater;
     
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
@@ -23,13 +26,10 @@ package org.integratedsemantics.flexspaces.view.folderview.coverflow
         [Bindable] public var coverFlowRepeater:Repeater;      
         public var coverFlowDataGrid:DataGrid;      
                   
-        [Bindable] public var pageSize:uint = 10;
-                        
-        [Bindable] public var pager:Pager;
+        [Bindable]
+        public var dataProvider:Object;    
         
-        public var pageBar:PagerBar;
-
-        
+                
         /**
          * Constructor 
          * 
@@ -38,6 +38,16 @@ package org.integratedsemantics.flexspaces.view.folderview.coverflow
         {
             super();
         }
+        
+        /**
+         * Handle view creation complete 
+         * 
+         * @param creation complete event
+         * 
+         */
+        protected function onCreationComplete(event:Event):void
+        {
+        }        
         
         protected function onChange(event:Event):void
         {

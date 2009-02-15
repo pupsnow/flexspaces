@@ -2,7 +2,9 @@ package org.integratedsemantics.flexspaces.view.search.results
 {
     import flash.events.Event;
     
+    import mx.binding.utils.ChangeWatcher;
     import mx.controls.Label;
+    import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
@@ -13,7 +15,6 @@ package org.integratedsemantics.flexspaces.view.search.results
 	{		
 	    public var resultsCountLabel:Label;
 
-		
 		/**
 		 * Constructor 
 		 * 
@@ -53,6 +54,9 @@ package org.integratedsemantics.flexspaces.view.search.results
             // init search count readout in breadcrumb area
             resultsCountLabel.setStyle("color", 0xFFFFFF); 
             resultsCountLabel.setStyle("fontSize", 11); 
+            
+            ChangeWatcher.watch(pageBar, "curPageIndex", onPageChange);            
+            pager.clientSidePage = false; 
         }
 
         /**
@@ -69,7 +73,45 @@ package org.integratedsemantics.flexspaces.view.search.results
             
             folderIconView.folderTileList.contextMenu = fileContextMenu.contextMenu;         
             folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;                    
-        }        
+        }    
+        
+        override protected function requery():void
+        {
+            var pageSize:int = searchResultsPresModel.model.flexSpacesPresModel.searchPageSize;
+            var pageNum:int = pageBar.curPageIndex;
+            var responder:Responder = new Responder(onResultSearch, onFaultSearch);
+            searchResultsPresModel.requery(responder, pageSize, pageNum);                
+        }
 
+        /**
+         * Handle successful requery search
+         *  
+         * @param data search results data
+         * 
+         */
+        protected function onResultSearch(data:Object):void
+        {
+            searchResultsPresModel.initResultsData(data);                     
+        }
+
+        /**
+         * Handle requery search fault
+         *  
+         * @param info fault info
+         * 
+         */
+        protected function onFaultSearch(info:Object):void
+        {
+            trace("onFaultRequerySearch " + info);     
+        }
+
+        protected function onPageSizeChange(event:Event):void
+        {
+            searchResultsPresModel.model.flexSpacesPresModel.searchPageSize = event.target.value;
+            
+            pageBar.curPageIndex = 0;
+            requery();
+        }
+                
 	}
 }

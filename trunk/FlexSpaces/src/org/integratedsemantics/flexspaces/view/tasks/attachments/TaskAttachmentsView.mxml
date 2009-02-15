@@ -6,6 +6,7 @@
     xmlns:iconview="org.integratedsemantics.flexspaces.view.folderview.iconview.*"
     xmlns:coverflow="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
     xmlns:viewmodebar="org.integratedsemantics.flexspaces.view.folderview.viewmodebar.*"
+    xmlns:paging="org.integratedsemantics.flexspaces.view.folderview.paging.*"
     creationComplete="onCreationComplete(event)" height="100%" width="100%">
     
     <mx:Metadata>[ResourceBundle("FolderView")]</mx:Metadata>
@@ -17,6 +18,10 @@
     [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
     [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
     </mx:Metadata>
+
+    <paging:Pager id="pager" pageIndex="0" pageSize="{taskAttachmentsPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize}" 
+        totalPages="{Math.max(Math.ceil(nodeListViewPresModel.nodeCollection.length/taskAttachmentsPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize),1)}" 
+    	dataProvider="{nodeListViewPresModel.nodeCollection}" />  
 
     <mx:VBox height="100%" width="100%">
         
@@ -32,20 +37,33 @@
         
             <!-- folder icon view -->
             <mx:Box height="100%" width="100%" visible="true">
-                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{taskAttachmentsPresModel}"/>
+                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{taskAttachmentsPresModel}" dataProvider="{pager.pageData}"/>
             </mx:Box>
 
             <!-- folder grid view -->
             <mx:Box height="100%" width="100%" visible="false">
-                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{taskAttachmentsPresModel}"/>
+                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{taskAttachmentsPresModel}" dataProvider="{pager.pageData}"/>
             </mx:Box>
 
             <!-- coverflow view -->
             <mx:Box height="100%" width="100%" visible="false">
-                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{taskAttachmentsPresModel}" />
+                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{taskAttachmentsPresModel}" dataProvider="{pager.pageData}"/>
             </mx:Box>
 
         </mx:ViewStack>
+
+        <mx:HBox horizontalAlign="center" width="100%">
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('FolderIconView', 'pagenumLabel_of')} {pager.totalPages}" 
+                      color="0xFFFFFF" id="pagenumLabel"/>    
+            <mx:Spacer width="4"/>    
+            <paging:PagerBar id="pageBar"  pager="{pager}" totalPages="{pager.totalPages}"
+                             maxVisiblePages="10" buttonWidth="45" buttonMode="true"/>
+            <mx:Spacer width="4"/>                
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'itemsPerPageLabel_text')}" color="0xFFFFFF" id="itemsPerPageLabel"/>
+            <mx:Spacer width="4"/>                
+            <mx:ComboBox id="pageSizeCombo" color="#000000" dataProvider="{taskAttachmentsPresModel.model.flexSpacesPresModel.pageSizeList}"
+                change="onPageSizeChange(event)"/>
+        </mx:HBox>
         
     </mx:VBox>    
 

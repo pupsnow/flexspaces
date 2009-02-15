@@ -5,6 +5,7 @@ package org.integratedsemantics.flexspaces.presmodel.search.basic
     import org.integratedsemantics.flexspaces.control.command.search.QueryBuilder;
     import org.integratedsemantics.flexspaces.control.event.SearchEvent;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
 	
 	
 	/**
@@ -15,8 +16,7 @@ package org.integratedsemantics.flexspaces.presmodel.search.basic
 	public class SearchPresModel extends PresModel
 	{		
 		public var searchText:String = "";
-		
-		
+				
 		/**
 		 * Constructor
 		 *  
@@ -51,11 +51,14 @@ package org.integratedsemantics.flexspaces.presmodel.search.basic
 	
 	            var query:String = queryBuilder.buildQuery(3);
 	            
-	            var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query);
+	            var model:AppModelLocator = AppModelLocator.getInstance();
+	            var pageSize:int = model.flexSpacesPresModel.searchPageSize;
+	            
+	            var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query, pageSize, 0);
 	            searchEvent.dispatch();
    			}                                 
 		}
-		
+			
         public function updateSearchText(text:String):void
         {
         	this.searchText = text;	

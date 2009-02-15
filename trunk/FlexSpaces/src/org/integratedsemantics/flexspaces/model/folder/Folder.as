@@ -54,8 +54,10 @@ package org.integratedsemantics.flexspaces.model.folder
         public function init(data:Object):void
         {
             var result:Folder = data as Folder;
-                        
+                                         
             var dataPath:String = String(result.folderNode.path);
+            
+            // trace("Folder init() dataPath " + dataPath + "curPath " + curPath);
 
             //  when initializing curPath is "/", use company home path we will get back
             if (curPath == "/")
@@ -66,6 +68,10 @@ package org.integratedsemantics.flexspaces.model.folder
             // only take new data if its for current path of this folder collection
             if (dataPath == curPath)
             {
+                this.totalSize = result.totalSize;
+                this.pageSize = result.pageSize;
+                this.pageNum = result.pageNum;
+
                 this.folderNode = result.folderNode;
 				this.nodeCollection = result.nodeCollection;                
                 result.nodeCollection = null;

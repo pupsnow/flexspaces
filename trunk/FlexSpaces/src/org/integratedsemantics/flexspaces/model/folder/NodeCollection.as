@@ -13,7 +13,12 @@ package org.integratedsemantics.flexspaces.model.folder
     public class NodeCollection extends ArrayCollection
     {              
        // nodes
-       public var nodeCollection:ArrayCollection;         
+       public var nodeCollection:ArrayCollection;     
+       
+       // if using server side paging
+       public var totalSize:int = 0;
+       public var pageSize:int = 10;
+       public var pageNum:int = 0;    
 
         /**
          * Constructor

@@ -29,7 +29,9 @@ package org.integratedsemantics.flexspaces.model.folder
         public var thumbnailUrl:String;               
 
         public var showThumbnail:Boolean = false;
-        
+  
+        public var mimetype:String;
+              
         
         /**
          * Constructor 

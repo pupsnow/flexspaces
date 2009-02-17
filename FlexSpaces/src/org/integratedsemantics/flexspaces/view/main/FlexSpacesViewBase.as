@@ -1217,7 +1217,7 @@ package org.integratedsemantics.flexspaces.view.main
                     mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
                     mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
                     mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;
-                                        
+
                     fileContextMenu = false;
                 }
                 else
@@ -1228,22 +1228,27 @@ package org.integratedsemantics.flexspaces.view.main
                     mainMenu.menuBarCollection[0].menuitem[7].@enabled = readPermission;                                        
 
                     fileContextMenu = true;
+                    // view, play video context  menus 
                     if (browserView != null)
                     {  
                         browserView.enableContextMenuItem("view", readPermission, fileContextMenu);
+                        browserView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
                     }  
                     if (wcmBrowserView != null)
                     {  
                         wcmBrowserView.enableContextMenuItem("view", readPermission, fileContextMenu);
+                        wcmBrowserView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
                     } 
                     if (searchPanel != null)
                     {  
                         searchPanel.searchResultsView.enableContextMenuItem("view", readPermission, fileContextMenu);
+                        searchPanel.searchResultsView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
                     }
                     if (tasksPanelView != null)
                     {  
                         tasksPanelView.taskAttachmentsView.enableContextMenuItem("view", readPermission, fileContextMenu);
-                    }
+                        tasksPanelView.taskAttachmentsView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
+                    }                    
                 }
                 
                 // view specific         

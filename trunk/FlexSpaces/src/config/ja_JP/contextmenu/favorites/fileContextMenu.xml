@@ -6,7 +6,7 @@
      <menuitem label="お気に入り削除" data="deletefavorite" />
      
      <menuitem label="プロパティ" data="properties" seperatorBefore="true" />
-     <menuitem label="タグ / カテゴリ" data="tags"/>
+     <menuitem label="タグ・カテゴリ" data="tags"/>
      
      <menuitem label="表示" data="view" seperatorBefore="true" />
 

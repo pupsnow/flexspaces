@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <contextmenu>
      
-     <menuitem label="Copy Items" data="copy" />     
+     <menuitem label="項目のコピー" data="copy" />     
 
-     <menuitem label="Delete Favorite" data="deletefavorite" />
+     <menuitem label="お気に入り削除" data="deletefavorite" />
      
-     <menuitem label="Properties" data="properties" seperatorBefore="true" />
-     <menuitem label="Tags / Categories" data="tags"/>
+     <menuitem label="プロパティ" data="properties" seperatorBefore="true" />
+     <menuitem label="タグ / カテゴリ" data="tags"/>
      
-     <menuitem label="View" data="view" seperatorBefore="true" />
+     <menuitem label="表示" data="view" seperatorBefore="true" />
 
-     <menuitem label="Play Video" data="playVideo"/>       
+     <menuitem label="ビデオの再生" data="playVideo"/>       
      
-     <menuitem label="Open Containing Folder" data="gotoParent" seperatorBefore="true" />
+     <menuitem label="一階層上のディレクトリを参照" data="gotoParent" seperatorBefore="true" />
      
 </contextmenu>    

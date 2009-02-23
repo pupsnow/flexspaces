@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu>
+
+    <menuitem label="Fichier">
+
+        <menuitem label="Créer Répertoire" data="newspace" enabled="false"/>
+
+        <menuitem label="Créer Contenu" enabled="false">
+
+           <menuitem label="HTML" data="createhtml"/>
+
+           <menuitem label="Texte" data="createtext"/>
+
+           <menuitem label="XML" data="createxml"/>
+
+        </menuitem>    
+
+        <menuitem type="separator" />
+
+        <menuitem label="Importer fichier" data="upload" enabled="false"/>
+
+        <menuitem label="Télécharger fichier" data="download" enabled="false"/>
+
+        <menuitem label="Editer fichier" data="edit" enabled="false"/>
+
+        <menuitem label="Voir fichier" data="view" enabled="false"/>
+
+        <menuitem label="Prévisualiser File" data="preview" enabled="false"/>
+
+    </menuitem>
+
+    <menuitem label="Edition">
+
+        <menuitem label="Couper" data="cut" enabled="false"/>
+
+        <menuitem label="Copier" data="copy" enabled="false"/>
+
+        <menuitem label="Coller" data="paste" enabled="false"/>
+
+        <menuitem label="Supprimer" data="delete" enabled="false"/>
+
+        <menuitem type="separator" />
+
+        <menuitem label="Checkin" data="checkin" enabled="false"/>
+
+        <menuitem label="Checkout" data="checkout" enabled="false"/>
+
+        <menuitem label="Annuler Checkout" data="cancelcheckout" enabled="false"/>
+
+        <menuitem label="Rendre Versionable" data="makeversion" enabled="false"/>
+
+        <menuitem label="Mis à jour" data="update" enabled="false"/>
+
+        <menuitem type="separator" />
+
+        <menuitem label="Renommer" data="rename" enabled="false"/>
+
+        <menuitem label="Propriétés" data="properties" enabled="false"/>
+
+        <menuitem label="Tags / Catégories" data="tags" enabled="false"/>
+
+    </menuitem>
+
+    <menuitem label="Vue">
+
+        <menuitem label="Navigateur" type="check" toggled="true"  data="repotree"/>
+
+        <menuitem label="Double panneaux" type="check" toggled="false"  data="secondrepofolder"/>
+
+        <menuitem type="separator" />
+
+        <menuitem label="Navigateur WCM" type="check" toggled="true"  data="wcmrepotree" enabled="false"/>
+
+        <menuitem label="Double panneaux WCM" type="check" toggled="false"  data="wcmsecondrepofolder" enabled="false"/>
+
+        <menuitem type="separator" />
+
+        <menuitem label="Thumbnails" type="check" toggled="false"  data="thumbnails"/>        
+
+        <menuitem type="separator" />
+
+        <menuitem label="Navigateur fichier locaux" type="check" toggled="false"  data="localfiles"/>                    
+
+        <menuitem type="separator" />
+
+        <menuitem label="Historique de version" type="check" toggled="false"  data="versionhistory"/>
+
+    </menuitem>
+
+    <menuitem label="Outils">
+
+        <menuitem label="Générer PDF" data="makepdf" enabled="false"/>     
+
+        <menuitem label="Générer Flash Preview" data="makepreview" enabled="false"/>     
+
+        <menuitem type="separator" />
+
+        <menuitem label="Démarrer Workflow" data="startworkflow" enabled="false"/>              
+
+        <menuitem type="separator" />
+
+        <menuitem label="Recherche avancée" data="advancedsearch"/>                                                        
+
+        <menuitem type="separator" />
+
+        <menuitem label="Rendre accessible offline" data="availoffline" enabled="false"/>                                    
+
+        <menuitem label="Télécharger offline" data="offlineupload" enabled="false"/>
+
+        <menuitem type="separator" />
+
+        <menuitem label="Automatically Tag with Calais" data="autoTag"/>        
+
+        <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                               
+
+    </menuitem>
+
+</menu>    

@@ -98,10 +98,13 @@ package org.integratedsemantics.flexspacesair.view.main
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop1);
     
-                var folderView2:FolderViewBase = browserView.fileView2;                
-                folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn2);
-                folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
-                folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop2);           
+                var folderView2:FolderViewBase = browserView.fileView2;        
+                if (folderView2 != null)
+                {                        
+                    folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn2);
+                    folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
+                    folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop2);
+                }           
             }
 
             if (flexSpacesAirPresModel.showWCM == true)
@@ -112,9 +115,12 @@ package org.integratedsemantics.flexspacesair.view.main
                 wcmFolderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onWcmDrop1);
                 
                 var wcmFolderView2:FolderViewBase = wcmBrowserView.fileView2;                
-                wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onWcmDragIn2);
-                wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
-                wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onWcmDrop2);
+                if (wcmFolderView2 != null)
+                {                        
+                    wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onWcmDragIn2);
+                    wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
+                    wcmFolderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onWcmDrop2);
+                }
             }           
                         
             // tab for share 3.0

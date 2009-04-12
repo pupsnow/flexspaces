@@ -11,8 +11,11 @@
         </mx:FormItem>
     </mx:Form>
     
+    <!--mx:TextArea id="textarea" width="478" height="350" fontWeight="normal" styleName="input"
+        text="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xa;&lt;sample&gt;&#xa;   &lt;element&gt;text&lt;/element&gt;&#xa;&lt;/sample&gt;"/-->
+
     <mx:TextArea id="textarea" width="478" height="350" fontWeight="normal" styleName="input"
-        text="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xa;&lt;sample&gt;&#xa;   &lt;element&gt;text&lt;/element&gt;&#xa;&lt;/sample&gt;"/>
+        text="&lt;sample&gt;&#xa;   &lt;element&gt;text&lt;/element&gt;&#xa;&lt;/sample&gt;"/>
 
     <mx:Spacer height="20"/>
                   

@@ -17,6 +17,7 @@ package org.integratedsemantics.flexspaces.presmodel.main
     import org.integratedsemantics.flexspaces.model.folder.NodeCollection;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.presmodel.browser.RepoBrowserPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.checkedout.CheckedOutPresModel;
     import org.integratedsemantics.flexspaces.presmodel.login.LoginPresModel;
     import org.integratedsemantics.flexspaces.presmodel.logout.LogoutPresModel;
     import org.integratedsemantics.flexspaces.presmodel.search.advanced.AdvancedSearchPresModel;
@@ -66,6 +67,9 @@ package org.integratedsemantics.flexspaces.presmodel.main
         public var tasksPanelPresModel:TasksPanelPresModel;               
         public var wcmBrowserPresModel:WcmRepoBrowserPresModel;  
         public var advSearchPresModel:AdvancedSearchPresModel;
+
+        // cmis
+        public var checkedOutPresModel:CheckedOutPresModel = new CheckedOutPresModel(); 
         
         public var loginPresModel:LoginPresModel = new LoginPresModel();
         public var searchPresModel:SearchPresModel = new SearchPresModel();
@@ -81,6 +85,7 @@ package org.integratedsemantics.flexspaces.presmodel.main
         public var taskAttachmentsPageSize:int = 10;
         public var versionsPageSize:int = 10;
         public var favoritesPageSize:int = 10;
+        public var checkedOutPageSize:int = 10;
         // list of pages sizes, todo make configurable
         public var pageSizeList:ArrayCollection = new ArrayCollection(new Array("10", "20", "30", "40", "50"));
         

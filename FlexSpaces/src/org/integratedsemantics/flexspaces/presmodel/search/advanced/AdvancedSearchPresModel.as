@@ -228,8 +228,19 @@ package org.integratedsemantics.flexspaces.presmodel.search.advanced
             var model:AppModelLocator = AppModelLocator.getInstance();
             var pageSize:int = model.flexSpacesPresModel.searchPageSize;
                         
-            var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query, pageSize, 0);
-            searchEvent.dispatch();                                 
+            if ((searchText != null) && (searchText.length > 2))
+            {
+                if  (model.appConfig.cmisMode == true)
+                {    
+                    // cmis: todo use new query builder
+                    var searchEvent:SearchEvent = new SearchEvent(SearchEvent.SEARCH, responder, searchText, pageSize, 0);
+                }
+                else
+                {
+                    searchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query, pageSize, 0);
+                }
+                searchEvent.dispatch();
+            }                                 
         }
          
         /**

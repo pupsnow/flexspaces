@@ -13,6 +13,7 @@ package org.integratedsemantics.flexspaces.model.global
         // note: curently resource bundle properties locale from project compile options
         public var locale:String = "en_US";     
         
+        public var cmisMode:Boolean = false;        
 
 		public function AppConfig()
 		{

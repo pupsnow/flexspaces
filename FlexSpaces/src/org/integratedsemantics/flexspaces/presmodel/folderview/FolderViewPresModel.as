@@ -20,6 +20,11 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
         // for currentPath property change
         protected var curPath:String;
 
+        // cmis
+        public var doneFolderViewData:Boolean = false;
+
+        public var totalSize:int;
+
 
         /**
          * Constructor 
@@ -38,7 +43,10 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
         {
             this.nodeCollection = new Folder();
             //this.currentPath = "/";
-            this.currentPath = model.userInfo.userHome.path;                
+            if ( model.appConfig.cmisMode == false )
+            {            
+                this.currentPath = model.userInfo.userHome.path;
+            }                
         }
         
 
@@ -50,6 +58,7 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
          */
         public function set currentPath(newPath:String):void
         {
+            //trace("FolderViewPresModel set currentPath newPath " + newPath);
             if (this.curPath != newPath)
             {
                 this.curPath = newPath;
@@ -65,12 +74,32 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
             }
         }
         
-		public function requery(pageSize:int, pageNum:int):void
-		{
+        // cmis
+        public function getCmisChildren(newPath:String, cmisGetChildrenUrl:String):void
+        {
+            //trace("FolderViewPresModel getCmisChildren() newPath " + newPath + " cmisGetChildrenUrl " + cmisGetChildrenUrl );
+            //trace("FolderViewPresModel getCmisChildren() newPath " + newPath);
+            if (this.curPath != newPath)
+            {
+                this.curPath = newPath;
+                var folder:Folder = this.nodeCollection as Folder;
+                folder.currentPath = newPath; 
+                this.breadCrumbPath = newPath;
+
+	            var pageSize:int = model.flexSpacesPresModel.docLibPageSize;
+                
+                var responder:Responder = new Responder(onResultGetFolderList, onFaultGetFolderList);
+                var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, responder, newPath, pageSize, 0, cmisGetChildrenUrl);
+                folderListEvent.dispatch();                  
+            }            
+        }
+        
+        public function requery(pageSize:int, pageNum:int):void
+        {
             var responder:Responder = new Responder(onResultGetFolderList, onFaultGetFolderList);
             var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, responder, curPath, pageSize, pageNum);
             folderListEvent.dispatch();                  
-		}		    		
+        }		    		
 
         /**
          * Getter for current folder path
@@ -103,7 +132,9 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
         public function redraw():void
         {
             var responder:Responder = new Responder(onResultGetFolderList, onFaultGetFolderList);
-            var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, responder, this.currentPath);
+            // cmis add passing cmisChildren url
+            var folderListEvent:FolderListEvent = new FolderListEvent(FolderListEvent.FOLDER_LIST, 
+                        responder, this.currentPath, 0, 0, currentFolderNode.cmisChildren);
             folderListEvent.dispatch();                                
         }
 
@@ -115,6 +146,7 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
          */
         protected function onResultGetFolderList(data:Object):void
         {
+            //trace("FolderViewPresModel onResultGetFolderList");
             var result:Folder = data as Folder;                
             var dataPath:String = String(result.folderNode.path);
 
@@ -132,7 +164,21 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
             for each (var node:Node in nodeCollection)
             {
                 node.showThumbnail = showThumbnails;
-            }                    
+            }   
+            
+            // cmis
+            doneFolderViewData = true;    
+            
+            // cmis spaces uses clientside paging only, flexspaces by default uses serverside paging
+            var cmisMode:Boolean = model.appConfig.cmisMode;
+            if (cmisMode == true)
+            {
+                totalSize = nodeCollection.length;                        
+            }   
+            else
+            {
+                totalSize = nodeCollection.totalSize;            
+            }                                                                                                
         }
         
         /**

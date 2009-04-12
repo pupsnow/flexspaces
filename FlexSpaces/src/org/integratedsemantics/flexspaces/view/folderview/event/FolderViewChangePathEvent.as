@@ -12,7 +12,7 @@ package org.integratedsemantics.flexspaces.view.folderview.event
 
 		/** data storing new path */
 		private var newPath:String;
-		
+				
 		/**
 		 * Constructor
 		 * 

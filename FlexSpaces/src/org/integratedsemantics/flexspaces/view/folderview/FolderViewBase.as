@@ -5,6 +5,7 @@ package org.integratedsemantics.flexspaces.view.folderview
     import flash.events.Event;
     
     import mx.binding.utils.ChangeWatcher;
+    import mx.collections.ArrayCollection;
     import mx.events.DragEvent;
     import mx.managers.DragManager;
     
@@ -13,7 +14,6 @@ package org.integratedsemantics.flexspaces.view.folderview
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewChangePathEvent;
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
-    import org.integratedsemantics.flexspaces.view.wcm.folderview.WcmFolderViewBase;
 
 
     /**
@@ -21,7 +21,11 @@ package org.integratedsemantics.flexspaces.view.folderview
      * 
      */
     public class FolderViewBase extends NodeListViewBase
-    {          	
+    {  
+        [Bindable]
+        protected var dataProvider:ArrayCollection;
+
+                	
         /**
          * Constructor 
          * 
@@ -66,9 +70,39 @@ package org.integratedsemantics.flexspaces.view.folderview
             if (folderViewPresModel.serverVersionNum >= 3.0)
             {
                 coverFlowView.coverFlowDataGrid.addEventListener(DragEvent.DRAG_DROP, doDragDropCoverFlowDataGrid);
-            }               
+            }     
+                    
+            // cmis spaces uses clientside paging only, flexspaces by default uses serverside paging
+            var cmisMode:Boolean = folderViewPresModel.model.appConfig.cmisMode;
+            if (cmisMode == true)
+            {
+                dataProvider = pager.pageData;
+                ChangeWatcher.watch(pager, "pageData", onDataProviderChange);
+            }   
+            else
+            {
+                dataProvider = nodeListViewPresModel.nodeCollection;
+                ChangeWatcher.watch(nodeListViewPresModel, "nodeCollection", onDataProviderChange);
+            }                                                           
         }
 
+        protected function onDataProviderChange(event:Event):void
+        {
+            var cmisMode:Boolean = folderViewPresModel.model.appConfig.cmisMode;
+            if (cmisMode == true)
+            {
+                dataProvider = pager.pageData;
+            }   
+            else
+            {
+                dataProvider = nodeListViewPresModel.nodeCollection;
+            }                                                                       
+        }
+
+        /**
+         * init for serverside paging 
+         * 
+         */
         public function initPaging():void
         {
             ChangeWatcher.watch(pageBar, "curPageIndex", onPageChange);            
@@ -107,7 +141,7 @@ package org.integratedsemantics.flexspaces.view.folderview
             {            	
                 folderViewPresModel.currentPath = newPath;
            
-                pager.pageIndex = 0;    
+                resetPaging();   
             }
         }
 
@@ -134,12 +168,27 @@ package org.integratedsemantics.flexspaces.view.folderview
             
             if (selectedItem.isFolder == true)
             {
-                // navigate into folder double clicked on
-                this.currentPath = selectedItem.displayPath;
-                
-                // fire event to let parents of component know about navigation of folder list to new folder path
-                var changePathEvent:FolderViewChangePathEvent = new FolderViewChangePathEvent(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, 
-                                                                                              this.currentPath);
+                if (folderViewPresModel.model.appConfig.cmisMode == true)
+                {
+                    // navigate into folder double clicked on
+                    var cmisChildrenUrl:String = selectedItem.cmisChildren;
+                    folderViewPresModel.getCmisChildren(selectedItem.displayPath, cmisChildrenUrl);
+                    
+                    // fire event to let parents of component know about navigation of folder list to new folder path   
+                    var changePathEvent:FolderViewChangePathEvent = new FolderViewChangePathEvent(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, 
+                                                                                                  selectedItem.displayPath);
+                }
+                else
+                {
+                    // navigate into folder double clicked on
+                    this.currentPath = selectedItem.displayPath;
+                    
+                    // fire event to let parents of component know about navigation of folder list to new folder path
+                    changePathEvent = new FolderViewChangePathEvent(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, this.currentPath);                                                                                            
+                }
+                                                                                                                                                                                            
+                resetPaging();
+                  
                 var dispatched:Boolean = dispatchEvent(changePathEvent);            
             }
             else
@@ -158,11 +207,19 @@ package org.integratedsemantics.flexspaces.view.folderview
          */
         protected function breadCrumbClick(event:BreadcrumbDisplayEvent):void
         {
-            this.currentPath = event.path;
-            
-            // fire event to let user of component know about navigation of folder list to new folder path
-            var changePathEvent:FolderViewChangePathEvent = new FolderViewChangePathEvent(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, 
-                                                                                          this.currentPath);
+            if (folderViewPresModel.model.appConfig.cmisMode == true)
+            {
+                // fire event to let user of component know about navigation of folder list to new folder path
+                var changePathEvent:FolderViewChangePathEvent = new FolderViewChangePathEvent(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, 
+                                                                                              event.path);
+            }
+            else
+            {
+                this.currentPath = event.path;            
+                // fire event to let user of component know about navigation of folder list to new folder path
+                changePathEvent = new FolderViewChangePathEvent(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, 
+                                                                                          this.currentPath);                
+            }
             var dispatched:Boolean = dispatchEvent(changePathEvent);            
         }  
 
@@ -237,8 +294,14 @@ package org.integratedsemantics.flexspaces.view.folderview
         {
             folderViewPresModel.model.flexSpacesPresModel.docLibPageSize = event.target.value;
             
-            pageBar.curPageIndex = 0;
-            requery();
+            resetPaging();
+            
+            var cmisMode:Boolean = folderViewPresModel.model.appConfig.cmisMode;
+            if (cmisMode == false)
+            {
+                // for server side paging
+                requery();
+            }
         }
         
     }

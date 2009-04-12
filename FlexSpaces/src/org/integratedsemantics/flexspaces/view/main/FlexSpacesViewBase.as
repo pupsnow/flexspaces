@@ -32,7 +32,6 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.vo.CheckoutVO;
-    import org.integratedsemantics.flexspaces.presmodel.favorites.FavoritesPresModel;
     import org.integratedsemantics.flexspaces.presmodel.folderview.FolderViewPresModel;
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
     import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
@@ -43,7 +42,7 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.presmodel.versions.versionlist.VersionListPresModel;
     import org.integratedsemantics.flexspaces.view.browser.RepoBrowserChangePathEvent;
     import org.integratedsemantics.flexspaces.view.browser.RepoBrowserViewBase;
-    import org.integratedsemantics.flexspaces.view.favorites.FavoritesView;
+    import org.integratedsemantics.flexspaces.view.checkedout.CheckedOutViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent;
@@ -85,8 +84,10 @@ package org.integratedsemantics.flexspaces.view.main
         // index of tabs for views
         public static const DOC_LIB_TAB_INDEX:int = 0;
         public static const SEARCH_TAB_INDEX:int = 1;
-        public static const TASKS_TAB_INDEX:int = 2;
-        public static const WCM_TAB_INDEX:int = 3;
+        //cmis added checked out tab view
+        public static const CHECKED_OUT_TAB_INDEX:int = 2;        
+        public static const TASKS_TAB_INDEX:int = 3;
+        public static const WCM_TAB_INDEX:int = 4;
              
         public var flexspacesviews:VBox;
         
@@ -117,6 +118,8 @@ package org.integratedsemantics.flexspaces.view.main
         public var wcmTab:VBox;
         public var wcmBrowserView:WcmRepoBrowserViewBase;
         
+        public var checkedOutView:CheckedOutViewBase;
+     
         public var docker:Docker;
         public var menuToolbar:DockableToolBar;
         public var toolbar1:DockableToolBar;
@@ -264,6 +267,7 @@ package org.integratedsemantics.flexspaces.view.main
             // prevent closing of doclib, search results, tasks, wcm tabs
             tabNav.setClosePolicyForTab(DOC_LIB_TAB_INDEX, SuperTab.CLOSE_NEVER);                    
             tabNav.setClosePolicyForTab(SEARCH_TAB_INDEX, SuperTab.CLOSE_NEVER);  
+            tabNav.setClosePolicyForTab(CHECKED_OUT_TAB_INDEX, SuperTab.CLOSE_NEVER);  
             tabNav.setClosePolicyForTab(TASKS_TAB_INDEX, SuperTab.CLOSE_NEVER);  
             tabNav.setClosePolicyForTab(WCM_TAB_INDEX, SuperTab.CLOSE_NEVER);  
             // todo: for now to avoid tab drag drop error in air app, disable drag/drop of tabs
@@ -271,6 +275,10 @@ package org.integratedsemantics.flexspaces.view.main
             tabNav.dragEnabled = false;
             tabNav.dropEnabled = false; 
             tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
+
+            // hide checked out tab for now
+            tabNav.getTabAt(CHECKED_OUT_TAB_INDEX).visible = false;
+            tabNav.getTabAt(CHECKED_OUT_TAB_INDEX).includeInLayout = false;            
 
             // init doclib view
             if (flexSpacesPresModel.showDocLib == true)
@@ -281,6 +289,7 @@ package org.integratedsemantics.flexspaces.view.main
                 browserView.setDoubleClickDocHandler(onDoubleClickDoc);
                 browserView.setClickNodeHandler(onClickNode);                                    
                 browserView.addEventListener(RepoBrowserChangePathEvent.REPO_BROWSER_CHANGE_PATH, onBrowserChangePath);
+                // init for serverside paging 
                 browserView.initPaging();                
             }
             
@@ -535,6 +544,8 @@ package org.integratedsemantics.flexspaces.view.main
         {
             tabNav.selectedIndex = SEARCH_TAB_INDEX;
             flexSpacesPresModel.searchPanelPresModel.initResultsData(event.searchResults);  
+            // reset page index since new user query,  not requery to page
+            searchResultsView.resetPaging();
         }
            
         /**
@@ -673,6 +684,10 @@ package org.integratedsemantics.flexspaces.view.main
             {  
                 wcmBrowserView.clearSelection();
             }
+            if (checkedOutView != null)
+            {  
+                checkedOutView.clearSelection();
+            }            
         }
 
         /**
@@ -699,6 +714,10 @@ package org.integratedsemantics.flexspaces.view.main
             {  
                 wcmBrowserView.clearOtherSelections(selectedFolderView);
             }
+            if (checkedOutView != null)
+            {  
+                checkedOutView.clearOtherSelections(selectedFolderView);
+            }            
         }
 
         /**
@@ -1309,20 +1328,20 @@ package org.integratedsemantics.flexspaces.view.main
                             mainMenu.menuBarCollection[3].menuitem[1].@enabled = createChildrenPermission;
                             mainMenu.menuBarCollection[3].menuitem[3].@enabled = readPermission;  
                             
-		                    // auto-tag, suggest tags
-			                if ((model.calaisConfig.enableCalias == true) && (writePermission == true))
-			                {
-			                	if (model.appConfig.airMode == false)
-				                {
-					                mainMenu.menuBarCollection[3].menuitem[7].@enabled = true;                	
-					                mainMenu.menuBarCollection[3].menuitem[8].@enabled = true;
-								}
-								else
-								{
-					                mainMenu.menuBarCollection[3].menuitem[10].@enabled = true;                	
-					                mainMenu.menuBarCollection[3].menuitem[11].@enabled = true;							
-								}                	
-			                }                                                                                  
+                            // auto-tag, suggest tags
+                            if ((model.calaisConfig.enableCalias == true) && (writePermission == true))
+                            {
+                                if (model.appConfig.airMode == false)
+                                {
+                                    mainMenu.menuBarCollection[3].menuitem[7].@enabled = true;                  
+                                    mainMenu.menuBarCollection[3].menuitem[8].@enabled = true;
+                                }
+                                else
+                                {
+                                    mainMenu.menuBarCollection[3].menuitem[10].@enabled = true;                 
+                                    mainMenu.menuBarCollection[3].menuitem[11].@enabled = true;                         
+                                }                   
+                            }                                                                                  
                         }
                         break;        
                                      
@@ -1553,10 +1572,19 @@ package org.integratedsemantics.flexspaces.view.main
                         this.pasteBtn.enabled = enablePaste;                    
                         // tree, dual panes, wcm tree, dual wcm panes
                         mainMenu.menuBarCollection[2].menuitem[0].@enabled = true;
-                        mainMenu.menuBarCollection[2].menuitem[1].@enabled = true;
+                        // disable dual panes in cmis
+                        if (model.appConfig.cmisMode == true)
+                        {
+                            mainMenu.menuBarCollection[2].menuitem[1].@enabled = false;                            
+                        }
+                        else
+                        {
+                            mainMenu.menuBarCollection[2].menuitem[1].@enabled = true;                            
+                        }
                         mainMenu.menuBarCollection[2].menuitem[3].@enabled = false;
                         mainMenu.menuBarCollection[2].menuitem[4].@enabled = false;
                         break;                     
+                    case CHECKED_OUT_TAB_INDEX:
                     case SEARCH_TAB_INDEX:
                     case TASKS_TAB_INDEX:
                         // create space, upload          

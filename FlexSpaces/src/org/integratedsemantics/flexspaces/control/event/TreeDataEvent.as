@@ -15,6 +15,9 @@ package org.integratedsemantics.flexspaces.control.event
 
         public var path:String;
         
+        // cmis
+        public var cmisChildren:String;
+        
                 
         /**
          * Constructor
@@ -22,13 +25,17 @@ package org.integratedsemantics.flexspaces.control.event
          * @param eventType event name
          * @param handlers responder with result and fault handlers
          * @param path path of adm parent folder to get folder children
+         * @param cmisChildren optional cmis url for getting folder chldren (cmis mode)
          * 
          */
-        public function TreeDataEvent(eventType:String, handlers:IResponder, path:String)
+        public function TreeDataEvent(eventType:String, handlers:IResponder, path:String, cmisChildren:String = null)
         {
             super(eventType, handlers);
             
             this.path = path;
+            
+            // cmis
+            this.cmisChildren = cmisChildren;                     
         }       
 				
 	}

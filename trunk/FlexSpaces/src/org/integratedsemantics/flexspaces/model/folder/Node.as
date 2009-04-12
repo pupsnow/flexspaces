@@ -31,6 +31,13 @@ package org.integratedsemantics.flexspaces.model.folder
         public var showThumbnail:Boolean = false;
   
         public var mimetype:String;
+        
+        // cmis
+        public var cmisChildren:String;
+        public var cmisSelf:String;
+        public var cmisObj:Object;
+        public var cmisAllVersions:String;
+        public var cmisType:String;
               
         
         /**

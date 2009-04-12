@@ -1,5 +1,7 @@
 package org.integratedsemantics.flexspaces.model.folder
 {
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
+    
 
     /**
      *  Model for folder view, folderNode and collection of node children
@@ -64,9 +66,11 @@ package org.integratedsemantics.flexspaces.model.folder
             {
                 curPath = dataPath;
             }
+            
+            var model:AppModelLocator = AppModelLocator.getInstance();
 
             // only take new data if its for current path of this folder collection
-            if (dataPath == curPath)
+            if ( (model.appConfig.cmisMode == true) || (dataPath == curPath))
             {
                 this.totalSize = result.totalSize;
                 this.pageSize = result.pageSize;

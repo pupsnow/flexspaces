@@ -19,7 +19,10 @@ package org.integratedsemantics.flexspaces.presmodel.tree
         
         public var loadingNode:TreeNode;
 
-		public var selectedNode:TreeNode = null;
+        public var selectedNode:TreeNode = null;
+		
+    	// cmis
+        public var doneTreeData:Boolean = false;
 
         
         /**
@@ -34,11 +37,12 @@ package org.integratedsemantics.flexspaces.presmodel.tree
         /**
          * Get tree data
          * 
-         * @param path   path or "/" for company homde
+         * @param path   path or "/" for company home
          * 
          */
         public function getTreeData(path:String, responder:Responder):void
         {
+            //trace("TreePresModel getTreeData path " + path);
             var treeDataEvent:TreeDataEvent = new TreeDataEvent(TreeDataEvent.TREE_DATA, responder, path); 
             treeDataEvent.dispatch();                                     
         }
@@ -51,8 +55,7 @@ package org.integratedsemantics.flexspaces.presmodel.tree
         protected function setLoadingNode(loadingNode:TreeNode):void
         {
             this.loadingNode = loadingNode;    
-        }
-                        
+        }                        
                        
        /**
         * Get subfolder data for node from the server 
@@ -65,12 +68,14 @@ package org.integratedsemantics.flexspaces.presmodel.tree
         */
        public function getNodeChildren(node:TreeNode, responder:Responder):void
         {
+            //trace("TreePresModel getNodeChildren path " + node.path + " hasBeenLoaded " + node.hasBeenLoaded + " cmisChildren " + node.cmisChildren);
+            //trace("TreePresModel getNodeChildren() path " + node.path + " hasBeenLoaded " + node.hasBeenLoaded);
             if (node.hasBeenLoaded == false)
             {
                 this.setLoadingNode(node);
-                var treeDataEvent:TreeDataEvent = new TreeDataEvent(TreeDataEvent.TREE_DATA, responder, node.path); 
+                var treeDataEvent:TreeDataEvent = new TreeDataEvent(TreeDataEvent.TREE_DATA, responder, node.path, node.cmisChildren); 
                 treeDataEvent.dispatch();                                            
-            }            
+            } 
         } 
                         
         /**
@@ -80,6 +85,7 @@ package org.integratedsemantics.flexspaces.presmodel.tree
          */
         public function onResultTreeData(data:Object):void
         {
+            //trace("TreePresModel onResultTreeData");
             var result:TreeNode = data as TreeNode;
 
             if (rootNode == null)
@@ -92,7 +98,7 @@ package org.integratedsemantics.flexspaces.presmodel.tree
             	loadingNode.children = result.children;
             	result.children = null;
                 loadingNode.hasBeenLoaded = true;                
-            }
+            }            
         }        
         
     }

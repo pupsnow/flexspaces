@@ -35,15 +35,24 @@ package org.integratedsemantics.flexspaces.view.tree
         protected function onCreationComplete(event:Event):void
         {
             addEventListener(ListEvent.CHANGE, treeChanged);
-            addEventListener(ListEvent.ITEM_CLICK, treeClicked);                       
+            addEventListener(ListEvent.ITEM_CLICK, treeClicked);     
+
+            // cmis
+            var path:String = "/";
+            initTree(path);                                          
+        }
+
+        // cmis: separated this from onCreationComplete 
+        public function initTree(path:String):void
+        {
+            //trace("TreeViewBase initTree() " + path);
 
             // call sever to request tree data, currently webscript will return data for company home data for "/"
             // regardless of the name of company home          
-            var path:String = "/";
             var responder:Responder = new Responder(onResultTreeData, onFaultTreeData);
-            treePresModel.getTreeData(path, responder);            
+            treePresModel.getTreeData(path, responder);                            
         }
-
+        
         /**
         * Get folder path of currently selected tree node
         *  
@@ -51,8 +60,14 @@ package org.integratedsemantics.flexspaces.view.tree
         */
         public function getPath():String
         {
+            var path:String = null;           
             var selectedNode:TreeNode = selectedItem as TreeNode;
-            var path:String = selectedNode.path;
+            
+            if (selectedNode != null)
+            {
+                path = selectedNode.path;
+            }
+            
             return path;            
         }
 
@@ -64,7 +79,9 @@ package org.integratedsemantics.flexspaces.view.tree
          */
         public function setPath(path:String):void
         {
-        	var oldLabelField:String = labelField;
+            //trace("TreeViewBase setPath " + path);
+                                    
+            var oldLabelField:String = labelField;
         	labelField = "path";
         	selectedIndex = -1;
 			var foundAndSelected:Boolean = findString(path);
@@ -74,8 +91,15 @@ package org.integratedsemantics.flexspaces.view.tree
 			{
 			    var node:TreeNode = selectedItem as TreeNode;
 			    
+                // cmis trigger folder list update
+                if (node.hasBeenLoaded == true)
+                {
+                    treePresModel.doneTreeData = true;
+                }                    			        
+
 			    if (node.path == path)
 			    {
+			        
 	                var responder:Responder = new Responder(onResultTreeData, onFaultTreeData);
   			        treePresModel.getNodeChildren(node, responder);
 			    }
@@ -118,18 +142,25 @@ package org.integratedsemantics.flexspaces.view.tree
          */
         override public function expandItem(item:Object, open:Boolean, animate:Boolean=false, dispatchEvent:Boolean=false, cause:Event=null):void
         {
+            //trace("TreeViewBase expandItem");
+            
+            var node:TreeNode = item as TreeNode;
+            
             if (open == true)
             {
-                var node:TreeNode = item as TreeNode;
                 var responder:Responder = new Responder(onResultTreeData, onFaultTreeData);
                 treePresModel.getNodeChildren(node, responder);                
             }
-            
+
             super.expandItem(item, open, animate, dispatchEvent, cause);           
         }
         
 		protected function expandLater():void
 		{
+            //trace("TreeViewBase expandLater");  
+            
+            treePresModel.doneTreeData = true;
+            
 			if (treePresModel.loadingNode != null)
 			{
 				var isOpen:Boolean = isItemOpen(treePresModel.loadingNode);
@@ -147,7 +178,8 @@ package org.integratedsemantics.flexspaces.view.tree
          */
         protected function onResultTreeData(data:Object):void
         {
-        	treePresModel.onResultTreeData(data);
+            //trace("TreeViewBase onResultTreeData");  
+            treePresModel.onResultTreeData(data);
         	callLater(expandLater);
         }
 
@@ -159,11 +191,12 @@ package org.integratedsemantics.flexspaces.view.tree
          */
         protected function onFaultTreeData(info:Object):void
         {
-            trace("onFaultGetTreeData" + info);            
+            //trace("TreeViewBase onFaultGetTreeData" + info);            
         } 
         
         protected function treeChanged(event:Event):void
         {
+            //trace("TreeViewBase treeChanged");            
             treePresModel.selectedNode = this.selectedItem as TreeNode;           
         }
 
@@ -176,7 +209,16 @@ package org.integratedsemantics.flexspaces.view.tree
          * 
          */
         protected function treeClicked(event:Event):void
-        {
+        {            
+            //trace("TreeViewBase treeClicked"); 
+
+            // cmis trigger folder list update
+            var node:TreeNode = selectedItem as TreeNode;
+            if (node.hasBeenLoaded == true)
+            {
+                treePresModel.doneTreeData = true;
+            }                    
+            
             var toggle:Boolean = isItemOpen(selectedItem);
             if (toggle == true)
             {

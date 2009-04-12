@@ -18,6 +18,9 @@ package org.integratedsemantics.flexspaces.presmodel.search.results
 	{	    		    
 	    public var resultsCountLabel:String;
 
+        public var totalSize:int;
+
+
 	    /**
 	     * Constructor 
 	     * 
@@ -56,7 +59,18 @@ package org.integratedsemantics.flexspaces.presmodel.search.results
             for each (var node:Node in nodeCollection)
             {
                 node.showThumbnail = showThumbnails;
-            }                                
+            }  
+
+            // cmis spaces uses clientside paging only, flexspaces by default uses serverside paging
+            var cmisMode:Boolean = model.appConfig.cmisMode;
+            if (cmisMode == true)
+            {
+                totalSize = nodeCollection.length;                        
+            }   
+            else
+            {
+                totalSize = nodeCollection.totalSize;            
+            }                                                                                                                                          
 		}
 		
 		public function requery(responder:Responder, pageSize:int, pageNum:int):void

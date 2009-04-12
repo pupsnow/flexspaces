@@ -3,6 +3,7 @@ package org.integratedsemantics.flexspaces.view.search.results
     import flash.events.Event;
     
     import mx.binding.utils.ChangeWatcher;
+    import mx.collections.ArrayCollection;
     import mx.controls.Label;
     import mx.rpc.Responder;
     
@@ -14,6 +15,10 @@ package org.integratedsemantics.flexspaces.view.search.results
 	public class SearchResultsViewBase extends NodeListViewBase
 	{		
 	    public var resultsCountLabel:Label;
+
+        [Bindable]
+        protected var dataProvider:ArrayCollection;
+
 
 		/**
 		 * Constructor 
@@ -55,8 +60,35 @@ package org.integratedsemantics.flexspaces.view.search.results
             resultsCountLabel.setStyle("color", 0xFFFFFF); 
             resultsCountLabel.setStyle("fontSize", 11); 
             
-            ChangeWatcher.watch(pageBar, "curPageIndex", onPageChange);            
-            pager.clientSidePage = false; 
+            
+            // cmis spaces uses clientside paging only, flexspaces by default uses serverside paging
+            var cmisMode:Boolean = searchResultsPresModel.model.appConfig.cmisMode;
+            if (cmisMode == true)
+            {
+                dataProvider = pager.pageData;
+                ChangeWatcher.watch(pager, "pageData", onDataProviderChange);
+            }   
+            else
+            {
+                dataProvider = nodeListViewPresModel.nodeCollection;
+                ChangeWatcher.watch(nodeListViewPresModel, "nodeCollection", onDataProviderChange);
+                
+                ChangeWatcher.watch(pageBar, "curPageIndex", onPageChange);            
+                pager.clientSidePage = false;                 
+            }                                                                       
+        }
+
+        protected function onDataProviderChange(event:Event):void
+        {
+            var cmisMode:Boolean = searchResultsPresModel.model.appConfig.cmisMode;
+            if (cmisMode == true)
+            {
+                dataProvider = pager.pageData;
+            }   
+            else
+            {
+                dataProvider = nodeListViewPresModel.nodeCollection;
+            }                                                                       
         }
 
         /**
@@ -109,8 +141,14 @@ package org.integratedsemantics.flexspaces.view.search.results
         {
             searchResultsPresModel.model.flexSpacesPresModel.searchPageSize = event.target.value;
             
-            pageBar.curPageIndex = 0;
-            requery();
+            resetPaging();
+            
+            var cmisMode:Boolean = searchResultsPresModel.model.appConfig.cmisMode;
+            if (cmisMode == false)
+            {
+                // for server side paging
+                requery();
+            }
         }
                 
 	}

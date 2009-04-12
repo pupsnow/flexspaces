@@ -64,6 +64,9 @@ package org.integratedsemantics.flexspaces.control.command
          * 
          */
         function httpStatusHandler(event:HTTPStatusEvent):void;
-         
+        
+        // cmis for now have a way to notify, do this for now cause target of a new event is readonly
+        function complete(target:Object):void;
+                 
     }
 }

@@ -19,8 +19,8 @@ package org.integratedsemantics.flexspaces.view.folderview.paging
 		private var _pager:Pager;		
 		
 		private var _totalPages:Number = 1;
-		
-		[Bindable]
+			
+		[Bindable]		
 		public var curPageIndex:int = 0;  
 
         // button selection status
@@ -39,28 +39,41 @@ package org.integratedsemantics.flexspaces.view.folderview.paging
 			this.addEventListener(ItemClickEvent.ITEM_CLICK, this.navigatePage);
 		}
 		
+        public function get pager():Pager
+        {
+            return this._pager;
+        }
+                
 		public function set pager(value:Pager):void
 		{
 			this._pager = value;
 			this.createNavBar(this.totalPages);
 		}
 		
-		public function get pager():Pager
-		{
-			return this._pager;
-		}
-		        
+        public function get totalPages():Number
+        {
+            return this._totalPages;
+        }
+        
 		public function set totalPages(value:Number):void
 		{
 			this._totalPages = value;
 			this.createNavBar(this.totalPages);
 		}
-		
-		public function get totalPages():Number
-		{
-			return this._totalPages;
-		}
-		
+				
+        public function reset():void
+        {
+            curPageIndex = 0;
+            if (totalPages > 1)
+            {
+                if (firstDisplayed > 0)  
+                {
+                    createNavBar(totalPages, 0);    
+                }  
+                selectedIndex = prevSelectedIndex = 0 + 2;
+            }    
+        }
+        
 		/**
 		 * Handle page number and first/previous/next/last button
 		 *  

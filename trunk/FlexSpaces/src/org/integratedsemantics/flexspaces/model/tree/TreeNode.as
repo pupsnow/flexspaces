@@ -2,7 +2,7 @@ package org.integratedsemantics.flexspaces.model.tree
 {
     import mx.collections.ArrayCollection;
     
-    import org.integratedsemantics.flexspaces.model.repo.RepoNode;
+    import org.integratedsemantics.flexspaces.model.folder.Node;
 
 
     /**
@@ -10,17 +10,14 @@ package org.integratedsemantics.flexspaces.model.tree
      *  Used in tree view
      */
     [Bindable] 
-    public class TreeNode extends RepoNode
+    public class TreeNode extends Node
     {
         public var label:String;
         
         public var hasBeenLoaded:Boolean;
         
         public var children:ArrayCollection;
-        
-        public var displayPath:String;  
-        
-        
+                       
         public function TreeNode(newLabel:String, newId:String)
         {
             super();

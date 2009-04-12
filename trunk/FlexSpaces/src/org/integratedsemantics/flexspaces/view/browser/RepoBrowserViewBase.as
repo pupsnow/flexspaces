@@ -52,8 +52,10 @@ package org.integratedsemantics.flexspaces.view.browser
             treeView.addEventListener(ListEvent.CHANGE, treeChanged);
             
             fileView1.addEventListener(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, onChangePathFolderList1);
-            fileView2.addEventListener(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, onChangePathFolderList2);
-            
+            if (fileView2 != null)
+            {
+                fileView2.addEventListener(FolderViewChangePathEvent.FOLDERLIST_CHANGEPATH, onChangePathFolderList2);
+            }
             parentApplication.addEventListener(AddedFolderEvent.ADDED_FOLDER, onAddRemoveFolder);
             parentApplication.addEventListener(DeletedFolderEvent.DELETED_FOLDER, onAddRemoveFolder);
         }
@@ -67,8 +69,14 @@ package org.integratedsemantics.flexspaces.view.browser
         public function setContextMenuHandler(handler:Function):void
         {
             fileView1.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);
-            fileView2.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);            
-            versionListView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);            
+            if (fileView2 != null)
+            {
+                fileView2.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);
+            }   
+            if (versionListView != null)
+            {         
+                versionListView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, handler);
+            }            
         }
 
         /**
@@ -80,7 +88,10 @@ package org.integratedsemantics.flexspaces.view.browser
         public function setOnDropHandler(handler:Function):void
         {
             fileView1.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, handler);
-            fileView2.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, handler);
+            if (fileView2 != null)
+            {
+                fileView2.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, handler);
+            }
         }
 
         /**
@@ -92,8 +103,14 @@ package org.integratedsemantics.flexspaces.view.browser
         public function setDoubleClickDocHandler(handler:Function):void
         {
             fileView1.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
-            fileView2.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
-            versionListView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
+            if (fileView2 != null)
+            {
+                fileView2.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
+            }
+            if (versionListView != null)
+            {                     
+                versionListView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, handler);
+            } 
         }
 
         /**
@@ -105,14 +122,23 @@ package org.integratedsemantics.flexspaces.view.browser
         public function setClickNodeHandler(handler:Function):void
         {
             fileView1.addEventListener(ClickNodeEvent.CLICK_NODE, handler);            
-            fileView2.addEventListener(ClickNodeEvent.CLICK_NODE, handler);                        
-            versionListView.addEventListener(ClickNodeEvent.CLICK_NODE, handler);                        
+            if (fileView2 != null)
+            {
+                fileView2.addEventListener(ClickNodeEvent.CLICK_NODE, handler);
+            }  
+            if (versionListView != null)
+            {                                           
+                versionListView.addEventListener(ClickNodeEvent.CLICK_NODE, handler);
+            }                        
         }
         
         public function initPaging():void
         {
             fileView1.initPaging();
-            fileView2.initPaging();
+            if (fileView2 != null)
+            {
+                fileView2.initPaging();
+            }
         }
 
         /**
@@ -121,7 +147,7 @@ package org.integratedsemantics.flexspaces.view.browser
          */
         public function showHideSecondRepoFolder():void
         {
-            if (fileView2.visible == true)
+            if ((fileView2 != null) && (fileView2.visible == true))
             {
                 // unselect things and select fileView1
                 if (repoBrowserPresModel.model.flexSpacesPresModel.currentNodeList == repoBrowserPresModel.folderViewPresModel2.nodeCollection)
@@ -146,7 +172,7 @@ package org.integratedsemantics.flexspaces.view.browser
                 repoBrowserPresModel.folderViewPresModel1.redraw();
             }
             
-            if (fileView2.visible == true)
+            if ((fileView2 != null) && (fileView2.visible == true))
             {
                 repoBrowserPresModel.folderViewPresModel2.redraw();
             }
@@ -159,7 +185,10 @@ package org.integratedsemantics.flexspaces.view.browser
         public function clearSelection():void
         {
             fileView1.clearSelection();
-            fileView2.clearSelection();     
+            if (fileView2 != null)
+            {            
+                fileView2.clearSelection();
+            }     
             repoBrowserPresModel.model.flexSpacesPresModel.clearSelection();
             
 			// since no selection in main folder view, version list should be clear
@@ -176,8 +205,14 @@ package org.integratedsemantics.flexspaces.view.browser
         public function clearOtherSelections(selectedFolderList:PresModel):void
         {
             fileView1.clearOtherSelections(selectedFolderList);
-            fileView2.clearOtherSelections(selectedFolderList);  
-            versionListView.clearOtherSelections(selectedFolderList);  
+            if (fileView2 != null)
+            {            
+                fileView2.clearOtherSelections(selectedFolderList);
+            }  
+            if (versionListView != null)
+            {                     
+                versionListView.clearOtherSelections(selectedFolderList);
+            }  
         }
         
         /**
@@ -207,8 +242,14 @@ package org.integratedsemantics.flexspaces.view.browser
         public function enableContextMenuItem(data:String, enabled:Boolean, fileMenu:Boolean):void
         {
             fileView1.enableContextMenuItem(data, enabled, fileMenu);
-            fileView2.enableContextMenuItem(data, enabled, fileMenu);
-            versionListView.enableContextMenuItem(data, enabled, fileMenu);
+            if (fileView2 != null)
+            {
+                fileView2.enableContextMenuItem(data, enabled, fileMenu);
+            }
+            if (versionListView != null)
+            {                     
+                versionListView.enableContextMenuItem(data, enabled, fileMenu);
+            }
         }
 
         /**
@@ -219,7 +260,10 @@ package org.integratedsemantics.flexspaces.view.browser
         public function showHideThumbnails():void
         {
             fileView1.showHideThumbnails();
-            fileView2.showHideThumbnails(); 
+            if (fileView2 != null)
+            {
+                fileView2.showHideThumbnails();
+            } 
         }
 
         /**
@@ -228,7 +272,7 @@ package org.integratedsemantics.flexspaces.view.browser
          */
         public function showHideVersionHistory():void
         {
-            if (versionListView.visible == false)
+            if ((versionListView != null) && (versionListView.visible == false))
             {
                 repoBrowserPresModel.versionListPresModel.initVersionList(fileView1.getSelectedItem());
             }
@@ -243,7 +287,7 @@ package org.integratedsemantics.flexspaces.view.browser
 		 */
 		public function initVersionList(selectedItem:Object):void
 		{
-			if (versionListView.visible == true)
+			if ((versionListView != null) &&(versionListView.visible == true))
 			{
 				repoBrowserPresModel.versionListPresModel.initVersionList(selectedItem);				
 			}                     			
@@ -256,11 +300,19 @@ package org.integratedsemantics.flexspaces.view.browser
          * 
          */
         protected function treeChanged(event:Event):void
-        {
+        {        
             var path:String = treeView.getPath();
-            
+           
             // for now tree only navigates the first folder list
-            repoBrowserPresModel.folderViewPresModel1.currentPath =  path;   
+            
+            if (repoBrowserPresModel.model.appConfig.cmisMode == false)
+            {
+                this.fileView1.currentPath = path;
+            }
+            else
+            {
+                this.fileView1.resetPaging();
+            }   
             
             // select fileView1 and clear item selection
             repoBrowserPresModel.model.flexSpacesPresModel.currentNodeList = repoBrowserPresModel.folderViewPresModel1.nodeCollection;
@@ -268,7 +320,7 @@ package org.integratedsemantics.flexspaces.view.browser
             
             // fire event to let container know about to new folder path in repo browser
             var changePathEvent:RepoBrowserChangePathEvent = new RepoBrowserChangePathEvent(RepoBrowserChangePathEvent.REPO_BROWSER_CHANGE_PATH, path);
-            var dispatched:Boolean = dispatchEvent(changePathEvent);                                
+            var dispatched:Boolean = dispatchEvent(changePathEvent);                                        
         }
 
         /**

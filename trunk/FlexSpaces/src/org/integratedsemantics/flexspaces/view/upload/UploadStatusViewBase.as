@@ -128,6 +128,22 @@ package org.integratedsemantics.flexspaces.view.upload
             }   
         }
      
+        public function complete(target:Object):void
+        {
+            var file:FileReference = FileReference(target);
+
+            // todo share code with completeHandler in a method
+            var uploadProgressBar:UploadProgressBarBase = getUploadProgressBarForFile(file);
+            
+            if (uploadProgressBar != null)
+            {
+                uploadProgressBar.progressBar.setProgress(file.size, file.size);                
+                uploadProgressBar.progressBar.label = uploadStatusPresModel.bytesToKiloBytesDisplay(file.size) + " of " 
+                                                      + uploadStatusPresModel.bytesToKiloBytesDisplay(file.size) + ", %3%%";            
+                uploadProgressBar.filenameLabel.text = file.name + ",  Completed";                
+            }   
+        }
+               
         /**
          * File uploaded and data returned event handler
          *  

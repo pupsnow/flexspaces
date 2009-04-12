@@ -20,10 +20,8 @@ package org.integratedsemantics.flexspaces.view.app
 	{
         protected var model:AppModelLocator = AppModelLocator.getInstance();
             
-        // make sure config service initialization is started soon so alfresco-config.xml loaded 
-        // and config config complete gets called soon (before config info is needed) 
-        protected var configService:ConfigService = ConfigService.instance;  
-        
+        protected var configService:ConfigService;
+          
         [Bindable]
         protected var flexSpacesPresModel:FlexSpacesPresModel;
         
@@ -36,12 +34,17 @@ package org.integratedsemantics.flexspaces.view.app
         public function AppBase()
         {
             super();
-			
+
             // Register interest in the error service events
             ErrorService.instance.addEventListener(ErrorRaisedEvent.ERROR_RAISED, onErrorRaised);            
             
-            // alfresco framework config           
-            configService.addEventListener(ConfigCompleteEvent.CONFIG_COMPLETE, onConfigComplete);
+            // make sure config service initialization is started soon so alfresco-config.xml loaded 
+            // and config config complete gets called soon (before config info is needed) 
+            if (model.appConfig.cmisMode == false)
+            {
+                configService = ConfigService.instance;
+                configService.addEventListener(ConfigCompleteEvent.CONFIG_COMPLETE, onConfigComplete);
+            }
             
             // spring actionscript config
             //applicationContext = new XMLApplicationContext("applicationContext.xml");
@@ -126,5 +129,5 @@ package org.integratedsemantics.flexspaces.view.app
             applicationContextComplete = true;  			
         }
         		
-	}
+    }
 }

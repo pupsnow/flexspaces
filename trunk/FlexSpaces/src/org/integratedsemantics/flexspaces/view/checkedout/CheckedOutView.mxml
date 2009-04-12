@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<folderview:FolderViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:folderview="org.integratedsemantics.flexspaces.view.folderview.*"
+<checkedoutview:CheckedOutViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:checkedoutview="org.integratedsemantics.flexspaces.view.checkedout.*"
     xmlns:breadcrumb="com.decoursey.components.*"
     xmlns:gridview="org.integratedsemantics.flexspaces.view.folderview.gridview.*"
     xmlns:iconview="org.integratedsemantics.flexspaces.view.folderview.iconview.*"
@@ -18,17 +18,16 @@
     [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
     [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
     </mx:Metadata>
-       
-    <paging:Pager id="pager" pageIndex="0" pageSize="{folderViewPresModel.model.flexSpacesPresModel.docLibPageSize}" 
-        totalPages="{Math.max(Math.ceil(folderViewPresModel.totalSize/folderViewPresModel.model.flexSpacesPresModel.docLibPageSize),1)}" 
+
+    <paging:Pager id="pager" pageIndex="0" pageSize="{checkedOutPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize}" 
+        totalPages="{Math.max(Math.ceil(nodeListViewPresModel.nodeCollection.length/checkedOutPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize),1)}" 
     	dataProvider="{nodeListViewPresModel.nodeCollection}" />  
 
     <mx:VBox height="100%" width="100%">
         
-        <!-- bread crumb and icon/grid view mode toggle buttons -->
+        <!-- bread crumb area and icon/grid view mode toggle buttons -->
         <mx:HBox width="100%">
             <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="left" id="breadCrumbAreaBox">
-                <breadcrumb:BreadcrumbDisplay id="breadCrumb" path="{folderViewPresModel.breadCrumbPath}" displayDivider="/" />
             </mx:HBox>
             <viewmodebar:ViewModeBarView id="viewModeBar" />
         </mx:HBox>
@@ -38,21 +37,21 @@
         
             <!-- folder icon view -->
             <mx:Box height="100%" width="100%" visible="true">
-                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{folderViewPresModel}" dataProvider="{dataProvider}"/>
+                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{checkedOutPresModel}" dataProvider="{pager.pageData}"/>
             </mx:Box>
 
             <!-- folder grid view -->
             <mx:Box height="100%" width="100%" visible="false">
-                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{folderViewPresModel}" dataProvider="{dataProvider}"/>
+                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{checkedOutPresModel}" dataProvider="{pager.pageData}"/>
             </mx:Box>
 
             <!-- coverflow view -->
             <mx:Box height="100%" width="100%" visible="false">
-                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{folderViewPresModel}" dataProvider="{dataProvider}"/>
+                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{checkedOutPresModel}" dataProvider="{pager.pageData}"/>
             </mx:Box>
 
         </mx:ViewStack>
-        
+
         <mx:HBox horizontalAlign="center" width="100%">
             <mx:Label text="{resourceManager.getString('FolderIconView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('FolderIconView', 'pagenumLabel_of')} {pager.totalPages}" 
                       color="0xFFFFFF" id="pagenumLabel"/>    
@@ -62,10 +61,10 @@
             <mx:Spacer width="4"/>                
             <mx:Label text="{resourceManager.getString('FolderIconView', 'itemsPerPageLabel_text')}" color="0xFFFFFF" id="itemsPerPageLabel"/>
             <mx:Spacer width="4"/>                
-            <mx:ComboBox id="pageSizeCombo" color="#000000" dataProvider="{folderViewPresModel.model.flexSpacesPresModel.pageSizeList}"
+            <mx:ComboBox id="pageSizeCombo" color="#000000" dataProvider="{checkedOutPresModel.model.flexSpacesPresModel.pageSizeList}"
                 change="onPageSizeChange(event)"/>
         </mx:HBox>
-
+        
     </mx:VBox>    
 
-</folderview:FolderViewBase>
+</checkedoutview:CheckedOutViewBase>    

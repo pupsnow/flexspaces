@@ -121,7 +121,11 @@ package org.integratedsemantics.flexspaces.presmodel.createspace
         public function createSpace(responder:Responder):void 
         {
             var templateNode:IRepoNode = new RepoNode();
-            templateNode.setId(selectedTemplateItem.id);
+            // cmis no templates
+            if (selectedTemplateItem != null)
+            {
+                templateNode.setId(selectedTemplateItem.id);
+            }
             var folderEvent:FolderEvent = new FolderEvent(FolderEvent.CREATE_SPACE, responder, parentNode, folderName, 
                                                           title, description, templateNode, selectedIcon.name);
             folderEvent.dispatch();                     

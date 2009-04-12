@@ -16,6 +16,9 @@ package org.integratedsemantics.flexspaces.control.event
         
         public var pageSize:int;
         public var pageNum:int;
+        
+        // cmis
+        public var cmisChildren:String;
 
         		
         /**
@@ -26,16 +29,20 @@ package org.integratedsemantics.flexspaces.control.event
          * @param path path of adm folder to list contents for
          * @param pageSize num of items in each page (0 for no paging)
          * @param pageNum  0 based page number to return
+         * @param cmisChildren optional cmis url for getting folder chldren (cmis mode)
          * 
          */
-        public function FolderListEvent(eventType:String, handlers:IResponder, path:String, pageSize:int=0, pageNum:int=0)
+        public function FolderListEvent(eventType:String, handlers:IResponder, path:String, pageSize:int=0, 
+                                        pageNum:int=0, cmisChildren:String = null)
         {
             super(eventType, handlers);
             
             this.path = path;
             
             this.pageSize = pageSize;
-            this.pageNum = pageNum;               
+            this.pageNum = pageNum;    
+            // cmis
+            this.cmisChildren = cmisChildren;         
         }       
 				
 	}

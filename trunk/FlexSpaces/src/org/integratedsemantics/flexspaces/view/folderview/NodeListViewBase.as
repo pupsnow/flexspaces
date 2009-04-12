@@ -345,7 +345,13 @@ package org.integratedsemantics.flexspaces.view.folderview
         protected function requery():void
         {
             // placeholder for override
-        }     
+        }  
+        
+        public function resetPaging():void
+        {
+            pager.pageIndex = 0;    
+            pageBar.reset();          
+        }                   
         
     }
 }

@@ -11,6 +11,7 @@
     xmlns:folderview="org.integratedsemantics.flexspaces.view.folderview.*"
     xmlns:searchpanel="org.integratedsemantics.flexspaces.view.search.searchpanel.*"
     xmlns:taskspanel="org.integratedsemantics.flexspaces.view.tasks.taskspanel.*"
+    xmlns:checkedout="org.integratedsemantics.flexspaces.view.checkedout.*"    
     creationComplete="onCreationComplete(event)" backgroundColor="#000000">
 
     <mx:Metadata>[ResourceBundle("FlexSpacesView")]</mx:Metadata>
@@ -102,6 +103,11 @@
                         <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
                                  id="searchTab" backgroundColor="#000000">              
                             <searchpanel:SearchPanel id="searchPanel" searchPanelPresModel="{flexSpacesPresModel.searchPanelPresModel}" height="100%" width="100%"/>
+                        </mx:VBox>
+                        
+                        <!-- Checked Out Tab -->
+                        <mx:VBox height="100%" width="100%" label="Checked Out" id="checkedOutTab" backgroundColor="#000000">          
+                            <checkedout:CheckedOutView id="checkedOutView" checkedOutPresModel="{flexSpacesPresModel.checkedOutPresModel}"/>                            
                         </mx:VBox>
                         
                         <!-- Task Tab -->

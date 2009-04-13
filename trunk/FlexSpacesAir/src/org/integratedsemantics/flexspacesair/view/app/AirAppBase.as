@@ -69,7 +69,9 @@ package org.integratedsemantics.flexspacesair.view.app
             {
             	flexSpacesAirPresModel.showTasks = false;
             	flexSpacesAirPresModel.showWCM = false;
-            }            
+            }    
+            
+            model.configComplete = true;                    
         }
         
         /**

@@ -30,7 +30,7 @@ package org.integratedsemantics.flexspaces.view.app
         [Bindable]
         protected var applicationContextComplete:Boolean = false;
         
-        
+                
         public function AppBase()
         {
             super();
@@ -103,7 +103,9 @@ package org.integratedsemantics.flexspaces.view.app
             {
             	flexSpacesPresModel.showTasks = false;
             	flexSpacesPresModel.showWCM = false;
-            }            
+            }    
+            
+            model.configComplete = true;        
         }
         
         /**

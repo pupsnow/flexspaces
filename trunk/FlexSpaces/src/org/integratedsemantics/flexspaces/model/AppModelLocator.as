@@ -40,6 +40,9 @@ package org.integratedsemantics.flexspaces.model
         
         // google map config (enable flag, key, url key is for)
         public var googleMapConfig:GoogleMapConfig = new GoogleMapConfig();
+        
+        // loading config complete
+        public var configComplete:Boolean = false;       
 
                    
 		// singleton: constructor only allows one model locator

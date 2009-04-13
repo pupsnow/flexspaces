@@ -11,6 +11,7 @@ package org.integratedsemantics.flexspaces.view.main
     import flexlib.controls.tabBarClasses.SuperTab;
     import flexlib.events.SuperTabEvent;
     
+    import mx.binding.utils.ChangeWatcher;
     import mx.containers.Box;
     import mx.containers.HBox;
     import mx.containers.VBox;
@@ -171,10 +172,14 @@ package org.integratedsemantics.flexspaces.view.main
                 AuthenticationService.instance.ticket = model.userInfo.loginTicket;                
                 onLoginDone(new LoginDoneEvent(LoginDoneEvent.LOGIN_DONE));
             }
-            else  
+            else if (model.configComplete == true)
             {			         
                 viewStack.selectedIndex = LOGIN_MODE_INDEX;         
             }              
+            else
+            {
+                ChangeWatcher.watch(model, "configComplete", onConfigComplete);
+            }
             
             if (flexSpacesPresModel != null)
             {
@@ -192,7 +197,12 @@ package org.integratedsemantics.flexspaces.view.main
         {
             loginView.addEventListener(LoginDoneEvent.LOGIN_DONE, onLoginDone);            
         }
-                            
+         
+        protected function onConfigComplete(event:Event):void
+        {
+            viewStack.selectedIndex = LOGIN_MODE_INDEX;                        
+        }
+                         
         /**
          * Handler called when login is successfully completed
          * 

@@ -32,7 +32,7 @@
        <#assign isWorkingCopy = "false">
        <#assign createChildrenPermission = "${ c.hasPermission('CreateChildren')?string('true', 'false') }" >
        <#assign mimetype="">
-   <#else>
+   <#elseif c.isDocument>
        <#assign isFolder="false">
        <#assign type="Document">
        <#assign size=c.size/1024 + " KB">
@@ -42,6 +42,8 @@
        <#assign createChildrenPermission = "false">
        <#assign mimetype=c.properties.content.mimetype!>       
    </#if>
+
+   <#if c.isContainer || c.isDocument>
 
    <node>
 
@@ -82,6 +84,9 @@
       <createChildrenPermission>${createChildrenPermission}</createChildrenPermission>
 
    </node>
+
+   </#if>
+
 </#list>
 
 </folder>

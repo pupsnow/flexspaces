@@ -17,7 +17,11 @@ package org.integratedsemantics.flexspaces.view.tree
         [Bindable]
         public var treePresModel:TreePresModel;
         
-
+        // multi level path to load in multple steps
+        private var multiStepPath:String = null;
+        private var pathParts:Array;
+        private var partIndex:int;
+        
         /**
          * Constructor 
          */
@@ -105,12 +109,17 @@ package org.integratedsemantics.flexspaces.view.tree
 			    }
 			    else
 			    {
-					//trace("TreePresModel.setPath: findString found wrong node " + path + " " + node.path);			
+					trace("TreePresModel.setPath: findString found wrong node " + path + " " + node.path);			
 			    }                                                                
 			}
 			else
 			{
-				//trace("TreePresModel.setPath: path not found " + path);			    					
+				trace("TreePresModel.setPath: path not found " + path);	
+				multiStepPath = path;	
+                pathParts = path.split("/");
+                partIndex = 1;
+                var currentMultiStepPath:String = "/" + pathParts[partIndex];
+				multiStepLoadPath(currentMultiStepPath);	    					
 			}
         } 
 
@@ -168,6 +177,11 @@ package org.integratedsemantics.flexspaces.view.tree
 				{
 	        		expandItem(treePresModel.loadingNode, true, false);
 	   			}
+	   			
+                if (multiStepPath != null)
+                {
+                    this.multiStepLoadPath(treePresModel.loadingNode.path);
+                }	   			
   			}			
 		}
         
@@ -180,7 +194,7 @@ package org.integratedsemantics.flexspaces.view.tree
         {
             //trace("TreeViewBase onResultTreeData");  
             treePresModel.onResultTreeData(data);
-        	callLater(expandLater);
+        	callLater(expandLater);        	
         }
 
         /**
@@ -234,6 +248,42 @@ package org.integratedsemantics.flexspaces.view.tree
             
             prevItem = selectedItem;
         }
+        
+        
+        private function multiStepLoadPath(path:String):void
+        {
+            var oldLabelField:String = labelField;
+            labelField = "path";
+            selectedIndex = -1;
+            var foundAndSelected:Boolean = findString(path);
+            labelField = oldLabelField;
+            
+            if (foundAndSelected == true)
+            {
+                var node:TreeNode = selectedItem as TreeNode;
+                
+                if (node.path == path)
+                {
+                    if (node.hasBeenLoaded == false)
+                    {
+                        var responder:Responder = new Responder(onResultTreeData, onFaultTreeData);
+                        treePresModel.getNodeChildren(node, responder);
+                    }  
+                    else if (path == multiStepPath)
+                    {
+                        // all done
+                        multiStepPath = null;
+                    }  
+                    else if (partIndex < (pathParts.length - 1))
+                    {
+                        partIndex++;
+                        path = path + "/" + pathParts[partIndex];
+                        multiStepLoadPath(path);
+                    }                                
+                }
+            }
+                        
+        }        
         
     }
 }

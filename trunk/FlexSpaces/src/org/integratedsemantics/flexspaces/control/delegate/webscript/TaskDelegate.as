@@ -6,10 +6,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import mx.collections.XMLListCollection;
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
@@ -44,20 +42,17 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/taskList";
+                var url:String = "/flexspaces/taskList";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetTaskListSuccess);
                 
                 var params:Object = new Object();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -108,21 +103,18 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/taskAttachments";
+                var url:String = "/flexspaces/taskAttachments";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetTaskAttachmentsSuccess);
                 
                 var params:Object = new Object();
                 params.taskid = taskId;
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -210,7 +202,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/endTask";
+                var url:String = "/flexspaces/endTask";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onEndTaskSuccess);
                 
@@ -222,14 +214,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                    params.transid = transitionId;
                 }
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -257,7 +246,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/startWorkflow";
+                var url:String = "/flexspaces/startWorkflow";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onStartWorkflowSuccess);
                 
@@ -272,14 +261,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                    params.duedate = dueDate;
                 }
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -297,7 +283,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/livecycle/startWorkflow";
+                var url:String = "/flexspaces/livecycle/startWorkflow";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onStartWorkflowSuccess);
                 
@@ -307,14 +293,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.reviewer = reviewer;
                 params.desc = desc;                
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         

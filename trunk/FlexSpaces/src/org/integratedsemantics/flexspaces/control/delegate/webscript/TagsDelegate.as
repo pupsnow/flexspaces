@@ -4,10 +4,9 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.vo.GetTagsVO;
     import org.integratedsemantics.flexspaces.model.vo.TagVO;
@@ -40,7 +39,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/getTags";
+                var url:String = "/flexspaces/getTags";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetTagsSuccess);
                 
@@ -51,14 +50,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                     params.noderef = repoNode.getNodeRef();
                 }
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -72,7 +68,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/addTag";
+                var url:String = "/flexspaces/addTag";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onAddTagSuccess);
                 
@@ -84,14 +80,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                     params.noderef = repoNode.getNodeRef();
                 }
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -105,7 +98,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/removeTag";
+                var url:String = "/flexspaces/removeTag";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onRemoveTagSuccess);
                 
@@ -117,14 +110,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                     params.noderef = repoNode.getNodeRef();
                 }
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 

@@ -4,10 +4,9 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.vo.PreviewInfoVO;
 
@@ -39,7 +38,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/getPreview";
+                var url:String = "/flexspaces/getPreview";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetPreviewSuccess);
                 
@@ -47,14 +46,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.nodeid = repoNode.getId()
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }                        
         }
 
@@ -95,7 +91,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/makePreviewRendition";
+                var url:String = "/flexspaces/makePreviewRendition";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onMakePreviewRenditionSuccess);
                 
@@ -104,14 +100,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.nodeid = repoNode.getId();
                 params.folderpath = parentNode.getPath();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }                        
         }
 

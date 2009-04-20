@@ -4,7 +4,6 @@ package org.integratedsemantics.flexspaces.control.command
     import com.universalmind.cairngorm.commands.Command;
     import com.universalmind.cairngorm.events.Callbacks;
     
-    import org.alfresco.framework.service.webscript.ConfigService;
     import org.integratedsemantics.flexspaces.control.delegate.webscript.LoginDelegate;
     import org.integratedsemantics.flexspaces.control.event.LoginEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
@@ -53,8 +52,6 @@ package org.integratedsemantics.flexspaces.control.command
         {
             var model : AppModelLocator = AppModelLocator.getInstance();
             
-            model.ecmServerConfig.urlPrefix = ConfigService.instance.url;
-
             model.userInfo.loginUserName = event.userName;
             model.userInfo.loginPassword = event.password;
             

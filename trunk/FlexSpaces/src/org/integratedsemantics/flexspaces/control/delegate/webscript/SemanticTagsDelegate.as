@@ -5,10 +5,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import mx.collections.ArrayCollection;
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.tree.SemanticTagTreeNode;
@@ -46,7 +44,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/getSemanticTags";
+                var url:String = "/semantics/getSemanticTags";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetSemanticTagsSuccess);
                 
@@ -57,14 +55,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 					params.semanticCat = semanticCategory;                	
                 }
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -77,7 +72,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/nodeSemanticTags";
+                var url:String = "/semantics/nodeSemanticTags";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetNodeSemanticTagsSuccess);
                 
@@ -85,14 +80,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.noderef = repoNode.getNodeRef();
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -105,7 +97,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/autoTag";
+                var model:AppModelLocator = AppModelLocator.getInstance();
+                var url:String = "/semantics/autoTag";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onTagsDataSuccess);
                 
@@ -113,19 +106,15 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.noderef = repoNode.getNodeRef();
                 
-				var model:AppModelLocator = AppModelLocator.getInstance();                                
                 params.key = model.calaisConfig.calaisKey;
                 
                 params.autoTag = "true";
-                
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
                 
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -138,7 +127,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/tagSuggestList";
+                var model:AppModelLocator = AppModelLocator.getInstance();
+                var url:String = "/semantics/tagSuggestList";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onSuggestTagsSuccess);
                 
@@ -146,17 +136,13 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.noderef = repoNode.getNodeRef();
                 
-				var model:AppModelLocator = AppModelLocator.getInstance();                                
                 params.key = model.calaisConfig.calaisKey;
-                
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
                 
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -180,7 +166,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/addNewSemanticTag";
+                var url:String = "/semantics/addNewSemanticTag";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onTagsDataSuccess);
                 
@@ -219,14 +205,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 	params.ticker = stockTicker;
     			}
                                                
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -241,7 +224,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/addNodeSemanticTag";
+                var url:String = "/semantics/addNodeSemanticTag";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onTagsDataSuccess);
                 
@@ -250,14 +233,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.noderef = repoNode.getNodeRef();
                 params.tagnoderef = tagNode.getNodeRef();
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -272,7 +252,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/removeNodeSemanticTag";
+                var url:String = "/semantics/removeNodeSemanticTag";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onTagsDataSuccess);
                 
@@ -281,14 +261,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.noderef = repoNode.getNodeRef();
                 params.tagnoderef = tagNode.getNodeRef();
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -304,7 +281,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/semantics/semanticTagTree";
+                var url:String = "/semantics/semanticTagTree";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetSemanticTagTreeSuccess);
                 
@@ -312,14 +289,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.noderef = repoNode.getNodeRef();
                 
-                // using e4x not default object result format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 

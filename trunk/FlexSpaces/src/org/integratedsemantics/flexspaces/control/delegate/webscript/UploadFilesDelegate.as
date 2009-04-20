@@ -16,12 +16,9 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     
     import mx.rpc.IResponder;
     import mx.rpc.events.ResultEvent;
-    import mx.utils.Base64Encoder;
     
-    import org.alfresco.framework.service.authentication.AuthenticationService;
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
     import org.integratedsemantics.flexspaces.control.command.IUploadHandlers;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.util.FormatUtil;
@@ -86,7 +83,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             var model:AppModelLocator = AppModelLocator.getInstance();
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
-	            var url:String = ConfigService.instance.url +  "/flexspaces/uploadNew";
+	            var url:String = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadNew";
             	this.uploadURLRequest = new URLRequest(url);
 	            //var encoder:Base64Encoder = new Base64Encoder();
 	            //encoder.encode(model.loginUserName + ":" + model.loginPassword);
@@ -97,7 +94,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             }
             else
             {
-	            url = ConfigService.instance.url +  "/flexspaces/uploadNew" + "?alf_ticket=" + AuthenticationService.instance.ticket;
+	            url = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadNew" + "?alf_ticket=" + model.userInfo.loginTicket;
             	this.uploadURLRequest = new URLRequest(url);            	
             }
 
@@ -147,11 +144,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             var model:AppModelLocator = AppModelLocator.getInstance();
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
-                var url:String = ConfigService.instance.url +  "/flexspaces/uploadExisting";
+                var url:String = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadExisting";
             }
             else
             {
-                url = ConfigService.instance.url +  "/flexspaces/uploadExisting" + "?alf_ticket=" + AuthenticationService.instance.ticket;            	
+                url = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadExisting" + "?alf_ticket=" + model.userInfo.loginTicket;            	
             }            
             this.uploadURLRequest = new URLRequest(url);
             uploadURLRequest.method = URLRequestMethod.POST;
@@ -240,7 +237,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
      

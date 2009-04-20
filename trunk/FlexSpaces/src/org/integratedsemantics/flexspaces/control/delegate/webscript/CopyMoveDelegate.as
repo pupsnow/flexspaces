@@ -4,10 +4,9 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     
 
@@ -40,7 +39,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/copy";
+                var url:String = "/flexspaces/copy";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCopySuccess);
                 
@@ -50,14 +49,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.path = targetFolderNode.getPath();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -72,7 +68,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/wcm/copy";
+                var url:String = "/flexspaces/wcm/copy";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCopySuccess);
                 
@@ -84,14 +80,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.targetstoreid = targetFolderNode.getStoreId();
                 params.targetpath = targetFolderNode.getPath();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
       
@@ -106,7 +99,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/move";
+                var url:String = "/flexspaces/move";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onMoveSuccess);
                 
@@ -116,14 +109,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.path = targetFolderNode.getPath();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -139,7 +129,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/wcm/move";
+                var url:String = "/flexspaces/wcm/move";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCopySuccess);
                 
@@ -151,14 +141,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.targetstoreid = targetFolderNode.getStoreId();
                 params.targetpath = targetFolderNode.getPath();
                                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -173,7 +160,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/wcm/crossRepoCopy";
+                var url:String = "/flexspaces/wcm/crossRepoCopy";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCopySuccess);
                 
@@ -184,14 +171,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 
                 params.targetadmpath = targetFolderNode.getPath();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -206,7 +190,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/wcm/crossRepoCopy";
+                var url:String = "/flexspaces/wcm/crossRepoCopy";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCopySuccess);
                 
@@ -217,14 +201,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.targetstoreid = targetFolderNode.getStoreId();
                 params.targetavmpath = targetFolderNode.getPath();
 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 

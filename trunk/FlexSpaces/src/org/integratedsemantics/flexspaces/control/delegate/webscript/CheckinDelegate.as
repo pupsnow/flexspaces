@@ -4,10 +4,9 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.vo.CheckoutVO;
 
@@ -39,8 +38,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         public function cancelCheckout(repoNode:IRepoNode):void
         {
             try
-            {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/cancelCheckout";
+            {          
+                var url:String = "/flexspaces/cancelCheckout";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onDocActionSuccess);
                 
@@ -48,14 +47,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.nodeid = repoNode.getId();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -69,7 +65,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/checkout";
+                var url:String = "/flexspaces/checkout";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCheckoutSuccess);
                 
@@ -77,14 +73,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.nodeid = repoNode.getId();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -98,7 +91,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/checkin";
+                var url:String = "/flexspaces/checkin";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onDocActionSuccess);
                 
@@ -106,14 +99,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.nodeid = repoNode.getId();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -127,7 +117,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/makeVersionable";
+                var url:String = "/flexspaces/makeVersionable";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onDocActionSuccess);
                 
@@ -135,14 +125,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.nodeid = repoNode.getId();
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 

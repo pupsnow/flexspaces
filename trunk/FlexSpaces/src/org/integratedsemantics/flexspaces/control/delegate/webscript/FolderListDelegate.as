@@ -6,10 +6,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import mx.collections.XMLListCollection;
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.folder.Node;
@@ -44,7 +42,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/folderlist";
+                var url:String = "/flexspaces/folderlist";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onFolderListDataSuccess);
                 
@@ -58,14 +56,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                     params.pagenum = pageNum;
                 }
 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         

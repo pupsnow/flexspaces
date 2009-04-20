@@ -4,7 +4,6 @@ package org.integratedsemantics.flexspaces.control.command
     import com.universalmind.cairngorm.commands.Command;
     import com.universalmind.cairngorm.events.Callbacks;
     
-    import org.alfresco.framework.service.webscript.ConfigService;
     import org.integratedsemantics.flexspaces.control.delegate.webscript.InfoDelegate;
     import org.integratedsemantics.flexspaces.control.delegate.webscript.ValidateTicketDelegate;
     import org.integratedsemantics.flexspaces.control.event.GetInfoEvent;
@@ -107,8 +106,6 @@ package org.integratedsemantics.flexspaces.control.command
             if (event.result is XML)
             {
                 var result:XML = event.result as XML;
-                
-                model.ecmServerConfig.urlPrefix = ConfigService.instance.url;
                 
                 model.ecmServerConfig.serverEdition = result.serverEdition;
                 model.ecmServerConfig.serverVersion = result.serverVersion;

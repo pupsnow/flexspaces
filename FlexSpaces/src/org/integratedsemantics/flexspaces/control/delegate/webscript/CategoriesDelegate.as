@@ -5,10 +5,9 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import mx.collections.ArrayCollection;
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.tree.TreeNode;
     import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
@@ -41,8 +40,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         public function getCategories(repoNode:IRepoNode):void
         {
             try
-            {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/categories";
+            {                  
+                var url:String = "/flexspaces/categories";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onGetCategoriesSuccess);
                 
@@ -50,14 +49,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.noderef = repoNode.getNodeRef();
                 
-                // using e4x not default object result format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         
@@ -70,7 +66,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/categoryProperties";
+                var url:String = "/flexspaces/categoryProperties";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onCategoryPropertiesSuccess);
                 
@@ -78,14 +74,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 
                 params.noderef = repoNode.getNodeRef();
                 
-                // using e4x not default object result format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -99,7 +92,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/addCategory";
+                var url:String =  "/flexspaces/addCategory";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCategoriesSuccess);
                 
@@ -108,14 +101,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.noderef = repoNode.getNodeRef();
                 params.categorynoderef = categoryNode.getNodeRef();
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 
@@ -128,8 +118,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         public function removeCategory(repoNode:IRepoNode, categoryNode:IRepoNode):void
         {
             try
-            {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/removeCategory";
+            {          
+                var url:String = "/flexspaces/removeCategory";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.POST, onCategoriesSuccess);
                 
@@ -138,14 +128,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                 params.noderef = repoNode.getNodeRef();
                 params.categorynoderef = categoryNode.getNodeRef();
                 
-                // using e4x instead of default object result format
-                webScript.resultFormat = "e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
 

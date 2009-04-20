@@ -3,9 +3,10 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
     import com.universalmind.cairngorm.business.Delegate;
     
     import mx.rpc.IResponder;
+    import mx.rpc.http.HTTPService;
     
-    import org.alfresco.framework.service.authentication.AuthenticationService;
-    import org.alfresco.framework.service.authentication.LogoutCompleteEvent;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
 
 
     /**
@@ -14,6 +15,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
      */
     public class LogoutDelegate extends Delegate
     {
+        private var model:AppModelLocator = AppModelLocator.getInstance();
+        
         /**
          * Constructor
          * 
@@ -32,21 +35,33 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
          */
         public function logout():void
         {
-            // Register interest in the authentication service logout success event
-            AuthenticationService.instance.addEventListener(LogoutCompleteEvent.LOGOUT_COMPLETE, onLogoutSuccess);
-
-            // Make call to authentication service to logout user
-            AuthenticationService.instance.logout();
+            if (model.ecmServerConfig.isLiveCycleContentServices == false)
+            {
+                var url:String = "/api/login/ticket/" + model.userInfo.loginTicket;             
+                var webScript:WebScriptService = new WebScriptService(url, WebScriptService.DELETE, onLogoutSuccess);
+                
+                webScript.resultFormat = HTTPService.RESULT_FORMAT_OBJECT;
+                
+                webScript.execute();
+            }   
+            else
+            {
+                model.userInfo.loginTicket = null;
+                model.userInfo.loginUserName = null;
+                model.userInfo.loginPassword = null;
+                notifyCaller(null, null);
+            }                                   
         }
 
         /**
-         * onLogoutSuccess event handler
-         * 
-         * @param event success event
+         * On logout success event handler
          */
-        protected function onLogoutSuccess(event:LogoutCompleteEvent):void
+        public function onLogoutSuccess(event:SuccessEvent):void
         {
-            AuthenticationService.instance.removeEventListener(LogoutCompleteEvent.LOGOUT_COMPLETE, onLogoutSuccess);
+            // Clear the current ticket information
+            model.userInfo.loginTicket = null;
+            model.userInfo.loginUserName = null;
+            model.userInfo.loginPassword = null;
             
             notifyCaller(null, event);
         }        

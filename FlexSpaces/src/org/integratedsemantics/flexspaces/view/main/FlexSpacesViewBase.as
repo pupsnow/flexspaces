@@ -24,7 +24,6 @@ package org.integratedsemantics.flexspaces.view.main
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
-    import org.alfresco.framework.service.authentication.AuthenticationService;
     import org.integratedsemantics.flexspaces.control.event.GetInfoEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
@@ -169,7 +168,6 @@ package org.integratedsemantics.flexspaces.view.main
             {
                 embeddedMode = true;
                 flexSpacesPresModel.showHeader = false;
-                AuthenticationService.instance.ticket = model.userInfo.loginTicket;                
                 onLoginDone(new LoginDoneEvent(LoginDoneEvent.LOGIN_DONE));
             }
             else if (model.configComplete == true)

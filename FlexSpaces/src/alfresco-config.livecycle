@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<alfresco-config>
-    <url protocol="http" domain="localhost" port="8080" alfrescoUrlPart="/contentspace/service" />
-    <server livecycle="true"/>
-    <locale default-locale="en_US"/>
-	<calais enable="false" key=""/>
-	<googlemap enable="false" url="" key=""/>        
-</alfresco-config>

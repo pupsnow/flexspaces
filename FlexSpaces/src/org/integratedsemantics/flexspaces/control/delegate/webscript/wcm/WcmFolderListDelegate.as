@@ -6,12 +6,10 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
     import mx.collections.XMLListCollection;
     import mx.rpc.IResponder;
     
-    import org.alfresco.framework.service.error.ErrorService;
-    import org.alfresco.framework.service.webscript.ConfigService;
-    import org.alfresco.framework.service.webscript.SuccessEvent;
-    import org.alfresco.framework.service.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.WebScriptService;
+    import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
-    import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.wcm.folder.WcmFolder;
     import org.integratedsemantics.flexspaces.model.wcm.folder.WcmNode;
 
@@ -44,7 +42,7 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
         {
             try
             {                   
-                var url:String = ConfigService.instance.url +  "/flexspaces/wcm/folderlist";
+                var url:String = "/flexspaces/wcm/folderlist";
                 
                 var webScript:WebScriptService = new WebScriptService(url, WebScriptService.GET, onFolderListDataSuccess);
                 
@@ -53,14 +51,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
                 params.storeid = storeId;
                 params.path = path;
                 
-                // using e4x result format not default object format
-                webScript.resultFormat ="e4x";
-                
                 webScript.execute(params);
             }
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
         }
         

@@ -17,7 +17,6 @@ package org.integratedsemantics.flexspacesair.view.main
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
-    import org.alfresco.framework.service.webscript.ConfigService;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
     import org.integratedsemantics.flexspaces.model.folder.Folder;
     import org.integratedsemantics.flexspaces.model.folder.Node;
@@ -142,7 +141,7 @@ package org.integratedsemantics.flexspacesair.view.main
                 browser.percentWidth = 100;
                 browser.percentHeight = 100;
                 var urlBegin:String;
-                urlBegin = ConfigService.instance.protocol + "://" + ConfigService.instance.domain + ":" + ConfigService.instance.port + "/share/";
+                urlBegin = model.ecmServerConfig.protocol + "://" + model.ecmServerConfig.domain + ":" + model.ecmServerConfig.port + "/share/";
                 browser.location = urlBegin + "login?username=" + model.userInfo.loginUserName + "&password=" + model.userInfo.loginPassword + "&success=" + urlBegin + "&failure=" + urlBegin;
                 tab.addChild(browser);
                 browser.visible = true;

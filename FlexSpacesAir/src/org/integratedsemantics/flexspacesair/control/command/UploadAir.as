@@ -12,8 +12,8 @@ package org.integratedsemantics.flexspacesair.control.command
     import flash.net.URLRequestMethod;
     import flash.net.URLVariables;
     
-    import org.alfresco.framework.service.error.ErrorService;
     import org.integratedsemantics.flexspaces.control.command.IUploadHandlers;
+    import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.util.FormatUtil;
@@ -144,7 +144,7 @@ package org.integratedsemantics.flexspacesair.control.command
             } 
             catch (error:Error)
             {
-                ErrorService.instance.raiseError(ErrorService.APPLICATION_ERROR, error);
+                ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
             }
 
             function openHandler(event:Event):void 

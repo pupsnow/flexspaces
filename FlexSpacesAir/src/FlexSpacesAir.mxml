@@ -7,7 +7,7 @@
 	verticalAlign="middle" horizontalAlign="center"                
 	styleName="mainApplication" 
 	xmlns:mx="http://www.adobe.com/2006/mxml"
-	xmlns:app="org.integratedsemantics.flexspacesair.view.app.*"
+	xmlns:app="org.integratedsemantics.flexspacesair.app.*"
 	xmlns:business="org.integratedsemantics.flexspaces.control.delegate.*"
 	xmlns:control="org.integratedsemantics.flexspacesair.control.*"
 	xmlns:view="org.integratedsemantics.flexspacesair.view.main.*"

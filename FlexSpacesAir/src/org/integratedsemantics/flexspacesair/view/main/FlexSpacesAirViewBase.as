@@ -126,14 +126,14 @@ package org.integratedsemantics.flexspacesair.view.main
             if ((model.ecmServerConfig.serverVersionNum() >= 3.0) && (flexSpacesAirPresModel.showShare == true))
             {
                 // add tab after other tabs
-                this.shareTabIndex = tabNav.numChildren;
                 var tab:VBox = new VBox();
                 tab.percentHeight = 100;
                 tab.percentWidth = 100;
                 tab.label = "Share";
-                tab.id = "ShareTab";
+                tab.id = "shareTab";
                 tab.setStyle("backgroundColor", 0x000000);
                 tabNav.addChild(tab); 
+                this.shareTabIndex = tabNav.getChildIndex(tab);
                 tabNav.setClosePolicyForTab(shareTabIndex, SuperTab.CLOSE_NEVER);                        
                         
                 // setup tab to dislay share
@@ -189,7 +189,7 @@ package org.integratedsemantics.flexspacesair.view.main
 
             // enable paste menu                                        
             var tabIndex:int = tabNav.selectedIndex;
-            if ((tabIndex == DOC_LIB_TAB_INDEX) || (tabIndex == WCM_TAB_INDEX))
+            if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
                 mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
             }                                                                                                           
@@ -209,7 +209,7 @@ package org.integratedsemantics.flexspacesair.view.main
             
             // enable paste menu                                        
             var tabIndex:int = tabNav.selectedIndex;
-            if ((tabIndex == DOC_LIB_TAB_INDEX) || (tabIndex == WCM_TAB_INDEX))
+            if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
                 mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
             }                                                                                                           
@@ -709,7 +709,7 @@ package org.integratedsemantics.flexspacesair.view.main
                 // view specific         
                 switch(tabIndex)
                 {
-                    case DOC_LIB_TAB_INDEX:  
+                    case docLibTabIndex:  
                         // paste                        
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
                         browserView.enableContextMenuItem("paste", enablePaste, true);  
@@ -718,13 +718,13 @@ package org.integratedsemantics.flexspacesair.view.main
                         mainMenu.menuBarCollection[3].menuitem[7].@enabled = readPermission;
                         mainMenu.menuBarCollection[3].menuitem[8].@enabled = writePermission;                         
                         break;                     
-                    case SEARCH_TAB_INDEX:
-                    case TASKS_TAB_INDEX:
+                    case searchTabIndex:
+                    case tasksTabIndex:
                         // make avail offline, offline upload
                         mainMenu.menuBarCollection[3].menuitem[7].@enabled = false;
                         mainMenu.menuBarCollection[3].menuitem[8].@enabled = false;                         
                         break;                
-                    case WCM_TAB_INDEX:
+                    case wcmTabIndex:
                         // paste
                         mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
                         wcmBrowserView.enableContextMenuItem("paste", enablePaste, true);  
@@ -767,7 +767,7 @@ package org.integratedsemantics.flexspacesair.view.main
     
                 switch(tabIndex)
                 {
-                    case DOC_LIB_TAB_INDEX:
+                    case docLibTabIndex:
                         // create content          
                         mainMenu.menuBarCollection[0].menuitem[1].@enabled = createChildrenPermission;
                         // paste
@@ -775,12 +775,12 @@ package org.integratedsemantics.flexspacesair.view.main
                         browserView.enableContextMenuItem("paste", enablePaste, true);  
                         this.pasteBtn.enabled = enablePaste;                    
                         break;                     
-                    case SEARCH_TAB_INDEX:
-                    case TASKS_TAB_INDEX:
+                    case searchTabIndex:
+                    case tasksTabIndex:
                         // create content          
                         mainMenu.menuBarCollection[0].menuitem[1].@enabled = false;
                         break;                
-                    case WCM_TAB_INDEX:
+                    case wcmTabIndex:
                         // create content          
                         mainMenu.menuBarCollection[0].menuitem[1].@enabled = false;
                         // paste

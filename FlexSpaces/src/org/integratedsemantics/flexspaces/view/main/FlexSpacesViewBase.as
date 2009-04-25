@@ -81,14 +81,13 @@ package org.integratedsemantics.flexspaces.view.main
         public static const GET_INFO_MODE_INDEX:int = 2;
         public static const MAIN_VIEW_MODE_INDEX:int = 3;
 
-        // index of tabs for views
-        public static const DOC_LIB_TAB_INDEX:int = 0;
-        public static const SEARCH_TAB_INDEX:int = 1;
-        //cmis added checked out tab view
-        public static const CHECKED_OUT_TAB_INDEX:int = 2;        
-        public static const TASKS_TAB_INDEX:int = 3;
-        public static const WCM_TAB_INDEX:int = 4;
-             
+        // index of tabs for views (set in onRepoBrowserCreated)   
+        public var docLibTabIndex:int = -1;
+        public var searchTabIndex:int = -1;
+        public var checkedOutTabIndex:int = -1;        
+        public var tasksTabIndex:int = -1;
+        public var wcmTabIndex:int = -1;             
+
         public var flexspacesviews:VBox;
         
         public var loginPage:VBox;
@@ -106,20 +105,21 @@ package org.integratedsemantics.flexspaces.view.main
         
         public var tabNav:SuperTabNavigator;
         
-        public var browserTab:VBox;
+        public var docLibTab:VBox;
         public var browserView:RepoBrowserViewBase;
         
         public var searchTab:VBox;
         public var searchPanel:SearchPanelBase;
+        
+        public var checkedOutTab:VBox;
+        public var checkedOutView:CheckedOutViewBase;
         
         public var tasksTab:VBox;
         public var tasksPanelView:TasksPanelViewBase;
         
         public var wcmTab:VBox;
         public var wcmBrowserView:WcmRepoBrowserViewBase;
-        
-        public var checkedOutView:CheckedOutViewBase;
-     
+            
         public var docker:Docker;
         public var menuToolbar:DockableToolBar;
         public var toolbar1:DockableToolBar;
@@ -269,15 +269,22 @@ package org.integratedsemantics.flexspaces.view.main
             this.uploadFileBtn.addEventListener(MouseEvent.CLICK, onUploadFileBtn);                    
             this.tagsBtn.addEventListener(MouseEvent.CLICK, onTagsBtn);     
 
+            // get index values of tabs
+            docLibTabIndex = tabNav.getChildIndex(docLibTab);
+            searchTabIndex = tabNav.getChildIndex(searchTab);
+            checkedOutTabIndex = tabNav.getChildIndex(checkedOutTab);        
+            tasksTabIndex = tabNav.getChildIndex(tasksTab);
+            wcmTabIndex = tabNav.getChildIndex(wcmTab);
+
             // init tab navigator
             tabNav.addEventListener(IndexChangedEvent.CHANGE, tabChange);   
             tabNav.popUpButtonPolicy = SuperTabNavigator.POPUPPOLICY_OFF;
             // prevent closing of doclib, search results, tasks, wcm tabs
-            tabNav.setClosePolicyForTab(DOC_LIB_TAB_INDEX, SuperTab.CLOSE_NEVER);                    
-            tabNav.setClosePolicyForTab(SEARCH_TAB_INDEX, SuperTab.CLOSE_NEVER);  
-            tabNav.setClosePolicyForTab(CHECKED_OUT_TAB_INDEX, SuperTab.CLOSE_NEVER);  
-            tabNav.setClosePolicyForTab(TASKS_TAB_INDEX, SuperTab.CLOSE_NEVER);  
-            tabNav.setClosePolicyForTab(WCM_TAB_INDEX, SuperTab.CLOSE_NEVER);  
+            tabNav.setClosePolicyForTab(docLibTabIndex, SuperTab.CLOSE_NEVER);                    
+            tabNav.setClosePolicyForTab(searchTabIndex, SuperTab.CLOSE_NEVER);  
+            tabNav.setClosePolicyForTab(checkedOutTabIndex, SuperTab.CLOSE_NEVER);  
+            tabNav.setClosePolicyForTab(tasksTabIndex, SuperTab.CLOSE_NEVER);  
+            tabNav.setClosePolicyForTab(wcmTabIndex, SuperTab.CLOSE_NEVER);  
             // todo: for now to avoid tab drag drop error in air app, disable drag/drop of tabs
             // due to bug in supertabnavigator
             tabNav.dragEnabled = false;
@@ -285,8 +292,8 @@ package org.integratedsemantics.flexspaces.view.main
             tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
 
             // hide checked out tab for now
-            tabNav.getTabAt(CHECKED_OUT_TAB_INDEX).visible = false;
-            tabNav.getTabAt(CHECKED_OUT_TAB_INDEX).includeInLayout = false;            
+            tabNav.getTabAt(checkedOutTabIndex).visible = false;
+            tabNav.getTabAt(checkedOutTabIndex).includeInLayout = false;            
 
             // init doclib view
             if (flexSpacesPresModel.showDocLib == true)
@@ -345,44 +352,44 @@ package org.integratedsemantics.flexspaces.view.main
             // hide tabs for views not to show
             if (flexSpacesPresModel.showDocLib == false)
             {
-                tabNav.getTabAt(DOC_LIB_TAB_INDEX).visible = false;
-                tabNav.getTabAt(DOC_LIB_TAB_INDEX).includeInLayout = false;
+                tabNav.getTabAt(docLibTabIndex).visible = false;
+                tabNav.getTabAt(docLibTabIndex).includeInLayout = false;
             }   
             if (flexSpacesPresModel.showSearch == false)
             {
-                tabNav.getTabAt(SEARCH_TAB_INDEX).visible = false;
-                tabNav.getTabAt(SEARCH_TAB_INDEX).includeInLayout = false;
+                tabNav.getTabAt(searchTabIndex).visible = false;
+                tabNav.getTabAt(searchTabIndex).includeInLayout = false;
                 searchView.visible = false;
                 this.header.invalidateDisplayList();
             }   
             if (flexSpacesPresModel.showTasks == false)
             {
-                tabNav.getTabAt(TASKS_TAB_INDEX).visible = false;
-                tabNav.getTabAt(TASKS_TAB_INDEX).includeInLayout = false;
+                tabNav.getTabAt(tasksTabIndex).visible = false;
+                tabNav.getTabAt(tasksTabIndex).includeInLayout = false;
             }   
             if (flexSpacesPresModel.showWCM == false)
             {
-                tabNav.getTabAt(WCM_TAB_INDEX).visible = false;
-                tabNav.getTabAt(WCM_TAB_INDEX).includeInLayout = false;
+                tabNav.getTabAt(wcmTabIndex).visible = false;
+                tabNav.getTabAt(wcmTabIndex).includeInLayout = false;
             } 
 
             // select the first enabled main view tab
             var tabIndex:int = 0;
             if (flexSpacesPresModel.showDocLib == true)
             {
-                tabIndex = DOC_LIB_TAB_INDEX;
+                tabIndex = docLibTabIndex;
             }
             else if (flexSpacesPresModel.showSearch == true)
             {
-                tabIndex = SEARCH_TAB_INDEX;
+                tabIndex = searchTabIndex;
             }
             else if (flexSpacesPresModel.showTasks == true)
             {
-                tabIndex = TASKS_TAB_INDEX;
+                tabIndex = tasksTabIndex;
             }
             else if (flexSpacesPresModel.showWCM == true)
             {
-                tabIndex = WCM_TAB_INDEX;
+                tabIndex = wcmTabIndex;
             }            
             tabNav.invalidateDisplayList();
             tabNav.selectedIndex = tabIndex;                          
@@ -428,19 +435,19 @@ package org.integratedsemantics.flexspaces.view.main
             var tabIndex:int = 0;
             if (flexSpacesPresModel.showDocLib == true)
             {
-                tabIndex = DOC_LIB_TAB_INDEX;
+                tabIndex = docLibTabIndex;
             }
             else if (flexSpacesPresModel.showSearch == true)
             {
-                tabIndex = SEARCH_TAB_INDEX;
+                tabIndex = searchTabIndex;
             }
             else if (flexSpacesPresModel.showTasks == true)
             {
-                tabIndex = TASKS_TAB_INDEX;
+                tabIndex = tasksTabIndex;
             }
             else if (flexSpacesPresModel.showWCM == true)
             {
-                tabIndex = WCM_TAB_INDEX;
+                tabIndex = wcmTabIndex;
             }
             
             tabNav.invalidateDisplayList();
@@ -459,7 +466,7 @@ package org.integratedsemantics.flexspaces.view.main
             {
                 clearSelection();   
                 
-                if (event.newIndex == DOC_LIB_TAB_INDEX)
+                if (event.newIndex == docLibTabIndex)
                 {
                     flexSpacesPresModel.wcmMode = false;
                     if (browserView != null)
@@ -471,7 +478,7 @@ package org.integratedsemantics.flexspaces.view.main
                     	wcmBrowserView.viewActive(false);
                     }
                 }
-                else if (event.newIndex == WCM_TAB_INDEX)
+                else if (event.newIndex == wcmTabIndex)
                 { 
                     flexSpacesPresModel.wcmMode = true;
                     if (browserView != null)
@@ -483,7 +490,7 @@ package org.integratedsemantics.flexspaces.view.main
                     	wcmBrowserView.viewActive(true);
                     }
                 }       
-                else if (event.newIndex == SEARCH_TAB_INDEX) 
+                else if (event.newIndex == searchTabIndex) 
                 {
                     flexSpacesPresModel.wcmMode = false;
                     flexSpacesPresModel.currentNodeList = null;
@@ -497,7 +504,7 @@ package org.integratedsemantics.flexspaces.view.main
                     	wcmBrowserView.viewActive(false);
                     }
                 }
-                else if (event.newIndex == TASKS_TAB_INDEX) 
+                else if (event.newIndex == tasksTabIndex) 
                 {
                     flexSpacesPresModel.wcmMode = false;
                     flexSpacesPresModel.currentNodeList = null;
@@ -550,7 +557,7 @@ package org.integratedsemantics.flexspaces.view.main
          */
         public function onSearchResults(event:SearchResultsEvent):void
         {
-            tabNav.selectedIndex = SEARCH_TAB_INDEX;
+            tabNav.selectedIndex = searchTabIndex;
             flexSpacesPresModel.searchPanelPresModel.initResultsData(event.searchResults);  
             // reset page index since new user query,  not requery to page
             searchResultsView.resetPaging();
@@ -584,7 +591,7 @@ package org.integratedsemantics.flexspaces.view.main
                 browserView.setPath(selectedItem.parentPath);
             
                 // switch to the doc lib tab 
-                tabNav.selectedIndex = DOC_LIB_TAB_INDEX;
+                tabNav.selectedIndex = docLibTabIndex;
             }
         }
                 
@@ -595,19 +602,19 @@ package org.integratedsemantics.flexspaces.view.main
         public function redraw():void
         {
             var tabIndex:int = tabNav.selectedIndex;
-            if (tabIndex == DOC_LIB_TAB_INDEX)
+            if (tabIndex == docLibTabIndex)
             {
                 browserView.redraw();
             }
-            else if (tabIndex == WCM_TAB_INDEX)
+            else if (tabIndex == wcmTabIndex)
             { 
                 wcmBrowserView.redraw();
             }       
-            else if (tabIndex == SEARCH_TAB_INDEX)
+            else if (tabIndex == searchTabIndex)
             {
                 searchPanel.redraw();
             }
-            else if (tabIndex == TASKS_TAB_INDEX) 
+            else if (tabIndex == tasksTabIndex) 
             {
                 tasksPanelView.taskAttachmentsView.redraw();
             }            
@@ -763,7 +770,7 @@ package org.integratedsemantics.flexspaces.view.main
             
             // enable paste menu                                        
             var tabIndex:int = tabNav.selectedIndex;
-            if ((tabIndex == DOC_LIB_TAB_INDEX) || (tabIndex == WCM_TAB_INDEX))
+            if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
                 mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
             }                                                    
@@ -781,7 +788,7 @@ package org.integratedsemantics.flexspaces.view.main
 
             // enable paste menu                                        
             var tabIndex:int = tabNav.selectedIndex;
-            if ((tabIndex == DOC_LIB_TAB_INDEX) || (tabIndex == WCM_TAB_INDEX))
+            if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
                 mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
             }                                                    
@@ -1281,7 +1288,7 @@ package org.integratedsemantics.flexspaces.view.main
                 // view specific         
                 switch(tabIndex)
                 {
-                    case DOC_LIB_TAB_INDEX:       
+                    case docLibTabIndex:       
                         // cut, copy, paste, delete   
                         mainMenu.menuBarCollection[1].menuitem[0].@enabled = deletePermission;
                         mainMenu.menuBarCollection[1].menuitem[1].@enabled = readPermission;
@@ -1353,8 +1360,8 @@ package org.integratedsemantics.flexspaces.view.main
                         }
                         break;        
                                      
-                    case SEARCH_TAB_INDEX:
-                    case TASKS_TAB_INDEX:
+                    case searchTabIndex:
+                    case tasksTabIndex:
                         // cut, copy, paste, delete   
                         mainMenu.menuBarCollection[1].menuitem[0].@enabled = false;
                         mainMenu.menuBarCollection[1].menuitem[1].@enabled = readPermission;
@@ -1404,7 +1411,7 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;                        
                         break;
                                         
-                    case WCM_TAB_INDEX:
+                    case wcmTabIndex:
                         // cut, copy, paste, delete   
                         mainMenu.menuBarCollection[1].menuitem[0].@enabled = deletePermission;
                         mainMenu.menuBarCollection[1].menuitem[1].@enabled = readPermission;
@@ -1569,7 +1576,7 @@ package org.integratedsemantics.flexspaces.view.main
     
                 switch(tabIndex)
                 {
-                    case DOC_LIB_TAB_INDEX:          
+                    case docLibTabIndex:          
                         // create space, upload          
                         mainMenu.menuBarCollection[0].menuitem[0].@enabled = createChildrenPermission;
                         mainMenu.menuBarCollection[0].menuitem[3].@enabled = createChildrenPermission;  
@@ -1592,9 +1599,9 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.menuBarCollection[2].menuitem[3].@enabled = false;
                         mainMenu.menuBarCollection[2].menuitem[4].@enabled = false;
                         break;                     
-                    case CHECKED_OUT_TAB_INDEX:
-                    case SEARCH_TAB_INDEX:
-                    case TASKS_TAB_INDEX:
+                    case checkedOutTabIndex:
+                    case searchTabIndex:
+                    case tasksTabIndex:
                         // create space, upload          
                         mainMenu.menuBarCollection[0].menuitem[0].@enabled = false;
                         mainMenu.menuBarCollection[0].menuitem[3].@enabled = false;
@@ -1609,7 +1616,7 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.menuBarCollection[2].menuitem[3].@enabled = false;
                         mainMenu.menuBarCollection[2].menuitem[4].@enabled = false;
                         break;                
-                    case WCM_TAB_INDEX:
+                    case wcmTabIndex:
                         // create folder, upload          
                         mainMenu.menuBarCollection[0].menuitem[0].@enabled = createChildrenPermission;
                         mainMenu.menuBarCollection[0].menuitem[3].@enabled = createChildrenPermission;

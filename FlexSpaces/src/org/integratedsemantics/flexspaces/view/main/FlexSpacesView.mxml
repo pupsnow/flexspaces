@@ -94,31 +94,31 @@
                     <flexlib:SuperTabNavigator id="tabNav" creationPolicy="all" width="100%" height="100%" backgroundColor="#FFFFFF" >
         
                         <!-- Doc Libary Tab: Repository Browser with Tree and Dual Folder Panes -->
-                        <mx:VBox id="browserTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
+                        <mx:VBox id="docLibTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
                                  height="100%" width="100%" backgroundColor="#000000" creationComplete="onRepoBrowserCreated(event)">
-                            <repobrowser:RepoBrowserView repoBrowserPresModel="{flexSpacesPresModel.browserPresModel}" id="browserView" height="100%" width="100%" backgroundColor="#000000"/>
+                            <repobrowser:RepoBrowserView id="browserView" repoBrowserPresModel="{flexSpacesPresModel.browserPresModel}"  height="100%" width="100%" backgroundColor="#000000"/>
                         </mx:VBox>
         
                         <!-- Search Tab -->
-                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
-                                 id="searchTab" backgroundColor="#000000">              
+                        <mx:VBox id="searchTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
+                                  backgroundColor="#000000">              
                             <searchpanel:SearchPanel id="searchPanel" searchPanelPresModel="{flexSpacesPresModel.searchPanelPresModel}" height="100%" width="100%"/>
                         </mx:VBox>
                         
                         <!-- Checked Out Tab -->
-                        <mx:VBox height="100%" width="100%" label="Checked Out" id="checkedOutTab" backgroundColor="#000000">          
+                        <mx:VBox id="checkedOutTab" height="100%" width="100%" label="Checked Out" backgroundColor="#000000">          
                             <checkedout:CheckedOutView id="checkedOutView" checkedOutPresModel="{flexSpacesPresModel.checkedOutPresModel}"/>                            
                         </mx:VBox>
                         
                         <!-- Task Tab -->
-                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'tasksTab_label' )}" 
-                                 id="tasksTab" backgroundColor="#000000">              
+                        <mx:VBox id="tasksTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'tasksTab_label' )}" 
+                                  backgroundColor="#000000">              
                             <taskspanel:TasksPanelView id="tasksPanelView" tasksPanelPresModel="{flexSpacesPresModel.tasksPanelPresModel}" height="100%" width="100%" />
                         </mx:VBox>
                         
                         <!-- WCM Tab -->
-                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'wcmTab_label' )}" 
-                                 id="wcmTab" backgroundColor="#000000">              
+                        <mx:VBox id="wcmTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'wcmTab_label' )}" 
+                                  backgroundColor="#000000">              
                             <wcmrepobrowser:WcmRepoBrowserView id="wcmBrowserView" wcmRepoBrowserPresModel="{flexSpacesPresModel.wcmBrowserPresModel}" height="100%" width="100%" backgroundColor="#000000"/>
                         </mx:VBox>
         

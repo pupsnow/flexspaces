@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
-    <menuitem label="ファイル">
+    <menuitem label="ファイル" data="file">
         <menuitem label="スペースの作成" data="newspace" enabled="false"/>
-        <menuitem label="コンテンツの作成" enabled="false">
+        <menuitem label="コンテンツの作成" data="createcontent" enabled="false">
            <menuitem label="HTMLファイル" data="createhtml"/>
            <menuitem label="テキストファイル" data="createtext"/>
            <menuitem label="XML" data="createxml"/>
         </menuitem>    
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="ファイルのアップロード" data="upload" enabled="false"/>
         <menuitem label="ファイルのダウンロード" data="download" enabled="false"/>
         <menuitem label="ファイルの編集" data="edit" enabled="false"/>
         <menuitem label="ファイルを見る" data="view" enabled="false"/>
         <menuitem label="ファイルをプレビュー" data="preview" enabled="false"/>
     </menuitem>
-    <menuitem label="編集">
+    <menuitem label="編集" data="edit">
         <menuitem label="切り取り" data="cut" enabled="false"/>
         <menuitem label="コピー" data="copy" enabled="false"/>
         <menuitem label="貼り付け" data="paste" enabled="false"/>
         <menuitem label="消去" data="delete" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="チェック イン" data="checkin" enabled="false"/>
         <menuitem label="チェック アウト" data="checkout" enabled="false"/>
         <menuitem label="チェックアウトの取り消し" data="cancelcheckout" enabled="false"/>
         <menuitem label="バージョン管理する" data="makeversion" enabled="false"/>
         <menuitem label="更新" data="update" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="名前の変更" data="rename" enabled="false"/>
         <menuitem label="プロパティ" data="properties" enabled="false"/>
         <menuitem label="タグ・カテゴリ" data="tags" enabled="false"/>
     </menuitem>
-    <menuitem label="表示">
+    <menuitem label="表示" data="view">
         <menuitem label="ツリー" type="check" toggled="true"  data="repotree"/>
         <menuitem label="デュアル・パネル" type="check" toggled="false"  data="secondrepofolder"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="WCM ツリー" type="check" toggled="true"  data="wcmrepotree" enabled="false"/>
         <menuitem label="デュアル WCM パネル" type="check" toggled="false"  data="wcmsecondrepofolder" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="サムネイルを表示" type="check" toggled="false"  data="thumbnails"/>        
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="ローカル ファイルブラウザ" type="check" toggled="false"  data="localfiles"/>                    
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="バージョンの履歴" type="check" toggled="false"  data="versionhistory"/>
     </menuitem>
-    <menuitem label="ツール">
+    <menuitem label="ツール" data="tools">
         <menuitem label="PDFの作成" data="makepdf" enabled="false"/>     
         <menuitem label="Flashプレビューの作成" data="makepreview" enabled="false"/>     
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="ワークフローの開始" data="startworkflow" enabled="false"/>              
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="詳細な検索" data="advancedsearch"/>                                                        
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="オフライン編集をする" data="availoffline" enabled="false"/>                                    
         <menuitem label="オフライン編集をアップロードする" data="offlineupload" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Calaisによるタグの自動付加" data="autoTag"/>        
         <menuitem label="Calaisによるタグの補完" data="suggestTags"/>                                                                                                               
     </menuitem>

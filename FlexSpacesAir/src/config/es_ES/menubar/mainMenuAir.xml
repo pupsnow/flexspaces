@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
-    <menuitem label="Archivo">
+    <menuitem label="Archivo" data="file">
         <menuitem label="Crear espacio" data="newspace" enabled="false"/>
-        <menuitem label="Crear contenido" enabled="false">
+        <menuitem label="Crear contenido" data="createcontent" enabled="false">
            <menuitem label="HTML" data="createhtml"/>
            <menuitem label="Texto sin formato" data="createtext"/>
            <menuitem label="XML" data="createxml"/>
         </menuitem>    
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Añadir archivo" data="upload" enabled="false"/>
         <menuitem label="Descargar archivo" data="download" enabled="false"/>
         <menuitem label="Editar archivo" data="edit" enabled="false"/>
         <menuitem label="Ver archivo" data="view" enabled="false"/>
         <menuitem label="Vista previa de archivo" data="preview" enabled="false"/>
     </menuitem>
-    <menuitem label="Edición">
+    <menuitem label="Edición" data="edit">
         <menuitem label="Cortar" data="cut" enabled="false"/>
         <menuitem label="Copiar" data="copy" enabled="false"/>
         <menuitem label="Pegar" data="paste" enabled="false"/>
         <menuitem label="Borrar" data="delete" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Checkin" data="checkin" enabled="false"/>
         <menuitem label="Checkout" data="checkout" enabled="false"/>
         <menuitem label="Cancelar Checkout" data="cancelcheckout" enabled="false"/>
         <menuitem label="Hacer Versionable" data="makeversion" enabled="false"/>
         <menuitem label="Actualizar" data="update" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Renombrar" data="rename" enabled="false"/>
         <menuitem label="Propiedades" data="properties" enabled="false"/>
         <menuitem label="Etiquetas / Categorías" data="tags" enabled="false"/>
     </menuitem>
-    <menuitem label="Ver">
+    <menuitem label="Ver" data="view">
         <menuitem label="Árbol de carpetas" type="check" toggled="true"  data="repotree"/>
         <menuitem label="Panel dual" type="check" toggled="false"  data="secondrepofolder"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Árbol WCM" type="check" toggled="true"  data="wcmrepotree" enabled="false"/>
         <menuitem label="Panel dual de WCM" type="check" toggled="false"  data="wcmsecondrepofolder" enabled="false"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Miniaturas" type="check" toggled="false"  data="thumbnails"/>
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Navegador de archivos locales" type="check" toggled="false"  data="localfiles"/>                    
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Historial de versiones" type="check" toggled="false"  data="versionhistory"/>        
     </menuitem>
-    <menuitem label="Herramientas">
+    <menuitem label="Herramientas" data="tools">
         <menuitem label="Crear PDF" data="makepdf" enabled="false"/>     
         <menuitem label="Crear vista previa en Flash" data="makepreview" enabled="false"/>     
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Iniciar Workflow" data="startworkflow" enabled="false"/>              
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Búsqueda avanzada" data="advancedsearch"/>     
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Poner a disposición fuera de línea" data="availoffline" enabled="false"/>                                    
         <menuitem label="Fuera de línea de carga" data="offlineupload" enabled="false"/>        
-        <menuitem type="separator" />
+        <menuitem type="separator" data="" />
         <menuitem label="Etiqueta automáticamente con Calais" data="autoTag"/>        
         <menuitem label="Sugerir etiquetas con Calais" data="suggestTags"/>                                                                                                               
     </menuitem>

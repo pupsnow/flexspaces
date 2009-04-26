@@ -163,7 +163,8 @@ package org.integratedsemantics.flexspacesair.view.main
             // enable paste right away if user has copied files to native external clipboard
             // before starting flexspacesair
             var enablePaste:Boolean = formatToPaste();
-            mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+            mainMenu.enableMenuItem("edit", "paste", enablePaste);
+            
             this.pasteBtn.enabled = enablePaste;                    
 
             // TODO: also need to add check for formatToPaste when switching/activating the flexpacesair window 
@@ -191,7 +192,7 @@ package org.integratedsemantics.flexspacesair.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
+                mainMenu.enableMenuItem("edit", "paste", true);
             }                                                                                                           
         }
         
@@ -211,7 +212,7 @@ package org.integratedsemantics.flexspacesair.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
+                mainMenu.enableMenuItem("edit", "paste", true);
             }                                                                                                           
         }        
             
@@ -711,27 +712,27 @@ package org.integratedsemantics.flexspacesair.view.main
                 {
                     case docLibTabIndex:  
                         // paste                        
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
                         browserView.enableContextMenuItem("paste", enablePaste, true);  
                         this.pasteBtn.enabled = enablePaste;                    
                         // make avail offline, offline upload
-                        mainMenu.menuBarCollection[3].menuitem[7].@enabled = readPermission;
-                        mainMenu.menuBarCollection[3].menuitem[8].@enabled = writePermission;                         
+                        mainMenu.enableMenuItem("tools", "availoffline", readPermission);
+                        mainMenu.enableMenuItem("tools", "offlineupload", writePermission);
                         break;                     
                     case searchTabIndex:
                     case tasksTabIndex:
                         // make avail offline, offline upload
-                        mainMenu.menuBarCollection[3].menuitem[7].@enabled = false;
-                        mainMenu.menuBarCollection[3].menuitem[8].@enabled = false;                         
+                        mainMenu.enableMenuItem("tools", "availoffline", false);
+                        mainMenu.enableMenuItem("tools", "offlineupload", false);
                         break;                
                     case wcmTabIndex:
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
                         wcmBrowserView.enableContextMenuItem("paste", enablePaste, true);  
                         this.pasteBtn.enabled = enablePaste;                    
                         // make avail offline, offline upload
-                        mainMenu.menuBarCollection[3].menuitem[7].@enabled = readPermission;
-                        mainMenu.menuBarCollection[3].menuitem[8].@enabled = writePermission;                         
+                        mainMenu.enableMenuItem("tools", "availoffline", readPermission);
+                        mainMenu.enableMenuItem("tools", "offlineupload", writePermission);
                         break;     
                 }                                                                                              
             }
@@ -750,9 +751,9 @@ package org.integratedsemantics.flexspacesair.view.main
             if (mainMenu.configurationDone == true)
             {
                 // make avail offline, offline upload
-                mainMenu.menuBarCollection[3].menuitem[7].@enabled = false;
-                mainMenu.menuBarCollection[3].menuitem[8].@enabled = false;
-    
+                mainMenu.enableMenuItem("tools", "availoffline", false);
+                mainMenu.enableMenuItem("tools", "offlineupload", false);
+
                 var createChildrenPermission:Boolean = false;                                       
                 if ( (flexSpacesAirPresModel.currentNodeList != null) && (flexSpacesAirPresModel.currentNodeList is Folder))
                 {
@@ -769,41 +770,41 @@ package org.integratedsemantics.flexspacesair.view.main
                 {
                     case docLibTabIndex:
                         // create content          
-                        mainMenu.menuBarCollection[0].menuitem[1].@enabled = createChildrenPermission;
+                        mainMenu.enableMenuItem("file", "createcontent", createChildrenPermission);
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
                         browserView.enableContextMenuItem("paste", enablePaste, true);  
                         this.pasteBtn.enabled = enablePaste;                    
                         break;                     
                     case searchTabIndex:
                     case tasksTabIndex:
                         // create content          
-                        mainMenu.menuBarCollection[0].menuitem[1].@enabled = false;
+                        mainMenu.enableMenuItem("file", "createcontent", false);
                         break;                
                     case wcmTabIndex:
                         // create content          
-                        mainMenu.menuBarCollection[0].menuitem[1].@enabled = false;
+                        mainMenu.enableMenuItem("file", "createcontent", false);
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
                         wcmBrowserView.enableContextMenuItem("paste", enablePaste, true);  
                         this.pasteBtn.enabled = enablePaste;                    
                         break;  
                     case this.shareTabIndex:
                         // create content          
-                        mainMenu.menuBarCollection[0].menuitem[1].@enabled = false;
+                        mainMenu.enableMenuItem("file", "createcontent", false);
                         // create space, upload          
-                        mainMenu.menuBarCollection[0].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[0].menuitem[3].@enabled = false;
+                        mainMenu.enableMenuItem("file", "newspace", false);
+                        mainMenu.enableMenuItem("file", "upload", false);                        
                         this.createSpaceBtn.enabled = false;
                         this.uploadFileBtn.enabled = false;
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = false;
+                        mainMenu.enableMenuItem("edit", "paste", false);
                         this.pasteBtn.enabled = false;                    
                         // tree, dual panes, wcm tree, dual wcm panes
-                        mainMenu.menuBarCollection[2].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[1].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[3].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[4].@enabled = false;
+                        mainMenu.enableMenuItem("view", "repotree", false);
+                        mainMenu.enableMenuItem("view", "secondrepofolder", false);
+                        mainMenu.enableMenuItem("view", "wcmrepotree", false);
+                        mainMenu.enableMenuItem("view", "wcmsecondrepofolder", false);
                         break;   
                 }   
             }            

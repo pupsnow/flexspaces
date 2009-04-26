@@ -404,19 +404,21 @@ package org.integratedsemantics.flexspaces.view.main
         protected function onMainMenuConfigured(event:MenuConfiguredEvent):void
         {
             // disable advanced search menu if no search tab
-            mainMenu.menuBarCollection[3].menuitem[5].@enabled = flexSpacesPresModel.showSearch;
-            // disable show tree, show second folder if no doclib tab      
-            mainMenu.menuBarCollection[2].menuitem[0].@enabled = flexSpacesPresModel.showDocLib;
-            mainMenu.menuBarCollection[2].menuitem[1].@enabled = flexSpacesPresModel.showDocLib;
-            // disable show wcm tree, show second wcm folder if no wcm tab                  
-            mainMenu.menuBarCollection[2].menuitem[3].@enabled = flexSpacesPresModel.showWCM;
-            mainMenu.menuBarCollection[2].menuitem[4].@enabled = flexSpacesPresModel.showWCM;
+            mainMenu.enableMenuItem("tools", "advancedsearch", flexSpacesPresModel.showSearch);
 
-            // dissable thumbnails menu if not at least 3.0
+            // disable show tree, show second folder if no doclib tab      
+            mainMenu.enableMenuItem("view", "repotree", flexSpacesPresModel.showDocLib);
+            mainMenu.enableMenuItem("view", "secondrepofolder", flexSpacesPresModel.showDocLib);
+
+            // disable show wcm tree, show second wcm folder if no wcm tab                  
+            mainMenu.enableMenuItem("view", "wcmrepotree", flexSpacesPresModel.showWCM);
+            mainMenu.enableMenuItem("view", "wcmsecondrepofolder", flexSpacesPresModel.showWCM);
+
+            // disable thumbnails menu if not at least 3.0
             var version:Number = model.ecmServerConfig.serverVersionNum();
             if (version < 3.0)
             {
-                mainMenu.menuBarCollection[2].menuitem[6].@enabled = false;    
+                mainMenu.enableMenuItem("view", "thumbnails", false);
             }            
 
             // do other menu setup
@@ -772,7 +774,7 @@ package org.integratedsemantics.flexspaces.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
+                mainMenu.enableMenuItem("edit", "paste", true);
             }                                                    
         }
 
@@ -790,7 +792,7 @@ package org.integratedsemantics.flexspaces.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.menuBarCollection[1].menuitem[2].@enabled = true;                    
+                mainMenu.enableMenuItem("edit", "paste", true);
             }                                                    
         }
 
@@ -1236,30 +1238,31 @@ package org.integratedsemantics.flexspaces.view.main
                 if (node.isFolder == true)
                 {
                     // download, edit, view, preview
-                    mainMenu.menuBarCollection[0].menuitem[4].@enabled = false;
-                    mainMenu.menuBarCollection[0].menuitem[5].@enabled = false;
-                    mainMenu.menuBarCollection[0].menuitem[6].@enabled = false;
-                    mainMenu.menuBarCollection[0].menuitem[7].@enabled = false;
+                    mainMenu.enableMenuItem("file", "download", false);
+                    mainMenu.enableMenuItem("file", "edit", false);
+                    mainMenu.enableMenuItem("file", "view", false);
+                    mainMenu.enableMenuItem("file", "preview", false);                    
+                    
                     // checkin menus, update
-                    mainMenu.menuBarCollection[1].menuitem[5].@enabled = false;
-                    mainMenu.menuBarCollection[1].menuitem[6].@enabled = false;
-                    mainMenu.menuBarCollection[1].menuitem[7].@enabled = false;
-                    mainMenu.menuBarCollection[1].menuitem[8].@enabled = false;
-                    mainMenu.menuBarCollection[1].menuitem[9].@enabled = false;
+                    mainMenu.enableMenuItem("edit", "checkin", false);
+                    mainMenu.enableMenuItem("edit", "checkout", false);
+                    mainMenu.enableMenuItem("edit", "cancelcheckout", false);
+                    mainMenu.enableMenuItem("edit", "makeversion", false);
+                    mainMenu.enableMenuItem("edit", "update", false);
                     
                     // make pdf, make flash, startworkflow    
-                    mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
-                    mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
-                    mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;
+                    mainMenu.enableMenuItem("tools", "makepdf", false);
+                    mainMenu.enableMenuItem("tools", "makepreview", false);
+                    mainMenu.enableMenuItem("tools", "startworkflow", false);
 
                     fileContextMenu = false;
                 }
                 else
                 {
                     // download, view, preview
-                    mainMenu.menuBarCollection[0].menuitem[4].@enabled = readPermission;
-                    mainMenu.menuBarCollection[0].menuitem[6].@enabled = readPermission;
-                    mainMenu.menuBarCollection[0].menuitem[7].@enabled = readPermission;                                        
+                    mainMenu.enableMenuItem("file", "download", readPermission);
+                    mainMenu.enableMenuItem("file", "view", readPermission);
+                    mainMenu.enableMenuItem("file", "preview", readPermission);                    
 
                     fileContextMenu = true;
                     // view, play video context  menus 
@@ -1290,10 +1293,10 @@ package org.integratedsemantics.flexspaces.view.main
                 {
                     case docLibTabIndex:       
                         // cut, copy, paste, delete   
-                        mainMenu.menuBarCollection[1].menuitem[0].@enabled = deletePermission;
-                        mainMenu.menuBarCollection[1].menuitem[1].@enabled = readPermission;
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-                        mainMenu.menuBarCollection[1].menuitem[3].@enabled = deletePermission;
+                        mainMenu.enableMenuItem("edit", "cut", deletePermission);
+                        mainMenu.enableMenuItem("edit", "copy", readPermission);
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
+                        mainMenu.enableMenuItem("edit", "delete", deletePermission);                       
                         this.cutBtn.enabled = deletePermission;
                         this.copyBtn.enabled = readPermission;
                         this.pasteBtn.enabled = enablePaste;                    
@@ -1304,9 +1307,9 @@ package org.integratedsemantics.flexspaces.view.main
                         browserView.enableContextMenuItem("delete", deletePermission, fileContextMenu);  
 
                         // rename, properties, tags
-                        mainMenu.menuBarCollection[1].menuitem[11].@enabled = writePermission;                        
-                        mainMenu.menuBarCollection[1].menuitem[12].@enabled = readPermission;                        
-                        mainMenu.menuBarCollection[1].menuitem[13].@enabled = readPermission;    
+                        mainMenu.enableMenuItem("edit", "rename", writePermission);
+                        mainMenu.enableMenuItem("edit", "properties", readPermission);
+                        mainMenu.enableMenuItem("edit", "tags", readPermission);                     
                         this.tagsBtn.enabled = readPermission;                        
                         browserView.enableContextMenuItem("rename", writePermission, fileContextMenu);  
                         browserView.enableContextMenuItem("properties", readPermission, fileContextMenu);  
@@ -1316,46 +1319,38 @@ package org.integratedsemantics.flexspaces.view.main
                         {                            
                             // checkin
                             var canCheckin:Boolean = writePermission && isWorkingCopy;
-                            mainMenu.menuBarCollection[1].menuitem[5].@enabled = canCheckin;
+                            mainMenu.enableMenuItem("edit", "checkin", canCheckin);
                             browserView.enableContextMenuItem("checkin", canCheckin, fileContextMenu);  
                             
                             // checkout, edit
                             var canCheckout:Boolean = writePermission && !isLocked && !isWorkingCopy;
-                            mainMenu.menuBarCollection[1].menuitem[6].@enabled = canCheckout;
-                            mainMenu.menuBarCollection[0].menuitem[5].@enabled = canCheckout;
+                            mainMenu.enableMenuItem("edit", "checkout", canCheckout);
+                            mainMenu.enableMenuItem("file", "edit", canCheckout);
                             browserView.enableContextMenuItem("checkout", canCheckout, fileContextMenu);  
                             
                             // cancel checkout
                             var canCancelCheckout:Boolean = writePermission && isWorkingCopy;
-                            mainMenu.menuBarCollection[1].menuitem[7].@enabled = canCancelCheckout;
+                            mainMenu.enableMenuItem("edit", "cancelcheckout", canCancelCheckout);
                             browserView.enableContextMenuItem("cancelcheckout", canCancelCheckout, fileContextMenu);  
                             
                             // make versionable
                             var canMakeVersionable:Boolean = writePermission && !isLocked;
-                            mainMenu.menuBarCollection[1].menuitem[8].@enabled = canMakeVersionable;
+                            mainMenu.enableMenuItem("edit", "makeversion", canMakeVersionable);
                             
                             // update
                             var canUpdate:Boolean = writePermission && !isLocked;
-                            mainMenu.menuBarCollection[1].menuitem[9].@enabled = canUpdate;
+                            mainMenu.enableMenuItem("edit", "update", canUpdate);
 
                             // make pdf, make flash, startworkflow
-                            mainMenu.menuBarCollection[3].menuitem[0].@enabled = createChildrenPermission;
-                            mainMenu.menuBarCollection[3].menuitem[1].@enabled = createChildrenPermission;
-                            mainMenu.menuBarCollection[3].menuitem[3].@enabled = readPermission;  
+                            mainMenu.enableMenuItem("tools", "makepdf", createChildrenPermission);
+                            mainMenu.enableMenuItem("tools", "makepreview", createChildrenPermission);
+                            mainMenu.enableMenuItem("tools", "startworkflow", readPermission);
                             
                             // auto-tag, suggest tags
                             if ((model.calaisConfig.enableCalias == true) && (writePermission == true))
                             {
-                                if (model.appConfig.airMode == false)
-                                {
-                                    mainMenu.menuBarCollection[3].menuitem[7].@enabled = true;                  
-                                    mainMenu.menuBarCollection[3].menuitem[8].@enabled = true;
-                                }
-                                else
-                                {
-                                    mainMenu.menuBarCollection[3].menuitem[10].@enabled = true;                 
-                                    mainMenu.menuBarCollection[3].menuitem[11].@enabled = true;                         
-                                }                   
+                                mainMenu.enableMenuItem("tools", "autoTag", true);
+                                mainMenu.enableMenuItem("tools", "suggestTags", true);
                             }                                                                                  
                         }
                         break;        
@@ -1363,10 +1358,10 @@ package org.integratedsemantics.flexspaces.view.main
                     case searchTabIndex:
                     case tasksTabIndex:
                         // cut, copy, paste, delete   
-                        mainMenu.menuBarCollection[1].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[1].menuitem[1].@enabled = readPermission;
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = false;
-                        mainMenu.menuBarCollection[1].menuitem[3].@enabled = false;
+                        mainMenu.enableMenuItem("edit", "cut", false);
+                        mainMenu.enableMenuItem("edit", "copy", readPermission);
+                        mainMenu.enableMenuItem("edit", "paste", false);
+                        mainMenu.enableMenuItem("edit", "delete", false);                                              
                         this.cutBtn.enabled = false;
                         this.copyBtn.enabled = readPermission;
                         this.pasteBtn.enabled = false;                    
@@ -1381,9 +1376,10 @@ package org.integratedsemantics.flexspaces.view.main
                         }  
 
                         // rename, properties, tags
-                        mainMenu.menuBarCollection[1].menuitem[11].@enabled = writePermission;                        
-                        mainMenu.menuBarCollection[1].menuitem[12].@enabled = readPermission;                        
-                        mainMenu.menuBarCollection[1].menuitem[13].@enabled = readPermission;                        
+                        mainMenu.enableMenuItem("edit", "rename", writePermission);
+                        mainMenu.enableMenuItem("edit", "properties", readPermission);
+                        mainMenu.enableMenuItem("edit", "tags", readPermission);                     
+                        
                         this.tagsBtn.enabled = readPermission;            
                         
                         if (searchPanel != null)
@@ -1400,23 +1396,24 @@ package org.integratedsemantics.flexspaces.view.main
                             tasksPanelView.taskAttachmentsView.enableContextMenuItem("tags", readPermission, fileContextMenu);
                             tasksPanelView.taskAttachmentsView.enableContextMenuItem( "gotoParent", flexSpacesPresModel.showDocLib, fileContextMenu);
                         }        
+                        
                         // checkin menus
-                        mainMenu.menuBarCollection[1].menuitem[5].@enabled = false;
-                        mainMenu.menuBarCollection[1].menuitem[6].@enabled = false;
-                        mainMenu.menuBarCollection[1].menuitem[7].@enabled = false;
-                        mainMenu.menuBarCollection[1].menuitem[8].@enabled = false;
+                        mainMenu.enableMenuItem("edit", "checkin", false);
+                        mainMenu.enableMenuItem("edit", "checkout", false);
+                        mainMenu.enableMenuItem("edit", "cancelcheckout", false);
+                        mainMenu.enableMenuItem("edit", "makeversion", false);                       
                         // make pdf, make flash, startworkflow    
-                        mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
-                        mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;                        
+                        mainMenu.enableMenuItem("tools", "makepdf", false);
+                        mainMenu.enableMenuItem("tools", "makepreview", false);
+                        mainMenu.enableMenuItem("tools", "startworkflow", false);                                       
                         break;
                                         
                     case wcmTabIndex:
                         // cut, copy, paste, delete   
-                        mainMenu.menuBarCollection[1].menuitem[0].@enabled = deletePermission;
-                        mainMenu.menuBarCollection[1].menuitem[1].@enabled = readPermission;
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
-                        mainMenu.menuBarCollection[1].menuitem[3].@enabled = deletePermission;
+                        mainMenu.enableMenuItem("edit", "cut", deletePermission);
+                        mainMenu.enableMenuItem("edit", "copy", readPermission);
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
+                        mainMenu.enableMenuItem("edit", "delete", deletePermission);                       
                         this.cutBtn.enabled = deletePermission;
                         this.copyBtn.enabled = readPermission;
                         this.pasteBtn.enabled = enablePaste;                    
@@ -1427,27 +1424,27 @@ package org.integratedsemantics.flexspaces.view.main
                         wcmBrowserView.enableContextMenuItem("delete", deletePermission, fileContextMenu);  
 
                         // rename, properties
-                        mainMenu.menuBarCollection[1].menuitem[11].@enabled = writePermission;                        
-                        mainMenu.menuBarCollection[1].menuitem[12].@enabled = readPermission;                        
+                        mainMenu.enableMenuItem("edit", "rename", writePermission);
+                        mainMenu.enableMenuItem("edit", "properties", readPermission);                        
                         wcmBrowserView.enableContextMenuItem("rename", writePermission, fileContextMenu);  
                         wcmBrowserView.enableContextMenuItem("properties", readPermission, fileContextMenu);  
 
                         if (selectedItem.isFolder != true)
                         {                                                    
                             // checkin menus
-                            mainMenu.menuBarCollection[1].menuitem[5].@enabled = false;
-                            mainMenu.menuBarCollection[1].menuitem[6].@enabled = false;
-                            mainMenu.menuBarCollection[1].menuitem[7].@enabled = false;
-                            mainMenu.menuBarCollection[1].menuitem[8].@enabled = false;
+                            mainMenu.enableMenuItem("edit", "checkin", false);
+                            mainMenu.enableMenuItem("edit", "checkout", false);
+                            mainMenu.enableMenuItem("edit", "cancelcheckout", false);
+                            mainMenu.enableMenuItem("edit", "makeversion", false);                       
     
                             // update
                             canUpdate = writePermission && !isLocked;
-                            mainMenu.menuBarCollection[1].menuitem[9].@enabled = canUpdate;
+                            mainMenu.enableMenuItem("edit", "update", canUpdate);                       
     
                             // make pdf, make flash, startworkflow    
-                            mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
-                            mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
-                            mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;  
+                            mainMenu.enableMenuItem("tools", "makepdf", false);
+                            mainMenu.enableMenuItem("tools", "makepreview", false);
+                            mainMenu.enableMenuItem("tools", "startworkflow", false);                                                                     
                         }
                                               
                         break;     
@@ -1470,9 +1467,9 @@ package org.integratedsemantics.flexspaces.view.main
                 var readPermission:Boolean = node.readPermission;                
                                 
                 // download, view, preview
-                mainMenu.menuBarCollection[0].menuitem[4].@enabled = readPermission;
-                mainMenu.menuBarCollection[0].menuitem[6].@enabled = readPermission;
-                mainMenu.menuBarCollection[0].menuitem[7].@enabled = false;                                        
+                mainMenu.enableMenuItem("file", "download", readPermission);
+                mainMenu.enableMenuItem("file", "view", readPermission);
+                mainMenu.enableMenuItem("file", "preview", false);                                                                         
 
                 if ( (browserView != null) && (browserView.versionListView != null) )
                 {  
@@ -1480,30 +1477,31 @@ package org.integratedsemantics.flexspaces.view.main
                 }  
                 
                 // cut, copy, paste, delete   
-                mainMenu.menuBarCollection[1].menuitem[0].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[1].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[2].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[3].@enabled = false;
+                mainMenu.enableMenuItem("edit", "cut", false);
+                mainMenu.enableMenuItem("edit", "copy", false);
+                mainMenu.enableMenuItem("edit", "paste", false);
+                mainMenu.enableMenuItem("edit", "delete", false);                       
                 this.cutBtn.enabled = false;
                 this.copyBtn.enabled = false;
                 this.pasteBtn.enabled = false;                    
                 this.deleteBtn.enabled = false;
 
                 // rename, properties, tags
-                mainMenu.menuBarCollection[1].menuitem[11].@enabled = false;                        
-                mainMenu.menuBarCollection[1].menuitem[12].@enabled = false;                        
-                mainMenu.menuBarCollection[1].menuitem[13].@enabled = false;                        
+                mainMenu.enableMenuItem("edit", "rename", false);
+                mainMenu.enableMenuItem("edit", "properties", false);
+                mainMenu.enableMenuItem("edit", "tags", false);                                     
                 this.tagsBtn.enabled = false;            
                 
                 // checkin menus
-                mainMenu.menuBarCollection[1].menuitem[5].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[6].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[7].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[8].@enabled = false;
+                mainMenu.enableMenuItem("edit", "checkin", false);
+                mainMenu.enableMenuItem("edit", "checkout", false);
+                mainMenu.enableMenuItem("edit", "cancelcheckout", false);
+                mainMenu.enableMenuItem("edit", "makeversion", false);                       
+               
                 // make pdf, make flash, startworkflow    
-                mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
-                mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
-                mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;                        
+                mainMenu.enableMenuItem("tools", "makepdf", false);
+                mainMenu.enableMenuItem("tools", "makepreview", false);
+                mainMenu.enableMenuItem("tools", "startworkflow", false);                                                                                                            
             }
         }               
         
@@ -1532,104 +1530,99 @@ package org.integratedsemantics.flexspaces.view.main
                 // initially disable menus requiring a selection
     
                 // download, edit, view, preview
-                mainMenu.menuBarCollection[0].menuitem[4].@enabled = false;
-                mainMenu.menuBarCollection[0].menuitem[5].@enabled = false;
-                mainMenu.menuBarCollection[0].menuitem[6].@enabled = false;
-                mainMenu.menuBarCollection[0].menuitem[7].@enabled = false;
+                mainMenu.enableMenuItem("file", "download", false);
+                mainMenu.enableMenuItem("file", "edit", false);
+                mainMenu.enableMenuItem("file", "view", false);
+                mainMenu.enableMenuItem("file", "preview", false);                    
+                
                 // cut, copy, delete
-                mainMenu.menuBarCollection[1].menuitem[0].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[1].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[3].@enabled = false;
+                mainMenu.enableMenuItem("edit", "cut", false);
+                mainMenu.enableMenuItem("edit", "copy", false);
+                mainMenu.enableMenuItem("edit", "delete", false);                       
+                
                 this.cutBtn.enabled = false;
                 this.copyBtn.enabled = false;
                 this.deleteBtn.enabled = false;
                 
                 // rename, properties, tags
-                mainMenu.menuBarCollection[1].menuitem[11].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[12].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[13].@enabled = false;
+                mainMenu.enableMenuItem("edit", "rename", false);
+                mainMenu.enableMenuItem("edit", "properties", false);
+                mainMenu.enableMenuItem("edit", "tags", false);                                                     
                 this.tagsBtn.enabled = false;                        
     
                 // checkin menus, update
-                mainMenu.menuBarCollection[1].menuitem[5].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[6].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[7].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[8].@enabled = false;
-                mainMenu.menuBarCollection[1].menuitem[9].@enabled = false;
+                mainMenu.enableMenuItem("edit", "checkin", false);
+                mainMenu.enableMenuItem("edit", "checkout", false);
+                mainMenu.enableMenuItem("edit", "cancelcheckout", false);
+                mainMenu.enableMenuItem("edit", "makeversion", false);
+                mainMenu.enableMenuItem("edit", "update", false);
                 
                 // make pdf, make flash, startworkflow    
-                mainMenu.menuBarCollection[3].menuitem[0].@enabled = false;
-                mainMenu.menuBarCollection[3].menuitem[1].@enabled = false;
-                mainMenu.menuBarCollection[3].menuitem[3].@enabled = false;
+                mainMenu.enableMenuItem("tools", "makepdf", false);
+                mainMenu.enableMenuItem("tools", "makepreview", false);
+                mainMenu.enableMenuItem("tools", "startworkflow", false);                                                                                                            
                 
                 // auto-tag, suggest tags
-            	if (model.appConfig.airMode == false)
-                {
-	                mainMenu.menuBarCollection[3].menuitem[7].@enabled = false;                	
-	                mainMenu.menuBarCollection[3].menuitem[8].@enabled = false;
-				}
-				else
-				{
-	                mainMenu.menuBarCollection[3].menuitem[10].@enabled = false;                	
-	                mainMenu.menuBarCollection[3].menuitem[11].@enabled = false;							
-				}                	
+                mainMenu.enableMenuItem("tools", "autoTag", false);
+                mainMenu.enableMenuItem("tools", "suggestTags", false);				               	
     
                 switch(tabIndex)
                 {
                     case docLibTabIndex:          
                         // create space, upload          
-                        mainMenu.menuBarCollection[0].menuitem[0].@enabled = createChildrenPermission;
-                        mainMenu.menuBarCollection[0].menuitem[3].@enabled = createChildrenPermission;  
+                        mainMenu.enableMenuItem("file", "newspace", createChildrenPermission);
+                        mainMenu.enableMenuItem("file", "upload", createChildrenPermission);                        
                         this.createSpaceBtn.enabled = createChildrenPermission;
                         this.uploadFileBtn.enabled = createChildrenPermission;                                      
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
                         this.pasteBtn.enabled = enablePaste;                    
+
                         // tree, dual panes, wcm tree, dual wcm panes
-                        mainMenu.menuBarCollection[2].menuitem[0].@enabled = true;
+                        mainMenu.enableMenuItem("view", "repotree", true);
                         // disable dual panes in cmis
                         if (model.appConfig.cmisMode == true)
                         {
-                            mainMenu.menuBarCollection[2].menuitem[1].@enabled = false;                            
+                            mainMenu.enableMenuItem("view", "secondrepofolder", false);
                         }
                         else
                         {
-                            mainMenu.menuBarCollection[2].menuitem[1].@enabled = true;                            
+                            mainMenu.enableMenuItem("view", "secondrepofolder", true);
                         }
-                        mainMenu.menuBarCollection[2].menuitem[3].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[4].@enabled = false;
+                        mainMenu.enableMenuItem("view", "wcmrepotree", false);
+                        mainMenu.enableMenuItem("view", "wcmsecondrepofolder", false);
                         break;                     
                     case checkedOutTabIndex:
                     case searchTabIndex:
                     case tasksTabIndex:
                         // create space, upload          
-                        mainMenu.menuBarCollection[0].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[0].menuitem[3].@enabled = false;
+                        mainMenu.enableMenuItem("file", "newspace", false);
+                        mainMenu.enableMenuItem("file", "upload", false);                        
                         this.createSpaceBtn.enabled = false;
                         this.uploadFileBtn.enabled = false;
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = false;
+                        mainMenu.enableMenuItem("edit", "paste", false);
                         this.pasteBtn.enabled = false;                    
                         // tree, dual panes, wcm tree, dual wcm panes
-                        mainMenu.menuBarCollection[2].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[1].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[3].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[4].@enabled = false;
+                        mainMenu.enableMenuItem("view", "repotree", false);
+                        mainMenu.enableMenuItem("view", "secondrepofolder", false);
+                        mainMenu.enableMenuItem("view", "wcmrepotree", false);
+                        mainMenu.enableMenuItem("view", "wcmsecondrepofolder", false);
                         break;                
                     case wcmTabIndex:
                         // create folder, upload          
-                        mainMenu.menuBarCollection[0].menuitem[0].@enabled = createChildrenPermission;
-                        mainMenu.menuBarCollection[0].menuitem[3].@enabled = createChildrenPermission;
+                        mainMenu.enableMenuItem("file", "newspace", createChildrenPermission);
+                        mainMenu.enableMenuItem("file", "upload", createChildrenPermission);                        
                         this.createSpaceBtn.enabled = createChildrenPermission;
                         this.uploadFileBtn.enabled = createChildrenPermission;
                         // paste
-                        mainMenu.menuBarCollection[1].menuitem[2].@enabled = enablePaste;
+                        mainMenu.enableMenuItem("edit", "paste", enablePaste);
                         this.pasteBtn.enabled = enablePaste;                    
                         // tree, dual panes, wcm tree, dual wcm panes
-                        mainMenu.menuBarCollection[2].menuitem[0].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[1].@enabled = false;
-                        mainMenu.menuBarCollection[2].menuitem[3].@enabled = true;
-                        mainMenu.menuBarCollection[2].menuitem[4].@enabled = true;
+                        mainMenu.enableMenuItem("view", "repotree", false);
+                        mainMenu.enableMenuItem("view", "secondrepofolder", false);
+                        mainMenu.enableMenuItem("view", "wcmrepotree", true);
+                        mainMenu.enableMenuItem("view", "wcmsecondrepofolder", true);
                         break;     
                 }     
             }          

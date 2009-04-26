@@ -23,6 +23,8 @@ package org.integratedsemantics.flexspaces.view.menu.menubar
         [Bindable]
         public var menuBarCollection:XMLListCollection;
         
+        protected var xmlData:XML;
+        
         protected var loader:URLLoader;
         
         
@@ -66,14 +68,20 @@ package org.integratedsemantics.flexspaces.view.menu.menubar
          */
         protected function onLoadSuccess(event:Event):void
         {
-            var xml:XML = new XML(loader.data);
+            xmlData = new XML(loader.data);
             
-            menuBarCollection.source = xml.menuitem;
+            menuBarCollection.source = xmlData.menuitem;
             
             configurationDone = true;
             
             var configuredEvent:MenuConfiguredEvent = new MenuConfiguredEvent(MenuConfiguredEvent.MENU_CONFIGURED);
             this.dispatchEvent(configuredEvent);            
+        }
+        
+        public function enableMenuItem(menuData:String, menuItemData:String, enable:Boolean):void
+        {
+            var menuXMLList:XMLList = xmlData.menuitem.(@data == menuData);
+            menuXMLList..menuitem.(@data == menuItemData).@enabled = enable;
         }
                 
     }

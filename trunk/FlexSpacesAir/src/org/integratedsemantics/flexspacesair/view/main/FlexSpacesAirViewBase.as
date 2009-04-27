@@ -34,7 +34,6 @@ package org.integratedsemantics.flexspacesair.view.main
     import org.integratedsemantics.flexspacesair.presmodel.create.CreateTextPresModel;
     import org.integratedsemantics.flexspacesair.presmodel.create.CreateXmlPresModel;
     import org.integratedsemantics.flexspacesair.presmodel.localfiles.LocalFilesBrowserPresModel;
-    import org.integratedsemantics.flexspacesair.presmodel.main.FlexSpacesAirPresModel;
     import org.integratedsemantics.flexspacesair.util.AirOfflineUtil;
     import org.integratedsemantics.flexspacesair.view.browser.Browser;
     import org.integratedsemantics.flexspacesair.view.create.html.CreateHtmlView;
@@ -70,12 +69,12 @@ package org.integratedsemantics.flexspacesair.view.main
         }
         
 		[Bindable]
-        public function get flexSpacesAirPresModel():FlexSpacesAirPresModel
+        public function get flexSpacesAirPresModel():FlexSpacesPresModel
         {
-        	return this.flexSpacesPresModel as FlexSpacesAirPresModel;
+        	return this.flexSpacesPresModel as FlexSpacesPresModel;
         }
 
-    	public function set flexSpacesAirPresModel(flexSpacesAirPresModel:FlexSpacesAirPresModel):void
+    	public function set flexSpacesAirPresModel(flexSpacesAirPresModel:FlexSpacesPresModel):void
         {
             this.flexSpacesPresModel = flexSpacesAirPresModel;            
         }               

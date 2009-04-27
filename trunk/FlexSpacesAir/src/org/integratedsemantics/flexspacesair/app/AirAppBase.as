@@ -5,16 +5,16 @@ package org.integratedsemantics.flexspacesair.app
     import mx.core.WindowedApplication;
     import mx.managers.PopUpManager;
     
-    import org.integratedsemantics.flexspaces.control.error.ErrorRaisedEvent;
     import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+    import org.integratedsemantics.flexspaces.control.error.ErrorRaisedEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.global.AppConfig;
     import org.integratedsemantics.flexspaces.model.global.CalaisConfig;
     import org.integratedsemantics.flexspaces.model.global.EcmServerConfig;
     import org.integratedsemantics.flexspaces.model.global.GoogleMapConfig;
     import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
     import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
-    import org.integratedsemantics.flexspacesair.presmodel.main.FlexSpacesAirPresModel;
     import org.springextensions.actionscript.context.support.XMLApplicationContext;
         
         
@@ -23,7 +23,7 @@ package org.integratedsemantics.flexspacesair.app
         protected var model:AppModelLocator = AppModelLocator.getInstance();
 	        
         [Bindable]
-        protected var flexSpacesAirPresModel:FlexSpacesAirPresModel;
+        protected var flexSpacesAirPresModel:FlexSpacesPresModel;
         
         protected var applicationContext:XMLApplicationContext;
         
@@ -95,7 +95,7 @@ package org.integratedsemantics.flexspacesair.app
             
             model.appConfig.airMode = true;         
 
-            flexSpacesAirPresModel = new FlexSpacesAirPresModel();
+            flexSpacesAirPresModel = new FlexSpacesPresModel();
             model.flexSpacesPresModel = flexSpacesAirPresModel;            
 
             if (model.ecmServerConfig.isLiveCycleContentServices == true)

@@ -15,8 +15,6 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
     {
         public var nodeCollection:NodeCollection;
         
-        public var serverVersionNum:Number;
-
         public var showThumbnails:Boolean = false;
 
         public var model:AppModelLocator = AppModelLocator.getInstance();
@@ -33,8 +31,6 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
         public function NodeListViewPresModel()
         {
             super();
-            
-            serverVersionNum = model.ecmServerConfig.serverVersionNum();  
             
             nodeCollection = new NodeCollection();          
         }
@@ -68,6 +64,11 @@ package org.integratedsemantics.flexspaces.presmodel.folderview
         public function set selectedItems(items:Array):void
         {
         	_selectedItems = items;
+        }
+
+        public function get serverVersionNum():Number
+        {
+            return model.ecmServerConfig.serverVersionNum();              
         }
 
         /**

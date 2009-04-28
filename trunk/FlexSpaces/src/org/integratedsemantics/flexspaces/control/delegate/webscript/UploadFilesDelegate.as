@@ -227,8 +227,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
                                 
                 params.mimetype = FormatUtil.getMimeType(file);
                 
-                //params.thumbnails = "doclib";
-                
+                var model:AppModelLocator = AppModelLocator.getInstance();
+                if (model.thumbnailConfig.requestOnUpload == true)
+                {
+                    params.thumbnails = model.thumbnailConfig.thumbnailName;
+                }
                 params.type = nodeType;                
                 
                 uploadURLRequest.data = params;

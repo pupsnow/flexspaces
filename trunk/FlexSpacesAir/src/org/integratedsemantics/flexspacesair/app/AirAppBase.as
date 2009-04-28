@@ -12,10 +12,11 @@ package org.integratedsemantics.flexspacesair.app
     import org.integratedsemantics.flexspaces.model.global.CalaisConfig;
     import org.integratedsemantics.flexspaces.model.global.EcmServerConfig;
     import org.integratedsemantics.flexspaces.model.global.GoogleMapConfig;
+    import org.integratedsemantics.flexspaces.model.global.ThumbnailConfig;
     import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
     import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
     import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
-    import org.springextensions.actionscript.context.support.XMLApplicationContext;
+    import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
         
         
     public class AirAppBase extends WindowedApplication
@@ -25,7 +26,7 @@ package org.integratedsemantics.flexspacesair.app
         [Bindable]
         protected var flexSpacesAirPresModel:FlexSpacesPresModel;
         
-        protected var applicationContext:XMLApplicationContext;
+        protected var applicationContext:FlexXMLApplicationContext;
         
         
         public function AirAppBase()
@@ -41,7 +42,7 @@ package org.integratedsemantics.flexspacesair.app
         protected function loadConfig():void
         {
             // spring actionscript config
-            applicationContext = new XMLApplicationContext("FlexSpacesConfig.xml");
+            applicationContext = new FlexXMLApplicationContext("FlexSpacesConfig.xml");
             applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
             applicationContext.load();                                          
         }
@@ -95,7 +96,10 @@ package org.integratedsemantics.flexspacesair.app
             
             model.appConfig.airMode = true;         
 
-            flexSpacesAirPresModel = new FlexSpacesPresModel();
+            var thumbnailConfig:ThumbnailConfig = applicationContext.getObject("thumbnailConfig"); 
+            model.thumbnailConfig = thumbnailConfig;
+            
+            flexSpacesAirPresModel = applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesAirPresModel;            
 
             if (model.ecmServerConfig.isLiveCycleContentServices == true)

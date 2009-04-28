@@ -316,10 +316,9 @@ package org.integratedsemantics.flexspaces.view.folderview
                 var columnWidth:int;
                 if (nodeListViewPresModel.showThumbnails == true)
                 {
-                    rowHeight = 125;
-                    columnWidth = 125;
-                    //rowHeight = 175;
-                    //columnWidth = 200;                    
+                    var model:AppModelLocator = nodeListViewPresModel.model;
+                    rowHeight = model.thumbnailConfig.thumbnailHeight + 25;
+                    columnWidth = model.thumbnailConfig.thumbnailWidth + 25;                                                            
                 }
                 else
                 {

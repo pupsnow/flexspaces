@@ -5,17 +5,18 @@ package org.integratedsemantics.flexspaces.app
 	import mx.core.Application;
 	import mx.managers.PopUpManager;
 	
-	import org.integratedsemantics.flexspaces.control.error.ErrorRaisedEvent;
 	import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
+	import org.integratedsemantics.flexspaces.control.error.ErrorRaisedEvent;
 	import org.integratedsemantics.flexspaces.model.AppModelLocator;
 	import org.integratedsemantics.flexspaces.model.global.AppConfig;
 	import org.integratedsemantics.flexspaces.model.global.CalaisConfig;
 	import org.integratedsemantics.flexspaces.model.global.EcmServerConfig;
 	import org.integratedsemantics.flexspaces.model.global.GoogleMapConfig;
+	import org.integratedsemantics.flexspaces.model.global.ThumbnailConfig;
 	import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
 	import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
 	import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
-	import org.springextensions.actionscript.context.support.XMLApplicationContext;
+	import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
 	
 	        
 	public class AppBase extends Application
@@ -25,7 +26,7 @@ package org.integratedsemantics.flexspaces.app
         [Bindable]
         protected var flexSpacesPresModel:FlexSpacesPresModel;
         
-        protected var applicationContext:XMLApplicationContext;
+        protected var applicationContext: FlexXMLApplicationContext;
               
                 
         public function AppBase()
@@ -41,7 +42,7 @@ package org.integratedsemantics.flexspaces.app
         protected function loadConfig():void
         {
             // spring actionscript config
-            applicationContext = new XMLApplicationContext("FlexSpacesConfig.xml");
+            applicationContext = new FlexXMLApplicationContext("FlexSpacesConfig.xml");
             applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
             applicationContext.load();                                          
         }
@@ -103,8 +104,11 @@ package org.integratedsemantics.flexspaces.app
 
             var googleMapConfig:GoogleMapConfig = applicationContext.getObject("googleMapConfig"); 
             model.googleMapConfig = googleMapConfig;
+
+            var thumbnailConfig:ThumbnailConfig = applicationContext.getObject("thumbnailConfig"); 
+            model.thumbnailConfig = thumbnailConfig;
             
-            flexSpacesPresModel = new FlexSpacesPresModel();
+            flexSpacesPresModel = applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesPresModel;            
 
             var doclib:String = this.parameters.doclib;

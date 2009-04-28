@@ -10,11 +10,13 @@
         <property name="domain" value="localhost"/>
         <property name="port" value="8080"/>
         <property name="alfrescoUrlPart" value="/alfresco/service"/>
+        <!-- url for livecycle -->
+        <!-- property name="alfrescoUrlPart" value="/contentspace/servicee" /-->
 
         <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
         <property name="isLiveCycleContentServices" value="false"/>
 
-        <!-- alfresco server version (allows enable/disable of features requiring certain version) -->                  
+        <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->                  
         <property name="serverVersion" value="3.0"/>        
     </object>
 
@@ -23,9 +25,41 @@
         <property name="locale" value="en_US"/>        
     </object>
 
-    <object id="appConfig" class="org.integratedsemantics.flexspaces.model.global.AppConfig">
-        <!-- default locale -->  
-        <property name="locale" value="en_US"/>        
+    <object id="thumbnailConfig" class="org.integratedsemantics.flexspaces.model.global.ThumbnailConfig">
+        <!-- thumbnail type name: doclib for alfresco 3.0 thumbnail service used in share, xxx for thumbnails forge project  -->  
+        <property name="thumbnailName" value="doclib"/>  
+        <property name="thumbnailHeight" value="100"/>  
+        <property name="thumbnailWidth" value="100"/>  
+        <!-- request generation of thumbnail on upload with alfresco 3.0 "share" thumbnail service -->
+        <property name="requestOnUpload" value="false"/>               
+    </object>
+
+    <object id="presModel" class="org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel">
+        <!-- configure what tab views to display -->
+        <property name="showDocLib" value="true"/>        
+        <property name="showSearch" value="true"/>                
+        <property name="showTasks" value="true"/>        
+        <property name="showWCM" value="false"/>        
+        <!-- show share tab is only used in air version -->
+        <property name="showShare" value="false"/>    
+        
+        <!-- default page sizes for views --> 
+        <property name="docLibPageSize" value="10"/>    
+        <property name="wcmPageSize" value="10"/>    
+        <property name="searchPageSize" value="10"/>    
+        <property name="taskAttachmentsPageSize" value="10"/>    
+        <property name="versionsPageSize" value="10"/>    
+        <property name="favoritesPageSize" value="10"/>    
+        <property name="checkedOutPageSize" value="10"/>    
+        <property name="pageSizeList">
+            <array-collection>
+                <value>10</value>
+                <value>20</value>
+                <value>30</value>
+                <value>40</value>
+                <value>50</value>
+            </array-collection>
+        </property>                               
     </object>
 
     <object id="calaisConfig" class="org.integratedsemantics.flexspaces.model.global.CalaisConfig">

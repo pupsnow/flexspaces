@@ -5,6 +5,7 @@ package org.integratedsemantics.flexspaces.presmodel.preview
     import org.integratedsemantics.flexspaces.control.event.preview.GetPreviewEvent;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
+    import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.model.vo.PreviewInfoVO;
 
@@ -47,9 +48,27 @@ package org.integratedsemantics.flexspaces.presmodel.preview
         {
         	this.viewResponder = viewResponder;
         	
-            var responder:Responder = new Responder(onResultGetPreview, onFaultGetPreview);
-            var getPreviewEvent:GetPreviewEvent = new GetPreviewEvent(GetPreviewEvent.GET_PREVIEW, responder, repoNode);
-            getPreviewEvent.dispatch();                    
+            // use "share" compatible preview if 3.0
+            var model:AppModelLocator = AppModelLocator.getInstance();                
+        	if (model.ecmServerConfig.serverVersionNum() >= 3.0)
+        	{
+        	    var node:Node = repoNode as Node;
+                var argsNoCache:String = "?c=force&noCacheToken=" + new Date().getTime();        	    
+                var url:String = model.ecmServerConfig.urlPrefix + "/api/node/" + node.storeProtocol + "/" + node.storeId + "/" + node.id;
+                url += "/content/thumbnails/webpreview" + argsNoCache + "&alf_ticket=" + model.userInfo.loginTicket;
+                this.urlFlash = url;        	
+                this.havePreview = true;
+                var data:PreviewInfoVO = new PreviewInfoVO();
+                data.previewId = node.id;
+                data.previewUrl = url;
+                viewResponder.result(data);        
+        	}
+        	else
+        	{
+                var responder:Responder = new Responder(onResultGetPreview, onFaultGetPreview);
+                var getPreviewEvent:GetPreviewEvent = new GetPreviewEvent(GetPreviewEvent.GET_PREVIEW, responder, repoNode);
+                getPreviewEvent.dispatch();
+            }                    
         }                 
         
         /**

@@ -182,7 +182,8 @@ package org.integratedsemantics.flexspaces.view.preview
         protected function onResultGetPreview(data:Object):void
         {
             if (previewPresModel.havePreview == true)
-            {                
+            {          
+                swfLoader.showBusyCursor = true;      
                 swfLoader.source = previewPresModel.urlFlash;        
                 contentPanel.title = previewPresModel.repoNode.getPath();
             }

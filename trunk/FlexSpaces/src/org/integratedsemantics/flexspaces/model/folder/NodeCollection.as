@@ -41,7 +41,7 @@ package org.integratedsemantics.flexspaces.model.folder
             // 3.0 only
             var model:AppModelLocator = AppModelLocator.getInstance();
             var url:String = model.ecmServerConfig.urlPrefix + "/api/node/" + node.storeProtocol + "/" + node.storeId + "/" + node.id;
-            url += "/content/thumbnails/" + model.thumbnailConfig.thumbnailName + "?qc=true&ph=true" + "&alf_ticket=" + model.userInfo.loginTicket;
+            url += "/content/thumbnails/" + model.thumbnailConfig.thumbnailName + "?c=force&ph=true" + "&alf_ticket=" + model.userInfo.loginTicket;
             return url;
         }
                                        

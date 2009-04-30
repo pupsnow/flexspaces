@@ -29,9 +29,7 @@
         <!-- thumbnail type name: doclib for alfresco 3.0 thumbnail service used in share, xxx for thumbnails forge project  -->  
         <property name="thumbnailName" value="doclib"/>  
         <property name="thumbnailHeight" value="100"/>  
-        <property name="thumbnailWidth" value="100"/>  
-        <!-- request generation of thumbnail on upload with alfresco 3.0 "share" thumbnail service -->
-        <property name="requestOnUpload" value="false"/>               
+        <property name="thumbnailWidth" value="100"/>             
     </object>
 
     <object id="presModel" class="org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel">
@@ -41,8 +39,11 @@
         <property name="showTasks" value="true"/>        
         <property name="showWCM" value="false"/>        
         <!-- show share tab is only used in air version -->
-        <property name="showShare" value="false"/>    
-        
+        <property name="showShare" value="false"/>  
+
+        <!-- whether to have coverflow view mode in views -->  
+        <property name="haveCoverFlow" value="false"/>                
+
         <!-- default page sizes for views --> 
         <property name="docLibPageSize" value="10"/>    
         <property name="wcmPageSize" value="10"/>    

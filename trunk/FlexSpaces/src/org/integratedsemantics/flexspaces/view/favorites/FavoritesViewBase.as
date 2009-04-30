@@ -59,8 +59,10 @@ package org.integratedsemantics.flexspaces.view.favorites
             {
                 folderGridView.folderGrid.addEventListener(DragEvent.DRAG_DROP, doDragDropDataGrid);
                 folderIconView.folderTileList.addEventListener(DragEvent.DRAG_DROP, doDragDropTileList);    
-                // also need alfresco 3.0 thumbnail service                
-                coverFlowView.coverFlowDataGrid.addEventListener(DragEvent.DRAG_DROP, doDragDropCoverFlowDataGrid);
+                if (haveCoverFlow() == true)
+                {             
+                    coverFlowView.coverFlowDataGrid.addEventListener(DragEvent.DRAG_DROP, doDragDropCoverFlowDataGrid);
+                }
             }                        
         }
 

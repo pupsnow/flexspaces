@@ -44,14 +44,18 @@ package org.integratedsemantics.flexspaces.presmodel.main
         // model of current folder view
         public var currentNodeList:NodeCollection;
         
-        // whether to have various views
+        // whether to have various tab views
         public var showDocLib:Boolean = true;
         public var showSearch:Boolean = true;
         public var showTasks:Boolean = true;
         public var showWCM:Boolean = true;
         public var showShare:Boolean = true;
         
+        // have header area with logos, search
         public var showHeader:Boolean = true;
+        
+        // whether to have coverflow view mode
+        public var haveCoverFlow:Boolean = false;
 
         // clipboard format flag for doc/folder nodes within flexspaces (air only)
         public static const FLEXSPACES_FORMAT:String = "FLEXSPACES";

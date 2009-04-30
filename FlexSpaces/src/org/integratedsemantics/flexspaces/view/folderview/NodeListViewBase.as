@@ -87,7 +87,7 @@ package org.integratedsemantics.flexspaces.view.folderview
 
             nodeListViewPresModel.initModel();
             
-            if (nodeListViewPresModel.serverVersionNum >= 3.0)
+            if (haveCoverFlow() == true)
             {
                 coverFlowView.coverFlowDataGrid.addEventListener(ListEvent.ITEM_DOUBLE_CLICK , folderListDoubleClick);
                 coverFlowView.coverFlowDataGrid.addEventListener(ListEvent.ITEM_CLICK, folderListClick);
@@ -97,9 +97,16 @@ package org.integratedsemantics.flexspaces.view.folderview
             }
             else
             { 
-                //  remove coverflow view mode button (no 3.0 thumbnails service)
+                //  remove coverflow view mode button
                 var viewModes:ToggleButtonBar = viewModeBar.toggleButtonBar;              
                 viewModes.dataProvider.removeItemAt(2);
+                
+                // remove coverflow view
+                if ((coverFlowView != null) && (coverFlowView.parent != null))
+                { 
+                    coverFlowView.parent.removeChild(coverFlowView);
+                }               
+                coverFlowView = null;
             }             
         }
         
@@ -173,7 +180,7 @@ package org.integratedsemantics.flexspaces.view.folderview
                 {
                     folderIconView.folderTileList.contextMenu = folderContextMenu.contextMenu;         
                     folderGridView.folderGrid.contextMenu = folderContextMenu.contextMenu; 
-                    if (nodeListViewPresModel.serverVersionNum >= 3.0)
+                    if (haveCoverFlow() == true)
                     {                                   
                         coverFlowView.coverFlowDataGrid.contextMenu = folderContextMenu.contextMenu;
                     }                                    
@@ -182,7 +189,7 @@ package org.integratedsemantics.flexspaces.view.folderview
                 {
                     folderIconView.folderTileList.contextMenu = fileContextMenu.contextMenu;         
                     folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;
-                    if (nodeListViewPresModel.serverVersionNum >= 3.0)
+                    if (haveCoverFlow() == true)
                     {
                         coverFlowView.coverFlowDataGrid.contextMenu = fileContextMenu.contextMenu;
                     }
@@ -280,7 +287,7 @@ package org.integratedsemantics.flexspaces.view.folderview
             nodeListViewPresModel.clearSelection();
             folderIconView.folderTileList.selectedItem = null;
             folderGridView.folderGrid.selectedItem = null;
-            if (nodeListViewPresModel.serverVersionNum >= 3.0)
+            if (haveCoverFlow() == true)
             {            
                 coverFlowView.coverFlowDataGrid.selectedItem = null;
             }
@@ -307,7 +314,7 @@ package org.integratedsemantics.flexspaces.view.folderview
          */
         public function showHideThumbnails():void
         {
-            if (nodeListViewPresModel.serverVersionNum >= 3.0)
+            if (haveThumbnails() == true)
             {
                 nodeListViewPresModel.showThumbnails = ! nodeListViewPresModel.showThumbnails;
                 folderIconView.showThumbnails = nodeListViewPresModel.showThumbnails;
@@ -350,7 +357,33 @@ package org.integratedsemantics.flexspaces.view.folderview
         {
             pager.pageIndex = 0;    
             pageBar.reset();          
-        }                   
+        } 
+        
+        protected function haveThumbnails():Boolean
+        {
+            if (nodeListViewPresModel.serverVersionNum >= 3.0)
+            {
+                return true;
+            }          
+            else
+            {
+                return false;
+            }            
+        }
+        
+        protected function haveCoverFlow():Boolean
+        {
+            var model:AppModelLocator = nodeListViewPresModel.model;  
+                     
+            if ((haveThumbnails() == true) && (model.flexSpacesPresModel.haveCoverFlow == true))
+            {
+                return true;
+            }          
+            else
+            {
+                return false;
+            }
+        }                  
         
     }
 }

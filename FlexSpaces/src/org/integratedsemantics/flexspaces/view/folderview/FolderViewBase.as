@@ -67,7 +67,7 @@ package org.integratedsemantics.flexspaces.view.folderview
 
             folderIconView.folderTileList.addEventListener(DragEvent.DRAG_DROP, doDragDropTileList);    
                         
-            if (folderViewPresModel.serverVersionNum >= 3.0)
+            if (haveCoverFlow() == true)
             {
                 coverFlowView.coverFlowDataGrid.addEventListener(DragEvent.DRAG_DROP, doDragDropCoverFlowDataGrid);
             }     
@@ -123,7 +123,7 @@ package org.integratedsemantics.flexspaces.view.folderview
             folderIconView.folderTileList.contextMenu = fileContextMenu.contextMenu;         
             folderGridView.folderGrid.contextMenu = fileContextMenu.contextMenu;    
             
-            if (folderViewPresModel.serverVersionNum >= 3.0)
+            if (haveCoverFlow() == true)
             {
                 coverFlowView.coverFlowDataGrid.contextMenu = fileContextMenu.contextMenu;                    
             }

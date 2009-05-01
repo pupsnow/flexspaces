@@ -38,16 +38,14 @@ package org.integratedsemantics.flexspaces.presmodel.search.searchpanel
                 
         public function SearchPanelPresModel()
         {
-            super();
-            
-            setupSubViews();
+            super();           
         }
         
         /**
          * Setup sub view presentation models
          * 
          */
-        protected function setupSubViews():void
+        public function setupSubViews():void
         {
             // setup category tree
             categoryTreePresModel = new CategoryTreePresModel();

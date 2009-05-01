@@ -11,6 +11,7 @@ package org.integratedsemantics.flexspaces.view.preview
     import mx.controls.LinkButton;
     import mx.controls.SWFLoader;
     import mx.events.SliderEvent;
+    import mx.managers.CursorManager;
     import mx.printing.FlexPrintJob;
     import mx.printing.FlexPrintJobScaleType;
     import mx.rpc.Responder;
@@ -59,7 +60,7 @@ package org.integratedsemantics.flexspaces.view.preview
         {
             swfLoader.addEventListener(Event.INIT, onLoadSwfComplete);
             swfLoader.addEventListener(Event.COMPLETE, onLoadSwfComplete);
-
+            
             ObserveUtil.observeButtonClick(printBtn, onPrint);
             ObserveUtil.observeButtonClick(previousPageBtn, onPreviousPageClick);
             ObserveUtil.observeButtonClick(nextPageBtn, onNextPageClick);
@@ -69,7 +70,9 @@ package org.integratedsemantics.flexspaces.view.preview
             zoomSlider.addEventListener(SliderEvent.CHANGE, onZoomSliderChange);  
                 
             var responder:Responder = new Responder(onResultGetPreview, onFaultGetPreview);
-            previewPresModel.getPreview(responder);          
+            previewPresModel.getPreview(responder); 
+            
+            CursorManager.setBusyCursor();         
         }                 
         
         /**
@@ -182,8 +185,7 @@ package org.integratedsemantics.flexspaces.view.preview
         protected function onResultGetPreview(data:Object):void
         {
             if (previewPresModel.havePreview == true)
-            {          
-                swfLoader.showBusyCursor = true;      
+            {           
                 swfLoader.source = previewPresModel.urlFlash;        
                 contentPanel.title = previewPresModel.repoNode.getPath();
             }
@@ -197,6 +199,7 @@ package org.integratedsemantics.flexspaces.view.preview
          */
         protected function onFaultGetPreview(info:Object):void
         {
+            CursorManager.removeBusyCursor();
         }
 
         /**
@@ -207,6 +210,8 @@ package org.integratedsemantics.flexspaces.view.preview
          */
         protected function onLoadSwfComplete(event:Event):void
         {
+            CursorManager.removeBusyCursor();
+            
             // stop wild auto advancing
             if ((swfLoader.content != null) && (swfLoader.content is MovieClip))
             {

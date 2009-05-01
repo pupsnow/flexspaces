@@ -1,10 +1,30 @@
 
-12/08/08
+4/30/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser release notes
+
+0.9 Release
+1. Code refactored to use presentation model pattern
+2. Using Spring Actionscript (formerly Prana) FlexSpacesConfig.xml instead of alfresco-config.xml
+3. Config file can configure what tab views to show
+4. Config file can configure default page size for views, and the page size pick list
+5. Config file can configure wtether to have the coverflow view mode
+6. Config file can configure thumbnail info
+6. server side paging in webscript (doclist, search results) for faster initial display
+7. more languages (engish, spanish, german, french, japanese, greek)
+8. filtering out display of content rule nodes
+9. goto containing folder in search better
+10. preview more usable/complete feature: on Alfresco 3.0+, flash preview of files uses same
+content model/rest api as preview in Share (no extra step doing make flash preview first needed)
+11. On Alfresco 3.0+, thumbnails now display correctly on recently uploaded files into FlexSpaces
+12. menu config in xml more usable now that all main menu enable/disable code is position independent
+(previously, this was only the case for context menus)
+13. tab view positions independent in the code now
+14. favorites/shortcuts (3.0 only, only available in the ui in search tab view)
+15. Changes FlexSpaces so CMIS Spaces can be built as with projects extending the flexspaces projects code
 
 0.8 Release
 1. Added semantic tagging / Calais features:

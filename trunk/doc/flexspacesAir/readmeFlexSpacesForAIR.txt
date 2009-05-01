@@ -1,4 +1,4 @@
-12/08/08
+4/30/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
@@ -6,7 +6,7 @@ integratedsemantics.com
 FlexSpaces+AIR readme
 (also see doc/readmeFlexSpacesForBrowser.txt)
 
-Server Web Scripts Installation
+Server Web Scripts Installation (needed before can use clients)
 (also see doc/readmeWebScripts.txt)
 
 
@@ -16,10 +16,9 @@ http://get.adobe.com/air/
 or alpha for Linux
 http://labs.adobe.com/technologies/air/
 
-(tested with both AIR 1.1 and AIR 1.5)
-Note tested with Alfresco 3.0 Enterprise
-previously test Alfresco 2.2.0 Enterprise, Labs 3b, 2.90C_dev, 
-and adobe livecycle content services es 8.2 update 1
+(0.9 tested with AIR 1.5.1, with Alfreso Labs 3 final/stable)
+previously test Alfresco 3.0 Enterprise, Alfresco 2.2.0 Enterprise, Labs 3b, 2.90C_dev, 
+and Adobe livecycle content services es 8.2 update 1
 (min version for webscripts is 2.1)
 
 FlexSpaces+AIR Windows Installation
@@ -29,67 +28,103 @@ FlexSpaces+AIR Windows Installation
 2. Click on on continue button (even though it says install location c:\Program Files on windows, default install dir will
 be c:\Program Files\FlexSpacesAIR
 
-3. When FlexSpaces+AIR launches enter user name / password in the login screen
+Can only launch right after install if server is running on localhost:8080, otherwise need to change FlexSpacesConfig.xml
+By default a shortcut icon FlexSpaceAir will be created on your desktop
+When FlexSpaces+AIR launches enter user name / password in the login screen
 
-4. the default localhost port 8080 can be changed in c:\Program Files\FlexSpacesAIR\alfresco-config.xml
-alfresco-config.xml has alfrescoUrlPart to set a different url for the "/alfresco/service"  part of the server url
-(NEW in 0.6, more of the url in alfresco-config.xml, "/alfresco/service" not just "/alfresco/)
+3. the default localhost and port 8080 can be changed in c:\Program Files\FlexSpacesAIR\FlexSpacesConfig.xml
+        <property name="domain" value="localhost"/>
+        <property name="port" value="8080"/>
 
-New in 0.7 in alfresco-config.xml
-a. <server livecycle="false"/> livecycle="false" for regular alfresco, livecycle="true" for livecycle content services es
-b. <locale default-locale="en_US"/> sets which locale/language menu set of xml files to load from the config dir
-(For ui strings other thean menus, flexspaces currently only built with English set of resource bundles. source code also has German,Spanish, Japanese)
+4. for LiveCycle instead of Alfresco (see readmeLiveCycleContentServices.txt) in FlexSpacesConfig.xml
+        <property name="alfrescoUrlPart" value="/contentspace/servicee" />
+        <property name="isLiveCycleContentServices" value="true"/>
+        <property name="serverVersion" value="2.1"/>   
+Note: currently FlexSpaces as built will run (after config) only on LiveCycle on localhost:8080
+To run on a different host:port, you need to have flexspaces+browser or flexspaces+air recompiled (using available
+source and flex builder) after changing the 2 urls in services-config.xml in the source
 
-New in 0.8 in alfresco-config.xml Calais config
+5. Locale (FlexSpacesConfig.xml)
+        <property name="locale" value="en_US"/>        
+Sets which locale/language menu set of xml files to load from the config dir
+(For ui strings other thean menus, flexspaces currently only built with English set of resource bundles
+and flexspaces would need to be rebuilt (sources has English, German, Spanish, French, Japanese, Greek)
 
-<calais enable="true" key="<Calais api key>" />
-1. To use the semantic features in FlexSapces you need to set enable="true", register for a Calais key at
-http://opencalais.com/user/register and put it in key attribute of the calais element in alfresco-config.xml
-2. You also need to install the Calais integration forge project http://forge.alfresco.com/projects/calais/
+6. Calais sematic tagging features config (FlexSpacesConfig.xml)
+(Semantic Tag clouds in search tab view, semantic tags in Tags/Categories dialog, suggest and auto tag menus)
+        <property name="enableCalias" value="true"/>        
+        <property name="calaisKey" value="key you get"/>         
+a. To use the semantic features in FlexSapces you need to set enableCalias, value="true",
+register for a Calais key at http://opencalais.com/user/register and put its in value attribute for calaisKey
+b. You also need to install the Calais integration forge project http://forge.alfresco.com/projects/calais/
 amp in your alfresco server
-3. Notes:Calais currently only supports Engish content. It will support one more language at end of 2008, a
-nd more languages in Q1 2009. If the content is too short, Calais may not recognize what language the content is in.
+c. Notes:Calais currently only supports Engish and French content. Calais plans to add more languages.
+If the content is too short, Calais may not recognize what language the content is in.
 
-New in 0.8 alfresco-config.xml  Google Map config
-<googlemap enable="true" url="<domain or ip address registered for google map key>" key="<Google map flash api key>"/>        
-1. To use the general map component or the semantic tag map in FlexSpaces you need to set enable to true on this,
-register for a google map api for your domain or ip address at http://code.google.com/apis/maps/signup.html, put registered
-domain address or ip address in url attribute, put google map api key in the key attribute
-2. Note: will get debug watermarks on map if key is not set, or when debugging on localhost
+7. Google Map config (FlexSpacesConfig.xml)
+(Used in Semantic Tag Map in search tab view, also need to configure Calais)
+      <property name="enableGoogleMap" value="false"/>      
+      <!--  url of ip address or domain google api key is for --> 
+      <property name="googleMapUrl" value="value"/>      
+      <!--  google map api key --> 
+      <property name="googleMapKey" value="value"/>                           
+       
+a. To use the general map component or the semantic tag map in FlexSpaces you need to set enableGoogleMap 
+value attribute to true
+b. register for a google map api for your domain or ip address at http://code.google.com/apis/maps/signup.html, 
+put registereddomain address or ip address in value attribute for googleMapUrl, 
+c. put google map api key in the value attribute for googleMapKey
+d. Note1: will get debug watermarks on map if key is not set, or when debugging on localhost
+e. Node2: on AIR, google map adds noticable delay on startup
 
+8. What tab views to show (FlexSpacesConfig.xml)
+        <property name="showDocLib" value="true"/>        
+        <property name="showSearch" value="true"/>                
+        <property name="showTasks" value="true"/>        
+        <property name="showWCM" value="false"/>        
+        <!-- show share tab is only used in air version -->
+        <property name="showShare" value="false"/>  
 
-5. By default a shortcut icon FlexSpaceAir will be created on your desktop
+9. Whether to have coverflow view mode in addition to icon and grid in folder views (FlexSpacesConfig.xml)
+        <property name="haveCoverFlow" value="false"/>      
+
+10. Default page size in views, page size pick list (FlexSpacesConfig.xml)      
+        <property name="docLibPageSize" value="10"/>    
+        <property name="wcmPageSize" value="10"/>    
+        <property name="searchPageSize" value="10"/>    
+        <property name="taskAttachmentsPageSize" value="10"/>    
+        <property name="versionsPageSize" value="10"/>    
+        <property name="favoritesPageSize" value="10"/>    
+        <property name="checkedOutPageSize" value="10"/>    
+        <property name="pageSizeList">
+            <array-collection>
+                <value>10</value>
+                <value>20</value>
+                <value>30</value>
+                <value>40</value>
+                <value>50</value>
+            </array-collection>
+        </property>                               
+
 
 FlexSpaces+AIR Mac OSX Installation
 1. Install released AIR 1.x runtime for the Mac
 http://get.adobe.com/air/
 2. Double click and install FlexSpacesAir.air from http://forge.alfresco.com/projects/flexspaces/
-3. Set host and port name in alfresco-config.xml
+3. Set host and port name in FlexSpacesConfig.xml
 a. In finder choose “Show Package Contents” on installed FlexSpacesAir.app
-b. alfresco-config.xml is in contents/resources/
+b. FlexSpacesConfig.xml is in contents/resources/
 
 FlexSpaces+AIR Linux Installation (based on Ubuntu 8.04)
-1. To install adobe air alpha runtime for linux:
-http://labs.adobe.com/technologies/air/
+1. To install adobe air runtime for linux:
+http://get.adobe.com/air/
 http://www.sizlopedia.com/2008/04/06/how-to-install-adobe-air-on-ubuntu/
 2. Double click and install FlexSpacesAir.air from http://forge.alfresco.com/projects/flexspaces/
-3. Set host and port in /opt/FlexSpacesAir/alfresco-config.xml
-(note the linux air alpha currently does not support internal viewing of pdfs)
-(make pdf, make flash preview, view flash preview features of FlexSpaces still work)
+3. Set host and port in /opt/FlexSpacesAir/FlexSpacesConfig.xml
 
 
 FlexSpaces+AIR Notes:
-(also see readmeFlexSpacesForBrowser.txt)
 
-1. Flex Builder 3.0 projects with Flex and ActionScript source included in this release.
-The project for FlexSpacesAir depends on the FlexSpaces project
-
-2. 0.7 flexspaces+air client 
-a. tested on vista with AIR 1.1 (AIR did auto upgrade of AIR)
-prevously tested with
-b. tested pm Mac OSX 10.5.4 with AIR 1.1 (AIR did auto upgrade of AIR)
-c. Linux Ubuntu 8.04 with AIR linux alpha
-
-3.Native Drag/Drop and Native clipboard between shell and flexspacesair is supported one direction 
+1.Native Drag/Drop and Native clipboard between shell and flexspacesair is supported one direction 
    (uploading to the repository) and as copy mode only
    . 

@@ -1,19 +1,29 @@
-10/21/08
+4/30/09
 Steve Reiner
+
 
 Additional instructions for using FlexSpaces+Browser, FlexSpaces+Air, webscripts
 with Adobe LiveCycle Content Services ES instead of regular Alfresco
 (instructions based on livecycle jboss for windows turnkey express install)
 
+Note: currently FlexSpaces as built will run (after config) only on LiveCycle on localhost:8080
+To run on a different host:port, you need to have flexspaces+browser or flexspaces+air recompiled (using available
+source and flex builder) after changing the 2 urls in services-config.xml in the source
+
+
 1. Install flexspaces webscripts the same as for regular alfresco  (see readmeWebScripts.txt)
 (web scripts home page is different http://localhost:8080/contentspace/service/ )
 
 
-2. alfresco-config.xml  needs to be setup differently (see readmeFlexSpacesForBrowser.txt and readmeFlexSpacesForAIR.txt)
-with contentspace/service instead of alfresco/service and  livecycle=true
-    <url protocol="http" domain="localhost" port="8080" alfrescoUrlPart="/contentspace/service" />
-    <server livecycle="true"/>
-(can copy alfresco-config.livecycle sample to alfresco-config.xml)
+2. FlexSpacesConfgi.xml needs to be setup differently (see readmeFlexSpacesForBrowser.txt and readmeFlexSpacesForAIR.txt)
+with contentspace/service instead of alfresco/service and  livecycle=true, and 2.1 (version of alfresco code embedded in 
+livecycle, not livecycle version)
+
+        <property name="alfrescoUrlPart" value="/contentspace/servicee" />
+
+        <property name="isLiveCycleContentServices" value="true"/>
+
+        <property name="serverVersion" value="2.1"/>        
 
 
 3. Add a <dynamic-url> for contentspace/service to livecycle's services-config.xml  remoting config file

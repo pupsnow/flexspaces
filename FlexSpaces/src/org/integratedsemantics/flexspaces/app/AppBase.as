@@ -109,7 +109,10 @@ package org.integratedsemantics.flexspaces.app
             model.thumbnailConfig = thumbnailConfig;
             
             flexSpacesPresModel = applicationContext.getObject("presModel");
-            model.flexSpacesPresModel = flexSpacesPresModel;            
+            model.flexSpacesPresModel = flexSpacesPresModel;    
+            
+            // setup search panel after all the config done
+            flexSpacesPresModel.searchPanelPresModel.setupSubViews();        
 
             var doclib:String = this.parameters.doclib;
             if ((doclib != null) && (doclib.length != 0))

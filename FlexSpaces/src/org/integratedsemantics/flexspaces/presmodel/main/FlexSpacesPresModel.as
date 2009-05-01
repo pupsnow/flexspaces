@@ -267,8 +267,22 @@ package org.integratedsemantics.flexspaces.presmodel.main
             {
                 var folder:Folder = currentNodeList as Folder; 
                 var parentNode:IRepoNode = folder.folderNode;
-                var event:CreateSpaceUIEvent = new CreateSpaceUIEvent(CreateSpaceUIEvent.CREATE_SPACE_UI, null, parentNode, parent, redraw);
-                event.dispatch();            
+                if ((parentNode != null) && (parentNode.getId() != null))
+                {
+                    if (this.wcmMode == true)
+                    {
+                        if (parentNode.getStoreId() != null)
+                        {
+                            var event:CreateSpaceUIEvent = new CreateSpaceUIEvent(CreateSpaceUIEvent.CREATE_SPACE_UI, null, parentNode, parent, redraw);
+                            event.dispatch();                                        
+                        }
+                    }
+                    else
+                    {
+                        event = new CreateSpaceUIEvent(CreateSpaceUIEvent.CREATE_SPACE_UI, null, parentNode, parent, redraw);
+                        event.dispatch();                                                                
+                    }
+                }
             }                                                                                
         }
         

@@ -1,10 +1,14 @@
 
-12/08/08
+4/30/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+AIR release notes
+
+0.9 Release
+1. No new AIR specific features, see new 0.9 features in releaseNotesFlexSpacesBrowser.txt
+2. Tested with AIR 1.5.1 with Alfresco Labs 3 final/stable
 
 0.8 Release
 1. No new AIR specific features, see new 0.8 features (semantic tagging, maps) in releaseNotesFlexSpacesBrowser.txt

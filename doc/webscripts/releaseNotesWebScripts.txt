@@ -1,10 +1,16 @@
 
-12/08/08
+4/30/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces WebScripts release notes
+
+0.9
+1. folderlist (doclib) and search can do paging in the webscripts ("server side")
+2. added favorites (shortcuts) webscripts added (same as in alfresco "explorer" web client)
+note one of the favorites webscripts uses a javascript api added in alfresco 3.0
+3. folderlist has filtering out of content rule nodes now
 
 0.8
 1. Web scripts were unchanged in 0.8. Additional web scripts for auto tagging,  semantic tags 

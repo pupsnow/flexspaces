@@ -1,13 +1,13 @@
 
-11/08/08
+4/30/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser readme
 
-Server Web Scripts Installation
-    See readme in webscripts only dir
+Server Web Scripts Installation (required to run client)
+    See readmeWebScripts.txt
 
 Web Server Setup
 

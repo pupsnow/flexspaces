@@ -102,6 +102,9 @@ package org.integratedsemantics.flexspacesair.app
             flexSpacesAirPresModel = applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesAirPresModel;            
 
+            // setup search panel after all the config done
+            flexSpacesAirPresModel.searchPanelPresModel.setupSubViews();        
+
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
                 flexSpacesAirPresModel.showTasks = false;

@@ -2,12 +2,12 @@
 <main:MainViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
     xmlns:main="org.integratedsemantics.sampleapp.view.main.*"
     xmlns:flexlib="flexlib.containers.*"
+    xmlns:menu="org.integratedsemantics.flexspaces.view.menu.menubar.*"
     xmlns:logout="org.integratedsemantics.flexspaces.view.logout.*" 
     xmlns:login="org.integratedsemantics.flexspaces.view.login.*" 
     xmlns:search="org.integratedsemantics.flexspaces.view.search.basic.*"
     xmlns:repobrowser="org.integratedsemantics.flexspaces.view.browser.*"
     xmlns:results="org.integratedsemantics.flexspaces.view.search.results.*"
-    xmlns:taskspanel="org.integratedsemantics.flexspaces.view.tasks.taskspanel.*"
     creationComplete="onCreationComplete(event)" backgroundColor="#000000">
 
     <mx:Metadata>[ResourceBundle("FlexSpacesView")]</mx:Metadata>
@@ -23,7 +23,7 @@
             <mx:VBox width="100%" height="100%" id="loginPage" visible="false">
                 <!-- login panel -->
                 <mx:Box id="loginPanel" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
-                    <login:LoginView id="loginView" loginPresModel="{sampleAppPresModel.loginPresModel}" creationComplete="onLoginViewCreated(event)"/>
+                    <login:LoginView id="loginView" loginPresModel="{flexSpacesPresModel.loginPresModel}" creationComplete="onLoginViewCreated(event)"/>
                 </mx:Box>
             </mx:VBox>
 
@@ -35,30 +35,52 @@
                 
                 <!-- search, logout -->
                 <mx:HBox id="header" width="100%" height="40">
-                                        
                     <!-- one box search -->   
-                    <search:SearchView id="searchView" searchPresModel="{sampleAppPresModel.searchPresModel}" height="100%" horizontalAlign="right" minWidth="330"/>      
+                    <search:SearchView id="searchView" searchPresModel="{flexSpacesPresModel.searchPresModel}" height="100%" horizontalAlign="right" minWidth="330"/>      
                     <!-- logout link  -->   
-                    <logout:LogoutView id="logoutView" logoutPresModel="{sampleAppPresModel.logoutPresModel}" height="100%" horizontalAlign="right" minWidth="100"/>
+                    <logout:LogoutView id="logoutView" logoutPresModel="{flexSpacesPresModel.logoutPresModel}" height="100%" horizontalAlign="right" minWidth="100"/>
                 </mx:HBox>
 
+                <flexlib:Docker id="docker" horizontalScrollPolicy="off" width="100%">
+
+                    <!-- main menu toolbar -->
+                    <flexlib:DockableToolBar id="menuToolbar" label="Menus" width="100%" backgroundColor="0xCCCCCC">                    
+                    <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" width="100%" height="25" 
+                        configPath="{model.appConfig.srcPath + 'config/' + model.appConfig.locale + '/menubar/mainMenuSampleApp.xml'}"/>
+                    </flexlib:DockableToolBar>    
+    
+                    <!-- buttons toolbar -->
+                    <flexlib:DockableToolBar id="toolbar1" label="Toolbar 1" width="100%" backgroundColor="0xCCCCCC">                    
+                        <mx:Button id="cutBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'cutBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/cut.gif')"/>            
+                        <mx:Button id="copyBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'copyBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/copy.gif')"/>            
+                        <mx:Button id="pasteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'pasteBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/paste.gif')"/>            
+                        <mx:Button id="deleteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'deleteBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/delete.gif')"/>            
+                        <mx:Spacer width="10"/>
+                        <mx:Button id="createSpaceBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/create_space.gif')"/>            
+                        <mx:Spacer width="10"/>
+                        <mx:Button id="uploadFileBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/add_item.gif')"/>            
+                        <mx:Spacer width="10"/>
+                        <mx:Button id="tagsBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'tagsBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/add_category.gif')"/>            
+                    </flexlib:DockableToolBar>                      
+    
                     <!-- tabs -->            
                     <flexlib:SuperTabNavigator id="tabNav" creationPolicy="all" width="100%" height="100%" backgroundColor="#FFFFFF" >
         
                         <!-- Company Home / Doc Libary View Mode: Repository Browser with Tree and Dual Folder Panes -->
-                        <mx:VBox id="browserTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
+                        <mx:VBox id="docLibTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
                                  height="100%" width="100%" backgroundColor="#000000" creationComplete="onRepoBrowserCreated(event)">
-                            <repobrowser:RepoBrowserView repoBrowserPresModel="{sampleAppPresModel.browserPresModel}" id="browserView" height="100%" width="100%" backgroundColor="#000000"/>
+                            <repobrowser:RepoBrowserView repoBrowserPresModel="{flexSpacesPresModel.browserPresModel}" id="browserView" height="100%" width="100%" backgroundColor="#000000"/>
                         </mx:VBox>
         
                         <!-- Search View -->
-                        <mx:VBox height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
-                                 id="searchTab" backgroundColor="#000000">              
-                            <results:SearchResultsView id="searchResultsView" searchResultsPresModel="{sampleAppPresModel.searchPanelPresModel.searchResultsPresModel}" height="100%" width="100%" />
+                        <mx:VBox id="searchTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" 
+                                 backgroundColor="#000000">              
+                            <results:SearchResultsView id="searchResultsView" searchResultsPresModel="{flexSpacesPresModel.searchPanelPresModel.searchResultsPresModel}" height="100%" width="100%" />
                         </mx:VBox>
                                         
-                    </flexlib:SuperTabNavigator>  
-    
+                    </flexlib:SuperTabNavigator> 
+                 
+                </flexlib:Docker>
             </mx:VBox>
 
         </mx:ViewStack>    

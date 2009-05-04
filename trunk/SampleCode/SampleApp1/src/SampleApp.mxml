@@ -8,7 +8,7 @@
         verticalAlign="middle" horizontalAlign="center"                
         styleName="mainApplication" 
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:app="org.integratedsemantics.sampleapp.view.app.*"
+        xmlns:app="org.integratedsemantics.sampleapp.app.*"
         xmlns:business="org.integratedsemantics.flexspaces.control.delegate.*"
         xmlns:control="org.integratedsemantics.sampleapp.control.*"
         xmlns:view="org.integratedsemantics.sampleapp.view.main.*"
@@ -22,7 +22,7 @@
 
     <control:SampleAppController id="appController"/>
 
-    <view:MainView id="appMainView" sampleAppPresModel="{sampleAppPresModel}" width="100%" height="100%"/>
+    <view:MainView id="appMainView" flexSpacesPresModel="{flexSpacesPresModel}" width="100%" height="100%"/>
    
 </app:SampleAppBase>
 

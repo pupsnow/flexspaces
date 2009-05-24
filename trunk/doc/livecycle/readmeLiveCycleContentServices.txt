@@ -19,7 +19,7 @@ source and flex builder) after changing the 2 urls in services-config.xml in the
 with contentspace/service instead of alfresco/service and  livecycle=true, and 2.1 (version of alfresco code embedded in 
 livecycle, not livecycle version)
 
-        <property name="alfrescoUrlPart" value="/contentspace/servicee" />
+        <property name="alfrescoUrlPart" value="/contentspace/service" />
 
         <property name="isLiveCycleContentServices" value="true"/>
 

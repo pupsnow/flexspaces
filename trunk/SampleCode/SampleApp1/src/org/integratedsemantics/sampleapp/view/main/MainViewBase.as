@@ -48,98 +48,10 @@ package org.integratedsemantics.sampleapp.view.main
          * 
          */
         override protected function onRepoBrowserCreated(event:FlexEvent):void
-        {            
-            // init header section
-            searchView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
-            searchView.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);   
-            logoutView.addEventListener(LogoutDoneEvent.LOGOUT_DONE, onLogoutDone);              
-
-            // init main menu
-            mainMenu.addEventListener(MenuConfiguredEvent.MENU_CONFIGURED, onMainMenuConfigured);
-            mainMenu.addEventListener(MenuEvent.ITEM_CLICK, menuHandler); 
-                      
-            // keyboard handlers
-            this.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);  
-            
-            // init toolbar
-            this.cutBtn.addEventListener(MouseEvent.CLICK, onCutBtn);
-            this.copyBtn.addEventListener(MouseEvent.CLICK, onCopyBtn);
-            this.pasteBtn.addEventListener(MouseEvent.CLICK, onPasteBtn);
-            this.deleteBtn.addEventListener(MouseEvent.CLICK, onDeleteBtn);
-            this.createSpaceBtn.addEventListener(MouseEvent.CLICK, onCreateSpaceBtn);
-            this.uploadFileBtn.addEventListener(MouseEvent.CLICK, onUploadFileBtn);                    
-            this.tagsBtn.addEventListener(MouseEvent.CLICK, onTagsBtn);     
-
-            // get index values of tabs
-            docLibTabIndex = tabNav.getChildIndex(docLibTab);
-            searchTabIndex = tabNav.getChildIndex(searchTab);
-
-            // init tab navigator
-            tabNav.addEventListener(IndexChangedEvent.CHANGE, tabChange);   
-            tabNav.popUpButtonPolicy = SuperTabNavigator.POPUPPOLICY_OFF;
-            // prevent closing of doclib, search results, tasks, wcm tabs
-            tabNav.setClosePolicyForTab(docLibTabIndex, SuperTab.CLOSE_NEVER);                    
-            tabNav.setClosePolicyForTab(searchTabIndex, SuperTab.CLOSE_NEVER);  
-            // todo: for now to avoid tab drag drop error in air app, disable drag/drop of tabs
-            // due to bug in supertabnavigator
-            tabNav.dragEnabled = false;
-            tabNav.dropEnabled = false; 
-            tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
-
-            // init doclib view
-            browserView.viewActive(true);
-            browserView.setContextMenuHandler(onContextMenu);
-            browserView.setOnDropHandler(onFolderViewOnDrop);
-            browserView.setDoubleClickDocHandler(onDoubleClickDoc);
-            browserView.setClickNodeHandler(onClickNode);                                    
-            browserView.addEventListener(RepoBrowserChangePathEvent.REPO_BROWSER_CHANGE_PATH, onBrowserChangePath);
-            // init for serverside paging 
-            browserView.initPaging();                
-            
-            // init search view
-            searchResultsView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
-            searchResultsView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
-            searchResultsView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);   
-                                
-            // select doclib tab
-            var tabIndex:int = docLibTabIndex;
-            tabNav.invalidateDisplayList();
-            tabNav.selectedIndex = tabIndex;                          
+        {    
+            super.onRepoBrowserCreated(event);                                 
         }
                 
-
-        /**
-         * Handle switching tabs between doc lib, search, 
-         *  
-         * @param event index change event
-         * 
-         */
-        override protected function tabChange(event:IndexChangedEvent):void
-        {
-            if (event.newIndex != event.oldIndex)
-            {
-                clearSelection();   
-                
-                if (event.newIndex == docLibTabIndex)
-                {
-                    if (browserView != null)
-                    {
-                        browserView.viewActive(true);
-                    }
-                }
-                else if (event.newIndex == searchTabIndex) 
-                {
-                    flexSpacesPresModel.currentNodeList = null;
-                    if (browserView != null)
-                    {
-                        browserView.viewActive(false);
-                    }
-                }
-                
-                enableMenusAfterTabChange(event.newIndex);                
-            }    
-        }
-
         /**
          * Switch on menu data to method for both main menu bar
          * and context menus

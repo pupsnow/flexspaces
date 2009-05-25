@@ -28,9 +28,9 @@ package org.integratedsemantics.sampleapp.app
         override protected function loadConfig():void
         {
             // spring actionscript config
-            applicationContext = new FlexXMLApplicationContext("SampleAppConfig.xml");
-            applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
-            applicationContext.load();                                          
+            model.applicationContext = new FlexXMLApplicationContext("SampleAppConfig.xml");
+            model.applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
+            model.applicationContext.load();                                          
         }
 
         override protected function onApplicationContextComplete(event:Event):void

@@ -25,9 +25,7 @@ package org.integratedsemantics.flexspacesair.app
 	        
         [Bindable]
         protected var flexSpacesAirPresModel:FlexSpacesPresModel;
-        
-        protected var applicationContext:FlexXMLApplicationContext;
-        
+                
         
         public function AirAppBase()
         {
@@ -42,9 +40,9 @@ package org.integratedsemantics.flexspacesair.app
         protected function loadConfig():void
         {
             // spring actionscript config
-            applicationContext = new FlexXMLApplicationContext("FlexSpacesConfig.xml");
-            applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
-            applicationContext.load();                                          
+            model.applicationContext = new FlexXMLApplicationContext("FlexSpacesConfig.xml");
+            model.applicationContext.addEventListener(Event.COMPLETE, onApplicationContextComplete);
+            model.applicationContext.load();                                          
         }
 
         protected function onCreationComplete(event:Event):void
@@ -72,7 +70,7 @@ package org.integratedsemantics.flexspacesair.app
         {
             //trace("onApplicationContextComplete");
 
-            var ecmServerConfig:EcmServerConfig = applicationContext.getObject("ecmServerConfig"); 
+            var ecmServerConfig:EcmServerConfig = model.applicationContext.getObject("ecmServerConfig"); 
             
             if (ecmServerConfig.port != null)
             {
@@ -85,21 +83,21 @@ package org.integratedsemantics.flexspacesair.app
             
             model.ecmServerConfig = ecmServerConfig;                
 
-            var appConfig:AppConfig = applicationContext.getObject("appConfig"); 
+            var appConfig:AppConfig = model.applicationContext.getObject("appConfig"); 
             model.appConfig = appConfig;                
 
-            var calaisConfig:CalaisConfig = applicationContext.getObject("calaisConfig"); 
+            var calaisConfig:CalaisConfig = model.applicationContext.getObject("calaisConfig"); 
             model.calaisConfig = calaisConfig;                
 
-            var googleMapConfig:GoogleMapConfig = applicationContext.getObject("googleMapConfig"); 
+            var googleMapConfig:GoogleMapConfig = model.applicationContext.getObject("googleMapConfig"); 
             model.googleMapConfig = googleMapConfig;
             
             model.appConfig.airMode = true;         
 
-            var thumbnailConfig:ThumbnailConfig = applicationContext.getObject("thumbnailConfig"); 
+            var thumbnailConfig:ThumbnailConfig = model.applicationContext.getObject("thumbnailConfig"); 
             model.thumbnailConfig = thumbnailConfig;
             
-            flexSpacesAirPresModel = applicationContext.getObject("presModel");
+            flexSpacesAirPresModel = model.applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesAirPresModel;            
 
             // setup search panel after all the config done

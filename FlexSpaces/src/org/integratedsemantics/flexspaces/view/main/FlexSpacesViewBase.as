@@ -1,6 +1,7 @@
 package org.integratedsemantics.flexspaces.view.main
 {
     import flash.events.Event;
+    import flash.events.FocusEvent;
     import flash.events.KeyboardEvent;
     import flash.events.MouseEvent;
     import flash.ui.Keyboard;
@@ -182,8 +183,8 @@ package org.integratedsemantics.flexspaces.view.main
             if (flexSpacesPresModel != null)
             {
             	flexSpacesPresModel.updateFunction = redraw;
-            }         
-        }        
+            }  
+        }
         
         /**
          * Handle login view creation complete
@@ -233,8 +234,11 @@ package org.integratedsemantics.flexspaces.view.main
          * 
          */
         protected function onRepoBrowserCreated(event:FlexEvent):void
-        {            
-            this.searchResultsView = this.searchPanel.searchResultsView;
+        {  
+            if (searchPanel != null)
+            {         
+                this.searchResultsView = this.searchPanel.searchResultsView;
+            }
 
             // init header section
             if (flexSpacesPresModel.showHeader == false)
@@ -246,57 +250,108 @@ package org.integratedsemantics.flexspaces.view.main
             {
                 if (flexSpacesPresModel.showSearch == true)
                 {
-                    searchView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
-                    searchView.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);   
+                    if (searchView != null)
+                    {
+                        searchView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
+                        searchView.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
+                    }   
                 }    
                 
-                logoutView.addEventListener(LogoutDoneEvent.LOGOUT_DONE, onLogoutDone);              
+                if (logoutView != null)
+                {
+                    logoutView.addEventListener(LogoutDoneEvent.LOGOUT_DONE, onLogoutDone);
+                }              
             }
 
             // init main menu
-            mainMenu.addEventListener(MenuConfiguredEvent.MENU_CONFIGURED, onMainMenuConfigured);
-            mainMenu.addEventListener(MenuEvent.ITEM_CLICK, menuHandler); 
+            if (mainMenu != null)
+            {
+                mainMenu.addEventListener(MenuConfiguredEvent.MENU_CONFIGURED, onMainMenuConfigured);
+                mainMenu.addEventListener(MenuEvent.ITEM_CLICK, menuHandler);
+            } 
                       
             // keyboard handlers
             this.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);  
             
             // init toolbar
-            this.cutBtn.addEventListener(MouseEvent.CLICK, onCutBtn);
-            this.copyBtn.addEventListener(MouseEvent.CLICK, onCopyBtn);
-            this.pasteBtn.addEventListener(MouseEvent.CLICK, onPasteBtn);
-            this.deleteBtn.addEventListener(MouseEvent.CLICK, onDeleteBtn);
-            this.createSpaceBtn.addEventListener(MouseEvent.CLICK, onCreateSpaceBtn);
-            this.uploadFileBtn.addEventListener(MouseEvent.CLICK, onUploadFileBtn);                    
-            this.tagsBtn.addEventListener(MouseEvent.CLICK, onTagsBtn);     
-
-            // get index values of tabs
-            docLibTabIndex = tabNav.getChildIndex(docLibTab);
-            searchTabIndex = tabNav.getChildIndex(searchTab);
-            checkedOutTabIndex = tabNav.getChildIndex(checkedOutTab);        
-            tasksTabIndex = tabNav.getChildIndex(tasksTab);
-            wcmTabIndex = tabNav.getChildIndex(wcmTab);
-
+            if (toolbar1 != null)
+            {
+                this.cutBtn.addEventListener(MouseEvent.CLICK, onCutBtn);
+                this.copyBtn.addEventListener(MouseEvent.CLICK, onCopyBtn);
+                this.pasteBtn.addEventListener(MouseEvent.CLICK, onPasteBtn);
+                this.deleteBtn.addEventListener(MouseEvent.CLICK, onDeleteBtn);
+                this.createSpaceBtn.addEventListener(MouseEvent.CLICK, onCreateSpaceBtn);
+                this.uploadFileBtn.addEventListener(MouseEvent.CLICK, onUploadFileBtn);                    
+                this.tagsBtn.addEventListener(MouseEvent.CLICK, onTagsBtn);     
+            }
+            
             // init tab navigator
             tabNav.addEventListener(IndexChangedEvent.CHANGE, tabChange);   
             tabNav.popUpButtonPolicy = SuperTabNavigator.POPUPPOLICY_OFF;
-            // prevent closing of doclib, search results, tasks, wcm tabs
-            tabNav.setClosePolicyForTab(docLibTabIndex, SuperTab.CLOSE_NEVER);                    
-            tabNav.setClosePolicyForTab(searchTabIndex, SuperTab.CLOSE_NEVER);  
-            tabNav.setClosePolicyForTab(checkedOutTabIndex, SuperTab.CLOSE_NEVER);  
-            tabNav.setClosePolicyForTab(tasksTabIndex, SuperTab.CLOSE_NEVER);  
-            tabNav.setClosePolicyForTab(wcmTabIndex, SuperTab.CLOSE_NEVER);  
+            tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
+
             // todo: for now to avoid tab drag drop error in air app, disable drag/drop of tabs
             // due to bug in supertabnavigator
             tabNav.dragEnabled = false;
             tabNav.dropEnabled = false; 
-            tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
 
-            // hide checked out tab for now
-            tabNav.getTabAt(checkedOutTabIndex).visible = false;
-            tabNav.getTabAt(checkedOutTabIndex).includeInLayout = false;            
+            // get index values of tabs, prevent closing of view tabs, hide if should
+            if (docLibTab != null)
+            {
+                docLibTabIndex = tabNav.getChildIndex(docLibTab);
+                tabNav.setClosePolicyForTab(docLibTabIndex, SuperTab.CLOSE_NEVER);                    
+                if (flexSpacesPresModel.showDocLib == false)
+                {
+                    tabNav.getTabAt(docLibTabIndex).visible = false;
+                    tabNav.getTabAt(docLibTabIndex).includeInLayout = false;
+                }   
+            }
+            if (searchTab != null)
+            {
+                searchTabIndex = tabNav.getChildIndex(searchTab);
+                tabNav.setClosePolicyForTab(searchTabIndex, SuperTab.CLOSE_NEVER);  
+                if (flexSpacesPresModel.showSearch == false)
+                {
+                    tabNav.getTabAt(searchTabIndex).visible = false;
+                    tabNav.getTabAt(searchTabIndex).includeInLayout = false;
+                    if (searchView != null)
+                    {
+                        searchView.visible = false;
+                    }
+                    this.header.invalidateDisplayList();
+                }   
+            }
+            if (checkedOutTab != null)
+            {
+                checkedOutTabIndex = tabNav.getChildIndex(checkedOutTab);
+                tabNav.setClosePolicyForTab(checkedOutTabIndex, SuperTab.CLOSE_NEVER);
+                // hide checked out tab for now
+                tabNav.getTabAt(checkedOutTabIndex).visible = false;
+                tabNav.getTabAt(checkedOutTabIndex).includeInLayout = false;                              
+            }
+            if (tasksTab != null)
+            {        
+                tasksTabIndex = tabNav.getChildIndex(tasksTab);
+                tabNav.setClosePolicyForTab(tasksTabIndex, SuperTab.CLOSE_NEVER);  
+                if (flexSpacesPresModel.showTasks == false)
+                {
+                    tabNav.getTabAt(tasksTabIndex).visible = false;
+                    tabNav.getTabAt(tasksTabIndex).includeInLayout = false;
+                }   
+            }
+            if (wcmTab != null)
+            {
+                wcmTabIndex = tabNav.getChildIndex(wcmTab);
+                tabNav.setClosePolicyForTab(wcmTabIndex, SuperTab.CLOSE_NEVER);  
+                if (flexSpacesPresModel.showWCM == false)
+                {
+                    tabNav.getTabAt(wcmTabIndex).visible = false;
+                    tabNav.getTabAt(wcmTabIndex).includeInLayout = false;
+                } 
+            }
 
             // init doclib view
-            if (flexSpacesPresModel.showDocLib == true)
+            if ( (flexSpacesPresModel.showDocLib == true) && (browserView != null) )
             {
                 browserView.viewActive(true);
                 browserView.setContextMenuHandler(onContextMenu);
@@ -309,7 +364,7 @@ package org.integratedsemantics.flexspaces.view.main
             }
             
             // init wcm view
-            if (flexSpacesPresModel.showWCM == true)
+            if ( (flexSpacesPresModel.showWCM == true) && (wcmBrowserView != null) )
             {
                 wcmBrowserView.setContextMenuHandler(onContextMenu);
                 wcmBrowserView.setOnDropHandler(onFolderViewOnDrop);
@@ -321,58 +376,39 @@ package org.integratedsemantics.flexspaces.view.main
             // init search view
             if (flexSpacesPresModel.showSearch == true)
             {
-                searchResultsView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
-                searchResultsView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
-                searchResultsView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);   
-                                
-                var searchView2:SearchViewBase = searchPanel.searchView2;
-                searchView2.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
-                searchView2.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
-                
-                // favorites
-                searchPanel.favoritesView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
-                searchPanel.favoritesView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
-                searchPanel.favoritesView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);     
-                searchPanel.favoritesView.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, onFavoritesOnDrop);                      
-                // get initial display of favorites
-                if (searchPanel.searchPanelPresModel.favoritesPresModel != null)
+                if (searchResultsView != null)
                 {
-                    searchPanel.searchPanelPresModel.favoritesPresModel.redraw();
-                }                                                             
+                    searchResultsView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
+                    searchResultsView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
+                    searchResultsView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);   
+                }
+                if (searchPanel != null)
+                {
+                    var searchView2:SearchViewBase = searchPanel.searchView2;
+                    searchView2.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
+                    searchView2.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
+                
+                    // favorites
+                    searchPanel.favoritesView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
+                    searchPanel.favoritesView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
+                    searchPanel.favoritesView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);     
+                    searchPanel.favoritesView.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, onFavoritesOnDrop);                      
+                    // get initial display of favorites
+                    if (searchPanel.searchPanelPresModel.favoritesPresModel != null)
+                    {
+                        searchPanel.searchPanelPresModel.favoritesPresModel.redraw();
+                    }   
+                }                                                          
             }
 
-            // init wcm view
-            if (flexSpacesPresModel.showTasks == true)
+            // init tasks view
+            if ( (flexSpacesPresModel.showTasks == true) && (tasksPanelView != null) )
             {
                 tasksPanelView.setContextMenuHandler(onContextMenu);
                 tasksPanelView.setDoubleClickDocHandler(onDoubleClickDoc);
                 tasksPanelView.setClickNodeHandler(onClickNode);                                    
             }
               
-            // hide tabs for views not to show
-            if (flexSpacesPresModel.showDocLib == false)
-            {
-                tabNav.getTabAt(docLibTabIndex).visible = false;
-                tabNav.getTabAt(docLibTabIndex).includeInLayout = false;
-            }   
-            if (flexSpacesPresModel.showSearch == false)
-            {
-                tabNav.getTabAt(searchTabIndex).visible = false;
-                tabNav.getTabAt(searchTabIndex).includeInLayout = false;
-                searchView.visible = false;
-                this.header.invalidateDisplayList();
-            }   
-            if (flexSpacesPresModel.showTasks == false)
-            {
-                tabNav.getTabAt(tasksTabIndex).visible = false;
-                tabNav.getTabAt(tasksTabIndex).includeInLayout = false;
-            }   
-            if (flexSpacesPresModel.showWCM == false)
-            {
-                tabNav.getTabAt(wcmTabIndex).visible = false;
-                tabNav.getTabAt(wcmTabIndex).includeInLayout = false;
-            } 
-
             // select the first enabled main view tab
             var tabIndex:int = 0;
             if (flexSpacesPresModel.showDocLib == true)
@@ -496,7 +532,10 @@ package org.integratedsemantics.flexspaces.view.main
                 {
                     flexSpacesPresModel.wcmMode = false;
                     flexSpacesPresModel.currentNodeList = null;
-                    searchPanel.refresh();
+                    if (searchPanel != null)
+                    {
+                        searchPanel.refresh();
+                    }
                     if (browserView != null)
                     {
                     	browserView.viewActive(false);
@@ -588,12 +627,15 @@ package org.integratedsemantics.flexspaces.view.main
         public function gotoParentFolder(selectedItem:Object):void
         {
             if (selectedItem != null)
-            {            
-                // set the path of the  tree and left pane 
-                browserView.setPath(selectedItem.parentPath);
-            
-                // switch to the doc lib tab 
-                tabNav.selectedIndex = docLibTabIndex;
+            {    
+                if (browserView != null)
+                {        
+                    // set the path of the  tree and left pane 
+                    browserView.setPath(selectedItem.parentPath);
+                
+                    // switch to the doc lib tab 
+                    tabNav.selectedIndex = docLibTabIndex;
+                }
             }
         }
                 
@@ -614,7 +656,10 @@ package org.integratedsemantics.flexspaces.view.main
             }       
             else if (tabIndex == searchTabIndex)
             {
-                searchPanel.redraw();
+                if (searchPanel != null)
+                {
+                    searchPanel.redraw();
+                }
             }
             else if (tabIndex == tasksTabIndex) 
             {
@@ -644,6 +689,10 @@ package org.integratedsemantics.flexspaces.view.main
         public function onClickNode(event:ClickNodeEvent):void
         {
             flexSpacesPresModel.selectedItem = event.clickedItem;
+
+            // handle may have may have multiple pres models, and some cmds will look in
+            // global presmodel to tell if in wcm mode
+            model.flexSpacesPresModel = flexSpacesPresModel;                                    
             
             if (event.folderView != null)
             {
@@ -669,11 +718,14 @@ package org.integratedsemantics.flexspaces.view.main
 	                // init version list when a main folder view node is selected
 	                if ( (flexSpacesPresModel.wcmMode == false) && (flexSpacesPresModel.browserPresModel != null) )
 	                {
-                		browserView.initVersionList(flexSpacesPresModel.selectedItem);
+                        if (browserView != null)
+    	                {
+                        	browserView.initVersionList(flexSpacesPresModel.selectedItem);
+                    	}   	  
 	                }
                 	
-		            enableMenusAfterTabChange(tabNav.selectedIndex);
-		            enableMenusAfterSelection(flexSpacesPresModel.selectedItem);                	
+	                enableMenusAfterTabChange(tabNav.selectedIndex);
+	                enableMenusAfterSelection(flexSpacesPresModel.selectedItem);
                 }
             }            
         }        
@@ -774,7 +826,10 @@ package org.integratedsemantics.flexspaces.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.enableMenuItem("edit", "paste", true);
+                if (mainMenu != null)
+                {
+                    mainMenu.enableMenuItem("edit", "paste", true);
+                }
             }                                                    
         }
 
@@ -792,7 +847,10 @@ package org.integratedsemantics.flexspaces.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.enableMenuItem("edit", "paste", true);
+                if (mainMenu != null)
+                {
+                    mainMenu.enableMenuItem("edit", "paste", true);
+                }
             }                                                    
         }
 
@@ -931,8 +989,11 @@ package org.integratedsemantics.flexspaces.view.main
          */
         public function showHideSecondRepoFolder():void
         {
-            browserView.showHideSecondRepoFolder();
-            tabNav.invalidateDisplayList();
+            if (browserView != null)
+            {
+                browserView.showHideSecondRepoFolder();
+                tabNav.invalidateDisplayList();
+            }
         }
         
         /**
@@ -951,8 +1012,11 @@ package org.integratedsemantics.flexspaces.view.main
          */
         public function showHideWcmSecondRepoFolder():void
         {
-            wcmBrowserView.showHideSecondRepoFolder();
-            tabNav.invalidateDisplayList();
+            if (wcmBrowserView != null)
+            {
+                wcmBrowserView.showHideSecondRepoFolder();
+                tabNav.invalidateDisplayList();
+            }
         }   
         
         /**
@@ -1039,6 +1103,10 @@ package org.integratedsemantics.flexspaces.view.main
         {    
             var selectedItem:Object = flexSpacesPresModel.selectedItem;   
             var selectedItems:Array = flexSpacesPresModel.selectedItems; 
+            
+            // handle may have may have multiple pres models, and some cmds will look in
+            // global presmodel to tell if in wcm mode
+            model.flexSpacesPresModel = flexSpacesPresModel;                                    
             
             switch(data)
             {
@@ -1210,7 +1278,7 @@ package org.integratedsemantics.flexspaces.view.main
         {              
             var tabIndex:int = tabNav.selectedIndex;
             
-            if ((selectedItem != null) && (mainMenu.configurationDone == true))
+            if ((selectedItem != null) && (mainMenu != null) && (mainMenu.configurationDone == true) && (toolbar1 != null) )
             {
                 var node:Node = selectedItem as Node;                
                 var isLocked:Boolean = node.isLocked;
@@ -1460,7 +1528,7 @@ package org.integratedsemantics.flexspaces.view.main
          */
         protected function enableMenusAfterVersionSelection(selectedItem:Object):void
         {              
-            if ((selectedItem != null) && (mainMenu.configurationDone == true))
+            if ((selectedItem != null) && (mainMenu != null) && (mainMenu.configurationDone == true)  && (toolbar1 != null) )
             {
                 var node:Node = selectedItem as Node;                
 
@@ -1513,7 +1581,7 @@ package org.integratedsemantics.flexspaces.view.main
          */
         protected function enableMenusAfterTabChange(tabIndex:int):void
         {
-            if (mainMenu.configurationDone == true)
+            if ((mainMenu != null) && (mainMenu.configurationDone == true)  && (toolbar1 != null) )
             {
                 var createChildrenPermission:Boolean = false;                                       
                 if ( (flexSpacesPresModel.currentNodeList != null) && (flexSpacesPresModel.currentNodeList is Folder))

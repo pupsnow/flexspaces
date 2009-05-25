@@ -9,6 +9,7 @@ package org.integratedsemantics.flexspaces.model
 	import org.integratedsemantics.flexspaces.model.global.ThumbnailConfig;
 	import org.integratedsemantics.flexspaces.model.global.UserInfo;
 	import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+	import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
 
 
 	/**
@@ -43,6 +44,9 @@ package org.integratedsemantics.flexspaces.model
         
         // loading config complete
         public var configComplete:Boolean = false;       
+
+        // for spring actionscript config
+        public var applicationContext:FlexXMLApplicationContext;
 
                    
 		// singleton: constructor only allows one model locator

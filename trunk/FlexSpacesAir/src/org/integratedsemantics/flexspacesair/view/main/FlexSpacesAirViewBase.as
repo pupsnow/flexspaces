@@ -89,7 +89,7 @@ package org.integratedsemantics.flexspacesair.view.main
             
             //Native Drag-and-drop listeners
             
-            if (flexSpacesAirPresModel.showDocLib == true)
+            if ( (flexSpacesAirPresModel.showDocLib == true) && (browserView != null) )
             {
                 var folderView1:FolderViewBase = browserView.fileView1;                
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn1);
@@ -105,7 +105,7 @@ package org.integratedsemantics.flexspacesair.view.main
                 }           
             }
 
-            if (flexSpacesAirPresModel.showWCM == true)
+            if ( (flexSpacesAirPresModel.showWCM == true) && (wcmBrowserView != null) )
             {
                 var wcmFolderView1:FolderViewBase = wcmBrowserView.fileView1;                
                 wcmFolderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onWcmDragIn1);
@@ -164,8 +164,11 @@ package org.integratedsemantics.flexspacesair.view.main
             var enablePaste:Boolean = formatToPaste();
             mainMenu.enableMenuItem("edit", "paste", enablePaste);
             
-            this.pasteBtn.enabled = enablePaste;                    
-
+            if (this.toolbar1 != null)
+            {
+                this.pasteBtn.enabled = enablePaste;                    
+            }
+            
             // TODO: also need to add check for formatToPaste when switching/activating the flexpacesair window 
             // for now have to switch tabs or select nodes for the paste menu enabling to be updated            
         }        
@@ -191,7 +194,10 @@ package org.integratedsemantics.flexspacesair.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.enableMenuItem("edit", "paste", true);
+                if (mainMenu != null)
+                {
+                    mainMenu.enableMenuItem("edit", "paste", true);
+                }
             }                                                                                                           
         }
         
@@ -211,7 +217,10 @@ package org.integratedsemantics.flexspacesair.view.main
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
-                mainMenu.enableMenuItem("edit", "paste", true);
+                if (mainMenu != null)
+                {
+                    mainMenu.enableMenuItem("edit", "paste", true);
+                }
             }                                                                                                           
         }        
             
@@ -687,7 +696,7 @@ package org.integratedsemantics.flexspacesair.view.main
                      
             var tabIndex:int = tabNav.selectedIndex;
             
-            if ((selectedItem != null) && (mainMenu.configurationDone == true))
+            if ((selectedItem != null) && (mainMenu != null) && (mainMenu.configurationDone == true) && (toolbar1 != null) )
             {
                 var createChildrenPermission:Boolean = false;                                       
                 if ( (flexSpacesAirPresModel.currentNodeList != null) && (flexSpacesAirPresModel.currentNodeList is Folder))
@@ -747,7 +756,7 @@ package org.integratedsemantics.flexspacesair.view.main
         {
             super.enableMenusAfterTabChange(tabIndex);
             
-            if (mainMenu.configurationDone == true)
+            if ( (mainMenu != null) && (mainMenu.configurationDone == true) && (toolbar1 != null) )
             {
                 // make avail offline, offline upload
                 mainMenu.enableMenuItem("tools", "availoffline", false);

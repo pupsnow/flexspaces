@@ -8,7 +8,6 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
     import org.integratedsemantics.flexspaces.control.delegate.webscript.WebScriptService;
     import org.integratedsemantics.flexspaces.control.delegate.webscript.event.SuccessEvent;
     import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
-    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.wcm.folder.WcmFolder;
     import org.integratedsemantics.flexspaces.model.wcm.tree.WcmTreeNode;
 
@@ -19,6 +18,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
      */
     public class WcmTreeDelegate extends Delegate
     {
+        private var path:String;
+        
         /**
          * Constructor
          * 
@@ -39,6 +40,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
          */
         public function getFolders(storeId:String, path:String):void
         {
+            this.path = path;
+            
             try
             {        
                 var url:String = "/flexspaces/wcm/tree";
@@ -77,15 +80,13 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
             currentNode.storeId = result.folder.storeId;                    
             currentNode.id = result.folder.id;                    
 
-            currentNode.path = "/AVM/" + currentNode.storeId + result.folder.path;
-            currentNode.displayPath = "/AVM/" + currentNode.storeId + result.folder.path;
-            currentNode.parentPath = "/AVM/" + currentNode.storeId + result.folder.parentPath;
+            currentNode.path = "/AVM/" + currentNode.storeId + path;
+            currentNode.displayPath = "/AVM/" + currentNode.storeId + path;
                             
             currentNode.readPermission = (result.folder.readPermission == "true");
             currentNode.writePermission = (result.folder.writePermission == "true");
             currentNode.deletePermission = (result.folder.deletePermission == "true");
             currentNode.createChildrenPermission = (result.folder.createChildrenPermission == "true");
-
    
             currentNode.children = new ArrayCollection();
 
@@ -101,9 +102,17 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
                 childNode.storeId = folder.storeId;                    
                 childNode.id = folder.id;                    
 
-                childNode.path = "/AVM/" + childNode.storeId + folder.path;
-                childNode.displayPath = "/AVM/" + childNode.storeId + folder.path;                
-                childNode.parentPath = "/AVM/" + childNode.storeId + folder.parentPath;
+                if (path == "/")
+                {
+                    childNode.path = currentNode.path + childNode.name; 
+                    childNode.displayPath = currentNode.displayPath + childNode.name;    
+                }
+                else
+                {
+                    childNode.path = currentNode.path + "/" + childNode.name; 
+                    childNode.displayPath = currentNode.displayPath + "/" + childNode.name;                            
+                }
+                childNode.parentPath = currentNode.path;    
                                     
                 childNode.readPermission = (folder.readPermission == "true");
                 childNode.writePermission = (folder.writePermission == "true");

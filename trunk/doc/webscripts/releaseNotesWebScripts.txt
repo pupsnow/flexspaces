@@ -1,10 +1,13 @@
 
-4/30/09
+7/11/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces WebScripts release notes
+
+0.91
+1. changed move webscript to use move operation
 
 0.9
 1. folderlist (doclib) and search can do paging in the webscripts ("server side")

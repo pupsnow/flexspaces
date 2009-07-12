@@ -1,10 +1,14 @@
 
-4/30/09
+7/11/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser release notes
+
+0.91 Release
+1. Fixed WCM tree and WCM folder in WCM tab view  to work on Alfresco 3.2 Community (note wcm tab not shown
+unless configured in FlexSpacesConfig.xml)
 
 0.9 Release
 1. Code refactored to use presentation model pattern

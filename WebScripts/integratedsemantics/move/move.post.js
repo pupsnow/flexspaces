@@ -12,9 +12,9 @@ var resultCode = false;
 var newNode;
 
 
-var sourceNodeId = args.nodeid;
-if ((sourceNodeId != "") && (sourceNodeId != null) )
+if (args.nodeid)
 {
+   var sourceNodeId = args.nodeid;
    var sourceNode = search.findNode("workspace://SpacesStore/" + sourceNodeId);
 
    if (sourceNode != null)
@@ -28,27 +28,11 @@ if ((sourceNodeId != "") && (sourceNodeId != null) )
             var nodeParent = roothome.childByNamePath(args.path);
             if (nodeParent != null)
             {
-               if (sourceNode.isDocument)
+               newNode = sourceNode.move(nodeParent);
+               if (newNode != null)
                {
-                  newNode = sourceNode.move(nodeParent);
-                  if (newNode != null)
-                  {
-                     resultString = "Node was moved";
-                     resultCode = true;
-                  }
-               }
-               else
-               {
-                  newNode = sourceNode.copy(nodeParent, true);
-                  if (newNode != null)
-                  {
-                     resultString = "Node was copied, not moved";
-                     if (sourceNode.remove())
-                     {
-                        resultString = "Node was moved";
-                        resultCode = true;
-                     }
-                  }
+                  resultString = "Node was moved";
+                  resultCode = true;
                }
             }
          }

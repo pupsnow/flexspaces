@@ -20,6 +20,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
      */
     public class WcmFolderListDelegate extends Delegate
     {
+        private var path:String;
+                
         /**
          * Constructor
          * 
@@ -40,6 +42,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
          */
         public function getFolderList(storeId:String, path:String):void
         {
+            this.path = path;
+            
             try
             {                   
                 var url:String = "/flexspaces/wcm/folderlist";
@@ -81,8 +85,12 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
             wcmFolder.folderNode.storeId = String(result.storeId);
             wcmFolder.folderNode.id = String(result.id);
 
-            wcmFolder.folderNode.parentPath = String(result.parentPath);
-            wcmFolder.folderNode.path = String(result.path);
+            //wcmFolder.folderNode.parentPath = String(result.parentPath);
+            //wcmFolder.folderNode.path = String(result.path);
+            
+            wcmFolder.folderNode.path = path;
+            wcmFolder.folderNode.displayPath = "/AVM/" + wcmFolder.folderNode.storeId + path;
+           
             
             wcmFolder.folderNode.readPermission = (result.readPermission == "true");
             wcmFolder.folderNode.writePermission = (result.writePermission == "true");
@@ -105,10 +113,20 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript.wcm
                 node.storeId = xmlNode.storeId;
                 node.id = xmlNode.id;
                 
-                node.parentPath = xmlNode.parentPath;
-                node.path = xmlNode.path;
-                //node.displayPath = curPath + "/" + xmlNode.name;
-                
+                //node.parentPath = xmlNode.parentPath;
+                //node.path = xmlNode.path;
+                if (path == "/")
+                {
+                    node.path = wcmFolder.folderNode.path + node.name; 
+                    node.displayPath = wcmFolder.folderNode.displayPath + node.name;        
+                }
+                else
+                {
+                    node.path = wcmFolder.folderNode.path + "/" + node.name; 
+                    node.displayPath = wcmFolder.folderNode.displayPath + "/" + node.name;                            
+                }
+                node.parentPath = wcmFolder.folderNode.path;
+                                
                // strip off initial slash. add src path, so local icons will be found
                 node.icon16 = xmlNode.icon16;
                 node.icon16 = model.appConfig.srcPath + node.icon16.substr(1);

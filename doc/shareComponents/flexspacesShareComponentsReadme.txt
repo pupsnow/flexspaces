@@ -1,30 +1,21 @@
-11/06/08
+7/11/09
+
+FlexSpaces page site components for  running FlexSpaces views inside Alfresco Share 3.x 
 
 
-FlexSpaces page site components for Alfresco Share 3.0 / Surf
-
-Notes for 0.7
-1. Tested these flexspaces share page site components with the released alfresco 3.0 enterprise share
+Note: Tested these flexspaces share page site components with the released alfresco 3.0 enterprise share
 (and "presets.xml sample" based on the "presets.xml" from the released alfresco 3.0 enterprise share)
-
-2. Tested share with flexspaces site components inside on vista+firefox3 and flash player 9.x
-(note: share currently supports flash 9.x player not flash 10.x player)
-
-3. Had to modifiy FlexSpacesPresenter.as from 0.7 to get the single view page site components to work in share. 
-(this change to flexspaces+browser 0.7 source  in flexspaces-src, and prebuilt into the FlexSpaces.swf in share/flexspaces)
-
+(and you may need to merge in changes into your more more recent presets.xml)
 
 Install instructions:
 
 1. Install integratedsemantics.zip webscripts per doc/webscripts readme
 
-2. copy files  included in share/flexspaces
+2. copy flexspaces dir from flexspaces browser to
 
     <installdir>/tomcat/webapps/share/flexspaces
 
     for use by flexspaces share site page components
-
-(these files not the same as those from flexspaces+browser 0.7, FlexSpaces.swf has modified FlexSpacesPresenter.as built in)
 
 
 3. copy files included in share/WEB-INF to
@@ -49,7 +40,7 @@ Install instructions:
         AVM / sitestore / alfresco / site-data/ pages / site / <sitename> / dashboard.xml
 
 
-5. NOTE: in share/flexspaces copy of flexspaces+browser files, alfresco-config.xml also needs to be setup with host,etc.
+5. NOTE: in share/flexspaces copy of flexspaces+browser files, FlexSpacesConfig.xml also needs to be setup with host,etc.
 
 6. If all 5 flexspaces page site components are included with all regular share site pages, the title link area will wrap
 Shorter page links can be used in for the flexspaces pages by editing the <title> in

@@ -1,10 +1,15 @@
 
-7/11/09
+8/5/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser release notes
+
+0.92 Release
+1. Styling and skinning: Default colors changed, more styles in css files (flexspaces.css, dialog.css) instead of hardcoded, 
+2. Tabs and menus skinned.
+3. Login: username and password fields are now initially blanked out
 
 0.91 Release
 1. Fixed WCM tree and WCM folder in WCM tab view  to work on Alfresco 3.2 Community (note wcm tab not shown

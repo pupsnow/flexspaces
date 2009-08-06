@@ -22,7 +22,7 @@
         </coverflow:CoverFlowContainer>    
             
         <mx:DataGrid id="coverFlowDataGrid" height="60%" width="100%" rowHeight="25"
-            dataProvider="{dataProvider}" styleName="DataGrid" doubleClickEnabled="true"         
+            dataProvider="{dataProvider}" styleName="fileGridStyle" doubleClickEnabled="true"         
             dragEnabled="true" dropEnabled="true"  dragMoveEnabled="true" allowMultipleSelection="true"             
             change="onChange(event)">
             <mx:columns>        

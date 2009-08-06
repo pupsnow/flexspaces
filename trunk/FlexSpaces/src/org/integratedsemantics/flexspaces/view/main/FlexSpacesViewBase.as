@@ -121,9 +121,11 @@ package org.integratedsemantics.flexspaces.view.main
         public var wcmTab:VBox;
         public var wcmBrowserView:WcmRepoBrowserViewBase;
             
-        public var docker:Docker;
-        public var menuToolbar:DockableToolBar;
-        public var toolbar1:DockableToolBar;
+        //public var docker:Docker;
+        //public var menuToolbar:DockableToolBar;
+        //public var toolbar1:DockableToolBar;
+        public var toolbar1:HBox;
+
         
         public var cutBtn:Button;
         public var copyBtn:Button;

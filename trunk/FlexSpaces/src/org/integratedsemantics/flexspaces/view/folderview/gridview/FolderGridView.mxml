@@ -8,7 +8,7 @@
     <mx:VBox verticalGap="0" height="100%" width="100%">
     
         <mx:DataGrid id="folderGrid" height="100%" width="100%" rowHeight="25"
-            dataProvider="{dataProvider}" styleName="DataGrid" doubleClickEnabled="true"         
+            dataProvider="{dataProvider}" styleName="fileGridStyle" doubleClickEnabled="true"         
             dragEnabled="true" dropEnabled="true"  dragMoveEnabled="true" allowMultipleSelection="true"
             change="onChange(event)">
     

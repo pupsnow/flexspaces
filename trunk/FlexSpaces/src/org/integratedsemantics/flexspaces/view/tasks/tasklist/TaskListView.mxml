@@ -11,7 +11,7 @@
                 
     <mx:Button id="refeshTasks" label="{resourceManager.getString('TaskListView', 'refeshTasks_label' )}"/>
     
-    <mx:DataGrid dataProvider="{taskListPresModel.taskList}" id="taskGrid" styleName="DataGrid"        
+    <mx:DataGrid dataProvider="{taskListPresModel.taskList}" id="taskGrid" styleName="fileGridStyle"        
         height="100%" width="100%" rowHeight="25">
         
         <mx:columns>

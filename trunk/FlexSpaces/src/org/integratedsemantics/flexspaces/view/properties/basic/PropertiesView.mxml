@@ -30,30 +30,30 @@
         </mx:FormItem>
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'sizeItem_label' )}" width="400" id="sizeItem" styleName="mainArea"
         	visible="{propPresModel.sizeVisible}" includeInLayout="{propPresModel.sizeVisible}" >      
-            <mx:Text id="size" text="{propPresModel.vo.size}" color="#000000"/>
+            <mx:Text id="size" text="{propPresModel.vo.size}" />
         </mx:FormItem>
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'creatorItem_label' )}" id="creatorItem" width="400" styleName="mainArea">      
-            <mx:Text id="creator" text="{propPresModel.vo.creator}" color="#000000"/>
+            <mx:Text id="creator" text="{propPresModel.vo.creator}" />
         </mx:FormItem>
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'createdItem_label' )}" id="createdItem" width="400" styleName="mainArea">      
-            <mx:Text id="created" text="{propPresModel.vo.created}" color="#000000"/>
+            <mx:Text id="created" text="{propPresModel.vo.created}" />
         </mx:FormItem>
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'modifierItem_label' )}" id="modifierItem" width="400" styleName="mainArea">      
-            <mx:Text id="modifier" text="{propPresModel.vo.modifier}" color="#000000"/>
+            <mx:Text id="modifier" text="{propPresModel.vo.modifier}" />
         </mx:FormItem>
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'modifiedItem_label' )}" id="modifiedItem" width="400" styleName="mainArea">      
-            <mx:Text id="modified" text="{propPresModel.vo.modified}" color="#000000"/>
+            <mx:Text id="modified" text="{propPresModel.vo.modified}" />
         </mx:FormItem>
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'mimetypeItem_label' )}" width="400" id="mimetypeItem" styleName="mainArea"
         	visible="{propPresModel.mimetypeVisible}" includeInLayout="{propPresModel.mimetypeVisible}">      
-            <mx:Text id="mimetype" text="{propPresModel.vo.mimetype}" color="#000000"/>
+            <mx:Text id="mimetype" text="{propPresModel.vo.mimetype}" />
         </mx:FormItem>
         <!--mx:FormItem label="Encoding:"  width="400" id="encodingItem">
             <mx:Text id="encoding"/>
         </mx:FormItem-->       
         <mx:FormItem label="{resourceManager.getString('PropertiesView', 'emailidItem_label' )}" id="emailidItem" width="400" styleName="mainArea"      
         	visible="{propPresModel.emailIdVisible}" includeInLayout="{propPresModel.emailIdVisible}">      
-            <mx:Text id="emailid" text="{propPresModel.vo.emailid}" color="#000000"/>
+            <mx:Text id="emailid" text="{propPresModel.vo.emailid}" />
         </mx:FormItem>
         <!--mx:FormItem label="Edit Inline:"  width="400" id="editinlineItem">
             <mx:CheckBox label="Enabled" id="editinline" />

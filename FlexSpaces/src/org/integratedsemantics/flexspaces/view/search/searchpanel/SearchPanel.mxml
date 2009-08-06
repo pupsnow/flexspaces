@@ -16,7 +16,7 @@
     <mx:Accordion height="100%" width="28%">
 
         <mx:Box label="{resourceManager.getString('SearchPanel', 'searchQuerySection_label' )}" height="100%" width="100%" id="searchQuerySection">      
-            <search:SearchView id="searchView2" searchPresModel="{searchPanelPresModel.searchPresModel}" width="100%" backgroundColor="0x000000"/>      
+            <search:SearchView id="searchView2" searchPresModel="{searchPanelPresModel.searchPresModel}" width="100%"/>      
         </mx:Box>
 
         <semantictags:SemanticTagCloudView id="semanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.semanticTagCloudPresModel}" 

@@ -12,7 +12,7 @@
     </mx:Metadata>
         
     <mx:DataGrid id="versionListGrid" height="100%" width="100%" rowHeight="25" 
-        dataProvider="{versionListPresModel.nodeCollection}" styleName="DataGrid" doubleClickEnabled="true"         
+        dataProvider="{versionListPresModel.nodeCollection}" styleName="fileGridStyle" doubleClickEnabled="true"         
         dragEnabled="false" dropEnabled="false"  dragMoveEnabled="false" allowMultipleSelection="false">                
 
         <mx:columns>        

@@ -29,6 +29,8 @@ package org.integratedsemantics.flexspaces.presmodel.login
 		{
 		    super();
 		    
+		    // for dev
+		    /*
 			if (model.ecmServerConfig.isLiveCycleContentServices == true)
 			{
 			    userName = "administrator";
@@ -38,7 +40,10 @@ package org.integratedsemantics.flexspaces.presmodel.login
 			{
 				userName = "admin";
 				password = "admin";
-			}		    		    
+			}	
+            */
+            userName = "";
+            password = "";				    		    
 		}
 			
 		/**

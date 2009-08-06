@@ -2,11 +2,11 @@
 
 .dialog
 {
-    backgroundColor: #999999; 
+    backgroundColor: #333333; 
     borderColor: #000000; 
     borderStyle: solid; 
     borderThickness: 3; 
-    color: #000000; 
+    color: #ffffff; 
     cornerRadius: 0; 
     fontSize: 12; 
     fontWeight: bold; 
@@ -14,11 +14,21 @@
 
 .mainArea
 {
-    borderColor: #999999;
+    borderColor: #333333;
     borderStyle: solid;
     borderThickness: 0;
     fontSize: 10;
 }
+
+.dialogTabs
+{
+    borderColor: #000000;
+    borderStyle: outset;
+    borderThickness: 0;
+    fontSize: 10;
+    backgroundColor: #777777;
+}
+
 
 .input
 {

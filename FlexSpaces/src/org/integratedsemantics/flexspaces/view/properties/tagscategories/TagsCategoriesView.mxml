@@ -16,7 +16,7 @@
     
     <mx:Spacer height="5"/>
     
-    <mx:TabNavigator creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" backgroundColor="#999999" styleName="mainArea" borderColor="#000000" borderStyle="outset">
+    <mx:TabNavigator creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" styleName="dialogTabs">
         
         <tags:TagPropertiesView id="tagPropertiesView" tagPropertiesPresModel="{tagCategoriesPresModel.tagPropertiesPresModel}" />
     

@@ -14,8 +14,8 @@
 		
         <mx:Spacer width="2"/> 
         
-        <mx:Button id="searchBtn" width="25" height="25" fillColors="[0x000000 0x000000]" 
-            icon="@Embed('/images/flexspaces/search_icon_black.gif')" toolTip="{resourceManager.getString('SearchView', 'searchBtn_tooltip' )}"/>
+        <mx:Button id="searchBtn" width="25" height="25" 
+            icon="@Embed('/images/flexspaces/search_dark.gif')" toolTip="{resourceManager.getString('SearchView', 'searchBtn_tooltip' )}"/>
 		
         <mx:Spacer width="2"/>  
 		

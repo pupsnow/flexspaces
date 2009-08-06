@@ -54,14 +54,14 @@
 
         <mx:HBox horizontalAlign="center" width="100%">
             <mx:Label text="{resourceManager.getString('FolderIconView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('FolderIconView', 'pagenumLabel_of')} {pager.totalPages}" 
-                      color="0xFFFFFF" id="pagenumLabel"/>    
+                      styleName="pageNumStyle" id="pagenumLabel"/>    
             <mx:Spacer width="4"/>    
             <paging:PagerBar id="pageBar"  pager="{pager}" totalPages="{pager.totalPages}"
                              maxVisiblePages="10" buttonWidth="45" buttonMode="true"/>
             <mx:Spacer width="4"/>                
-            <mx:Label text="{resourceManager.getString('FolderIconView', 'itemsPerPageLabel_text')}" color="0xFFFFFF" id="itemsPerPageLabel"/>
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'itemsPerPageLabel_text')}" styleName="itemsPerPageStyle" id="itemsPerPageLabel"/>
             <mx:Spacer width="4"/>                
-            <mx:ComboBox id="pageSizeCombo" color="#000000" dataProvider="{taskAttachmentsPresModel.model.flexSpacesPresModel.pageSizeList}"
+            <mx:ComboBox id="pageSizeCombo" styleName="pageSizeComboStyle" dataProvider="{taskAttachmentsPresModel.model.flexSpacesPresModel.pageSizeList}"
                 change="onPageSizeChange(event)"/>
         </mx:HBox>
         

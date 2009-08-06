@@ -1,4 +1,4 @@
-4/30/09
+8/5/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
@@ -16,9 +16,8 @@ http://get.adobe.com/air/
 or alpha for Linux
 http://labs.adobe.com/technologies/air/
 
-(0.9 tested with AIR 1.5.1, with Alfreso Labs 3 final/stable)
-previously test Alfresco 3.0 Enterprise, Alfresco 2.2.0 Enterprise, Labs 3b, 2.90C_dev, 
-and Adobe livecycle content services es 8.2 update 1
+(note: 0.92 tested with AIR 1.5.2, with Alfreso 3.2 Community, and Adobe Livecycle Content Services ES 8.2.1
+(previously tested Alfresco 3.0 Enterprise, Alfresco 2.2.0 Enterprise, other community/labs versions)
 (min version for webscripts is 2.1)
 
 FlexSpaces+AIR Windows Installation
@@ -108,7 +107,7 @@ e. Node2: on AIR, google map adds noticable delay on startup
 
 
 FlexSpaces+AIR Mac OSX Installation
-1. Install released AIR 1.x runtime for the Mac
+1. Install released AIR 1.5.x runtime for the Mac
 http://get.adobe.com/air/
 2. Double click and install FlexSpacesAir.air from http://forge.alfresco.com/projects/flexspaces/
 3. Set host and port name in FlexSpacesConfig.xml

@@ -1,5 +1,5 @@
 
-4/30/09
+8/5/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
@@ -16,8 +16,15 @@ Web Server Setup
 2. flexspaces/FlexSpacesConfig.xml 
 see readmeFlexSpacesForAIR.txt for instructions
 
+Client install of latest Flash Player 10.x
+1. Uninstall current flash players
+Although mainly support flash 9.x player. Did some testing with flash 10 player. Only issue: edit does checkout + download with
+flash 9.x player. With flash 10.x player, edit will only do the checkout. Can still do the download as a  separate step with flash 10.x player.
+2. Install from your browser: (if have both IE and Firefox, need to from each browser)
+http://www.adobe.com/go/getflashplayer
 
-Client install of Flash Player 9.x 
+
+(Client install of Flash Player 9.x)
 0. Uninstall current flash players if not 9.x
 1. On Clients, install the latest 9.x flash player for the given browser
 2. Windows, Mac, Linux supported
@@ -28,13 +35,6 @@ http://fpdownload.macromedia.com/get/flashplayer/installers/archive/fp9_debug_ar
 4. Install 124 version
 Windows / FireFox: flashplayer9r124_win.exe
 Windows / IE: flashplayer9r124_winax.exe
-
-Client install of Flash Player 10.x
-1. Uninstall current flash players
-Although mainly support flash 9.x player. Did some testing with flash 10 player. Only issue: edit does checkout + download with
-flash 9.x player. With flash 10.x player, edit will only do the checkout. Can still do the download as a  separate step with flash 10.x player.
-2. Install from your browser: (if have both IE and Firefox, need to from each browser)
-http://www.adobe.com/go/getflashplayer
 
 
 To run FlexSpaces from browser:

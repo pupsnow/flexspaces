@@ -145,3 +145,7 @@ TextArea
     backgroundColor:    #000000;
 }
 
+ProgressBar
+{
+    barColor:   #0E9EE5;
+}

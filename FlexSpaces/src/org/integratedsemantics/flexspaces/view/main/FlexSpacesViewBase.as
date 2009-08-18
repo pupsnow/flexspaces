@@ -22,7 +22,6 @@ package org.integratedsemantics.flexspaces.view.main
     import mx.events.MenuEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
-    import mx.utils.URLUtil;
     
     import org.integratedsemantics.flexspaces.control.event.GetInfoEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
@@ -143,9 +142,9 @@ package org.integratedsemantics.flexspaces.view.main
         protected var embeddedMode:Boolean = false;
         
         // use a shared object to remember some data in case of browser refresh, porlet resize, etc.
-        private var sessionData:SharedObject;
-        private var tabIndexHistory:int = -1;      
-        private var pathHistory:String = null;        
+        protected var sessionData:SharedObject;
+        protected var tabIndexHistory:int = -1;      
+        protected var pathHistory:String = null;        
                           
         /**
          * Constructor 
@@ -1835,7 +1834,7 @@ package org.integratedsemantics.flexspaces.view.main
         // sessionData handling: restoring state using short term shared object
         //
         
-        private function initSessionData():void
+        protected function initSessionData():void
         {
             if (model.appConfig.useSessionData == true)
             {
@@ -1863,7 +1862,7 @@ package org.integratedsemantics.flexspaces.view.main
             }
         }
         
-        private function loadSessionData():void
+        protected function loadSessionData():void
         {
             if (sessionData.data.tabIndex != undefined)
             {
@@ -1881,7 +1880,7 @@ package org.integratedsemantics.flexspaces.view.main
             }                                               
         }
         
-        private function updateSessionData():void
+        protected function updateSessionData():void
         {
             if (model.appConfig.useSessionData == true)
             {

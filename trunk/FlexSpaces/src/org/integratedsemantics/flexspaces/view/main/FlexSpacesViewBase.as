@@ -1,13 +1,11 @@
 package org.integratedsemantics.flexspaces.view.main
 {
     import flash.events.Event;
-    import flash.events.FocusEvent;
     import flash.events.KeyboardEvent;
     import flash.events.MouseEvent;
+    import flash.net.SharedObject;
     import flash.ui.Keyboard;
     
-    import flexlib.containers.DockableToolBar;
-    import flexlib.containers.Docker;
     import flexlib.containers.SuperTabNavigator;
     import flexlib.controls.tabBarClasses.SuperTab;
     import flexlib.events.SuperTabEvent;
@@ -24,6 +22,7 @@ package org.integratedsemantics.flexspaces.view.main
     import mx.events.MenuEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
+    import mx.utils.URLUtil;
     
     import org.integratedsemantics.flexspaces.control.event.GetInfoEvent;
     import org.integratedsemantics.flexspaces.control.event.ui.*;
@@ -121,11 +120,7 @@ package org.integratedsemantics.flexspaces.view.main
         public var wcmTab:VBox;
         public var wcmBrowserView:WcmRepoBrowserViewBase;
             
-        //public var docker:Docker;
-        //public var menuToolbar:DockableToolBar;
-        //public var toolbar1:DockableToolBar;
         public var toolbar1:HBox;
-
         
         public var cutBtn:Button;
         public var copyBtn:Button;
@@ -146,7 +141,11 @@ package org.integratedsemantics.flexspaces.view.main
 
         // embedded mode when passed login ticket
         protected var embeddedMode:Boolean = false;
-      
+        
+        // use a shared object to remember some data in case of browser refresh, porlet resize, etc.
+        private var sessionData:SharedObject;
+        private var tabIndexHistory:int = -1;      
+        private var pathHistory:String = null;        
                           
         /**
          * Constructor 
@@ -165,27 +164,19 @@ package org.integratedsemantics.flexspaces.view.main
          */
         protected function onCreationComplete(event:FlexEvent):void
         {
-            this.viewStack = this.viewStack;   
-            
-            if ((model.userInfo.loginTicket != null) && (model.userInfo.loginTicket.length != 0))
+            if (flexSpacesPresModel != null)
             {
-                embeddedMode = true;
-                flexSpacesPresModel.showHeader = false;
-                onLoginDone(new LoginDoneEvent(LoginDoneEvent.LOGIN_DONE));
-            }
-            else if (model.configComplete == true)
+                flexSpacesPresModel.updateFunction = redraw;
+            }  
+            
+            if (model.configComplete == true)
             {			         
-                viewStack.selectedIndex = LOGIN_MODE_INDEX;         
+                onConfigComplete(null);  
             }              
             else
             {
                 ChangeWatcher.watch(model, "configComplete", onConfigComplete);
-            }
-            
-            if (flexSpacesPresModel != null)
-            {
-            	flexSpacesPresModel.updateFunction = redraw;
-            }  
+            }                       
         }
         
         /**
@@ -201,9 +192,27 @@ package org.integratedsemantics.flexspaces.view.main
          
         protected function onConfigComplete(event:Event):void
         {
-            viewStack.selectedIndex = LOGIN_MODE_INDEX;                        
+            // embedded in Share
+            if ((model.userInfo.loginTicket != null) && (model.userInfo.loginTicket.length != 0))
+            {
+                embeddedMode = true;
+                // todo make showHeader a parm
+                flexSpacesPresModel.showHeader = false;
+            } 
+            
+            // may also have a ticket from shared object
+            initSessionData(); 
+
+            if (model.userInfo.loginTicket != null)
+            {
+                onLoginDone(new LoginDoneEvent(LoginDoneEvent.LOGIN_DONE));
+            }
+            else
+            {           
+                viewStack.selectedIndex = LOGIN_MODE_INDEX; 
+            }                       
         }
-                         
+
         /**
          * Handler called when login is successfully completed
          * 
@@ -215,7 +224,10 @@ package org.integratedsemantics.flexspaces.view.main
        
             var responder:Responder = new Responder(onGetInfoDone, flexSpacesPresModel.onFaultAction);
             var getInfoEvent:GetInfoEvent = new GetInfoEvent(GetInfoEvent.GET_INFO, responder);
-            getInfoEvent.dispatch();                                
+            getInfoEvent.dispatch();  
+            
+            // remember ticket      
+            updateSessionData();                       
         }        
 
         /**
@@ -430,7 +442,21 @@ package org.integratedsemantics.flexspaces.view.main
                 tabIndex = wcmTabIndex;
             }            
             tabNav.invalidateDisplayList();
-            tabNav.selectedIndex = tabIndex;                          
+            tabNav.selectedIndex = tabIndex;   
+            
+            // use sessionData shared object to restore selected tab and path
+            if ( (tabIndexHistory != -1) && (tabIndexHistory < tabNav.childDescriptors.length))
+            {
+                tabNav.selectedIndex = tabIndexHistory;
+                trace("set tab: " + tabIndexHistory);
+            }  
+            if (pathHistory != null) 
+            {
+                if (browserView != null)
+                {        
+                    browserView.setPath(pathHistory);
+                }                    
+            }                    
         }
                 
         /**
@@ -561,7 +587,10 @@ package org.integratedsemantics.flexspaces.view.main
                     }
                 }
                 
-                enableMenusAfterTabChange(event.newIndex);                
+                enableMenusAfterTabChange(event.newIndex);  
+                
+                // remember tab index
+                updateSessionData();             
             }    
         }
 
@@ -575,7 +604,10 @@ package org.integratedsemantics.flexspaces.view.main
         {
             // enable/disable menus dependent on user permissions in folder
             // independent of selections since selection is cleared after path change
-            this.enableMenusAfterTabChange(tabNav.selectedIndex);                
+            this.enableMenusAfterTabChange(tabNav.selectedIndex);   
+            
+            // remember path
+            updateSessionData();             
         }
                 
         /**
@@ -1797,7 +1829,82 @@ package org.integratedsemantics.flexspaces.view.main
                     flexSpacesPresModel.newFavorite(item);
                 }
             }
-        }                   
+        }
+        
+        //
+        // sessionData handling: restoring state using short term shared object
+        //
+        
+        private function initSessionData():void
+        {
+            if (model.appConfig.useSessionData == true)
+            {
+                sessionData = SharedObject.getLocal("sessionData");
+                var now:Date = new Date();
+                if (sessionData.data.timeStamp == undefined)
+                {   
+                    sessionData.data.timeStamp = now.time;
+                }
+                else
+                {
+                    var timeStamp:Number = sessionData.data.timeStamp;
+                    var secs:Number = (now.time - timeStamp) / 1000;
+                    var mins:Number = Math.round(secs /60);
+                    if  (mins > model.appConfig.sessionDataValidTime)
+                    {
+                        sessionData.clear();    
+                        sessionData.data.timeStamp = now.time;
+                    }  
+                    else
+                    {
+                        loadSessionData();
+                    }              
+                }
+            }
+        }
+        
+        private function loadSessionData():void
+        {
+            if (sessionData.data.tabIndex != undefined)
+            {
+                tabIndexHistory = sessionData.data.tabIndex;
+            }
+
+            if (sessionData.data.ticket != undefined)
+            {
+                model.userInfo.loginTicket = sessionData.data.ticket;
+            } 
+            
+            if (sessionData.data.docLibPath != undefined)
+            {
+                pathHistory = sessionData.data.docLibPath;
+            }                                               
+        }
+        
+        private function updateSessionData():void
+        {
+            if (model.appConfig.useSessionData == true)
+            {
+                if (tabNav != null)
+                {
+                    sessionData.data.tabIndex = tabNav.selectedIndex;
+                }
+                else
+                {
+                    sessionData.data.tabIndex = 0;
+                }
+                
+                if (model.userInfo.loginTicket != null)
+                {
+                    sessionData.data.ticket = model.userInfo.loginTicket;
+                }            
+    
+                if (browserView != null)
+                {
+                    sessionData.data.docLibPath = browserView.treeView.getPath();
+                }
+            }                                    
+        }                                   
 
     }
 }

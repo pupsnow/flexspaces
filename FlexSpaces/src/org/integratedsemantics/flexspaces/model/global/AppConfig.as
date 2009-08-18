@@ -15,6 +15,14 @@ package org.integratedsemantics.flexspaces.model.global
         
         public var cmisMode:Boolean = false;        
 
+        // whether to use short term shared object to store ticket / docLibPath / tabIndex
+        // allows restoring state after browser refresh, portlet resize, and re-running app
+        public var useSessionData:Boolean = false;
+        
+        // when sessionData shared object is used (useSessionData true),
+        // how long can (in minutes) can its data be used to restore state when app restarts
+        public var sessionDataValidTime:int = 30;
+
 		public function AppConfig()
 		{
 		}

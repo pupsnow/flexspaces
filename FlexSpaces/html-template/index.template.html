@@ -63,34 +63,51 @@ var hasRequestedVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVers
 var urlArgs = getUrlArgs();
 var ticket = urlArgs.alf_ticket || "";
 var srcUrl = "FlexSpaces.swf";
+var flashVars = "";
 if (ticket != "")
 {
-    srcUrl = srcUrl + "?alf_ticket=" + ticket;
+    flashVars = "alf_ticket=" + ticket;
 
     var doclib = urlArgs.doclib || "";
     if (doclib != "")
     {
-        srcUrl = srcUrl + "&doclib=" + doclib;
+        flashVars = flashVars + "&doclib=" + doclib;
     }
     var search = urlArgs.search || "";
     if (search != "")
     {
-        srcUrl = srcUrl + "&search=" + search;
+        flashVars = flashVars + "&search=" + search;
     }
     var tasks = urlArgs.tasks || "";
     if (tasks != "")
     {
-        srcUrl = srcUrl + "&tasks=" + tasks;
+        flashVars = flashVars + "&tasks=" + tasks;
     }
     var wcm = urlArgs.wcm || "";
     if (wcm != "")
     {
-        srcUrl = srcUrl + "&wcm=" + wcm;
+        flashVars = flashVars + "&wcm=" + wcm;
     }
+    var header = urlArgs.header || "";
+    if (header != "")
+    {
+        flashVars = flashVars + "&header=" + header;
+    }    
+    var coverflow = urlArgs.coverflow || "";
+    if (coverflow != "")
+    {
+        flashVars = flashVars + "&coverflow=" + coverflow;
+    }    
+    var alfrescourl = urlArgs.alfrescourl || "";
+    if (alfrescourl != "")
+    {
+        flashVars = flashVars + "&alfrescourl=" + alfrescourl;
+    }    
 }
 
-// for testing  
-//srcUrl = "FlexSpaces.swf" + "?doclib=true&search=true&tasks=false&wcm=false";
+// for testing flashvars
+//flashVars = "doclib=true&search=true&tasks=true&wcm=true&header=true&coverflow=true&alfrescourl=http://localhost:8080/alfresco/service";
+//flashVars += "&user=admin&pw=admin&autologin=true";
 
 if ( hasProductInstall && !hasRequestedVersion )
 {
@@ -122,6 +139,7 @@ else if (hasRequestedVersion)
 	// embed the Flash Content SWF when all tests are passed
 	AC_FL_RunContent(
 			"src", srcUrl,
+			"flashVars", flashVars,
 			"width", "100%",
 			"height", "100%",
 			"align", "middle",

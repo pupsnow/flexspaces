@@ -7,8 +7,9 @@ package org.integratedsemantics.flexspaces.model.global
 	{
         // login
 		public var loginTicket:String = null;
-		public var loginUserName:String = null;
-		public var loginPassword:String = null;
+		public var loginUserName:String = "";
+		public var loginPassword:String = "";
+		public var autoLogin:Boolean = false;
 		
         // from get info
         public var userName:String;

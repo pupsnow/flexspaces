@@ -26,7 +26,7 @@
 
         <!-- whether store to locally short term store ticket / docLibPath / tabIndex -->
         <!-- allows restoring state after browser refresh, portlet resize, and re-running app -->
-        <property name="useSessionData" value="true"/>                 
+        <property name="useSessionData" value="false"/>                 
         <!-- when short term data storage is used (useSessionData true), how long (in minutes) -->
         <!-- can data still be used to restore state when app restarts -->
         <property name="sessionDataValidTime" value="30"/>  

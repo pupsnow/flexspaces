@@ -195,8 +195,6 @@ package org.integratedsemantics.flexspaces.view.main
             if ((model.userInfo.loginTicket != null) && (model.userInfo.loginTicket.length != 0))
             {
                 embeddedMode = true;
-                // todo make showHeader a parm
-                flexSpacesPresModel.showHeader = false;
             } 
             
             // may also have a ticket from shared object

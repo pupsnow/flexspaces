@@ -47,8 +47,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             else
             {
                 model.userInfo.loginTicket = null;
-                model.userInfo.loginUserName = null;
-                model.userInfo.loginPassword = null;
+                model.userInfo.loginUserName = "";
+                model.userInfo.loginPassword = "";
                 notifyCaller(null, null);
             }                                   
         }
@@ -60,8 +60,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
         {
             // Clear the current ticket information
             model.userInfo.loginTicket = null;
-            model.userInfo.loginUserName = null;
-            model.userInfo.loginPassword = null;
+            model.userInfo.loginUserName = "";
+            model.userInfo.loginPassword = "";
             
             notifyCaller(null, event);
         }        

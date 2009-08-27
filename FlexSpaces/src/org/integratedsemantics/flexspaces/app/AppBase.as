@@ -133,6 +133,42 @@ package org.integratedsemantics.flexspaces.app
                 flexSpacesPresModel.showWCM = (wcm == "true");
             }                                                                          
 
+            var header:String = this.parameters.header;
+            if ((header != null) && (header.length != 0))
+            {
+                flexSpacesPresModel.showHeader = (header == "true");
+            }   
+
+            var coverflow:String = this.parameters.coverflow;
+            if ((coverflow != null) && (coverflow.length != 0))
+            {
+                flexSpacesPresModel.haveCoverFlow = (coverflow == "true");
+            } 
+            
+            var alfrescourl:String = this.parameters.alfrescourl;
+            if ((alfrescourl != null) && (alfrescourl.length != 0))
+            {
+                model.ecmServerConfig.urlPrefix = alfrescourl;
+            } 
+
+            var user:String = this.parameters.user;
+            if ((user != null) && (user.length != 0))
+            {
+                model.userInfo.loginUserName = user;
+            } 
+
+            var pw:String = this.parameters.pw;
+            if ((pw != null) && (pw.length != 0))
+            {
+                model.userInfo.loginPassword = pw;
+            } 
+
+            var autologin:String = this.parameters.autologin;
+            if ((autologin != null) && (autologin.length != 0))
+            {
+                model.userInfo.autoLogin = (autologin == "true");
+            } 
+                                    
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
                 flexSpacesPresModel.showTasks = false;

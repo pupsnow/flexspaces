@@ -1,10 +1,13 @@
 
-8/5/09
+8/26/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+AIR release notes
+
+0.93
+1. Fix to progress bar color with new styling/skinning in 0.92
 
 0.92 Release
 1. Styling and skinning: Default colors changed, more styles in css files (flexspacesair.css, dialog.css) instead of hardcoded, 

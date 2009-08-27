@@ -19,7 +19,7 @@ package org.integratedsemantics.flexspaces.presmodel.login
         public var errorMessage:String;
         public var userName:String;
         public var password:String;
-
+        public var autoLogin:Boolean;
 
 		/** 
 		 * Constructor
@@ -27,23 +27,14 @@ package org.integratedsemantics.flexspaces.presmodel.login
 		 */
 		public function LoginPresModel()
 		{
-		    super();
-		    
-		    // for dev
-		    /*
-			if (model.ecmServerConfig.isLiveCycleContentServices == true)
-			{
-			    userName = "administrator";
-			    password = "password"; 
-			}
-			else
-			{
-				userName = "admin";
-				password = "admin";
-			}	
-            */
-            userName = "";
-            password = "";				    		    
+		    super();		    
+		}
+		
+		public function init():void
+		{
+            userName = model.userInfo.loginUserName;
+            password = model.userInfo.loginPassword;
+            autoLogin = model.userInfo.autoLogin;   		    
 		}
 			
 		/**

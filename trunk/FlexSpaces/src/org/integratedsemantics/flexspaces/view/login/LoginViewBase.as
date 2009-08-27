@@ -43,7 +43,8 @@ package org.integratedsemantics.flexspaces.view.login
 		 * 
 		 */
 		protected function onCreationComplete(event:Event):void
-		{			
+		{		
+		    loginPresModel.init();	
 			username.text = loginPresModel.userName;
 			password.text = loginPresModel.password;
 			
@@ -53,7 +54,12 @@ package org.integratedsemantics.flexspaces.view.login
 			// add login btn and enter key handlers
             ObserveUtil.observeButtonClick(loginBtn, onLoginButton);                        
             username.addEventListener(FlexEvent.ENTER, onLoginButton);		 
-            password.addEventListener(FlexEvent.ENTER, onLoginButton);         
+            password.addEventListener(FlexEvent.ENTER, onLoginButton);  
+            
+            if (loginPresModel.autoLogin == true)
+            {
+                login();                
+            }       
 		}
             
 		/**
@@ -62,18 +68,27 @@ package org.integratedsemantics.flexspaces.view.login
 		 * @param event click event or enter key event
 		 */
 		protected function onLoginButton(event:Event):void
-		{	
-			if (username.text != null && username.text.length == 0)
-			{
-				// Remind the user to enter a username
-				// todo: i18n
-				showErrorMessage("Enter a user name.");
-			}
-			else
-			{
+		{
+		    login();	
+		}
+		
+		protected function login():void
+		{
+            if (username.text != null && username.text.length == 0)
+            {
+                // todo: i18n
+                showErrorMessage("Enter a user name.");
+            }
+            else if (password.text != null && password.text.length == 0)
+            {
+                // todo: i18n
+                showErrorMessage("Enter a password.");
+            }
+            else
+            {
                 var responder:Responder = new Responder(onResultLogin, onFaultLogin);
-				loginPresModel.login(responder);
-			}
+                loginPresModel.login(responder);
+            }		    
 		}
             
 		/**

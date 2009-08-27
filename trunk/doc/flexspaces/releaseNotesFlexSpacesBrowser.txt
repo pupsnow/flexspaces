@@ -1,10 +1,17 @@
 
-8/5/09
+8/26/09
 Steve Reiner
 integratedsemantics.org
 integratedsemantics.com
 
 FlexSpaces+Browser release notes
+
+0.93
+1. Fix to progress bar color with new styling/skinning in 0.92
+2. Added short-term storage of state to support browser refresh, browser refresh (only configured to use in portlet
+packaging
+3. Additional parms/flashvars to support config in portlet preferences dialog
+4. Liferay portlet added 
 
 0.92 Release
 1. Styling and skinning: Default colors changed, more styles in css files (flexspaces.css, dialog.css) instead of hardcoded, 

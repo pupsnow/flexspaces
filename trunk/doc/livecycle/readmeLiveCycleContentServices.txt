@@ -1,14 +1,10 @@
-4/30/09
+9/22/09
 Steve Reiner
 
 
 Additional instructions for using FlexSpaces+Browser, FlexSpaces+Air, webscripts
 with Adobe LiveCycle Content Services ES instead of regular Alfresco
 (instructions based on livecycle jboss for windows turnkey express install)
-
-Note: currently FlexSpaces as built will run (after config) only on LiveCycle on localhost:8080
-To run on a different host:port, you need to have flexspaces+browser or flexspaces+air recompiled (using available
-source and flex builder) after changing the 2 urls in services-config.xml in the source
 
 
 1. Install flexspaces webscripts the same as for regular alfresco  (see readmeWebScripts.txt)
@@ -17,7 +13,8 @@ source and flex builder) after changing the 2 urls in services-config.xml in the
 
 2. FlexSpacesConfgi.xml needs to be setup differently (see readmeFlexSpacesForBrowser.txt and readmeFlexSpacesForAIR.txt)
 with contentspace/service instead of alfresco/service and  livecycle=true, and 2.1 (version of alfresco code embedded in 
-livecycle, not livecycle version)
+livecycle content services, not livecycle version) 
+(for newer livecycle contentservices check contentspace admin console system info for alfresco version)
 
         <property name="alfrescoUrlPart" value="/contentspace/service" />
 
@@ -36,7 +33,7 @@ e. In  <service id="proxy-service" section within   <destination id="DefaultHTTP
             <destination id="DefaultHTTP">
                 <properties>
                     <!-- <dynamic-url>http://{server.name}:*/dev/remote/*</dynamic-url> -->
-                    <dynamic-url>http://localhost:8080/contentspace/service/*</dynamic-url>
+                    <dynamic-url>http://{server.name}:*/contentspace/service/*</dynamic-url>
                 </properties>
             </destination>
 f. ok save changes to services-config.xml and to adobe-remoting-provider.war
@@ -45,7 +42,7 @@ h. takes a long time for livecycle  to deploy and restart ( wait for http://loca
 
 
 
-4. For optional "Make Flash Preview" / view Preview features
+4. For optional "Make Flash Preview" / view Preview features (steps for lc cs 8.2.1 / alf 2.1, for newer steps may change)
 (Note this is optional, only for flash previews. If you  get errors in your alfresco startup console, undo the add of custom-transform-context.xml)
 
 a. Use livecycle-pdf2swf-transform-context.xml instead of openoffice based custom-transform-context.xml

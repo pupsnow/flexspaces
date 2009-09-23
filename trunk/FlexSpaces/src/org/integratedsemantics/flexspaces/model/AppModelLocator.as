@@ -2,6 +2,8 @@ package org.integratedsemantics.flexspaces.model
 {
 	import com.adobe.cairngorm.model.ModelLocator;
 	
+	import mx.messaging.ChannelSet;
+	
 	import org.integratedsemantics.flexspaces.model.global.AppConfig;
 	import org.integratedsemantics.flexspaces.model.global.CalaisConfig;
 	import org.integratedsemantics.flexspaces.model.global.EcmServerConfig;
@@ -48,6 +50,8 @@ package org.integratedsemantics.flexspaces.model
         // for spring actionscript config
         public var applicationContext:FlexXMLApplicationContext;
 
+        // for LiveCycle
+        public var remotingChannelSet:ChannelSet;
                    
 		// singleton: constructor only allows one model locator
 		public function AppModelLocator():void

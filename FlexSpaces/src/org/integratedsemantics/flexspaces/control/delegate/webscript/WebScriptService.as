@@ -1,5 +1,10 @@
  package org.integratedsemantics.flexspaces.control.delegate.webscript
 {
+    import mx.messaging.ChannelSet;
+    import mx.messaging.channels.AMFChannel;
+    import mx.messaging.channels.HTTPChannel;
+    import mx.messaging.channels.SecureAMFChannel;
+    import mx.messaging.channels.SecureHTTPChannel;    
 	import mx.rpc.AsyncToken;
 	import mx.rpc.Fault;
 	import mx.rpc.events.FaultEvent;
@@ -82,19 +87,29 @@
 				
 				if (model.ecmServerConfig.isLiveCycleContentServices == true)
 				{
-					this.useProxy = true;
-	            	this.destination = "DefaultHTTP";
-	            	if (model.userInfo.loginTicket != null)
+                    if (model.remotingChannelSet == null)
+                    {
+                        setupChannels();
+                    }                   
+
+                    this.useProxy = true;
+                    
+                    //this.destination = "DefaultHTTP";
+
+                    this.channelSet = model.remotingChannelSet;
+				    
+                    // basic auth header
+                    if ( (model.userInfo.loginUserName != null) && (model.userInfo.loginPassword != null) &&
+                         (model.userInfo.loginUserName != "") && (model.userInfo.loginPassword != "") )
 	            	{
 						var headerList:Array = new Array();
 
-	            		// basic auth header
 	            		var encoder:Base64Encoder = new Base64Encoder();
 	            		encoder.encode(model.userInfo.loginUserName + ":" + model.userInfo.loginPassword);
 	            		headerList["Authorization"] = "Basic " + encoder.toString();
 	            		
 	            		// saml assertion ticket header
-						headerList["ticket"] = model.userInfo.loginTicket;
+						//headerList["ticket"] = model.userInfo.loginTicket;
 						
 			            this.headers = headerList;						
 	            	}
@@ -149,5 +164,45 @@
 				ErrorMgr.getInstance().raiseError(ErrorMgr.APPLICATION_ERROR, error);
 			}
 		}
+		
+        private function setupChannels():void
+        {
+            var model:AppModelLocator = AppModelLocator.getInstance();
+            
+            var channelSet:ChannelSet = new ChannelSet();
+
+            var baseUrl:String = model.ecmServerConfig.protocol + "://" + model.ecmServerConfig.domain + ":" + model.ecmServerConfig.port;     
+
+            if (model.ecmServerConfig.protocol == "http")
+            {
+                // setup a channel for web scripts
+                var channelUrl:String = baseUrl + "/remoting/messagebroker/http";
+                var channelId:String = "remoting-http";
+                var channel:HTTPChannel = new HTTPChannel(channelId, channelUrl);            
+                channelSet.addChannel(channel);
+                
+                // setup a channel for remoting to LC for directory mgr service, etc.
+                var channelUrl2:String = baseUrl + "/remoting/messagebroker/amf";
+                var channelId2:String = "remoting-amf";
+                var channel2:AMFChannel = new AMFChannel(channelId2, channelUrl2);
+                channelSet.addChannel(channel2);
+            }
+            else if (model.ecmServerConfig.protocol == "https")
+            {   
+                // setup a channel for web scripts
+                var channelUrl3:String = baseUrl + "/remoting/messagebroker/httpsecure";
+                var channelId3:String = "remoting-secure-http";
+                var channel3:SecureHTTPChannel = new SecureHTTPChannel(channelId3, channelUrl3);            
+                channelSet.addChannel(channel3);
+                
+                // setup a channel for remoting to LC for directory mgr service, etc.
+                var channelUrl4:String = baseUrl + "/remoting/messagebroker/amfsecure";
+                var channelId4:String = "remoting-secure-amf";
+                var channel4:SecureAMFChannel = new SecureAMFChannel(channelId4, channelUrl4);
+                channelSet.addChannel(channel4);
+            }                                                                                   
+            model.remotingChannelSet = channelSet;  
+        }
+		
 	}
 }

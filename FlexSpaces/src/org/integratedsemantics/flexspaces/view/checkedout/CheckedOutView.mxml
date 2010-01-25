@@ -19,8 +19,8 @@
     [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
     </mx:Metadata>
 
-    <paging:Pager id="pager" pageIndex="0" pageSize="{checkedOutPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize}" 
-        totalPages="{Math.max(Math.ceil(nodeListViewPresModel.nodeCollection.length/checkedOutPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize),1)}" 
+    <paging:Pager id="pager" pageIndex="0" pageSize="{checkedOutPresModel.model.flexSpacesPresModel.checkedOutPageSize}" 
+        totalPages="{Math.max(Math.ceil(nodeListViewPresModel.nodeCollection.length/checkedOutPresModel.model.flexSpacesPresModel.checkedOutPageSize),1)}" 
     	dataProvider="{nodeListViewPresModel.nodeCollection}" />  
 
     <mx:VBox height="100%" width="100%">

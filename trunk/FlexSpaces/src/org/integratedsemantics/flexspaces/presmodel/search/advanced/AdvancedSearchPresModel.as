@@ -233,7 +233,9 @@ package org.integratedsemantics.flexspaces.presmodel.search.advanced
                 if  (model.appConfig.cmisMode == true)
                 {    
                     // cmis: todo use new query builder
-                    var searchEvent:SearchEvent = new SearchEvent(SearchEvent.SEARCH, responder, searchText, pageSize, 0);
+                    // test for non full text cmis query
+                    query = "SELECT * FROM cmis:document";
+                    var searchEvent:SearchEvent = new SearchEvent(SearchEvent.ADVANCED_SEARCH, responder, query, pageSize, 0);
                 }
                 else
                 {

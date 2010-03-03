@@ -31,10 +31,14 @@ package org.integratedsemantics.flexspaces.presmodel.playvideo
             var model:AppModelLocator = AppModelLocator.getInstance();
             
             // livecycle and cmis both no ticket, basic auth
-            if ( (model.appConfig.cmisMode == true) || (model.ecmServerConfig.isLiveCycleContentServices == true) )
+            if (model.appConfig.cmisMode == true)
             {
-                url= repoNode.viewurl;				
-            }   
+                url = repoNode.viewurl;
+            }  
+            else if (model.ecmServerConfig.isLiveCycleContentServices == true)
+            {
+                url = repoNode.viewurl + "?ticket=" + model.userInfo.loginTicket;                
+            } 
             else
             {         
                 url = repoNode.viewurl + "?alf_ticket=" + model.userInfo.loginTicket;

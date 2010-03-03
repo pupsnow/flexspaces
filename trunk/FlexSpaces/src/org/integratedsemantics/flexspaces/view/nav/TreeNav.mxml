@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nav:TreeNavBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:nav="org.integratedsemantics.flexspaces.view.nav.*"    
+    xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*"         
+    creationComplete="onCreationComplete(event)">
+    
+    <mx:Metadata>[ResourceBundle("NavPanel")]</mx:Metadata>
+  
+    <tree:TreeView id="treeView" treePresModel="{treePresModel}" width="100%" height="100%" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false" />
+    
+</nav:TreeNavBase>

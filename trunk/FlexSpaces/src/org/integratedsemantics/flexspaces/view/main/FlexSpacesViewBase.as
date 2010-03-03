@@ -13,10 +13,12 @@ package org.integratedsemantics.flexspaces.view.main
     import mx.binding.utils.ChangeWatcher;
     import mx.containers.Box;
     import mx.containers.HBox;
+    import mx.containers.HDividedBox;
     import mx.containers.VBox;
     import mx.containers.VDividedBox;
     import mx.containers.ViewStack;
     import mx.controls.Button;
+    import mx.controls.Label;
     import mx.events.FlexEvent;
     import mx.events.IndexChangedEvent;
     import mx.events.MenuEvent;
@@ -39,8 +41,8 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.presmodel.search.advanced.AdvancedSearchPresModel;
     import org.integratedsemantics.flexspaces.presmodel.semantictags.suggest.SemanticTagSuggestPresModel;
     import org.integratedsemantics.flexspaces.presmodel.versions.versionlist.VersionListPresModel;
+    import org.integratedsemantics.flexspaces.view.browser.BrowserViewBase;
     import org.integratedsemantics.flexspaces.view.browser.RepoBrowserChangePathEvent;
-    import org.integratedsemantics.flexspaces.view.browser.RepoBrowserViewBase;
     import org.integratedsemantics.flexspaces.view.checkedout.CheckedOutViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
@@ -54,6 +56,8 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.view.logout.LogoutViewBase;
     import org.integratedsemantics.flexspaces.view.menu.event.MenuConfiguredEvent;
     import org.integratedsemantics.flexspaces.view.menu.menubar.ConfigurableMenuBar;
+    import org.integratedsemantics.flexspaces.view.nav.NavPanelBase;
+    import org.integratedsemantics.flexspaces.view.nav.TreeChangePathEvent;
     import org.integratedsemantics.flexspaces.view.playvideo.PlayVideoView;
     import org.integratedsemantics.flexspaces.view.preview.PreviewView;
     import org.integratedsemantics.flexspaces.view.search.advanced.AdvancedSearchEvent;
@@ -61,7 +65,6 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.view.search.basic.SearchViewBase;
     import org.integratedsemantics.flexspaces.view.search.event.SearchResultsEvent;
     import org.integratedsemantics.flexspaces.view.search.results.SearchResultsViewBase;
-    import org.integratedsemantics.flexspaces.view.search.searchpanel.SearchPanelBase;
     import org.integratedsemantics.flexspaces.view.semantictags.suggest.SemanticTagSuggestView;
     import org.integratedsemantics.flexspaces.view.tasks.taskspanel.TasksPanelViewBase;
     import org.integratedsemantics.flexspaces.view.versions.versionlist.VersionListViewBase;
@@ -102,13 +105,16 @@ package org.integratedsemantics.flexspaces.view.main
         public var loginPanel:Box;
         public var loginView:LoginViewBase;
         
+        public var navPanelAndTabs:HDividedBox;
+        public var navPanel:NavPanelBase;
+        
         public var tabNav:SuperTabNavigator;
         
         public var docLibTab:VBox;
-        public var browserView:RepoBrowserViewBase;
+        public var browserView:BrowserViewBase;
         
         public var searchTab:VBox;
-        public var searchPanel:SearchPanelBase;
+        public var searchResultsView:SearchResultsViewBase;               
         
         public var checkedOutTab:VBox;
         public var checkedOutView:CheckedOutViewBase;
@@ -121,12 +127,22 @@ package org.integratedsemantics.flexspaces.view.main
             
         public var toolbar1:HBox;
         
+        public var createSpaceBtn:Button;
+        public var uploadFileBtn:Button;
+        
         public var cutBtn:Button;
         public var copyBtn:Button;
         public var pasteBtn:Button;
         public var deleteBtn:Button;
-        public var createSpaceBtn:Button;
-        public var uploadFileBtn:Button;
+
+        public var editBtn:Button;
+        public var updateBtn:Button;
+
+        public var checkoutBtn:Button;
+        public var cancelCheckoutBtn:Button;
+        public var checkinBtn:Button;
+
+        public var propertiesBtn:Button;
         public var tagsBtn:Button;
                 
         [Bindable]
@@ -135,7 +151,6 @@ package org.integratedsemantics.flexspaces.view.main
         [Bindable]
         public var flexSpacesPresModel:FlexSpacesPresModel;
         
-        public var searchResultsView:SearchResultsViewBase;               
         protected var advSearchView:AdvancedSearchView = null;
 
         // embedded mode when passed login ticket
@@ -145,6 +160,9 @@ package org.integratedsemantics.flexspaces.view.main
         protected var sessionData:SharedObject;
         protected var tabIndexHistory:int = -1;      
         protected var pathHistory:String = null;        
+            
+        public var welcomeText:Label;                                      
+
                           
         /**
          * Constructor 
@@ -235,7 +253,7 @@ package org.integratedsemantics.flexspaces.view.main
         public function onGetInfoDone(info:Object):void
         {
             // Switch from get info to (main view in view stack 
-            viewStack.selectedIndex = MAIN_VIEW_MODE_INDEX;                 
+            viewStack.selectedIndex = MAIN_VIEW_MODE_INDEX;              
         }
                 
         /**
@@ -246,33 +264,28 @@ package org.integratedsemantics.flexspaces.view.main
          */
         protected function onRepoBrowserCreated(event:FlexEvent):void
         {  
-            if (searchPanel != null)
-            {         
-                this.searchResultsView = this.searchPanel.searchResultsView;
-            }
-
             // init header section
             if (flexSpacesPresModel.showHeader == false)
             {
                 this.header.visible = false;
                 this.header.includeInLayout = false;
             }
-            else
+            
+            // init basic search box, advanced search link
+            if (flexSpacesPresModel.showSearch == true)
             {
-                if (flexSpacesPresModel.showSearch == true)
+                if (searchView != null)
                 {
-                    if (searchView != null)
-                    {
-                        searchView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
-                        searchView.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
-                    }   
-                }    
-                
-                if (logoutView != null)
-                {
-                    logoutView.addEventListener(LogoutDoneEvent.LOGOUT_DONE, onLogoutDone);
-                }              
+                    searchView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
+                    searchView.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
+                }   
             }
+                
+            // init logout link
+            if (logoutView != null)
+            {
+                logoutView.addEventListener(LogoutDoneEvent.LOGOUT_DONE, onLogoutDone);
+            }              
 
             // init main menu
             if (mainMenu != null)
@@ -287,25 +300,54 @@ package org.integratedsemantics.flexspaces.view.main
             // init toolbar
             if (toolbar1 != null)
             {
+                // todo: should condition these 
+                this.createSpaceBtn.addEventListener(MouseEvent.CLICK, onCreateSpaceBtn);
+                this.uploadFileBtn.addEventListener(MouseEvent.CLICK, onUploadFileBtn);                    
                 this.cutBtn.addEventListener(MouseEvent.CLICK, onCutBtn);
                 this.copyBtn.addEventListener(MouseEvent.CLICK, onCopyBtn);
                 this.pasteBtn.addEventListener(MouseEvent.CLICK, onPasteBtn);
                 this.deleteBtn.addEventListener(MouseEvent.CLICK, onDeleteBtn);
-                this.createSpaceBtn.addEventListener(MouseEvent.CLICK, onCreateSpaceBtn);
-                this.uploadFileBtn.addEventListener(MouseEvent.CLICK, onUploadFileBtn);                    
+                this.editBtn.addEventListener(MouseEvent.CLICK, onEditBtn);                    
+                this.updateBtn.addEventListener(MouseEvent.CLICK, onUpdateBtn);     
+                this.checkoutBtn.addEventListener(MouseEvent.CLICK, onCheckoutBtn);     
+                this.cancelCheckoutBtn.addEventListener(MouseEvent.CLICK, onCancelCheckoutBtn);     
+                this.checkinBtn.addEventListener(MouseEvent.CLICK, onCheckinBtn);     
                 this.tagsBtn.addEventListener(MouseEvent.CLICK, onTagsBtn);     
+                this.propertiesBtn.addEventListener(MouseEvent.CLICK, onPropertiesBtn);     
+            }
+
+            // init nav panel
+            if (navPanel != null)
+            {
+                navPanel.addEventListener(TreeChangePathEvent.COMPANY_HOME_TREE_CHANGE_PATH, onChangeTree);
+                navPanel.addEventListener(TreeChangePathEvent.USER_HOME_TREE_CHANGE_PATH, onChangeTree);
+                navPanel.initSearchResultsHandler(onSearchResults);    
+                
+                // favorites
+                navPanel.favoritesView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
+                navPanel.favoritesView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
+                navPanel.favoritesView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);     
+                navPanel.favoritesView.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, onFavoritesOnDrop);                      
+                // get initial display of favorites
+                if (navPanel.navPanelPresModel.favoritesPresModel != null)
+                {
+                    navPanel.navPanelPresModel.favoritesPresModel.redraw();
+                }                               
             }
             
             // init tab navigator
-            tabNav.addEventListener(IndexChangedEvent.CHANGE, tabChange);   
-            tabNav.popUpButtonPolicy = SuperTabNavigator.POPUPPOLICY_OFF;
-            tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
+            if (tabNav != null)
+            {
+                tabNav.addEventListener(IndexChangedEvent.CHANGE, tabChange);   
+                tabNav.popUpButtonPolicy = SuperTabNavigator.POPUPPOLICY_OFF;
+                tabNav.addEventListener(SuperTabEvent.TAB_CLOSE, onTabClose);
 
-            // todo: for now to avoid tab drag drop error in air app, disable drag/drop of tabs
-            // due to bug in supertabnavigator
-            tabNav.dragEnabled = false;
-            tabNav.dropEnabled = false; 
-
+                // todo: for now to avoid tab drag drop error in air app, disable drag/drop of tabs
+                // due to bug in supertabnavigator
+                tabNav.dragEnabled = false;
+                tabNav.dropEnabled = false; 
+            }
+            
             // get index values of tabs, prevent closing of view tabs, hide if should
             if (docLibTab != null)
             {
@@ -371,7 +413,7 @@ package org.integratedsemantics.flexspaces.view.main
                 browserView.setClickNodeHandler(onClickNode);                                    
                 browserView.addEventListener(RepoBrowserChangePathEvent.REPO_BROWSER_CHANGE_PATH, onBrowserChangePath);
                 // init for serverside paging 
-                browserView.initPaging();                
+                browserView.initPaging();  
             }
             
             // init wcm view
@@ -393,23 +435,6 @@ package org.integratedsemantics.flexspaces.view.main
                     searchResultsView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
                     searchResultsView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);   
                 }
-                if (searchPanel != null)
-                {
-                    var searchView2:SearchViewBase = searchPanel.searchView2;
-                    searchView2.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);
-                    searchView2.addEventListener(AdvancedSearchEvent.ADVANCED_SEARCH_REQUEST, advancedSearch);
-                
-                    // favorites
-                    searchPanel.favoritesView.addEventListener(FolderViewContextMenuEvent.FOLDERLIST_CONTEXTMENU, onContextMenu);
-                    searchPanel.favoritesView.addEventListener(DoubleClickDocEvent.DOUBLE_CLICK_DOC, onDoubleClickDoc);
-                    searchPanel.favoritesView.addEventListener(ClickNodeEvent.CLICK_NODE, onClickNode);     
-                    searchPanel.favoritesView.addEventListener(FolderViewOnDropEvent.FOLDERLIST_ONDROP, onFavoritesOnDrop);                      
-                    // get initial display of favorites
-                    if (searchPanel.searchPanelPresModel.favoritesPresModel != null)
-                    {
-                        searchPanel.searchPanelPresModel.favoritesPresModel.redraw();
-                    }   
-                }                                                          
             }
 
             // init tasks view
@@ -453,7 +478,12 @@ package org.integratedsemantics.flexspaces.view.main
                 {        
                     browserView.setPath(pathHistory);
                 }                    
-            }                    
+            }    
+            
+            if ((model.userInfo.loginUserName != null) && (welcomeText != null))
+            {
+                welcomeText.text = "Logged in as: " + model.userInfo.loginUserName;
+            }                                                                      
         }
                 
         /**
@@ -557,9 +587,9 @@ package org.integratedsemantics.flexspaces.view.main
                 {
                     flexSpacesPresModel.wcmMode = false;
                     flexSpacesPresModel.currentNodeList = null;
-                    if (searchPanel != null)
+                    if (searchResultsView != null)
                     {
-                        searchPanel.refresh();
+                        // no refresh needed
                     }
                     if (browserView != null)
                     {
@@ -599,12 +629,16 @@ package org.integratedsemantics.flexspaces.view.main
          */
         protected function onBrowserChangePath(event:RepoBrowserChangePathEvent):void
         {
+            if ((navPanel != null) && (flexSpacesPresModel.wcmMode == false))
+            {
+                navPanel.setPath(event.path);
+            }
             // enable/disable menus dependent on user permissions in folder
             // independent of selections since selection is cleared after path change
             this.enableMenusAfterTabChange(tabNav.selectedIndex);   
             
             // remember path
-            updateSessionData();             
+            updateSessionData();    
         }
                 
         /**
@@ -630,7 +664,7 @@ package org.integratedsemantics.flexspaces.view.main
         public function onSearchResults(event:SearchResultsEvent):void
         {
             tabNav.selectedIndex = searchTabIndex;
-            flexSpacesPresModel.searchPanelPresModel.initResultsData(event.searchResults);  
+            flexSpacesPresModel.searchResultsPresModel.initResultsData(event.searchResults);  
             // reset page index since new user query,  not requery to page
             searchResultsView.resetPaging();
         }
@@ -677,6 +711,13 @@ package org.integratedsemantics.flexspaces.view.main
         public function redraw():void
         {
             var tabIndex:int = tabNav.selectedIndex;
+            
+            if (navPanel != null)
+            {
+                // may need to update tag clouds if added new tag, or update favorites if added one
+                navPanel.redraw();
+            }
+            
             if (tabIndex == docLibTabIndex)
             {
                 browserView.redraw();
@@ -687,9 +728,9 @@ package org.integratedsemantics.flexspaces.view.main
             }       
             else if (tabIndex == searchTabIndex)
             {
-                if (searchPanel != null)
+                if (searchResultsView != null)
                 {
-                    searchPanel.redraw();
+                    // no redraw needed
                 }
             }
             else if (tabIndex == tasksTabIndex) 
@@ -772,9 +813,9 @@ package org.integratedsemantics.flexspaces.view.main
             {  
                 browserView.clearSelection();
             }
-            if (searchPanel != null)
+            if (searchResultsView != null)
             {  
-                searchPanel.clearSelection();
+                searchResultsView.clearSelection();
             }
             if (tasksPanelView != null)
             {  
@@ -802,9 +843,9 @@ package org.integratedsemantics.flexspaces.view.main
             {  
                 browserView.clearOtherSelections(selectedFolderView);
             }            
-            if (searchPanel != null)
+            if (searchResultsView != null)
             {  
-                searchPanel.clearOtherSelections(selectedFolderView);
+                searchResultsView.clearOtherSelections(selectedFolderView);
             }
             if (tasksPanelView != null)
             {  
@@ -853,13 +894,18 @@ package org.integratedsemantics.flexspaces.view.main
         {
             flexSpacesPresModel.cutNodes(selectedItems);    
             
-            // enable paste menu                                        
+            // enable paste menu   and btn                                     
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
                 if (mainMenu != null)
                 {
                     mainMenu.enableMenuItem("edit", "paste", true);
+                }
+
+                if (pasteBtn != null)
+                {
+                    pasteBtn.enabled = true;                    
                 }
             }                                                    
         }
@@ -874,7 +920,7 @@ package org.integratedsemantics.flexspaces.view.main
         {
             flexSpacesPresModel.copyNodes(selectedItems);    
 
-            // enable paste menu                                        
+            // enable paste menu and btn                                     
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
@@ -882,6 +928,10 @@ package org.integratedsemantics.flexspaces.view.main
                 {
                     mainMenu.enableMenuItem("edit", "paste", true);
                 }
+                if (pasteBtn != null)
+                {
+                    pasteBtn.enabled = true;                    
+                }                
             }                                                    
         }
 
@@ -1005,13 +1055,17 @@ package org.integratedsemantics.flexspaces.view.main
         }
 
         /**
-         * Toggle whether the adm repository tree is displayed 
+         * Toggle whether the navigation panel is displayed 
          * 
          */
-        public function showHideRepoTree():void
+        public function showHideNavPanel():void
         {
-            flexSpacesPresModel.browserPresModel.showHideRepoTree();
-            tabNav.invalidateDisplayList();
+            // show/hide nav panel
+            flexSpacesPresModel.showHideNavPanel();
+            if (navPanelAndTabs != null)
+            {
+                navPanelAndTabs.invalidateDisplayList();
+            }
         }
 
         /**
@@ -1061,9 +1115,9 @@ package org.integratedsemantics.flexspaces.view.main
             {  
                 browserView.showHideThumbnails();
             }
-            if (searchPanel != null)
+            if (searchResultsView != null)
             {  
-                searchPanel.showHideThumbnails();
+                searchResultsView.showHideThumbnails();
             }
             if (tasksPanelView != null)
             {  
@@ -1148,7 +1202,10 @@ package org.integratedsemantics.flexspaces.view.main
                    viewNode(selectedItem);
                    break;
                 case 'edit':
-                   flexSpacesPresModel.editNode(selectedItem, onResultCheckoutForEdit);
+                   // leaving as download only (no auto checkout first before download) for now due to issues changes to flash
+                   // requiring file browse to be in response to direct user event
+                   //flexSpacesPresModel.editNode(selectedItem, onResultCheckoutForEdit);
+                   flexSpacesPresModel.downloadFile(selectedItem, this);
                    break;
                 case 'cut':
                    cutNodes(selectedItems);
@@ -1208,7 +1265,7 @@ package org.integratedsemantics.flexspaces.view.main
                     showHideSecondRepoFolder();
                     break;    
                 case "repotree":
-                    showHideRepoTree();
+                    showHideNavPanel();
                     break;  
                 case "wcmsecondrepofolder":
                     showHideWcmSecondRepoFolder();
@@ -1341,6 +1398,7 @@ package org.integratedsemantics.flexspaces.view.main
                     mainMenu.enableMenuItem("file", "edit", false);
                     mainMenu.enableMenuItem("file", "view", false);
                     mainMenu.enableMenuItem("file", "preview", false);                    
+                    this.editBtn.enabled = false; 
                     
                     // checkin menus, update
                     mainMenu.enableMenuItem("edit", "checkin", false);
@@ -1348,6 +1406,10 @@ package org.integratedsemantics.flexspaces.view.main
                     mainMenu.enableMenuItem("edit", "cancelcheckout", false);
                     mainMenu.enableMenuItem("edit", "makeversion", false);
                     mainMenu.enableMenuItem("edit", "update", false);
+                    this.checkinBtn.enabled = false; 
+                    this.checkoutBtn.enabled = false; 
+                    this.cancelCheckoutBtn.enabled = false; 
+                    this.updateBtn.enabled = false; 
                     
                     // make pdf, make flash, startworkflow    
                     mainMenu.enableMenuItem("tools", "makepdf", false);
@@ -1375,10 +1437,10 @@ package org.integratedsemantics.flexspaces.view.main
                         wcmBrowserView.enableContextMenuItem("view", readPermission, fileContextMenu);
                         wcmBrowserView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
                     } 
-                    if (searchPanel != null)
+                    if (searchResultsView != null)
                     {  
-                        searchPanel.searchResultsView.enableContextMenuItem("view", readPermission, fileContextMenu);
-                        searchPanel.searchResultsView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
+                        searchResultsView.enableContextMenuItem("view", readPermission, fileContextMenu);
+                        searchResultsView.enableContextMenuItem("playVideo", readPermission, fileContextMenu);
                     }
                     if (tasksPanelView != null)
                     {  
@@ -1410,6 +1472,7 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.enableMenuItem("edit", "properties", readPermission);
                         mainMenu.enableMenuItem("edit", "tags", readPermission);                     
                         this.tagsBtn.enabled = readPermission;                        
+                        this.propertiesBtn.enabled = readPermission;                        
                         browserView.enableContextMenuItem("rename", writePermission, fileContextMenu);  
                         browserView.enableContextMenuItem("properties", readPermission, fileContextMenu);  
                         browserView.enableContextMenuItem("tags", readPermission, fileContextMenu);
@@ -1420,17 +1483,25 @@ package org.integratedsemantics.flexspaces.view.main
                             var canCheckin:Boolean = writePermission && isWorkingCopy;
                             mainMenu.enableMenuItem("edit", "checkin", canCheckin);
                             browserView.enableContextMenuItem("checkin", canCheckin, fileContextMenu);  
+                            this.checkinBtn.enabled = canCheckin; 
                             
                             // checkout, edit
                             var canCheckout:Boolean = writePermission && !isLocked && !isWorkingCopy;
                             mainMenu.enableMenuItem("edit", "checkout", canCheckout);
-                            mainMenu.enableMenuItem("file", "edit", canCheckout);
                             browserView.enableContextMenuItem("checkout", canCheckout, fileContextMenu);  
+                            this.checkoutBtn.enabled = canCheckout; 
+
+                            // edit menu currently just download but don't enable if checked out, will ok on working copy
+                            var canEdit:Boolean = writePermission && !isLocked; 
+                            mainMenu.enableMenuItem("file", "edit", canEdit);                                                       
+                            // edit btn currently edit offline (air) if feature enabled or download 
+                            this.editBtn.enabled = canEdit;
                             
                             // cancel checkout
                             var canCancelCheckout:Boolean = writePermission && isWorkingCopy;
                             mainMenu.enableMenuItem("edit", "cancelcheckout", canCancelCheckout);
                             browserView.enableContextMenuItem("cancelcheckout", canCancelCheckout, fileContextMenu);  
+                            this.cancelCheckoutBtn.enabled = canCancelCheckout; 
                             
                             // make versionable
                             var canMakeVersionable:Boolean = writePermission && !isLocked;
@@ -1439,6 +1510,7 @@ package org.integratedsemantics.flexspaces.view.main
                             // update
                             var canUpdate:Boolean = writePermission && !isLocked;
                             mainMenu.enableMenuItem("edit", "update", canUpdate);
+                            this.updateBtn.enabled = canUpdate; 
 
                             // make pdf, make flash, startworkflow
                             mainMenu.enableMenuItem("tools", "makepdf", createChildrenPermission);
@@ -1465,9 +1537,9 @@ package org.integratedsemantics.flexspaces.view.main
                         this.copyBtn.enabled = readPermission;
                         this.pasteBtn.enabled = false;                    
                         this.deleteBtn.enabled = false;
-                        if (searchPanel != null)
+                        if (searchResultsView != null)
                         {
-                            searchPanel.searchResultsView.enableContextMenuItem("copy", readPermission, fileContextMenu);
+                            searchResultsView.enableContextMenuItem("copy", readPermission, fileContextMenu);
                         }  
                         if (tasksPanelView != null)
                         {
@@ -1480,13 +1552,14 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.enableMenuItem("edit", "tags", readPermission);                     
                         
                         this.tagsBtn.enabled = readPermission;            
+                        this.propertiesBtn.enabled = readPermission;            
                         
-                        if (searchPanel != null)
+                        if (searchResultsView != null)
                         {
-                            searchPanel.searchResultsView.enableContextMenuItem("rename", writePermission, fileContextMenu);
-                            searchPanel.searchResultsView.enableContextMenuItem("properties", readPermission, fileContextMenu);
-                            searchPanel.searchResultsView.enableContextMenuItem("tags", readPermission, fileContextMenu);
-                            searchPanel.searchResultsView.enableContextMenuItem( "gotoParent", flexSpacesPresModel.showDocLib, fileContextMenu);
+                            searchResultsView.enableContextMenuItem("rename", writePermission, fileContextMenu);
+                            searchResultsView.enableContextMenuItem("properties", readPermission, fileContextMenu);
+                            searchResultsView.enableContextMenuItem("tags", readPermission, fileContextMenu);
+                            searchResultsView.enableContextMenuItem( "gotoParent", flexSpacesPresModel.showDocLib, fileContextMenu);
                         }        
                         if (tasksPanelView != null)
                         {
@@ -1500,7 +1573,11 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.enableMenuItem("edit", "checkin", false);
                         mainMenu.enableMenuItem("edit", "checkout", false);
                         mainMenu.enableMenuItem("edit", "cancelcheckout", false);
-                        mainMenu.enableMenuItem("edit", "makeversion", false);                       
+                        mainMenu.enableMenuItem("edit", "makeversion", false);
+                        this.checkinBtn.enabled = false; 
+                        this.checkoutBtn.enabled = false; 
+                        this.cancelCheckoutBtn.enabled = false; 
+                                               
                         // make pdf, make flash, startworkflow    
                         mainMenu.enableMenuItem("tools", "makepdf", false);
                         mainMenu.enableMenuItem("tools", "makepreview", false);
@@ -1535,11 +1612,15 @@ package org.integratedsemantics.flexspaces.view.main
                             mainMenu.enableMenuItem("edit", "checkout", false);
                             mainMenu.enableMenuItem("edit", "cancelcheckout", false);
                             mainMenu.enableMenuItem("edit", "makeversion", false);                       
-    
+                            this.checkinBtn.enabled = false; 
+                            this.checkoutBtn.enabled = false; 
+                            this.cancelCheckoutBtn.enabled = false; 
+
                             // update
                             canUpdate = writePermission && !isLocked;
                             mainMenu.enableMenuItem("edit", "update", canUpdate);                       
-    
+                            this.updateBtn.enabled = canUpdate; 
+
                             // make pdf, make flash, startworkflow    
                             mainMenu.enableMenuItem("tools", "makepdf", false);
                             mainMenu.enableMenuItem("tools", "makepreview", false);
@@ -1569,6 +1650,8 @@ package org.integratedsemantics.flexspaces.view.main
                 mainMenu.enableMenuItem("file", "download", readPermission);
                 mainMenu.enableMenuItem("file", "view", readPermission);
                 mainMenu.enableMenuItem("file", "preview", false);                                                                         
+                mainMenu.enableMenuItem("file", "edit", false);                                                                         
+                this.editBtn.enabled = false; 
 
                 if ( (browserView != null) && (browserView.versionListView != null) )
                 {  
@@ -1580,22 +1663,28 @@ package org.integratedsemantics.flexspaces.view.main
                 mainMenu.enableMenuItem("edit", "copy", false);
                 mainMenu.enableMenuItem("edit", "paste", false);
                 mainMenu.enableMenuItem("edit", "delete", false);                       
+                mainMenu.enableMenuItem("edit", "update", false);                       
                 this.cutBtn.enabled = false;
                 this.copyBtn.enabled = false;
                 this.pasteBtn.enabled = false;                    
                 this.deleteBtn.enabled = false;
+                this.updateBtn.enabled = false;
 
                 // rename, properties, tags
                 mainMenu.enableMenuItem("edit", "rename", false);
                 mainMenu.enableMenuItem("edit", "properties", false);
                 mainMenu.enableMenuItem("edit", "tags", false);                                     
                 this.tagsBtn.enabled = false;            
+                this.propertiesBtn.enabled = false;            
                 
                 // checkin menus
                 mainMenu.enableMenuItem("edit", "checkin", false);
                 mainMenu.enableMenuItem("edit", "checkout", false);
                 mainMenu.enableMenuItem("edit", "cancelcheckout", false);
                 mainMenu.enableMenuItem("edit", "makeversion", false);                       
+                this.checkinBtn.enabled = false; 
+                this.checkoutBtn.enabled = false; 
+                this.cancelCheckoutBtn.enabled = false; 
                
                 // make pdf, make flash, startworkflow    
                 mainMenu.enableMenuItem("tools", "makepdf", false);
@@ -1633,6 +1722,7 @@ package org.integratedsemantics.flexspaces.view.main
                 mainMenu.enableMenuItem("file", "edit", false);
                 mainMenu.enableMenuItem("file", "view", false);
                 mainMenu.enableMenuItem("file", "preview", false);                    
+                this.editBtn.enabled = false; 
                 
                 // cut, copy, delete
                 mainMenu.enableMenuItem("edit", "cut", false);
@@ -1648,6 +1738,7 @@ package org.integratedsemantics.flexspaces.view.main
                 mainMenu.enableMenuItem("edit", "properties", false);
                 mainMenu.enableMenuItem("edit", "tags", false);                                                     
                 this.tagsBtn.enabled = false;                        
+                this.propertiesBtn.enabled = false;                        
     
                 // checkin menus, update
                 mainMenu.enableMenuItem("edit", "checkin", false);
@@ -1655,6 +1746,10 @@ package org.integratedsemantics.flexspaces.view.main
                 mainMenu.enableMenuItem("edit", "cancelcheckout", false);
                 mainMenu.enableMenuItem("edit", "makeversion", false);
                 mainMenu.enableMenuItem("edit", "update", false);
+                this.checkinBtn.enabled = false; 
+                this.checkoutBtn.enabled = false; 
+                this.cancelCheckoutBtn.enabled = false; 
+                this.updateBtn.enabled = false; 
                 
                 // make pdf, make flash, startworkflow    
                 mainMenu.enableMenuItem("tools", "makepdf", false);
@@ -1740,7 +1835,8 @@ package org.integratedsemantics.flexspaces.view.main
         protected function onCutBtn(event:MouseEvent):void
         {
             var selectedItems:Array = flexSpacesPresModel.selectedItems; 
-            flexSpacesPresModel.cutNodes(selectedItems);            
+            //flexSpacesPresModel.cutNodes(selectedItems);            
+            this.cutNodes(selectedItems);                      
         }               
                                        
         /**
@@ -1752,7 +1848,8 @@ package org.integratedsemantics.flexspaces.view.main
         protected function onCopyBtn(event:MouseEvent):void
         {
             var selectedItems:Array = flexSpacesPresModel.selectedItems; 
-            flexSpacesPresModel.copyNodes(selectedItems);                        
+            //flexSpacesPresModel.copyNodes(selectedItems);  
+            this.copyNodes(selectedItems);                      
         }               
         
         /**
@@ -1875,7 +1972,9 @@ package org.integratedsemantics.flexspaces.view.main
             if (sessionData.data.docLibPath != undefined)
             {
                 pathHistory = sessionData.data.docLibPath;
-            }                                               
+            }    
+            
+            // todo restore whether company home or user home active                                           
         }
         
         protected function updateSessionData():void
@@ -1896,12 +1995,69 @@ package org.integratedsemantics.flexspaces.view.main
                     sessionData.data.ticket = model.userInfo.loginTicket;
                 }            
     
-                if (browserView != null)
+                if (navPanel != null)
                 {
-                    sessionData.data.docLibPath = browserView.treeView.getPath();
+                    sessionData.data.docLibPath = navPanel.getPath();
+                    sessionData.data.companyHomeActive  = navPanel.companyHomeTreeActive;
+                    sessionData.data.userHomeActive  = navPanel.userHomeTreeActive;
                 }
             }                                    
-        }                                   
+        }
+        
+        protected function onEditBtn(event:MouseEvent):void
+        {
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;  
+            flexSpacesPresModel.downloadFile(selectedItem, this);
+        }               
 
+        protected function onUpdateBtn(event:MouseEvent):void
+        {
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;  
+            flexSpacesPresModel.updateNode(selectedItem, this);
+        }   
+
+        protected function onCheckoutBtn(event:MouseEvent):void
+        {
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;  
+            flexSpacesPresModel.checkout(selectedItem);
+        }               
+
+        protected function onCancelCheckoutBtn(event:MouseEvent):void
+        {
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;  
+            flexSpacesPresModel.cancelCheckout(selectedItem);
+        }               
+        
+        protected function onCheckinBtn(event:MouseEvent):void
+        {
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;  
+            flexSpacesPresModel.checkin(selectedItem);
+        }                                   
+                                           
+        protected function onPropertiesBtn(event:MouseEvent):void
+        {
+            var selectedItem:Object = flexSpacesPresModel.selectedItem;  
+            flexSpacesPresModel.properties(selectedItem, this);
+        }
+        
+        //
+        // NavPanel Handling
+        //
+        
+        protected function onChangeTree(event:TreeChangePathEvent):void
+        {
+            if (browserView != null)
+            {
+                browserView.setPath(event.path);    
+            }
+
+            // enable/disable menus dependent on user permissions in folder
+            // independent of selections since selection is cleared after path change
+            this.enableMenusAfterTabChange(tabNav.selectedIndex);   
+            
+            // remember path
+            updateSessionData();              
+        }
+                                           
     }
 }

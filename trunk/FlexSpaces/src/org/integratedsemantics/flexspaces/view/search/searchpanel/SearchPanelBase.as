@@ -1,5 +1,6 @@
 package org.integratedsemantics.flexspaces.view.search.searchpanel
 {
+    import mx.containers.Accordion;
     import mx.containers.Box;
     import mx.containers.HDividedBox;
     import mx.events.FlexEvent;
@@ -22,7 +23,8 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
         public var searchView2:SearchViewBase;
         public var tagCloudView:TagCloudViewBase;
         public var categoriesTreeView:CategoryTreeViewBase;
-               
+        
+        public var semanticSection:Accordion;   
         public var semanticTagCloudView:SemanticTagCloudViewBase;
         public var companySemanticTagCloudView:SemanticTagCloudViewBase;
         public var personSemanticTagCloudView:SemanticTagCloudViewBase;
@@ -54,8 +56,8 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
             // setup category tree
             categoriesTreeView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);      
             
-            // setup search results
-
+            // setup semantic tag clouds/map
+            
             var version:Number = searchPanelPresModel.model.ecmServerConfig.serverVersionNum();
             
             // only setup tag cloud if 2.9 or greater since tagging content model added in 2.9

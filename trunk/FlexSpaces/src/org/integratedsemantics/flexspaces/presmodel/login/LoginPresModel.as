@@ -34,7 +34,15 @@ package org.integratedsemantics.flexspaces.presmodel.login
 		{
             userName = model.userInfo.loginUserName;
             password = model.userInfo.loginPassword;
-            autoLogin = model.userInfo.autoLogin;   		    
+            autoLogin = model.userInfo.autoLogin;   
+
+            // for Alfresco testing
+            //userName = "admin";
+            //password = "admin";                        
+            
+            // for LC testing
+            //userName = "Administrator";
+            //password = "password";            		    
 		}
 			
 		/**

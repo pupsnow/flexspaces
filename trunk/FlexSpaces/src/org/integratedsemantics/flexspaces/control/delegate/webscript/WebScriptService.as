@@ -87,6 +87,7 @@
 				
 				if (model.ecmServerConfig.isLiveCycleContentServices == true)
 				{
+/*
                     if (model.remotingChannelSet == null)
                     {
                         setupChannels();
@@ -113,12 +114,28 @@
 						
 			            this.headers = headerList;						
 	            	}
+*/ 
+                    if (this.ticketRequired == true)
+                    {
+                        var ticket:String = model.userInfo.loginTicket;
+                        if (ticket == null)
+                        {
+                            throw new Error("Unable to execute web script because required ticket is not available");   
+                        }
+                        
+                        parameters.ticket = ticket;
+                    }
+
+                    if (this.method == POST && this.requestedMethod != POST)
+                    {
+                    	parameters.alf_method = this.requestedMethod;
+                    }                              	            	
     			}
             	else
 				{												
                     if (this.ticketRequired == true)
                     {
-						var ticket:String = model.userInfo.loginTicket;
+						ticket = model.userInfo.loginTicket;
 						if (ticket == null)
 						{
 							throw new Error("Unable to execute web script because required ticket is not available");	
@@ -126,12 +143,14 @@
     					
     					parameters.alf_ticket = ticket;
                     }
+
+                    if (this.method == POST && this.requestedMethod != POST)
+                    {
+                        parameters.alf_method = this.requestedMethod;
+                    }           
+                                        
 				}
 				
-				if (this.method == POST && this.requestedMethod != POST)
-				{
-					parameters.alf_method = this.requestedMethod;
-				}			
 				
 				result = send(parameters);
 			}

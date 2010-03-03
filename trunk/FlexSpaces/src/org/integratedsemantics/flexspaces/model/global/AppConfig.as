@@ -22,6 +22,11 @@ package org.integratedsemantics.flexspaces.model.global
         // when sessionData shared object is used (useSessionData true),
         // how long can (in minutes) can its data be used to restore state when app restarts
         public var sessionDataValidTime:int = 30;
+        
+        // air only, less steps editing (edit button saves offline without prompt or browse dialog, launches app
+        public var useLessStepsEdit:Boolean = false;
+        // air only, when using less step editing, whether to do auto update online, when user saves in app
+        public var autoUpdateOnlineOnAppSave:Boolean = false;
 
 		public function AppConfig()
 		{

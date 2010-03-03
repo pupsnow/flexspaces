@@ -69,7 +69,9 @@ package org.integratedsemantics.flexspaces.control.command.ui
                 {
                     if (model.ecmServerConfig.isLiveCycleContentServices == true)
                     {
-                        var viewurl:String = selectedItem.viewurl;
+                        // use formfetch url on lc content services es2 which has support for ticket
+                        var viewurl:String = model.ecmServerConfig.urlPrefix + "/adobe/formfetch?storeprotocol=" + selectedItem.storeProtocol + 
+                            "&storeid=" + selectedItem.storeId + "&formid=" + selectedItem.id +  "&ticket=" + model.userInfo.loginTicket;                     
                     }
                     else
                     {
@@ -79,14 +81,21 @@ package org.integratedsemantics.flexspaces.control.command.ui
                 }
                 else
                 {
-                    viewurl = selectedItem.viewurl;                
-                    request = new URLRequest(viewurl);
-                    var params:URLVariables = new URLVariables();
                     if (model.ecmServerConfig.isLiveCycleContentServices == false)
                     {
+                        viewurl = selectedItem.viewurl;                
+                        request = new URLRequest(viewurl);
+                        var params:URLVariables = new URLVariables();
                         params.alf_ticket = model.userInfo.loginTicket;
+                        request.data = params;
+                    }
+                    else
+                    {
+                        viewurl = model.ecmServerConfig.urlPrefix + "/adobe/formfetch?storeprotocol=" + selectedItem.storeProtocol + 
+                            "&storeid=" + selectedItem.storeId + "&formid=" + selectedItem.id +  "&ticket=" + model.userInfo.loginTicket;                     
+
+                        request = new URLRequest(viewurl);                       
                     }    
-                    request.data = params;
                 }                                
                 
                 var fileRef:FileReference = new FileReference();

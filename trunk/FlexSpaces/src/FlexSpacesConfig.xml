@@ -12,14 +12,14 @@
         
         <property name="alfrescoUrlPart" value="/alfresco/service"/>
         <!-- for livecycle content services use next line and comment out previous line -->
-        <!-- property name="alfrescoUrlPart" value="/contentspace/service" /-->
+        <!-- property name="alfrescoUrlPart" value="/contentspace/wcservice" /-->
 
         <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
         <property name="isLiveCycleContentServices" value="false"/>
 
         <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->   
-        <!-- for livecycle content services 8.2.1, use the version of alfresco included (2.1), for newer check contentspace admin console sys info  -->               
-        <property name="serverVersion" value="3.0"/>     
+        <!-- for livecycle  content services ES2 9.0, use the version of alfresco included (3.1)  -->               
+        <property name="serverVersion" value="3.2"/>     
            
     </object>
 
@@ -33,7 +33,12 @@
         <!-- when short term data storage is used (useSessionData true), how long (in minutes) -->
         <!-- can data still be used to restore state when app restarts -->
         <property name="sessionDataValidTime" value="30"/>  
-                    
+        
+        <!-- air only, less steps editing (edit button saves offline without prompt or browse dialog, launches app -->
+        <property name="useLessStepsEdit" value="false"/>                 
+        <!-- air only, when using less step editing, whether to do auto update online, when user saves in app -->
+        <property name="autoUpdateOnlineOnAppSave" value="false"/>                 
+                            
     </object>
 
     <object id="thumbnailConfig" class="org.integratedsemantics.flexspaces.model.global.ThumbnailConfig">

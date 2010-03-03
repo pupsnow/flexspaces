@@ -114,13 +114,21 @@ package org.integratedsemantics.flexspaces.control.command
                 model.userInfo.firstName = result.firstName;
                 model.userInfo.lastName = result.lastName;
         
-                model.userInfo.companyHome = new RepoNode();
-                model.userInfo.companyHome.nodeRef = result.companyHome.noderef;
-                model.userInfo.companyHome.name = result.companyHome.name;
-                model.userInfo.companyHome.path = result.companyHome.path;
-                model.userInfo.companyHome.storeProtocol = result.companyHome.storeProtocol;
-                model.userInfo.companyHome.storeId = result.companyHome.storeId;
-                model.userInfo.companyHome.id = result.companyHome.id
+                // when no read permission to company home all companyhome field will come back as empty strings
+                if (result.companyHome.noderef == "")
+                {
+                    model.userInfo.companyHome = null;
+                }
+                else
+                {
+                    model.userInfo.companyHome = new RepoNode();
+                    model.userInfo.companyHome.nodeRef = result.companyHome.noderef;
+                    model.userInfo.companyHome.name = result.companyHome.name;
+                    model.userInfo.companyHome.path = result.companyHome.path;
+                    model.userInfo.companyHome.storeProtocol = result.companyHome.storeProtocol;
+                    model.userInfo.companyHome.storeId = result.companyHome.storeId;
+                    model.userInfo.companyHome.id = result.companyHome.id
+                }
 
                 model.userInfo.userHome = new RepoNode();               
                 model.userInfo.userHome.nodeRef = result.userHome.noderef;

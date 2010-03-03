@@ -4,10 +4,8 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import com.universalmind.cairngorm.commands.Command;
     
     import flash.net.URLRequest;
-    import flash.net.URLRequestHeader;
+    import flash.net.URLVariables;
     import flash.net.navigateToURL;
-    
-    import mx.utils.Base64Encoder;
     
     import org.integratedsemantics.flexspaces.control.event.ui.ViewNodeUIEvent;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
@@ -65,10 +63,10 @@ package org.integratedsemantics.flexspaces.control.command.ui
                     var model : AppModelLocator = AppModelLocator.getInstance();                            
                     if (model.ecmServerConfig.isLiveCycleContentServices == true)
                     {
-                        var url:String = selectedItem.viewurl;
-                    	request = new URLRequest(url);                    	
-						var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.userInfo.loginTicket);
-			            request.requestHeaders.push(ticketHeader);	                    	
+                        var url:String = model.ecmServerConfig.urlPrefix + "/adobe/formfetch?storeprotocol=" + selectedItem.storeProtocol + 
+                            "&storeid=" + selectedItem.storeId + "&formid=" + selectedItem.id +  "&ticket=" + model.userInfo.loginTicket;                     
+
+                    	request = new URLRequest(url);                    				            
                     }
                     else
                     {

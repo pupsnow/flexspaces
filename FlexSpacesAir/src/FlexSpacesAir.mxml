@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <app:AirAppBase title="FlexSpaces+Air"
 	verticalScrollPolicy="off" layout="absolute" 
-	width="1100" height="700"
+	width="1280" height="1024"
 	paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" 
 	verticalAlign="middle" horizontalAlign="center"                 
 	xmlns:mx="http://www.adobe.com/2006/mxml"

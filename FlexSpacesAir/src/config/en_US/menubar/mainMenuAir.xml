@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
     <menuitem label="File" data="file">
-        <menuitem label="Create Space" data="newspace" enabled="false"/>
+        <menuitem label="New Folder" data="newspace" enabled="false"/>
         <menuitem label="Create Content" data="createcontent" enabled="false">
            <menuitem label="HTML" data="createhtml"/>
            <menuitem label="Plain Text" data="createtext"/>
@@ -31,7 +31,7 @@
         <menuitem label="Tags / Categories" data="tags" enabled="false"/>
     </menuitem>
     <menuitem label="View" data="view">
-        <menuitem label="Tree" type="check" toggled="true"  data="repotree"/>
+        <menuitem label="Navigation Panel" type="check" toggled="true"  data="repotree"/>
         <menuitem label="Dual Panes" type="check" toggled="false"  data="secondrepofolder"/>
         <menuitem type="separator" data="" />
         <menuitem label="WCM Tree" type="check" toggled="true"  data="wcmrepotree" enabled="false"/>
@@ -52,7 +52,7 @@
         <menuitem label="Advanced Search" data="advancedsearch"/>                                                        
         <menuitem type="separator" data="" />
         <menuitem label="Make Available Offline" data="availoffline" enabled="false"/>                                    
-        <menuitem label="Offline Upload" data="offlineupload" enabled="false"/>
+        <menuitem label="Update from Offline" data="offlineupload" enabled="false"/>
         <menuitem type="separator" data="" />
         <menuitem label="Automatically Tag with Calais" data="autoTag"/>        
         <menuitem label="Suggest Tags with Calais" data="suggestTags"/>                                                                                                               

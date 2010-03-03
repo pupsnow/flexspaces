@@ -24,6 +24,7 @@ package org.integratedsemantics.flexspacesair.control.event
 
         public var selectedItems:Array;  
         public var parent:DisplayObject;
+        public var promptForConfirm:Boolean;
         
         /**
          * Constructor
@@ -32,14 +33,16 @@ package org.integratedsemantics.flexspacesair.control.event
          * @param handlers handlers responder with result and fault handlers
          * @param selectedItems the selected node items
          * @param parent parent window for confirm dialog
+         * @param prompt whether to prompt user for confirmation
          * 
          */
-        public function AirMakeAvailOfflineUIEvent(eventType:String, handlers:IResponder, selectedItems:Array, parent:DisplayObject)
+        public function AirMakeAvailOfflineUIEvent(eventType:String, handlers:IResponder, selectedItems:Array, parent:DisplayObject, prompt:Boolean=true)
         {
             super(eventType, handlers);
             
             this.selectedItems = selectedItems;
             this.parent = parent;
+            this.promptForConfirm = prompt;
         }       
         
     }

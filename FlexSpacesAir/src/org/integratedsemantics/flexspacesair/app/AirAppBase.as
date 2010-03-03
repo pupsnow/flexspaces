@@ -15,6 +15,7 @@ package org.integratedsemantics.flexspacesair.app
     import org.integratedsemantics.flexspaces.model.global.ThumbnailConfig;
     import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
     import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
     import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
     import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
         
@@ -100,8 +101,12 @@ package org.integratedsemantics.flexspacesair.app
             flexSpacesAirPresModel = model.applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesAirPresModel;            
 
-            // setup search panel after all the config done
-            flexSpacesAirPresModel.searchPanelPresModel.setupSubViews();        
+            // setup search results
+            flexSpacesAirPresModel.searchResultsPresModel = new SearchResultsPresModel();                     
+
+            // setup nav panel after all the config done
+            flexSpacesAirPresModel.navPanelPresModel.setupSubViews();        
+
 
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {

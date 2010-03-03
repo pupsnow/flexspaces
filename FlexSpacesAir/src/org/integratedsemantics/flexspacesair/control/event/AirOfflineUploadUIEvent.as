@@ -25,6 +25,7 @@ package org.integratedsemantics.flexspacesair.control.event
         public var checkin:Boolean;
         public var parent:DisplayObject;
         public var onComplete:Function;  
+        public var promptForConfirm:Boolean;
         
         /**
          * Constructor
@@ -35,10 +36,11 @@ package org.integratedsemantics.flexspacesair.control.event
          * @param checkin whether to checkin also
          * @param view parent window for confirm
          * @param onComplete callback after complete
+         * @param prompt whether to prompt user for confirmation
          * 
          */
         public function AirOfflineUploadUIEvent(eventType:String, handlers:IResponder, selectedItem:Object, checkin:Boolean,
-                                                parent:DisplayObject, onComplete:Function=null)
+                                                parent:DisplayObject, onComplete:Function=null, prompt:Boolean=true)
         {
             super(eventType, handlers);
             
@@ -46,6 +48,7 @@ package org.integratedsemantics.flexspacesair.control.event
             this.checkin = checkin;
             this.parent = parent;
             this.onComplete = onComplete;
+            this.promptForConfirm = prompt;
         }       
         
     }

@@ -49,7 +49,7 @@ package org.integratedsemantics.sampleapp.view.main
          */
         override protected function onRepoBrowserCreated(event:FlexEvent):void
         {    
-            super.onRepoBrowserCreated(event);                                 
+            super.onRepoBrowserCreated(event);  
         }
                 
         /**

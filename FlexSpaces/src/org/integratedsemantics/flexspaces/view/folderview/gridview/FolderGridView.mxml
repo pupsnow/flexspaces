@@ -13,13 +13,22 @@
             change="onChange(event)">
     
             <mx:columns>        
+                <mx:DataGridColumn dataField="lock" headerText="" width="25" sortable="false">
+                    <mx:itemRenderer>
+                        <mx:Component>
+                            <mx:Box>
+                                <mx:Image source="@Embed('images/icons/locked.gif')" includeInLayout="{data.isLocked}"  visible="{data.isLocked}" scaleContent="false" />                                                        
+                            </mx:Box>
+                        </mx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>    
                 <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
                     <mx:itemRenderer>
                         <mx:Component>
                             <mx:Image source="{data.icon16}" scaleContent="false"/>
                         </mx:Component>
                     </mx:itemRenderer>
-                </mx:DataGridColumn>             
+                </mx:DataGridColumn>    
                 <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'nameColumn_headerText')}" dataField="name" width="200" id="dgcolumn0"/>      
                 <!--<mx:DataGridColumn headerText="Description" dataField="desc" width="100" /> -->            
                 <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'typeColumn_headerText')}" dataField="type" width="100" id="dgcolumn1"/>      

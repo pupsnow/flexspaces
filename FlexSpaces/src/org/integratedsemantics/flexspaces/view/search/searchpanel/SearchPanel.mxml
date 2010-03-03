@@ -19,15 +19,16 @@
             <search:SearchView id="searchView2" searchPresModel="{searchPanelPresModel.searchPresModel}" width="100%"/>      
         </mx:Box>
 
-        <semantictags:SemanticTagCloudView id="semanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.semanticTagCloudPresModel}" 
-            label="{resourceManager.getString('SearchPanel', 'semanticTagCloudView_label' )}" width="100%" height="100%"/>  
-        <semantictags:SemanticTagCloudView  id="companySemanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.companySemanticTagCloudPresModel}"
-        	label="{resourceManager.getString('SearchPanel', 'companySemanticTagCloudView_label' )}" width="100%" height="100%"/>  
-        <semantictags:SemanticTagCloudView id="personSemanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.personSemanticTagCloudPresModel}"
-        	label="{resourceManager.getString('SearchPanel', 'personSemanticTagCloudView_label' )}" width="100%" height="100%"/>  
-
-        <mx:Box label="{resourceManager.getString('SearchPanel', 'mapSection_label' )}" height="100%" width="100%" id="mapSection">      
-        </mx:Box>
+        <mx:Accordion id="semanticSection" label="{resourceManager.getString('NavPanel', 'semanticSection_label')}" height="100%" width="100%">
+            <semantictags:SemanticTagCloudView id="semanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.semanticTagCloudPresModel}" 
+                label="{'     ' + resourceManager.getString('SearchPanel', 'semanticTagCloudView_label' )}" width="100%" height="100%"/>  
+            <semantictags:SemanticTagCloudView  id="companySemanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.companySemanticTagCloudPresModel}"
+            	label="{'     ' + resourceManager.getString('SearchPanel', 'companySemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+            <semantictags:SemanticTagCloudView id="personSemanticTagCloudView" tagCloudPresModel="{searchPanelPresModel.personSemanticTagCloudPresModel}"
+            	label="{'     ' + resourceManager.getString('SearchPanel', 'personSemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+            <mx:Box label="{'     ' + resourceManager.getString('SearchPanel', 'mapSection_label' )}" height="100%" width="100%" id="mapSection">      
+            </mx:Box>
+        </mx:Accordion>
 
         <tags:TagCloudView id="tagCloudView" tagCloudPresModel="{searchPanelPresModel.tagCloudPresModel}" 
         	label="{resourceManager.getString('SearchPanel', 'tagCloudView_label' )}" width="100%" height="100%"/>  

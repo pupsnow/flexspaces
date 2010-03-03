@@ -15,6 +15,7 @@ package org.integratedsemantics.flexspaces.app
 	import org.integratedsemantics.flexspaces.model.global.ThumbnailConfig;
 	import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
 	import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
+	import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
 	import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
 	import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
 	
@@ -108,9 +109,12 @@ package org.integratedsemantics.flexspaces.app
             
             flexSpacesPresModel = model.applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesPresModel;    
+                   
+            // setup search results
+            flexSpacesPresModel.searchResultsPresModel = new SearchResultsPresModel();                     
             
-            // setup search panel after all the config done
-            flexSpacesPresModel.searchPanelPresModel.setupSubViews();        
+            // setup nav panel pres model after all the config done 
+            flexSpacesPresModel.navPanelPresModel.setupSubViews();        
 
             var doclib:String = this.parameters.doclib;
             if ((doclib != null) && (doclib.length != 0))

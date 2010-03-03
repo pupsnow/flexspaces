@@ -72,9 +72,8 @@ package org.integratedsemantics.flexspaces.control.command
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {               
 				var result:String = event.result;
-				var start:int = result.indexOf("<Assertion");
-				var end:int = result.indexOf("</ticket>");
-				var ticket:String = result.substring(start, end);   
+				// lc es2 has simple ticket unlike es1
+				var ticket:String = result;
 	            model.userInfo.loginTicket = ticket;         
             }
             else

@@ -2,6 +2,7 @@ package org.integratedsemantics.flexspaces.model
 {
 	import com.adobe.cairngorm.model.ModelLocator;
 	
+	import mx.collections.ArrayCollection;
 	import mx.messaging.ChannelSet;
 	
 	import org.integratedsemantics.flexspaces.model.global.AppConfig;
@@ -52,6 +53,12 @@ package org.integratedsemantics.flexspaces.model
 
         // for LiveCycle
         public var remotingChannelSet:ChannelSet;
+        
+        // table to lookup node give local filepath (on a monitored file in air only)
+        public var fileToNodeLookup:Object = new Object();
+        // file monitors
+        public var fileMonitors:ArrayCollection = new ArrayCollection();
+
                    
 		// singleton: constructor only allows one model locator
 		public function AppModelLocator():void

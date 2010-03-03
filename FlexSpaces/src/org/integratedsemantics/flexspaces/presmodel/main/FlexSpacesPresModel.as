@@ -20,9 +20,10 @@ package org.integratedsemantics.flexspaces.presmodel.main
     import org.integratedsemantics.flexspaces.presmodel.checkedout.CheckedOutPresModel;
     import org.integratedsemantics.flexspaces.presmodel.login.LoginPresModel;
     import org.integratedsemantics.flexspaces.presmodel.logout.LogoutPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.navpanel.NavPanelPresModel;
     import org.integratedsemantics.flexspaces.presmodel.search.advanced.AdvancedSearchPresModel;
     import org.integratedsemantics.flexspaces.presmodel.search.basic.SearchPresModel;
-    import org.integratedsemantics.flexspaces.presmodel.search.searchpanel.SearchPanelPresModel;
+    import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
     import org.integratedsemantics.flexspaces.presmodel.tasks.taskspanel.TasksPanelPresModel;
     import org.integratedsemantics.flexspaces.presmodel.wcm.browser.WcmRepoBrowserPresModel;
 
@@ -66,8 +67,9 @@ package org.integratedsemantics.flexspaces.presmodel.main
         public var wcmCutCopy:Boolean = false;
 
         // subview presenation models 
+        public var navPanelPresModel:NavPanelPresModel;
         public var browserPresModel:RepoBrowserPresModel; 
-        public var searchPanelPresModel:SearchPanelPresModel;
+        public var searchResultsPresModel:SearchResultsPresModel;
         public var tasksPanelPresModel:TasksPanelPresModel;               
         public var wcmBrowserPresModel:WcmRepoBrowserPresModel;  
         public var advSearchPresModel:AdvancedSearchPresModel;
@@ -93,6 +95,9 @@ package org.integratedsemantics.flexspaces.presmodel.main
         // list of pages sizes, todo make configurable
         public var pageSizeList:ArrayCollection = new ArrayCollection(new Array("10", "20", "30", "40", "50"));
         
+        public var showNavPanel:Boolean = true;
+        
+        
         /**
          * Constructor
          *  
@@ -107,8 +112,9 @@ package org.integratedsemantics.flexspaces.presmodel.main
         
         protected function setupSubPresModels():void
         {
+            navPanelPresModel = new NavPanelPresModel();
             browserPresModel = new RepoBrowserPresModel(); 
-            searchPanelPresModel = new SearchPanelPresModel();
+            searchResultsPresModel = new SearchResultsPresModel();
             tasksPanelPresModel = new TasksPanelPresModel();               
             wcmBrowserPresModel = new WcmRepoBrowserPresModel();  
             advSearchPresModel = new AdvancedSearchPresModel();
@@ -559,6 +565,16 @@ package org.integratedsemantics.flexspaces.presmodel.main
                 favoritesEvent.dispatch();                    
             }
         }
+        
+        /**
+         * Handle toggling the showing the navigation panel
+         * 
+         */
+        public function showHideNavPanel():void
+        {
+            showNavPanel = ! showNavPanel;
+        }
+        
                 
     }
 }

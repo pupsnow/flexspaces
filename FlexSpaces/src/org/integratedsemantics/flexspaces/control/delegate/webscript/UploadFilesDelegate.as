@@ -89,8 +89,11 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
 	            //encoder.encode(model.loginUserName + ":" + model.loginPassword);
 	            //var authHeader:URLRequestHeader = new URLRequestHeader("Authorization", "Basic " + encoder.toString());
 	            //uploadURLRequest.requestHeaders.push(authHeader);
-				var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.userInfo.loginTicket);
-	            uploadURLRequest.requestHeaders.push(ticketHeader);	
+				//var ticketHeader:URLRequestHeader = new URLRequestHeader("ticket", model.userInfo.loginTicket);
+	            //uploadURLRequest.requestHeaders.push(ticketHeader);	
+
+                url = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadNew" + "?ticket=" + model.userInfo.loginTicket;
+                this.uploadURLRequest = new URLRequest(url);                
             }
             else
             {
@@ -144,7 +147,8 @@ package org.integratedsemantics.flexspaces.control.delegate.webscript
             var model:AppModelLocator = AppModelLocator.getInstance();
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
-                var url:String = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadExisting";
+                //var url:String = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadExisting";
+                var url:String = model.ecmServerConfig.urlPrefix +  "/flexspaces/uploadExisting" + "?ticket=" + model.userInfo.loginTicket;                
             }
             else
             {

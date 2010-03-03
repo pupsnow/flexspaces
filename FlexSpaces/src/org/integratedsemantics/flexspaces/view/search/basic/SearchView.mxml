@@ -7,7 +7,7 @@
   
     <mx:Style source="search.css"/> 
       		
-    <mx:HBox width="100%" height="100%"  horizontalAlign="left" verticalAlign="middle">
+    <mx:HBox width="100%" height="100%"  horizontalAlign="center" verticalAlign="top">
 		
         <mx:TextInput id="searchTextInput" width="175" height="23"
         	change="searchPresModel.updateSearchText(searchTextInput.text)"/>

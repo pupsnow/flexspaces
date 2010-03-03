@@ -55,7 +55,15 @@ package org.integratedsemantics.flexspaces.presmodel.preview
         	    var node:Node = repoNode as Node;
                 var argsNoCache:String = "?c=force&noCacheToken=" + new Date().getTime();        	    
                 var url:String = model.ecmServerConfig.urlPrefix + "/api/node/" + node.storeProtocol + "/" + node.storeId + "/" + node.id;
-                url += "/content/thumbnails/webpreview" + argsNoCache + "&alf_ticket=" + model.userInfo.loginTicket;
+                
+                if (model.ecmServerConfig.isLiveCycleContentServices == true)
+                {                                
+                    url += "/content/thumbnails/webpreview" + argsNoCache + "&ticket=" + model.userInfo.loginTicket;
+                }
+                else
+                {
+                    url += "/content/thumbnails/webpreview" + argsNoCache + "&alf_ticket=" + model.userInfo.loginTicket;                    
+                }
                 this.urlFlash = url;        	
                 this.havePreview = true;
                 var data:PreviewInfoVO = new PreviewInfoVO();
@@ -93,7 +101,14 @@ package org.integratedsemantics.flexspaces.presmodel.preview
                 }   
                 else
                 {
-                    urlFlash = previewURL + "?alf_ticket=" + model.userInfo.loginTicket;                       	
+                    if (model.ecmServerConfig.isLiveCycleContentServices == true)
+                    {
+                        urlFlash = previewURL + "?ticket=" + model.userInfo.loginTicket;                                                
+                    }
+                    else
+                    {
+                        urlFlash = previewURL + "?alf_ticket=" + model.userInfo.loginTicket;                                                
+                    }
                 }             
                             
                 this.havePreview = true;                

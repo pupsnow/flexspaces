@@ -4,6 +4,7 @@ package org.integratedsemantics.flexspaces.view.tree
     import mx.events.ListEvent;
     import mx.rpc.Responder;
     
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.model.tree.TreeNode;
     import org.integratedsemantics.flexspaces.presmodel.tree.TreePresModel;
     
@@ -21,6 +22,12 @@ package org.integratedsemantics.flexspaces.view.tree
         private var multiStepPath:String = null;
         private var pathParts:Array;
         private var partIndex:int;
+        
+        public var rootPath:String = "/";
+        
+        [Bindable]
+        public var isUserHomeTree:Boolean = false;
+        
         
         /**
          * Constructor 
@@ -41,9 +48,33 @@ package org.integratedsemantics.flexspaces.view.tree
             addEventListener(ListEvent.CHANGE, treeChanged);
             addEventListener(ListEvent.ITEM_CLICK, treeClicked);     
 
-            // cmis
-            var path:String = "/";
-            initTree(path);                                          
+            var model : AppModelLocator = AppModelLocator.getInstance();
+            if ( model.appConfig.cmisMode == false )
+            {
+                if (isUserHomeTree == true)
+                {
+                    if (model.userInfo.userHome != null)
+                    {
+                        rootPath = model.userInfo.userHome.path;
+                    }
+                }
+                else
+                {
+                    if (model.userInfo.companyHome != null)
+                    {
+                        rootPath = model.userInfo.companyHome.path;
+                    }         
+                    else
+                    {
+                        rootPath = null;
+                    }           
+                }
+            }
+
+            if (rootPath != null)
+            {
+                initTree(rootPath); 
+            }                                         
         }
 
         // cmis: separated this from onCreationComplete 

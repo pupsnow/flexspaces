@@ -85,7 +85,9 @@ package org.integratedsemantics.flexspacesair.control.command
             {
                 if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
-                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadNew";
+                    //url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadNew";
+
+                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadNew"  + "?ticket=" + model.userInfo.loginTicket;
                 }
                 else
                 {
@@ -96,7 +98,8 @@ package org.integratedsemantics.flexspacesair.control.command
             {
                 if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
-                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadExisting";                 
+                    //url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadExisting";                 
+                    url = model.ecmServerConfig.urlPrefix + "/flexspaces/uploadExisting"  + "?ticket=" + model.userInfo.loginTicket;
                 }
                 else
                 {

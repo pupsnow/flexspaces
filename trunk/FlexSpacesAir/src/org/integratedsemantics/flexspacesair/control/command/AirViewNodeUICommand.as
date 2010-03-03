@@ -84,7 +84,8 @@ package org.integratedsemantics.flexspacesair.control.command
             {    
                 if (model.ecmServerConfig.isLiveCycleContentServices == true)
                 {
-                    var url:String = selectedItem.viewurl;                
+                    var url:String = model.ecmServerConfig.urlPrefix + "/adobe/formfetch?storeprotocol=" + selectedItem.storeProtocol + 
+                        "&storeid=" + selectedItem.storeId + "&formid=" + selectedItem.id +  "&ticket=" + model.userInfo.loginTicket;                                                 
                 }
                 else
                 {

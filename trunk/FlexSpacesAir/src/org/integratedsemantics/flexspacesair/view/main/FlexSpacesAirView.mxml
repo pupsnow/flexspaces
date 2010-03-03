@@ -6,12 +6,13 @@
     xmlns:logout="org.integratedsemantics.flexspaces.view.logout.*" 
     xmlns:login="org.integratedsemantics.flexspaces.view.login.*" 
     xmlns:search="org.integratedsemantics.flexspaces.view.search.basic.*"
-    xmlns:repobrowser="org.integratedsemantics.flexspaces.view.browser.*"
+    xmlns:browser="org.integratedsemantics.flexspaces.view.browser.*"
     xmlns:wcmrepobrowser="org.integratedsemantics.flexspaces.view.wcm.browser.*"
     xmlns:folderview="org.integratedsemantics.flexspaces.view.folderview.*"
-    xmlns:searchpanel="org.integratedsemantics.flexspaces.view.search.searchpanel.*"
+    xmlns:results="org.integratedsemantics.flexspaces.view.search.results.*"
     xmlns:taskspanel="org.integratedsemantics.flexspaces.view.tasks.taskspanel.*"
     xmlns:checkedout="org.integratedsemantics.flexspaces.view.checkedout.*"    
+    xmlns:nav="org.integratedsemantics.flexspaces.view.nav.*"
     creationComplete="onCreationComplete(event)">
 
     <mx:Metadata>[ResourceBundle("FlexSpacesView")]</mx:Metadata>
@@ -33,6 +34,7 @@
                         <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLoginLabel_text')}" styleName="logoText" id="alfrescoLoginLabel"/-->            
                         <mx:Spacer width="5"/>
                         <mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLoginLabel_text')}" styleName="logoText" id="flexspacesLoginLabel"/>            
+                        <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLcLoginLabel_text')}" styleName="logoText" id="flexspacesLoginLabel"/-->            
                     </mx:HBox>
                     <!-- integrated semantics logo -->
                     <mx:HBox width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
@@ -52,7 +54,7 @@
             <!-- after login, after get info, main view mode -->
             <mx:VBox width="100%" height="100%">
                 
-                <!-- logos, search, logout -->
+                <!-- logos -->
                 <mx:HBox id="header" width="100%" height="40">
                     <!-- flexspaces logo -->
                     <mx:HBox width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
@@ -60,11 +62,8 @@
                         <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLabel_text')}" styleName="logoText" id="alfrescoLabel"/-->            
                         <mx:Spacer width="5"/>
                         <mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLabel_text')}" styleName="logoText" id="flexspacesLabel"/>            
+                        <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLcLabel_text')}" styleName="logoText" id="flexspacesLabel"/-->            
                     </mx:HBox>
-                    <!-- one box search -->   
-                    <search:SearchView id="searchView" searchPresModel="{flexSpacesPresModel.searchPresModel}" height="100%" horizontalAlign="right" minWidth="330"/>      
-                    <!-- logout link  -->   
-                    <logout:LogoutView id="logoutView" logoutPresModel="{flexSpacesPresModel.logoutPresModel}" height="100%" horizontalAlign="right" minWidth="100"/>
                     <!-- integrated semantics logo -->
                     <mx:HBox width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
                         <mx:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLabel_text')}" styleName="logoText" id="integratedsemanticsLabel"/>            
@@ -72,57 +71,88 @@
                     </mx:HBox>
                 </mx:HBox>
 
-                <!-- menu and toolbar -->
-                <mx:HBox height="30" width="100%" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">                
+                <!-- menu basic search logout  -->
+                <mx:HBox id="menussearchlogout" width="100%" height="30" verticalAlign="top">
                     <!-- main menu toolbar -->
-                    <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" width="100%" height="25" 
+                    <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" height="30"
                         configPath="{model.appConfig.srcPath + 'config/' + model.appConfig.locale + '/menubar/mainMenuAir.xml'}"/>
-                    <!-- buttons toolbar -->
-                    <mx:HBox id="toolbar1" width="100%">              
-                        <mx:Button id="cutBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'cutBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/flexspaces/cut_dark.gif')"/>            
-                        <mx:Button id="copyBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'copyBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/copy.gif')"/>            
-                        <mx:Button id="pasteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'pasteBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/paste.gif')"/>            
-                        <mx:Button id="deleteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'deleteBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/delete.gif')"/>            
+                    <mx:HBox height="100%" horizontalAlign="right">
                         <mx:Spacer width="10"/>
-                        <mx:Button id="createSpaceBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/create_space.gif')"/>            
+                        <!-- one box search -->   
+                        <search:SearchView id="searchView" searchPresModel="{flexSpacesPresModel.searchPresModel}" height="100%" width="100%" verticalAlign="bottom" horizontalAlign="right" />      
+                    </mx:HBox>
+                    <mx:HBox height="100%" horizontalAlign="right">
                         <mx:Spacer width="10"/>
-                        <mx:Button id="uploadFileBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/add_item.gif')"/>            
-                        <mx:Spacer width="10"/>
-                        <mx:Button id="tagsBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'tagsBtn_tooltip' )}" width="25" height="25" icon="@Embed('images/icons/add_category.gif')"/>            
-                    </mx:HBox>   
-                </mx:HBox>  
+                        <!-- logout link  -->   
+                        <logout:LogoutView id="logoutView" logoutPresModel="{flexSpacesPresModel.logoutPresModel}" height="100%" width="100%" verticalAlign="bottom" horizontalAlign="right"/>
+                        <mx:Spacer width="5"/>
+                        <!--  logged in as: username -->  
+                        <mx:Label id="welcomeText" color="#0E9EE5" fontStyle="italic"/> 
+                        <mx:Spacer width="5"/>                                                    
+                    </mx:HBox>
+                </mx:HBox>
 
-                <!-- tabs -->            
-                <flexlib:SuperTabNavigator id="tabNav" creationPolicy="all" styleName="viewTabs" tabStyleName="viewTab" width="100%" height="100%">
-    
-                    <!-- Doc Libary Tab: Repository Browser with Tree and Dual Folder Panes -->
-                    <mx:VBox id="docLibTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
-                             height="100%" width="100%" creationComplete="onRepoBrowserCreated(event)" styleName="viewStyle">
-                        <repobrowser:RepoBrowserView id="browserView" repoBrowserPresModel="{flexSpacesPresModel.browserPresModel}" height="100%" width="100%"/>
-                    </mx:VBox>
-    
-                    <!-- Search Tab -->
-                    <mx:VBox id="searchTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" styleName="viewStyle">              
-                        <searchpanel:SearchPanel id="searchPanel" searchPanelPresModel="{flexSpacesPresModel.searchPanelPresModel}" height="100%" width="100%"/>
-                    </mx:VBox>
+                <!-- buttons toolbar -->
+                <mx:HBox id="toolbar1" height="70" width="100%" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">              
+                    <mx:Spacer width="5"/>
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="createSpaceBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_tooltip' )}" width="90" height="60" icon="@Embed('images/flexspaces/new_folder32.png')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="uploadFileBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_tooltip' )}" width="70" height="60" icon="@Embed('images/icons/add_item_large.gif')"/>            
+                    <mx:Spacer width="5" visible="true" includeInLayout="true" />
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'cutBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="cutBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'cutBtn_tooltip' )}" width="60" height="60" icon="@Embed('images/flexspaces/cut32.png')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'copyBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="copyBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'copyBtn_tooltip' )}" width="60" height="60" icon="@Embed('images/flexspaces/copy32.png')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'pasteBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="pasteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'pasteBtn_tooltip' )}" width="70" height="60" icon="@Embed('images/flexspaces/paste32.png')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'deleteBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="deleteBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'deleteBtn_tooltip' )}" width="70" height="60" icon="@Embed('images/icons/delete_large.gif')"/>            
+                    <mx:Spacer width="5" visible="true" includeInLayout="true" />
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'editBtn_label' )}" labelPlacement="bottom" id="editBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'editBtn_tooltip' )}" width="70" height="60" icon="@Embed('images/icons/edit_offline_large.gif')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'updateBtn_label' )}" labelPlacement="bottom" id="updateBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'updateBtn_tooltip' )}" width="75" height="60" icon="@Embed('images/icons/update_large.gif')"/>            
+                    <mx:Spacer width="5"/>
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'checkoutBtn_label' )}" labelPlacement="bottom" id="checkoutBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'checkoutBtn_tooltip' )}" width="80" height="60" icon="@Embed('images/icons/check_out_large.gif')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'cancelCheckoutBtn_label' )}" labelPlacement="bottom" id="cancelCheckoutBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'cancelCheckoutBtn_tooltip' )}" width="120" height="60" icon="@Embed('images/icons/cancel_checkout_large.gif')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'checkinBtn_label' )}" labelPlacement="bottom" id="checkinBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'checkinBtn_tooltip' )}" width="70" height="60" icon="@Embed('images/icons/check_in_large.gif')"/>            
+                    <mx:Spacer width="5"/>
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'propertiesBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="propertiesBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'propertiesBtn_tooltip' )}" width="85" height="60" icon="@Embed('images/icons/category.gif')"/>            
+                    <mx:Button label="{resourceManager.getString('FlexSpacesView', 'tagsBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="tagsBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'tagsBtn_tooltip' )}" width="55" height="60" icon="@Embed('images/icons/category.gif')"/>            
+                </mx:HBox>   
+
+                <mx:HDividedBox id="navPanelAndTabs" height="100%" width="100%" styleName="viewStyle" creationPolicy="all">
                     
-                    <!-- Checked Out Tab -->
-                    <mx:VBox id="checkedOutTab" height="100%" width="100%" label="Checked Out" styleName="viewStyle">          
-                        <checkedout:CheckedOutView id="checkedOutView" checkedOutPresModel="{flexSpacesPresModel.checkedOutPresModel}" height="100%" width="100%"/>                            
-                    </mx:VBox>
-                    
-                    <!-- Task Tab -->
-                    <mx:VBox id="tasksTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'tasksTab_label' )}" styleName="viewStyle">              
-                        <taskspanel:TasksPanelView id="tasksPanelView" tasksPanelPresModel="{flexSpacesPresModel.tasksPanelPresModel}" height="100%" width="100%" />
-                    </mx:VBox>
-                    
-                    <!-- WCM Tab -->
-                    <mx:VBox id="wcmTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'wcmTab_label' )}" styleName="viewStyle">              
-                        <wcmrepobrowser:WcmRepoBrowserView id="wcmBrowserView" wcmRepoBrowserPresModel="{flexSpacesPresModel.wcmBrowserPresModel}" height="100%" width="100%"/>
-                    </mx:VBox>
+                    <!-- navigation panel with company home tree, user home tree, categories tag cloud, semantics tag clouds/map, favorites -->
+                    <nav:NavPanel id="navPanel" navPanelPresModel="{flexSpacesPresModel.navPanelPresModel}" height="100%" width="25%"
+                        visible="{flexSpacesPresModel.showNavPanel}" includeInLayout="{flexSpacesPresModel.showNavPanel}"/>
+                                            
+                    <!-- tabs --> 
+                    <flexlib:SuperTabNavigator id="tabNav"  styleName="viewTabs" tabStyleName="viewTab" height="100%" width="75%" allowTabSqueezing="false">
+        
+                        <!-- Doc Libary Tab: Repository Browser with Tree and Dual Folder Panes -->
+                        <mx:VBox id="docLibTab" label="{resourceManager.getString('FlexSpacesView', 'browserTab_label' )}" 
+                                 height="100%" width="100%" creationComplete="onRepoBrowserCreated(event)" styleName="viewStyle">
+                            <browser:BrowserView id="browserView" repoBrowserPresModel="{flexSpacesPresModel.browserPresModel}" height="100%" width="100%"/>
+                        </mx:VBox>
+        
+                        <!-- Search Tab -->
+                        <mx:VBox id="searchTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'searchTab_label' )}" styleName="viewStyle">              
+                            <results:SearchResultsView id="searchResultsView" searchResultsPresModel="{flexSpacesPresModel.searchResultsPresModel}" height="100%" width="100%" />
+                        </mx:VBox>
+                        
+                        <!-- Checked Out Tab -->
+                        <mx:VBox id="checkedOutTab" height="100%" width="100%" label="Checked Out" styleName="viewStyle">          
+                            <checkedout:CheckedOutView id="checkedOutView" checkedOutPresModel="{flexSpacesPresModel.checkedOutPresModel}" height="100%" width="100%"/>                            
+                        </mx:VBox>
+                        
+                        <!-- Task Tab -->
+                        <mx:VBox id="tasksTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'tasksTab_label' )}" styleName="viewStyle">              
+                            <taskspanel:TasksPanelView id="tasksPanelView" tasksPanelPresModel="{flexSpacesPresModel.tasksPanelPresModel}" height="100%" width="100%" />
+                        </mx:VBox>
+                        
+                        <!-- WCM Tab -->
+                        <mx:VBox id="wcmTab" height="100%" width="100%" label="{resourceManager.getString('FlexSpacesView', 'wcmTab_label' )}" styleName="viewStyle">              
+                            <wcmrepobrowser:WcmRepoBrowserView id="wcmBrowserView" wcmRepoBrowserPresModel="{flexSpacesPresModel.wcmBrowserPresModel}" height="100%" width="100%"/>
+                        </mx:VBox>
+        
+                    </flexlib:SuperTabNavigator>                          
     
-                </flexlib:SuperTabNavigator>  
-    
+                </mx:HDividedBox>
+
             </mx:VBox>
 
         </mx:ViewStack>    

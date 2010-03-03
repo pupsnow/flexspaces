@@ -39,6 +39,9 @@ package org.integratedsemantics.flexspacesair.control
             addCommand(AirMakeAvailOfflineUIEvent.AIR_MAKE_AVAIL_OFFLINE, AirMakeAvailOfflineUICommand);
 
             addCommand(AirOfflineUploadUIEvent.AIR_OFFLINE_UPLOAD, AirOfflineUploadUICommand);
+            
+            addCommand(AirOfflineEditUIEvent.AIR_OFFLINE_EDIT, AirOfflineEditUICommand);
+            
         }
         
     }

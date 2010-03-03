@@ -4,6 +4,7 @@ package org.integratedsemantics.flexspacesair.view.main
     import flash.desktop.ClipboardFormats;
     import flash.desktop.NativeDragActions;
     import flash.desktop.NativeDragManager;
+    import flash.events.MouseEvent;
     import flash.events.NativeDragEvent;
     import flash.filesystem.File;
     import flash.filesystem.FileMode;
@@ -12,6 +13,7 @@ package org.integratedsemantics.flexspacesair.view.main
     import flexlib.controls.tabBarClasses.SuperTab;
     
     import mx.containers.VBox;
+    import mx.controls.Button;
     import mx.events.FlexEvent;
     import mx.managers.DragManager;
     import mx.managers.PopUpManager;
@@ -58,7 +60,7 @@ package org.integratedsemantics.flexspacesair.view.main
 
         protected var shareTabIndex:int = -1;
         
-                
+               
         /**
          * Constructor 
          * 
@@ -146,7 +148,7 @@ package org.integratedsemantics.flexspacesair.view.main
                 browser.visible = true;
                 browser.includeInLayout = true;
                 tab.invalidateDisplayList();
-            }                                   
+            }             
         }
 
         /**
@@ -190,7 +192,7 @@ package org.integratedsemantics.flexspacesair.view.main
             var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_CUT, null, this, selectedItems);
             event.dispatch(); 
 
-            // enable paste menu                                        
+            // enable paste menu and btn                                       
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
@@ -198,6 +200,10 @@ package org.integratedsemantics.flexspacesair.view.main
                 {
                     mainMenu.enableMenuItem("edit", "paste", true);
                 }
+                if (pasteBtn != null)
+                {
+                    pasteBtn.enabled = true;                    
+                }                
             }                                                                                                           
         }
         
@@ -213,7 +219,7 @@ package org.integratedsemantics.flexspacesair.view.main
             var event:AirClipboardUIEvent = new AirClipboardUIEvent(AirClipboardUIEvent.AIR_CLIPBOARD_COPY, null, this, selectedItems);
             event.dispatch(); 
             
-            // enable paste menu                                        
+            // enable paste menu and btn                                      
             var tabIndex:int = tabNav.selectedIndex;
             if ((tabIndex == docLibTabIndex) || (tabIndex == wcmTabIndex))
             {
@@ -221,6 +227,10 @@ package org.integratedsemantics.flexspacesair.view.main
                 {
                     mainMenu.enableMenuItem("edit", "paste", true);
                 }
+                if (pasteBtn != null)
+                {
+                    pasteBtn.enabled = true;                    
+                }                
             }                                                                                                           
         }        
             
@@ -838,6 +848,39 @@ package org.integratedsemantics.flexspacesair.view.main
                 return false;
             }           
         }        
+
+        protected function offlineEdit():void
+        {
+            var selectedItem:Object = flexSpacesAirPresModel.selectedItem;
+            var event:AirOfflineEditUIEvent = new AirOfflineEditUIEvent(AirOfflineEditUIEvent.AIR_OFFLINE_EDIT, null, selectedItem, tabNav);
+            event.dispatch();                                                                    
+        }
+
+        override protected function onEditBtn(event:MouseEvent):void
+        {   
+            if (model.appConfig.useLessStepsEdit == true)
+            {
+                offlineEdit();  
+            }
+            else
+            {
+                var selectedItem:Object = flexSpacesAirPresModel.selectedItem;                
+                flexSpacesAirPresModel.downloadFile(selectedItem, this);
+            }
+        }               
+
+        override protected function onUpdateBtn(event:MouseEvent):void
+        {
+            if (model.appConfig.useLessStepsEdit == true)
+            {
+                offlineUpload(false); 
+            }
+            else
+            {
+                var selectedItem:Object = flexSpacesAirPresModel.selectedItem;                
+                flexSpacesAirPresModel.updateNode(selectedItem, this);
+            }
+        }   
 
     }       
 }

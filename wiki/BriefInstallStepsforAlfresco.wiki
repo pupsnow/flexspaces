@@ -1,21 +1,21 @@
 =Brief Install Steps for Alfresco=
 
 ==Web Scripts Installation==
-# In Alfreso Explorer (Web Client) use the Import action and import integratedsemantics.zip into /Company Home/Data Dictionary/Web Scripts Extensions/
+  # In Alfreso Explorer (Web Client) use the Import action and import integratedsemantics.zip into /Company Home/Data Dictionary/Web Scripts Extensions/
 folder inside it will be unzipped automatically
-# restart Alfresco server or use the "Refresh Web Scripts" button on http://localhost:8080/alfresco/service/ on the web script home page
-# verify install of webscripts on the web script home page by "Browse by Web Script Package" and you should see bunch of /integratedsemantics packages
+  # restart Alfresco server or use the "Refresh Web Scripts" button on http://localhost:8080/alfresco/service/ on the web script home page
+  # verify install of webscripts on the web script home page by "Browse by Web Script Package" and you should see bunch of /integratedsemantics packages
 
 ==FlexSpaces "In Browser" Installation==
-# web script installation required first
-# copy "flexspaces" folder to <alfresco install dir>/tomcat/webapps
-# configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
-4 run  http://localhost:8080/flexspaces/FlexSpaces.html
+  # web script installation required first
+  # copy "flexspaces" folder to <alfresco install dir>/tomcat/webapps
+  # configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
+  # run  http://localhost:8080/flexspaces/FlexSpaces.html
 
 ==FlexSpaces AIR Installation==
-# web script installation required first
-# Run FlexSpacesAir.air to install but don't launch right after install
-# configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
-on 32 bit Windows FlexSpacesConfig.xml is in c:\Program Files\FlexSpacesAIR\FlexSpacesConfig.xml
-on 64 bit Windows FlexSpacesConfig.xml is in C:\Program Files (x86)\FlexSpacesAir 
-on Mac: In finder choose "Show Package Contents" on installed FlexSpacesAir.app, FlexSpacesConfig.xml is in contents/resources/
+  # web script installation required first
+  # Run FlexSpacesAir.air to install but don't launch right after install
+  # configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
+  # on 32 bit Windows FlexSpacesConfig.xml is in c:\Program Files\FlexSpacesAIR\FlexSpacesConfig.xml
+  # on 64 bit Windows FlexSpacesConfig.xml is in C:\Program Files (x86)\FlexSpacesAir 
+  # on Mac: In finder choose "Show Package Contents" on installed FlexSpacesAir.app, FlexSpacesConfig.xml is in contents/resources/

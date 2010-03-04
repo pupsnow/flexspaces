@@ -2,7 +2,6 @@
 
 ==Web Scripts Installation==
   # In ContentSpace use the Import action and import integratedsemantics.zip into /Company Home/Data Dictionary/Web Scripts Extensions/
-folder inside it will be unzipped automatically
   # restart LiveCycle JBoss service or use the "Refresh Web Scripts" button on http://hostname:8080/contentspace/service/ on the web script home page
   # verify install of webscripts on the web script home page by "Browse by Web Script Package" and you should see bunch of /integratedsemantics packages
 

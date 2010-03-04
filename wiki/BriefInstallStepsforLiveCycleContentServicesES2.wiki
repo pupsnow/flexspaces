@@ -1,17 +1,17 @@
-Brief Install Steps for Adobe LiveCycle Content Services ES2
+=Brief Install Steps for Adobe LiveCycle Content Services ES2=
 
-Web Scripts Installation
+==Web Scripts Installation==
 1. In ContentSpace use the Import action and import integratedsemantics.zip into /Company Home/Data Dictionary/Web Scripts Extensions/
 folder inside it will be unzipped automatically
 2. restart LiveCycle JBoss service or use the "Refresh Web Scripts" button on http://hostname:8080/contentspace/service/ on the web script home page
 3. verify install of webscripts on the web script home page by "Browse by Web Script Package" and you should see bunch of /integratedsemantics packages
 
-FlexSpaces "In Browser" Installation
+==FlexSpaces "In Browser" Installation==
 1. copy "flexspaces" folder to C:\Adobe\Adobe LiveCycle ES2\jboss\server\lc_turnkey\deploy\jboss-web.deployer\ROOT.war
 2. configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
 3. run  http://hostname:8080/flexspaces/FlexSpaces.html
 
-FlexSpaces AIR Installation
+==FlexSpaces AIR Installation==
 1. Run FlexSpacesAir.air to install but don't launch right after install
 2. configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
 on 32 bit Windows FlexSpacesConfig.xml is in c:\Program Files\FlexSpacesAIR\FlexSpacesConfig.xml

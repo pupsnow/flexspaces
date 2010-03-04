@@ -495,7 +495,10 @@ package org.integratedsemantics.flexspacesair.view.main
                    break;
                 case 'download':
                     downloadFile(selectedItem);
-                    break;                   
+                    break;
+                case 'edit':
+                    downloadFile(selectedItem);
+                    break;                                   
                 case "localfiles":
                     showHideLocalFilesBrowser();
                     break;                    
@@ -864,8 +867,8 @@ package org.integratedsemantics.flexspacesair.view.main
             }
             else
             {
-                var selectedItem:Object = flexSpacesAirPresModel.selectedItem;                
-                flexSpacesAirPresModel.downloadFile(selectedItem, this);
+                var selectedItem:Object = flexSpacesAirPresModel.selectedItem;      
+                downloadFile(selectedItem);          
             }
         }               
 

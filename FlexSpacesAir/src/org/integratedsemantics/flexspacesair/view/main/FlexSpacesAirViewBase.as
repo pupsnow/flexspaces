@@ -884,6 +884,18 @@ package org.integratedsemantics.flexspacesair.view.main
                 flexSpacesAirPresModel.updateNode(selectedItem, this);
             }
         }   
+        
+        /**
+         * Handle paste toolbar button with special air native paste from desktop/folder
+         * or from a cut/copy from inside flexspaces
+         * 
+         * @param event click event
+         * 
+         */
+        override protected function onPasteBtn(event:MouseEvent):void
+        {
+            pasteNodes();                        
+        }                       
 
     }       
 }

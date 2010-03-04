@@ -9,11 +9,13 @@ folder inside it will be unzipped automatically
 ==FlexSpaces "In Browser" Installation==
   # copy "flexspaces" folder to C:\Adobe\Adobe LiveCycle ES2\jboss\server\lc_turnkey\deploy\jboss-web.deployer\ROOT.war
   # configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
+  # configure to FlexSpacesConfig.xml for LiveCycle instead of Alfresco
   # run  http://hostname:8080/flexspaces/FlexSpaces.html
 
 ==FlexSpaces AIR Installation==
   # Run FlexSpacesAir.air to install but don't launch right after install
   # configure domain (hostname or ip address) and port in FlexSpacesConfig.xml
+  # configure to FlexSpacesConfig.xml for LiveCycle instead of Alfresco
   # on 32 bit Windows FlexSpacesConfig.xml is in c:\Program Files\FlexSpacesAIR\FlexSpacesConfig.xml
   # on 64 bit Windows FlexSpacesConfig.xml is in C:\Program Files (x86)\FlexSpacesAir 
   # on Mac: In finder choose "Show Package Contents" on installed FlexSpacesAir.app, FlexSpacesConfig.xml is in contents/resources/

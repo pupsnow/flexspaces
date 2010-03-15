@@ -16,13 +16,14 @@ package org.integratedsemantics.flexspaces.view.nav
     {
         public var treeView:TreeViewBase;
 
-        public var treePresModel:TreePresModel;
+        [Bindable]
+        public var repoTreePresModel:TreePresModel;
 
         
         public function TreeNavBase()
         {
             super();
-            treePresModel = new TreePresModel();   
+            repoTreePresModel = new TreePresModel();   
         }
               
         /**

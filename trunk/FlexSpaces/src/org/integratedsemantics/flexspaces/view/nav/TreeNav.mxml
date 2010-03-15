@@ -6,6 +6,6 @@
     
     <mx:Metadata>[ResourceBundle("NavPanel")]</mx:Metadata>
   
-    <tree:TreeView id="treeView" treePresModel="{treePresModel}" width="100%" height="100%" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false" />
+    <tree:TreeView id="treeView" treePresModel="{repoTreePresModel}" width="100%" height="100%" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false" />
     
 </nav:TreeNavBase>

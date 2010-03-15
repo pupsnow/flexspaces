@@ -482,7 +482,8 @@ package org.integratedsemantics.flexspaces.view.main
             
             if ((model.userInfo.loginUserName != null) && (welcomeText != null))
             {
-                welcomeText.text = "Logged in as: " + model.userInfo.loginUserName;
+                var loggedInAs:String = resourceManager.getString('FlexSpacesView', 'loggedInAsLabel_text');
+                welcomeText.text = loggedInAs + " " + model.userInfo.loginUserName;
             }                                                                      
         }
                 

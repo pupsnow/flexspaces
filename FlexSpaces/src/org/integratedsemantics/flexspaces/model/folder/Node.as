@@ -38,7 +38,7 @@ package org.integratedsemantics.flexspaces.model.folder
         public var cmisObj:Object;
         public var cmisAllVersions:String;
         public var cmisType:String;
-              
+        public var cmisEditMedia:String;              
         
         /**
          * Constructor 

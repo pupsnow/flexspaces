@@ -267,8 +267,11 @@ package org.integratedsemantics.flexspaces.view.main
             // init header section
             if (flexSpacesPresModel.showHeader == false)
             {
-                this.header.visible = false;
-                this.header.includeInLayout = false;
+                if (header != null)
+                {
+                    header.visible = false;
+                    header.includeInLayout = false;
+                }
             }
             
             // init basic search box, advanced search link

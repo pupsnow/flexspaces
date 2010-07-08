@@ -28,7 +28,7 @@
     <tags:TagCloudView id="tagCloudView" tagCloudPresModel="{navPanelPresModel.tagCloudPresModel}" 
         label="{resourceManager.getString('NavPanel', 'tagCloudView_label' )}" width="100%" height="100%"/>  
 
-    <!--mx:Accordion id="semanticSection" label="{resourceManager.getString('NavPanel', 'semanticSection_label')}" height="100%" width="100%">
+    <mx:Accordion id="semanticSection" label="{resourceManager.getString('NavPanel', 'semanticSection_label')}" height="100%" width="100%">
         <semantictags:SemanticTagCloudView id="semanticTagCloudView" tagCloudPresModel="{navPanelPresModel.semanticTagCloudPresModel}" 
             label="{'     ' + resourceManager.getString('NavPanel', 'semanticTagCloudView_label' )}" width="100%" height="100%"/>  
         <semantictags:SemanticTagCloudView  id="companySemanticTagCloudView" tagCloudPresModel="{navPanelPresModel.companySemanticTagCloudPresModel}"
@@ -37,7 +37,7 @@
         	label="{'     ' + resourceManager.getString('NavPanel', 'personSemanticTagCloudView_label' )}" width="100%" height="100%"/>  
         <mx:Box label="{'     ' + resourceManager.getString('NavPanel', 'mapSection_label' )}" height="100%" width="100%" id="mapSection">      
         </mx:Box>
-    </mx:Accordion-->
+    </mx:Accordion>
 
     <mx:Box label="{resourceManager.getString('NavPanel', 'favoritesSection_label' )}" height="100%" width="100%" id="favoritesSection">      
         <favorites:FavoritesView id="favoritesView" favoritesPresModel="{navPanelPresModel.favoritesPresModel}" height="100%" width="100%"/>

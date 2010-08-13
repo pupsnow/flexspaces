@@ -13,7 +13,6 @@ package org.integratedsemantics.flexspacesair.view.main
     import flexlib.controls.tabBarClasses.SuperTab;
     
     import mx.containers.VBox;
-    import mx.controls.Button;
     import mx.events.FlexEvent;
     import mx.managers.DragManager;
     import mx.managers.PopUpManager;
@@ -37,6 +36,7 @@ package org.integratedsemantics.flexspacesair.view.main
     import org.integratedsemantics.flexspacesair.presmodel.create.CreateXmlPresModel;
     import org.integratedsemantics.flexspacesair.presmodel.localfiles.LocalFilesBrowserPresModel;
     import org.integratedsemantics.flexspacesair.util.AirOfflineUtil;
+    import org.integratedsemantics.flexspacesair.util.DownloadToTempFiles;
     import org.integratedsemantics.flexspacesair.view.browser.Browser;
     import org.integratedsemantics.flexspacesair.view.create.html.CreateHtmlView;
     import org.integratedsemantics.flexspacesair.view.create.text.CreateTextView;
@@ -97,6 +97,8 @@ package org.integratedsemantics.flexspacesair.view.main
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn1);
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                 folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop1);
+                
+                folderView1.addEventListener(NativeDragEvent.NATIVE_DRAG_START, onDragOut1);
     
                 var folderView2:FolderViewBase = browserView.fileView2;        
                 if (folderView2 != null)
@@ -104,6 +106,8 @@ package org.integratedsemantics.flexspacesair.view.main
                     folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER,onDragIn2);
                     folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_OVER,onDragOver);
                     folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP,onDrop2);
+ 
+                    folderView2.addEventListener(NativeDragEvent.NATIVE_DRAG_START, onDragOut2);
                 }           
             }
 
@@ -293,6 +297,29 @@ package org.integratedsemantics.flexspacesair.view.main
         }
 
         /**
+         * Native drag out event handler for folder list 1
+         * 
+         * @param event native drag event
+         * 
+         */
+        protected function onDragOut1(event:NativeDragEvent):void
+        {
+            onDragOut(event, browserView.fileView1);    
+        }
+                
+        /**
+         * Native drag out event handler for folder list 2
+         * 
+         * @param event native drag event
+         * 
+         */
+        protected function onDragOut2(event:NativeDragEvent):void
+        {
+            onDragOut(event, browserView.fileView2);    
+        }
+
+
+        /**
          * Native drag in event handler for wcm folder list 1
          * 
          * @param event native drag event
@@ -414,7 +441,18 @@ package org.integratedsemantics.flexspacesair.view.main
         {
             //trace("Drag drop event.");
             var data:Clipboard = event.clipboard;
-            if (data.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))
+            if (data.hasFormat("items"))
+            {
+                var action:String = DragManager.COPY;
+                if (event.shiftKey == true)
+                {
+                    action = DragManager.MOVE;
+                }          
+                
+                var dropItems:Array = data.getData("items") as Array;
+                onDropItems(targetFolderView.folderViewPresModel, action, dropItems);
+            }
+            else if (data.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))
             {
                 var dropfiles:Array = data.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
                 
@@ -427,17 +465,6 @@ package org.integratedsemantics.flexspacesair.view.main
                     var uploadAir:UploadAir = new UploadAir(uploadStatusView);
                     uploadAir.uploadAir(file, targetFolderView.folderViewPresModel.currentFolderNode, redraw);
                 }
-            }
-            else if (data.hasFormat("items"))
-            {
-                var action:String = DragManager.COPY;
-                if (event.shiftKey == true)
-                {
-                    action = DragManager.MOVE;
-                }          
-                
-                var dropItems:Array = data.getData("items") as Array;
-                onDropItems(targetFolderView.folderViewPresModel, action, dropItems);
             }
         }
               
@@ -468,6 +495,35 @@ package org.integratedsemantics.flexspacesair.view.main
                 }            
             }
         }
+
+
+       /**
+        * On drag-out, setup formats with NativeDragManager to drag file(s) to desktop
+        * 
+        * @param event native drag event
+        * @param sourceFolderView source folder view
+        * 
+        */  
+        protected function onDragOut(event:NativeDragEvent, sourceFolderView:FolderViewBase):void
+        {
+            trace("Native Drag start event.");
+            
+            var clipboard:Clipboard = event.clipboard;            
+                      
+            clipboard.setDataHandler(ClipboardFormats.FILE_LIST_FORMAT, getDragOutFiles);
+        }
+        
+        private function getDragOutFiles():Array
+        {
+            var downloadUtil:DownloadToTempFiles = new DownloadToTempFiles();
+
+            var selectedItems:Array = flexSpacesPresModel.selectedItems; 
+
+            var fileArray:Array = downloadUtil.download(selectedItems);
+                        
+            return fileArray;              
+        }
+
 
         // 
         // Menu Handlers

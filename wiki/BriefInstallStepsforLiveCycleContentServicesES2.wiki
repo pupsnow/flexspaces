@@ -18,3 +18,16 @@
   # on 32 bit Windows FlexSpacesConfig.xml is in c:\Program Files\FlexSpacesAIR\FlexSpacesConfig.xml
   # on 64 bit Windows FlexSpacesConfig.xml is in C:\Program Files (x86)\FlexSpacesAir 
   # on Mac: In finder choose "Show Package Contents" on installed FlexSpacesAir.app, FlexSpacesConfig.xml is in contents/resources/
+  # example of how to switch from using Alfresco to using LiveCycle in FlexSpacesConfig.xml :
+'
+        <!-- property name="alfrescoUrlPart" value="/alfresco/service"/-->
+        <!-- for livecycle content services use next line and comment out previous line -->
+        <property name="alfrescoUrlPart" value="/contentspace/wcservice" />
+
+        <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
+        <property name="isLiveCycleContentServices" value="true"/>
+
+        <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->   
+        <!-- for livecycle  content services ES2 9.0, use the version of alfresco included (3.1)  -->               
+        <property name="serverVersion" value="3.1"/>   
+'

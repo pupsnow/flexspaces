@@ -5,6 +5,7 @@
    <serverEdition>${server.edition}</serverEdition>
    <serverVersion>${server.version}</serverVersion>
 
+<#if companyHomeReadPerm>
    <companyHome>
       <name>${companyHome.name}</name>      
       <noderef>${companyHome.nodeRef}</noderef>      
@@ -13,6 +14,16 @@
       <id>${companyHome.id}</id>      
       <path>${companyHome.displayPath}/${companyHome.name}</path>   
    </companyHome>
+<#else>
+   <companyHome>
+      <name></name>      
+      <noderef></noderef>      
+      <storeProtocol></storeProtocol>
+      <storeId></storeId>
+      <id></id>      
+      <path></path>   
+   </companyHome>
+</#if>
 
    <userName>${userName}</userName>
    <firstName>${firstName}</firstName>

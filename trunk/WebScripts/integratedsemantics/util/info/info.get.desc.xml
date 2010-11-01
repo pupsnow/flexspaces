@@ -6,4 +6,7 @@
    <authentication>user</authentication>
    <transaction>required</transaction>
    <format default="xml">extension</format>
+   <cache>
+      <never>false</never>
+   </cache>          
 </webscript>

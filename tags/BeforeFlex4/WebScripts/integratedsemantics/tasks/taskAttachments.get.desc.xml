@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces task attachments</shortname>
+  <description>Gets task attachments docs and or folders</description>
+  <url>/flexspaces/taskAttachments?taskid={taskid}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

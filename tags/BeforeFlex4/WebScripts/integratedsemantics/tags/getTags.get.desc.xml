@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces get tags</shortname>
+  <description>Get all tags or tags on a node</description>
+  <url>/flexspaces/getTags?noderef={nodeRef?}&amp;max={maxResults?}</url>
+  <format default="xml"/>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

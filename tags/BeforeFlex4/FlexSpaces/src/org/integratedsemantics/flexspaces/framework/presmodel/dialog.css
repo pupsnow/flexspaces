@@ -1,0 +1,59 @@
+/* CSS file for dialogs */
+
+.dialog
+{
+    backgroundColor: #333333; 
+    borderColor: #000000; 
+    borderStyle: solid; 
+    borderThickness: 3; 
+    color: #ffffff; 
+    cornerRadius: 0; 
+    fontSize: 12; 
+    fontWeight: bold; 
+}
+
+.mainArea
+{
+    borderColor: #333333;
+    borderStyle: solid;
+    borderThickness: 0;
+    fontSize: 10;
+}
+
+.dialogTabs
+{
+    borderColor: #000000;
+    borderStyle: outset;
+    borderThickness: 0;
+    fontSize: 10;
+    backgroundColor: #777777;
+}
+
+
+.input
+{
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}    
+
+.combo
+{
+    color: #000000;
+}
+
+.list
+{
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}
+
+.buttonArea
+{
+    borderStyle: solid;
+    borderThickness: 0;
+    horizontalAlign: center;
+}

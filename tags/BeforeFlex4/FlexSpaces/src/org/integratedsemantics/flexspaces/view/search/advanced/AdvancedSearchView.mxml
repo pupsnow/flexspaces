@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<advanced:AdvancedSearchViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:flexlib="flexlib.containers.*"
+    xmlns:advanced="org.integratedsemantics.flexspaces.view.search.advanced.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*" 
+    xmlns:categoriestree="org.integratedsemantics.flexspaces.view.categories.tree.*"
+    title="{resourceManager.getString('AdvancedSearchView', 'title')}" 
+    width="750" height="620" styleName="dialog"  showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("AdvancedSearchView")]</mx:Metadata>
+
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <mx:Style>
+        .linkButtonWindowShade
+        {
+            headerClass:ClassReference('mx.controls.LinkButton');
+            header-style-name: linkButtonStyle;         
+            drop-shadow-enabled:true;            
+            corner-radius:10;  
+            border-style:solid; 
+            borderThickness: 1;
+            borderColor: #000000;
+            background-color:#777777;
+        }         
+        
+        .linkButtonStyle
+        {
+            corner-radius:10;   
+            padding-left:10;                       
+            rollOverColor: #0E9EE5;
+        }        
+    </mx:Style>
+        
+    <mx:HBox width="100%"  styleName="mainArea">
+        <mx:Label text="{resourceManager.getString('AdvancedSearchView', 'searchForLabel_text')}" id="searchForLabel"/>    
+        <mx:TextInput id="searchText" styleName="input" width="400"
+        	change="advancedSearchPresModel.searchText = searchText.text" />
+    </mx:HBox>
+
+    <mx:HBox styleName="mainArea" width="100%">
+        
+        <mx:VBox width="55%">
+                                     
+            <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'typesSection_label' )}" opened="true" styleName="linkButtonWindowShade" width="100%" id="typesSection">        
+                <mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6"> 
+                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'resultsForFormItem_label' )}" styleName="mainArea" width="100%" id="resultsForFormItem">            
+                    <mx:ComboBox id="resultsForCombo" styleName="combo" width="100%"
+                    	change="advancedSearchPresModel.resultsForSelection = resultsForCombo.selectedItem">
+                        <mx:dataProvider>
+                            <mx:ArrayCollection>
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'resultsForAll_label' )}" resultsFor="all" id="resultsForAll"/>                  
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'resultsForFileNamesAndContent_label' )}" resultsFor="filenamesAndContent" id="resultsForFileNamesAndContent"/>                  
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'resultsForFileNames_label' )}" resultsFor="filenames" id="resultsForFileNames"/>                  
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'resultsForSpaceNames_label' )}" resultsFor="spacenames" id="resultsForSpaceNames"/>                  
+                            </mx:ArrayCollection>                                               
+                        </mx:dataProvider>
+                    </mx:ComboBox>
+                </mx:FormItem>
+                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'folderTypeFormItem_label' )}" styleName="mainArea" width="100%" id="folderTypeFormItem">            
+                    <mx:ComboBox id="folderTypeCombo" styleName="combo" width="100%"
+						change="advancedSearchPresModel.folderTypeSelection = folderTypeCombo.selectedItem">                    
+                        <mx:dataProvider>
+                            <mx:ArrayCollection>
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'folderTypeFolder_label' )}" type="\{http://www.alfresco.org/model/content/1.0\}folder" id="folderTypeFolder"/>                  
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'folderTypeFormSpace_label' )}" type="\{http://www.alfresco.org/model/forum/1.0\}forums" id="folderTypeFormSpace"/>                  
+                            </mx:ArrayCollection>                                               
+                        </mx:dataProvider>
+                    </mx:ComboBox>
+                </mx:FormItem>
+    
+                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'contentTypeFormItem_label' )}" styleName="mainArea" width="100%" id="contentTypeFormItem">            
+                    <mx:ComboBox id="contentTypeCombo" styleName="combo" width="100%"
+						change="advancedSearchPresModel.contentTypeSelection = contentTypeCombo.selectedItem">                                        
+                        <mx:dataProvider>
+                            <mx:ArrayCollection>
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'contentTypeContent_label' )}" type="\{http://www.alfresco.org/model/content/1.0\}content" id="contentTypeContent"/>                  
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'contentTypeForumArticle_label' )}" type="\{http://www.alfresco.org/model/forum/1.0\}post" id="contentTypeForumArticle"/>                  
+                            </mx:ArrayCollection>                                               
+                        </mx:dataProvider>
+                    </mx:ComboBox>
+                </mx:FormItem>
+
+                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'contentFormatFormItem_label' )}" styleName="mainArea" width="100%" id="contentFormatFormItem">            
+                    <mx:ComboBox id="formatCombo" styleName="combo" width="100%"
+						change="advancedSearchPresModel.formatSelection = formatCombo.selectedItem">                                                            
+                        <mx:dataProvider>
+                            <mx:ArrayCollection>
+                                <mx:Object format="allFormats" label="{resourceManager.getString('AdvancedSearchView', 'allFormats_label' )}" id="allFormats"/>                  
+                                <mx:Object format="application/pdf" label="{resourceManager.getString('AdvancedSearchView', 'format1_label' )}" id="format1"/>                  
+                                <mx:Object format="audio/x-aiff" label="{resourceManager.getString('AdvancedSearchView', 'format2_label' )}" id="format2"/>                  
+                                <mx:Object format="application/acp" label="{resourceManager.getString('AdvancedSearchView', 'format3_label' )}" id="format3"/>                  
+                                <mx:Object format="image/x-portable-anymap" label="{resourceManager.getString('AdvancedSearchView', 'format4_label' )}" id="format4"/>                  
+                                <mx:Object format="image/x-dwg" label="{resourceManager.getString('AdvancedSearchView', 'format5_label' )}" id="format5"/>                  
+                                <mx:Object format="image/x-dwt" label="{resourceManager.getString('AdvancedSearchView', 'format6_label' )}" id="format6"/>                  
+                                <mx:Object format="audio/basic" label="{resourceManager.getString('AdvancedSearchView', 'format7_label' )}" id="format7"/>                  
+                                <mx:Object format="image/bmp" label="{resourceManager.getString('AdvancedSearchView', 'format8_label' )}" id="format8"/>                  
+                                <mx:Object format="image/cgm" label="{resourceManager.getString('AdvancedSearchView', 'format9_label' )}" id="format9"/>                  
+                                <mx:Object format="message/rfc822" label="{resourceManager.getString('AdvancedSearchView', 'format10_label' )}" id="format10"/>                  
+                                <mx:Object format="image/gif" label="{resourceManager.getString('AdvancedSearchView', 'format11_label' )}" id="format11"/>                  
+                                <mx:Object format="image/x-portable-graymap" label="{resourceManager.getString('AdvancedSearchView', 'format12_label' )}" id="format12"/>                  
+                                <mx:Object format="application/x-gzip" label="{resourceManager.getString('AdvancedSearchView', 'format13_label' )}" id="format13"/>                  
+                                <mx:Object format="application/x-gtar" label="{resourceManager.getString('AdvancedSearchView', 'format14_label' )}" id="format14"/>                  
+                                <mx:Object format="text/html" label="{resourceManager.getString('AdvancedSearchView', 'format15_label' )}" id="format15"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.text-web" label="{resourceManager.getString('AdvancedSearchView', 'format16_label' )}" id="format16"/>                  
+                                <mx:Object format="text/calendar" label="{resourceManager.getString('AdvancedSearchView', 'format17_label' )}" id="format17"/>                  
+                                <mx:Object format="image/ief" label="{resourceManager.getString('AdvancedSearchView', 'format18_label' )}" id="format18"/>                  
+                                <mx:Object format="application/java" label="{resourceManager.getString('AdvancedSearchView', 'format19_label' )}" id="format19"/>                  
+                                <mx:Object format="application/x-javascript" label="{resourceManager.getString('AdvancedSearchView', 'format20_label' )}" id="format20"/>                  
+                                <mx:Object format="image/jpeg2000" label="{resourceManager.getString('AdvancedSearchView', 'format21_label' )}" id="format21"/>                  
+                                <mx:Object format="image/jpeg" label="{resourceManager.getString('AdvancedSearchView', 'format22_label' )}" id="format22"/>                  
+                                <mx:Object format="application/x-latex" label="{resourceManager.getString('AdvancedSearchView', 'format23_label' )}" id="format23"/>                  
+                                <mx:Object format="application/x-troff-man" label="{resourceManager.getString('AdvancedSearchView', 'format24_label' )}" id="format24"/>                  
+                                <mx:Object format="text/mediawiki" label="{resourceManager.getString('AdvancedSearchView', 'format25_label' )}" id="format25"/>                  
+                                <mx:Object format="application/vnd.excel" label="{resourceManager.getString('AdvancedSearchView', 'format26_label' )}" id="format26"/>                  
+                                <mx:Object format="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" label="{resourceManager.getString('AdvancedSearchView', 'format27_label' )}" id="format27"/>                  
+                                <mx:Object format="application/vnd.powerpoint" label="{resourceManager.getString('AdvancedSearchView', 'format28_label' )}" id="format28"/>                  
+                                <mx:Object format="application/vnd.openxmlformats-officedocument.presentationml.presentation" label="{resourceManager.getString('AdvancedSearchView', 'format29_label' )}" id="format29"/>                  
+                                <mx:Object format="application/msword" label="{resourceManager.getString('AdvancedSearchView', 'format30_label' )}" id="format30"/>                  
+                                <mx:Object format="application/vnd.openxmlformats-officedocument.wordprocessingml.document" label="{resourceManager.getString('AdvancedSearchView', 'format31_label' )}" id="format31"/>                  
+                                <mx:Object format="audio/x-mpeg" label="{resourceManager.getString('AdvancedSearchView', 'format32_label' )}" id="format32"/>                  
+                                <mx:Object format="video/mpeg" label="{resourceManager.getString('AdvancedSearchView', 'format33_label' )}" id="format33"/>                  
+                                <mx:Object format="video/mpeg2" label="{resourceManager.getString('AdvancedSearchView', 'format34_label' )}" id="format34"/>                  
+                                <mx:Object format="video/mp4" label="{resourceManager.getString('AdvancedSearchView', 'format35_label' )}" id="format35"/>                  
+                                <mx:Object format="video/x-ms-wma" label="{resourceManager.getString('AdvancedSearchView', 'format36_label' )}" id="format36"/>                  
+                                <mx:Object format="video/x-ms-asf" label="{resourceManager.getString('AdvancedSearchView', 'format37_label' )}" id="format37"/>                  
+                                <mx:Object format="video/x-ms-wmv" label="{resourceManager.getString('AdvancedSearchView', 'format38_label' )}" id="format38"/>                  
+                                <mx:Object format="video/x-msvideo" label="{resourceManager.getString('AdvancedSearchView', 'format39_label' )}" id="format39"/>                  
+                                <mx:Object format="application/octet-stream" label="{resourceManager.getString('AdvancedSearchView', 'format40_label' )}" id="format40"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.chart" label="{resourceManager.getString('AdvancedSearchView', 'format41_label' )}" id="format41"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.database" label="{resourceManager.getString('AdvancedSearchView', 'format42_label' )}" id="format42"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.graphics" label="{resourceManager.getString('AdvancedSearchView', 'format43_label' )}" id="format43"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.graphics-template" label="{resourceManager.getString('AdvancedSearchView', 'format44_label' )}" id="format44"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.formula" label="{resourceManager.getString('AdvancedSearchView', 'format45_label' )}" id="format45"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.image" label="{resourceManager.getString('AdvancedSearchView', 'format46_label' )}" id="format46"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.text-master" label="{resourceManager.getString('AdvancedSearchView', 'format47_label' )}" id="format47"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.presentation" label="{resourceManager.getString('AdvancedSearchView', 'format48_label' )}" id="format48"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.presentation-template" label="{resourceManager.getString('AdvancedSearchView', 'format49_label' )}" id="format49"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.spreadsheet" label="{resourceManager.getString('AdvancedSearchView', 'format50_label' )}" id="format50"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.spreadsheet-template" label="{resourceManager.getString('AdvancedSearchView', 'format51_label' )}" id="format51"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.text" label="{resourceManager.getString('AdvancedSearchView', 'format52_label' )}" id="format52"/>                  
+                                <mx:Object format="application/vnd.oasis.opendocument.text-template" label="{resourceManager.getString('AdvancedSearchView', 'format53_label' )}" id="format53"/>                  
+                                <mx:Object format="application/vnd.sun.xml.calc" label="{resourceManager.getString('AdvancedSearchView', 'format54_label' )}" id="format54"/>                  
+                                <mx:Object format="application/vnd.sun.xml.draw" label="{resourceManager.getString('AdvancedSearchView', 'format55_label' )}" id="format55"/>                  
+                                <mx:Object format="application/vnd.sun.xml.impress" label="{resourceManager.getString('AdvancedSearchView', 'format56_label' )}" id="format56"/>                  
+                                <mx:Object format="application/vnd.sun.xml.writer" label="{resourceManager.getString('AdvancedSearchView', 'format57_label' )}" id="format57"/>                  
+                                <mx:Object format="image/x-portable-pixmap" label="{resourceManager.getString('AdvancedSearchView', 'format58_label' )}" id="format58"/>                  
+                                <mx:Object format="text/plain" label="{resourceManager.getString('AdvancedSearchView', 'format59_label' )}" id="format59"/>                  
+                                <mx:Object format="image/png" label="{resourceManager.getString('AdvancedSearchView', 'format60_label' )}" id="format60"/>                  
+                                <mx:Object format="image/x-portable-bitmap" label="{resourceManager.getString('AdvancedSearchView', 'format61_label' )}" id="format61"/>                  
+                                <mx:Object format="application/postscript" label="{resourceManager.getString('AdvancedSearchView', 'format62_label' )}" id="format62"/>                  
+                                <mx:Object format="video/quicktime" label="{resourceManager.getString('AdvancedSearchView', 'format63_label' )}" id="format63"/>                  
+                                <mx:Object format="video/x-rad-screenplay" label="{resourceManager.getString('AdvancedSearchView', 'format64_label' )}" id="format64"/>                  
+                                <mx:Object format="image/x-cmu-raster" label="{resourceManager.getString('AdvancedSearchView', 'format65_label' )}" id="format65"/>                  
+                                <mx:Object format="image/x-rgb" label="{resourceManager.getString('AdvancedSearchView', 'format66_label' )}" id="format66"/>                  
+                                <mx:Object format="text/richtext" label="{resourceManager.getString('AdvancedSearchView', 'format67_label' )}" id="format67"/>                  
+                                <mx:Object format="application/rtf" label="{resourceManager.getString('AdvancedSearchView', 'format68_label' )}" id="format68"/>                  
+                                <mx:Object format="image/svg" label="{resourceManager.getString('AdvancedSearchView', 'format69_label' )}" id="format69"/>                  
+                                <mx:Object format="video/x-sgi-movie" label="{resourceManager.getString('AdvancedSearchView', 'format70_label' )}" id="format70"/>                  
+                                <mx:Object format="application/sgml" label="{resourceManager.getString('AdvancedSearchView', 'format71_label' )}" id="format71"/>                  
+                                <mx:Object format="text/sgml" label="{resourceManager.getString('AdvancedSearchView', 'format72_label' )}" id="format72"/>                  
+                                <mx:Object format="application/x-sh" label="{resourceManager.getString('AdvancedSearchView', 'format73_label' )}" id="format73"/>                  
+                                <mx:Object format="application/x-shockwave-flash" label="{resourceManager.getString('AdvancedSearchView', 'format74_label' )}" id="format74"/>                  
+                                <mx:Object format="application/vnd.stardivision.chart" label="{resourceManager.getString('AdvancedSearchView', 'format75_label' )}" id="format75"/>                  
+                                <mx:Object format="application/vnd.stardivision.calc" label="{resourceManager.getString('AdvancedSearchView', 'format76_label' )}" id="format76"/>                  
+                                <mx:Object format="application/vnd.stardivision.draw" label="{resourceManager.getString('AdvancedSearchView', 'format77_label' )}" id="format77"/>                  
+                                <mx:Object format="application/vnd.stardivision.impress" label="{resourceManager.getString('AdvancedSearchView', 'format78_label' )}" id="format78"/>                  
+                                <mx:Object format="application/vnd.stardivision.impress-packed" label="{resourceManager.getString('AdvancedSearchView', 'format79_label' )}" id="format79"/>                  
+                                <mx:Object format="application/vnd.stardivision.math" label="{resourceManager.getString('AdvancedSearchView', 'format80_label' )}" id="format80"/>                  
+                                <mx:Object format="application/vnd.stardivision.writer" label="{resourceManager.getString('AdvancedSearchView', 'format81_label' )}" id="format81"/>                  
+                                <mx:Object format="application/vnd.stardivision.writer-global" label="{resourceManager.getString('AdvancedSearchView', 'format82_label' )}" id="format82"/>                  
+                                <mx:Object format="text/css" label="{resourceManager.getString('AdvancedSearchView', 'format83_label' )}" id="format83"/>                  
+                                <mx:Object format="text/tab-separated-values" label="{resourceManager.getString('AdvancedSearchView', 'format84_label' )}" id="format84"/>                  
+                                <mx:Object format="application/x-tar" label="{resourceManager.getString('AdvancedSearchView', 'format85_label' )}" id="format85"/>                  
+                                <mx:Object format="application/x-tex" label="{resourceManager.getString('AdvancedSearchView', 'format86_label' )}" id="format86"/>                  
+                                <mx:Object format="application/x-texinfo" label="{resourceManager.getString('AdvancedSearchView', 'format87_label' )}" id="format87"/>                  
+                                <mx:Object format="image/tiff" label="{resourceManager.getString('AdvancedSearchView', 'format88_label' )}" id="format88"/>                  
+                                <mx:Object format="x-world/x-vrml" label="{resourceManager.getString('AdvancedSearchView', 'format89_label' )}" id="format89"/>                  
+                                <mx:Object format="audio/x-wav" label="{resourceManager.getString('AdvancedSearchView', 'format90_label' )}" id="format90"/>                  
+                                <mx:Object format="application/wordperfect" label="{resourceManager.getString('AdvancedSearchView', 'format91_label' )}" id="format91"/>                  
+                                <mx:Object format="image/x-xbitmap" label="{resourceManager.getString('AdvancedSearchView', 'format92_label' )}" id="format92"/>                  
+                                <mx:Object format="application/xhtml+xml" label="{resourceManager.getString('AdvancedSearchView', 'format93_label' )}" id="format93"/>                  
+                                <mx:Object format="text/xml" label="{resourceManager.getString('AdvancedSearchView', 'format94_label' )}" id="format94"/>                  
+                                <mx:Object format="image/x-xpixmap" label="{resourceManager.getString('AdvancedSearchView', 'format95_label' )}" id="format95"/>                  
+                                <mx:Object format="image/x-xwindowdump" label="{resourceManager.getString('AdvancedSearchView', 'format96_label' )}" id="format96"/>                  
+                                <mx:Object format="application/x-compress" label="{resourceManager.getString('AdvancedSearchView', 'format97_label' )}" id="format97"/>                  
+                                <mx:Object format="application/zip" label="{resourceManager.getString('AdvancedSearchView', 'format98_label' )}" id="format98"/>                  
+                            </mx:ArrayCollection>                                               
+                        </mx:dataProvider>
+                    </mx:ComboBox>
+                </mx:FormItem>
+                </mx:Form>                
+            </flexlib:WindowShade2>
+
+            <mx:Spacer height="4"/>
+
+            <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'locationSection_label' )}" opened="false" styleName="linkButtonWindowShade" width="100%" id="locationSection">        
+                <mx:VBox width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6">                    
+                    <mx:ComboBox id="locationCombo" styleName="combo" width="100%"
+						change="advancedSearchPresModel.locationSelection = locationCombo.selectedItem">                                                            
+                        <mx:dataProvider>
+                            <mx:ArrayCollection>
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'locationAllSpaces_label' )}" location="allSpaces" id="locationAllSpaces"/>                
+                                <mx:Object label="{resourceManager.getString('AdvancedSearchView', 'locationSpecificSpaces_label' )}" location="specificSpaces" id="locationSpecificSpaces"/>                
+                            </mx:ArrayCollection>                                               
+                        </mx:dataProvider>
+                    </mx:ComboBox>
+                    <tree:TreeView id="treeView"  treePresModel="{advancedSearchPresModel.treePresModel}" width="100%" height="150" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false" />
+                    <mx:CheckBox id="includeChildSpacesCheckbox" label="Include child spaces" selected="true" width="100%"
+						change="advancedSearchPresModel.includeChildSpaces = includeChildSpacesCheckbox.selected"/>                                                            
+               </mx:VBox>
+            </flexlib:WindowShade2>
+
+            <mx:Spacer height="4"/>
+
+            <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'categoriesSection_label' )}" opened="false" styleName="linkButtonWindowShade" width="100%" id="categoriesSection">        
+                <mx:VBox width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6">                    
+                    <mx:List id="categoryList" dataProvider="{advancedSearchPresModel.categories}" labelField="{resourceManager.getString('AdvancedSearchView', 'categoryList_labelField')}" height="60" styleName="list" width="100%"          
+						change="advancedSearchPresModel.categoryListSelectedIndex = categoryList.selectedIndex"/>                                                            
+                    <mx:HBox width="100%">
+                        <mx:Button label="{resourceManager.getString('AdvancedSearchView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"/>            
+                        <mx:Button label="{resourceManager.getString('AdvancedSearchView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"/>            
+                    </mx:HBox>    
+                   <categoriestree:CategoryTreeView id="categoriesTreeView" categoryTreePresModel="{advancedSearchPresModel.categoryTreePresModel}" height="130" width="100%"/>
+                   <mx:CheckBox id="includeSubCategoriesCheckbox" label="Include sub-categories" selected="true" width="100%"
+						change="advancedSearchPresModel.includeSubCategories = includeSubCategoriesCheckbox.selected"/>                                                                               
+               </mx:VBox>
+            </flexlib:WindowShade2>
+
+        </mx:VBox>
+    
+        <mx:Spacer width="4"/>
+
+        <mx:VBox width="45%">
+            
+            <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'attributesSection_label' )}" opened="true" styleName="linkButtonWindowShade" width="100%" id="attributesSection">        
+                <mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6">                
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'titleFormItem_label' )}" styleName="mainArea" width="100%" id="titleFormItem">            
+                        <mx:TextInput id="titleText" styleName="input" width="100%"
+							change="advancedSearchPresModel.titleText = titleText.text"/>                                                                               
+                    </mx:FormItem>
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'descriptionFormItem_label' )}" styleName="mainArea" width="100%" id="descriptionFormItem">            
+                        <mx:TextInput id="descriptionText" styleName="input" width="100%"
+							change="advancedSearchPresModel.descriptionText = descriptionText.text"/>                                                                                                      
+                    </mx:FormItem>
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'authorFormItem_label' )}" styleName="mainArea" width="100%" id="authorFormItem">            
+                        <mx:TextInput id="authorText" styleName="input" width="100%"
+							change="advancedSearchPresModel.authorText = authorText.text"/>                                                                                                       
+                    </mx:FormItem>
+                </mx:Form>
+            </flexlib:WindowShade2>
+
+            <mx:Spacer height="4"/>
+
+            <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'datesSection_label' )}" opened="true" styleName="linkButtonWindowShade" width="100%" id="datesSection">        
+                <mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6">
+                    <mx:FormItem label="" styleName="mainArea" width="100%">
+                        <mx:CheckBox id="modifiedDateCheckBox" label="Modified Date:" selected="false" width="100%"
+   						    change="advancedSearchPresModel.modifiedDateCheckState = modifiedDateCheckBox.selected"/>                                                                                                       
+                    </mx:FormItem>
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'modifiedFromFormItem_label' )}" styleName="mainArea" width="100%" id="modifiedFromFormItem">            
+                        <mx:DateField id="modifiedFromDate" styleName="input" width="100%"
+   						    change="advancedSearchPresModel.modifiedFromDate = modifiedFromDate.text"/>                                                                                                                               
+                    </mx:FormItem>
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'modifiedToFormItem_label' )}" styleName="mainArea" width="100%" id="modifiedToFormItem">            
+                        <mx:DateField id="modifiedToDate" styleName="input" width="100%"
+   						    change="advancedSearchPresModel.modifiedToDate = modifiedToDate.text"/>                                                                                                                                                       
+                    </mx:FormItem>
+                    <mx:FormItem label="" styleName="mainArea" width="100%">
+                        <mx:CheckBox id="createdDateCheckBox" label="Created Date:" selected="false" width="100%"
+   						    change="advancedSearchPresModel.createdDateCheckState = createdDateCheckBox.selected"/>                                                                                                                               
+                    </mx:FormItem>
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'createdFromFormItem_label' )}" styleName="mainArea" width="100%" id="createdFromFormItem">            
+                        <mx:DateField id="createdFromDate"  styleName="input" width="100%"
+   						    change="advancedSearchPresModel.createdFromDate = createdFromDate.text"/>                                                                                                                                                       
+                    </mx:FormItem>    
+                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'createdToFormItem_label' )}" styleName="mainArea" width="100%" id="createdToFormItem">            
+                        <mx:DateField id="createdToDate" styleName="input" width="100%"
+   						    change="advancedSearchPresModel.createdToDate = createdToDate.text"/>                                                                                                                                                                               
+                    </mx:FormItem>                            
+                </mx:Form>
+            </flexlib:WindowShade2>
+
+        </mx:VBox>
+
+    </mx:HBox>
+
+    <mx:Spacer height="20"/>
+
+    <mx:ControlBar width="100%" styleName="buttonArea" horizontalAlign="center"> 
+        <mx:Button id="okBtn" label="{resourceManager.getString('AdvancedSearchView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="{resourceManager.getString('AdvancedSearchView', 'cancelBtn_label' )}"/>    
+    </mx:ControlBar> 
+        
+</advanced:AdvancedSearchViewBase>

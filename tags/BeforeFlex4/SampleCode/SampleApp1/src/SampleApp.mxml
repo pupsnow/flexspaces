@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app:SampleAppBase
+        verticalScrollPolicy="off"
+        layout="absolute" 
+        paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" 
+        verticalAlign="middle" horizontalAlign="center"                
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:app="org.integratedsemantics.sampleapp.app.*"
+        xmlns:business="org.integratedsemantics.flexspaces.control.delegate.*"
+        xmlns:control="org.integratedsemantics.sampleapp.control.*"
+        xmlns:view="org.integratedsemantics.sampleapp.view.main.*"
+        creationComplete="onCreationComplete(event)">
+    
+    <mx:Metadata>[ResourceBundle("FlexSpaces")]</mx:Metadata>  
+             
+    <mx:Style source="sampleapp.css"/>
+            
+    <business:Services id="services"/>
+
+    <control:SampleAppController id="appController"/>
+
+    <view:MainView id="appMainView" flexSpacesPresModel="{flexSpacesPresModel}" width="100%" height="100%"/>
+   
+</app:SampleAppBase>
+

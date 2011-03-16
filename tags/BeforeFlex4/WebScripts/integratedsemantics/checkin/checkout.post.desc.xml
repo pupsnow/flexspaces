@@ -1,0 +1,11 @@
+<webscript>
+   <shortname>FlexSpaces Checkout</shortname>
+   <description>Checkout document with given nodeid</description>
+   <url>/flexspaces/checkout?nodeid={nodeid}</url>
+   <format default="xml">argument</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   <cache>
+      <never>false</never>
+   </cache>             
+</webscript>

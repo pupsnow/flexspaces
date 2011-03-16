@@ -1,0 +1,19 @@
+<makePreviewRendition>
+<node>
+   <name>${node.name}</name>
+   <id>${node.id}</id>
+   <path>${node.displayPath}/${node.name}</path>
+</node>
+<folder>
+   <name>${folder.name}</name>
+   <id>${folder.id}</id>
+   <path>${folder.displayPath}/${folder.name}</path>
+</folder>
+<#if previewnode??>
+<previewnode>
+   <name>${previewnode.name}</name>
+   <id>${previewnode.id}</id>
+   <path>${previewnode.displayPath}/${previewnode.name}</path>
+</previewnode>
+</#if>
+</makePreviewRendition>

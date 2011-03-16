@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browser:RepoBrowserViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:browser="org.integratedsemantics.flexspaces.view.browser.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*"         
+    xmlns:folderview="org.integratedsemantics.flexspaces.view.folderview.*"
+    xmlns:versionlist="org.integratedsemantics.flexspaces.view.versions.versionlist.*"
+    creationComplete="onCreationComplete(event)">
+  
+    <mx:Metadata>[ResourceBundle("RepoBrowserView")]</mx:Metadata>
+    
+    <!-- repository tree -->
+    <tree:TreeView id="treeView" treePresModel="{repoBrowserPresModel.treePresModel}" width="300" height="100%" showRoot="true" selectedIndex="0" dragEnabled="false" dropEnabled="false" 
+    	 visible="{repoBrowserPresModel.showTree}" includeInLayout="{repoBrowserPresModel.showTree}"/>
+    
+    <mx:VDividedBox width="100%" height="100%">
+    	
+	    <!-- dual repository folder lists -->
+	    <mx:HDividedBox width="100%" height="100%" resizeToContent="true" dividerThickness="10">
+	        
+	        <!-- folder view 1 ( details or icon view) -->
+	        <folderview:FolderView id="fileView1" folderViewPresModel="{repoBrowserPresModel.folderViewPresModel1}" />
+	        
+	        <!-- folder view 2 ( details or icon view) -->
+	        <folderview:FolderView id="fileView2" folderViewPresModel="{repoBrowserPresModel.folderViewPresModel2}" 
+	        	visible="{repoBrowserPresModel.showDualFolders}" includeInLayout="{repoBrowserPresModel.showDualFolders}"/>
+	        
+	    </mx:HDividedBox>
+
+		<versionlist:VersionListView id="versionListView" versionListPresModel="{repoBrowserPresModel.versionListPresModel}" 
+			visible="{repoBrowserPresModel.showVersionHistory}" includeInLayout="{repoBrowserPresModel.showVersionHistory}" />
+		 
+    </mx:VDividedBox>
+    
+</browser:RepoBrowserViewBase>    
+

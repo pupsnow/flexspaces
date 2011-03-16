@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<taskcontrol:TaskButtonsViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:taskcontrol="org.integratedsemantics.flexspaces.view.tasks.taskcontrol.*"
+    creationComplete="onCreationComplete(event)">
+
+    <mx:Metadata>[ResourceBundle("TaskButtonsView")]</mx:Metadata>
+    
+    <mx:Spacer width="10" />
+    
+    <mx:Button id="adhocDone" label="{resourceManager.getString('TaskButtonsView', 'adhocDone_label' )}"/>
+    
+    <mx:Spacer width="10" />
+    
+    <mx:Button id="approveTask" label="{resourceManager.getString('TaskButtonsView', 'approveTask_label' )}"/>
+    
+    <mx:Spacer width="5" />
+    
+    <mx:Button id="rejectTask" label="{resourceManager.getString('TaskButtonsView', 'rejectTask_label' )}"/>
+    
+    <mx:Spacer width="20" />
+    
+    <mx:Label id="taskLabel" text="{resourceManager.getString('TaskButtonsView', 'taskLabel_text')}" color="#ffffff"/>
+    
+    <mx:Spacer width="5" />
+    
+    <mx:Label id="taskDescription" color="#ffffff" />
+    
+    <mx:Spacer width="20" />
+    
+    <mx:Label id="listTitle" text="{resourceManager.getString('TaskButtonsView', 'listTitle_text')}" color="#ffffff"/>
+                        
+</taskcontrol:TaskButtonsViewBase>

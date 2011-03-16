@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+   <shortname>List favorites</shortname>
+   <description>List favorites/shortcuts for current user</description>
+   <url>/flexspaces/favorites/favoritesList</url>
+   <format default="xml">extension</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   <cache>
+      <never>false</never>
+   </cache>          
+</webscript>

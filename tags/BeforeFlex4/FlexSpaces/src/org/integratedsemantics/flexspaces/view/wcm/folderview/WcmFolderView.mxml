@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<folderview:WcmFolderViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:folderview="org.integratedsemantics.flexspaces.view.wcm.folderview.*"
+    xmlns:breadcrumb="com.decoursey.components.*"
+    xmlns:gridview="org.integratedsemantics.flexspaces.view.folderview.gridview.*"
+    xmlns:iconview="org.integratedsemantics.flexspaces.view.folderview.iconview.*"
+    xmlns:coverflow="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
+    xmlns:viewmodebar="org.integratedsemantics.flexspaces.view.folderview.viewmodebar.*"
+    xmlns:paging="org.integratedsemantics.flexspaces.view.folderview.paging.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">
+    
+    <mx:Metadata>[ResourceBundle("FolderView")]</mx:Metadata>
+
+    <mx:Metadata>
+    [Event(name="folderListContextMenu",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewContextMenuEvent")]          
+    [Event(name="folderListOnDrop",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent")]          
+    [Event(name="folderListChangePath",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewChangePathEvent")]          
+    [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
+    [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
+    </mx:Metadata>
+
+    <paging:Pager id="pager" pageIndex="0" pageSize="{folderViewPresModel.model.flexSpacesPresModel.wcmPageSize}" 
+        totalPages="{Math.max(Math.ceil(folderViewPresModel.nodeCollection.length/folderViewPresModel.model.flexSpacesPresModel.wcmPageSize),1)}" 
+    	dataProvider="{nodeListViewPresModel.nodeCollection}" />  
+
+    <mx:VBox height="100%" width="100%">
+        
+        <!-- bread crumb and icon/grid view mode toggle buttons -->
+        <mx:HBox width="100%">
+            <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="left" id="breadCrumbAreaBox">
+                <breadcrumb:BreadcrumbDisplay id="breadCrumb" path="{folderViewPresModel.breadCrumbPath}"  displayDivider="/" />
+            </mx:HBox>
+            <viewmodebar:ViewModeBarView id="viewModeBar" />
+        </mx:HBox>
+        
+        <!-- icon and grid views of folder  -->
+        <mx:ViewStack id="folderViewStack" width="100%" height="100%">
+        
+            <!-- folder icon view -->
+            <mx:Box height="100%" width="100%" visible="true">
+                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{folderViewPresModel}" dataProvider="{pager.pageData}"/>
+            </mx:Box>
+
+            <!-- folder grid view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{folderViewPresModel}" dataProvider="{pager.pageData}"/>
+            </mx:Box>
+
+            <!-- coverflow view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{folderViewPresModel}" dataProvider="{pager.pageData}"/>
+            </mx:Box>
+
+        </mx:ViewStack>
+
+        <mx:HBox horizontalAlign="center" width="100%">
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('FolderIconView', 'pagenumLabel_of')} {pager.totalPages}" 
+                      styleName="pageNumStyle" id="pagenumLabel"/>    
+            <mx:Spacer width="4"/>    
+            <paging:PagerBar id="pageBar"  pager="{pager}" totalPages="{pager.totalPages}"
+                             maxVisiblePages="10" buttonWidth="45" buttonMode="true"/>
+            <mx:Spacer width="4"/>                
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'itemsPerPageLabel_text')}" styleName="itemsPerPageStyle" id="itemsPerPageLabel"/>
+            <mx:Spacer width="4"/>                
+            <mx:ComboBox id="pageSizeCombo" styleName="pageSizeComboStyle" dataProvider="{folderViewPresModel.model.flexSpacesPresModel.pageSizeList}"
+                change="onPageSizeChange(event)"/>
+        </mx:HBox>
+          
+    </mx:VBox>    
+
+</folderview:WcmFolderViewBase>

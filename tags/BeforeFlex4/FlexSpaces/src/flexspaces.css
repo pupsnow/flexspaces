@@ -1,0 +1,158 @@
+
+global
+{
+    themeColor: #999999;        
+}
+
+Application
+{
+    color:           #ffffff;    
+    backgroundColor: #333333;
+}
+
+.logoText
+{
+    fontSize: 16;
+    color:    #ffffff;      
+}
+
+.logoutLink
+{
+    color: #0E9EE5;
+    rollOverColor: #0E9EE5;
+    text-decoration: underline;
+}
+
+Tree
+{
+    color:              #ffffff;
+    textSelectedColor:  #ffffff;
+    textRollOverColor:  #ffffff;
+    backgroundColor:    #333333;
+    rollOverColor:      #000000;
+    selectionColor:     #000000;    
+}
+
+.fileTileListStyle
+{
+    color:              #000000;
+    backgroundColor:    #e6e6e6;
+    rollOverColor:      #b0b0b0;
+    selectionColor:     #b0b0b0;    
+}
+
+.fileGridStyle 
+{          
+    alternatingItemColors:  #e6e6e6, #dedfde;               
+    color:                  #000000; 
+    selectionColor:         #b0b0b0;
+    rollOverColor:          #b0b0b0; 
+    vertical-grid-lines:    false;
+    horizontalGridLineColor: #999999;
+    horizontalGridLines:    true;
+}
+
+MenuBar
+{
+    color:                  #0E9EE5;
+    fillColors:             #333333,#333333;
+    rollOverColor:          #000000;
+    selectionColor:         #000000;
+    borderColor:            #333333;
+    backgroundSkin:         ClassReference("org.integratedsemantics.flexspaces.skin.ListTransparentSkin");
+}
+
+Menu
+{
+    color:                  #ffffff;
+    disabledColor:          #bbbbbb;      
+    textSelectedColor:      #ffffff;
+    textRollOverColor:      #ffffff;
+    backgroundColor:        #333333;
+    rollOverColor:          #000000;
+    selectionColor:         #000000;
+    borderColor:            #333333;
+}
+
+.viewTab 
+{
+    upSkin:                 ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");
+    overSkin:               ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");    
+    selectedUpSkin:         ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");   
+    selectedOverSkin:       ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");    
+    color:                  #ffffff;
+    tabBackgroundColors:    #6e6e6e, #ffffff;
+    tabBackgroundAlphas:    0.0, 1.0;       
+}
+
+.viewTabs
+{
+    backgroundColor:          #ededed;    
+    tabHeight:                35;
+    horizontalGap:            0;  
+    selectedTabTextStyleName: selectedTabText;
+}
+
+.selectedTabText
+{
+    fontSize:               10px;
+    fontWeight:             normal;
+    color:                  #ffffff;
+}  
+
+.viewStyle
+{
+    backgroundColor:    #333333; 
+}
+
+.pageNumStyle
+{
+    color:  #ffffff;      
+}
+
+.itemsPerPageStyle
+{
+    color:  #ffffff;      
+}
+
+.pageSizeComboStyle
+{
+    color:              #000000;  
+    textRollOverColor:  #ffffff;     
+    textSelectedColor:  #ffffff;
+    rollOverColor:      #000000;     
+    selectionColor:     #000000;     
+}
+
+TextInput
+{
+    backgroundColor: #ffffff;
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}  
+
+TextArea
+{
+    backgroundColor: #ffffff;
+    color: #000000;
+} 
+
+Accordion
+{
+    color:              #ffffff;
+    backgroundColor:    #333333;
+}
+
+.tabCloseButtonStyleName
+{
+    color:              #ff0000;
+    backgroundColor:    #000000;
+}
+
+ProgressBar
+{
+    barColor:   #0E9EE5;
+}
+

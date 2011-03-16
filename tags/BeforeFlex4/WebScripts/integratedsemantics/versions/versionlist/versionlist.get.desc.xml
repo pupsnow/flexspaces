@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+   <shortname>get version list</shortname>
+   <description>gets a version history list for a doc node</description>
+   <url>/flexspaces/versionlist?nodeid={nodeId}</url>
+   <format default="xml">extension</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   <cache>
+      <never>false</never>
+   </cache>          
+</webscript>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MapViewBase xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="org.integratedsemantics.flexspaces.view.map.*"
+	mapevent_mappreinitialize="onMapPreInit(event)" mapevent_mapready="onMapReady(event)" 
+	creationComplete="onCreationComplete(event)"  width="100%" height="100%">	
+</MapViewBase>

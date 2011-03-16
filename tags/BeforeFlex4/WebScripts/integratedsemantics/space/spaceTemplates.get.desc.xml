@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces Space Templates</shortname>
+  <description>Lists available templates for spaces</description>
+  <url>/flexspaces/spaceTemplates</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

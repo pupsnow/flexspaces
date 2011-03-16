@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<suggest:SemanticTagSuggestViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:suggest="org.integratedsemantics.flexspaces.view.semantictags.suggest.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.semantictags.suggesttree.*"
+    title="{resourceManager.getString('SemanticTagSuggestView', 'title' )}" 
+    styleName="dialog" width="520" height="520" showCloseButton="true">
+    
+    <mx:Metadata>[ResourceBundle("SemanticTagSuggestView")]</mx:Metadata>
+    
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <mx:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'categoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" id="categoriesFormItem">
+
+        <mx:List id="categoryList" dataProvider="{semanticTagSuggestPresModel.categories}" labelField="{resourceManager.getString('SemanticTagSuggestView', 'categoryList_labelField')}" height="120" styleName="list" width="100%"
+        	change="onChangeSemanticTagList(event)"/>
+    
+        <mx:Button label="{resourceManager.getString('SemanticTagSuggestView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"
+        	enabled="{semanticTagSuggestPresModel.enableRemove}" visible="{semanticTagSuggestPresModel.enableRemove}"/>
+
+    </mx:FormItem>    
+    
+    <mx:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'allCategoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+
+        <tree:SemanticTagSuggestionTreeView id="semanticTagTreeView" semanticTagSuggestionTreePresModel="{semanticTagSuggestPresModel.semanticTagTreePresModel}" height="217" width="100%"/>
+    
+        <mx:Button label="{resourceManager.getString('SemanticTagSuggestView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"
+        	enabled="{semanticTagSuggestPresModel.enableAdd}" visible="{semanticTagSuggestPresModel.enableAdd}"/>
+
+    </mx:FormItem>
+    
+    <mx:Spacer height="5"/>
+    
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="closeBtn" label="{resourceManager.getString('SemanticTagSuggestView', 'closeBtn_label' )}"/>    
+    </mx:HBox> 
+    
+        
+</suggest:SemanticTagSuggestViewBase>

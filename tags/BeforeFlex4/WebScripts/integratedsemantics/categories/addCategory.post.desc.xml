@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces add category</shortname>
+  <description>Add a category to a node</description>
+  <url>/flexspaces/addCategory?noderef={noderef}&amp;categorynoderef={categoryNodeRef}</url>
+  <format default="xml"/>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>       
+</webscript>

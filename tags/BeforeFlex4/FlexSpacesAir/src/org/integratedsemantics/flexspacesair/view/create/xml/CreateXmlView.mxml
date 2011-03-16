@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<createxml:CreateXmlViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:createxml="org.integratedsemantics.flexspacesair.view.create.xml.*"
+    width="516" height="530" title="Create Content - XML" styleName="dialog" showCloseButton="true">
+
+    <mx:Style source="../create.css"/>
+
+    <mx:Form styleName="mainArea">
+        <mx:FormItem label="Name:"  width="400"  styleName="mainArea">
+            <mx:TextInput id="nodename" width="250" text="New XML Doc.xml" styleName="input"/>
+        </mx:FormItem>
+    </mx:Form>
+    
+    <!--mx:TextArea id="textarea" width="478" height="350" fontWeight="normal" styleName="input"
+        text="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xa;&lt;sample&gt;&#xa;   &lt;element&gt;text&lt;/element&gt;&#xa;&lt;/sample&gt;"/-->
+
+    <mx:TextArea id="textarea" width="478" height="350" fontWeight="normal" styleName="input"
+        text="&lt;sample&gt;&#xa;   &lt;element&gt;text&lt;/element&gt;&#xa;&lt;/sample&gt;"/>
+
+    <mx:Spacer height="20"/>
+                  
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="okBtn" label="OK"/> 
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="Cancel"/>
+    </mx:HBox> 
+
+</createxml:CreateXmlViewBase>

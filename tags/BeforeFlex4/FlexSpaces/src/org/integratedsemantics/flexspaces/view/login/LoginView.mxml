@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<login:LoginViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:login="org.integratedsemantics.flexspaces.view.login.*"
+    width="482" height="254" styleName="login" backgroundImage="@Embed(source='/images/flexspaces/login_background.png')"
+    creationComplete="onCreationComplete(event)">
+	
+    <mx:Metadata>[ResourceBundle("LoginView")]</mx:Metadata>
+  
+    <mx:Style source="login.css"/> 
+        
+	<mx:Box width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:HBox width="85%" height="75%">
+			<mx:VBox id="errorVBox" width="100%" height="100%">
+				<mx:Spacer height="10"/>
+				<mx:Form width="100%" id="loginForm">		
+					<mx:FormItem width="100%">
+                        <mx:Text id="errorMessage" styleName="errorText" text="{resourceManager.getString('LoginView', 'errorMessage_text')}" alpha="0"/>            
+					</mx:FormItem>	
+					<mx:Spacer height="2"/>			
+                    <mx:FormItem label="{resourceManager.getString('LoginView', 'userNameFormItem_label' )}" styleName="loginText" width="100%" id="userNameFormItem">            
+                        <mx:TextInput text="{resourceManager.getString('LoginView', 'username_text')}" id="username" styleName="loginInputText" height="23" width="180"
+	      	            	change="loginPresModel.updateUserName(username.text)"/>            
+					</mx:FormItem>	
+					<mx:Spacer height="7"/>					
+                    <mx:FormItem label="{resourceManager.getString('LoginView', 'passwordFormItem_label' )}" styleName="loginText" width="100%" id="passwordFormItem">            
+				        <mx:TextInput text="" id="password" styleName="loginInputText" displayAsPassword="true" height="23" width="180"
+	      	            	change="loginPresModel.updatePassword(password.text)"/>            
+					</mx:FormItem>
+					<mx:Spacer height="7"/>	
+					<mx:FormItem width="100%">
+                        <mx:Button label="{resourceManager.getString('LoginView', 'loginBtn_label' )}" id="loginBtn" width="90"/>            
+					</mx:FormItem>
+				</mx:Form>
+			</mx:VBox>   		    			
+		</mx:HBox>					
+	</mx:Box>
+	
+</login:LoginViewBase>

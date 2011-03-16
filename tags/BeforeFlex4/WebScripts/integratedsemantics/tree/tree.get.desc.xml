@@ -1,0 +1,12 @@
+<webscript>
+  <shortname>FlexSpaces tree data</shortname>
+  <description>Gets one level of folder children for given folder</description>
+  <url>/flexspaces/tree?nodeid={nodeid}</url>
+  <url>/flexspaces/tree?path={path}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

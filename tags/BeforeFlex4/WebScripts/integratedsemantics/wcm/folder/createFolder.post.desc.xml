@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>Flexspaces WCM Create Folder</shortname>
+  <description>Creates a folder in avm store</description>
+  <url>/flexspaces/wcm/createFolder?storeid={storeid}&amp;parentpath={parentPath}&amp;name={name}&amp;title={title?}&amp;desc={desc?}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

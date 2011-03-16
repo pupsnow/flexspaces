@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.pranaframework.org/objects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.pranaframework.org/objects
+                             http://www.pranaframework.org/schema/objects/prana-objects-0.6.xsd">
+
+    <object id="ecmServerConfig" class="org.integratedsemantics.flexspaces.model.global.EcmServerConfig">
+
+        <!-- configuration of parts of webscript service url -->
+        <property name="protocol" value="http"/>
+        <property name="domain" value="localhost"/>
+        <property name="port" value="8080"/>
+        
+        <property name="alfrescoUrlPart" value="/alfresco/service"/>
+        <!-- for livecycle content services use next line and comment out previous line -->
+        <!-- property name="alfrescoUrlPart" value="/contentspace/wcservice" /-->
+
+        <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
+        <property name="isLiveCycleContentServices" value="false"/>
+
+        <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->   
+        <!-- for livecycle  content services ES2 9.0, use the version of alfresco included (3.1)  -->               
+        <property name="serverVersion" value="3.2"/>     
+           
+    </object>
+
+    <object id="appConfig" class="org.integratedsemantics.flexspaces.model.global.AppConfig">
+        <!-- default locale -->  
+        <property name="locale" value="en_US"/>    
+
+        <!-- whether store to locally short term store ticket / docLibPath / tabIndex -->
+        <!-- allows restoring state after browser refresh, portlet resize, and re-running app -->
+        <property name="useSessionData" value="false"/>                 
+        <!-- when short term data storage is used (useSessionData true), how long (in minutes) -->
+        <!-- can data still be used to restore state when app restarts -->
+        <property name="sessionDataValidTime" value="30"/>  
+        
+        <!-- air only, less steps editing (edit button saves offline without prompt or browse dialog, launches app -->
+        <property name="useLessStepsEdit" value="false"/>                 
+        <!-- air only, when using less step editing, whether to do auto update online, when user saves in app -->
+        <property name="autoUpdateOnlineOnAppSave" value="false"/>                 
+                            
+    </object>
+
+    <object id="thumbnailConfig" class="org.integratedsemantics.flexspaces.model.global.ThumbnailConfig">
+        <!-- thumbnail type name: doclib for alfresco 3.0 thumbnail service used in share  -->  
+        <property name="thumbnailName" value="doclib"/>  
+        <property name="thumbnailHeight" value="100"/>  
+        <property name="thumbnailWidth" value="100"/>             
+    </object>
+
+    <object id="presModel" class="org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel">
+        <!-- configure what tab views to display -->
+        <property name="showDocLib" value="true"/>        
+        <property name="showSearch" value="true"/>                
+        <property name="showTasks" value="true"/>        
+        <property name="showWCM" value="false"/>        
+        <!-- show share tab is only used in air version -->
+        <property name="showShare" value="false"/>  
+
+        <!-- whether to have coverflow view mode in views -->  
+        <property name="haveCoverFlow" value="false"/>                
+
+        <!-- default page sizes for views --> 
+        <property name="docLibPageSize" value="10"/>    
+        <property name="wcmPageSize" value="10"/>    
+        <property name="searchPageSize" value="10"/>    
+        <property name="taskAttachmentsPageSize" value="10"/>    
+        <property name="versionsPageSize" value="10"/>    
+        <property name="favoritesPageSize" value="10"/>    
+        <property name="checkedOutPageSize" value="10"/>    
+        <property name="pageSizeList">
+            <array-collection>
+                <value>10</value>
+                <value>20</value>
+                <value>30</value>
+                <value>40</value>
+                <value>50</value>
+            </array-collection>
+        </property>                               
+    </object>
+
+    <object id="calaisConfig" class="org.integratedsemantics.flexspaces.model.global.CalaisConfig">
+        <!-- whether to enable calais features -->  
+        <property name="enableCalias" value="false"/>        
+        <!--  calais api key --> 
+        <property name="calaisKey" value="value"/>                               
+    </object>
+
+   <object id="googleMapConfig" class="org.integratedsemantics.flexspaces.model.global.GoogleMapConfig">
+      <!-- whether to enable google map feature -->  
+      <property name="enableGoogleMap" value="false"/>      
+      <!--  url of ip address or domain google api key is for --> 
+      <property name="googleMapUrl" value="value"/>      
+      <!--  google map api key --> 
+      <property name="googleMapKey" value="value"/>                           
+   </object>
+
+</objects>

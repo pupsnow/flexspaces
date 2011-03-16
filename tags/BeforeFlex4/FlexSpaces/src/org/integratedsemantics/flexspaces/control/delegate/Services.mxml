@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cairngorm:ServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:cairngorm="com.universalmind.cairngorm.business.*">
+	
+    <mx:Metadata>[ResourceBundle("Services")]</mx:Metadata>
+
+</cairngorm:ServiceLocator>

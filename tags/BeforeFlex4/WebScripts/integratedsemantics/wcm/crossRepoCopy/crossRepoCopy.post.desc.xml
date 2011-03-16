@@ -1,0 +1,12 @@
+<webscript>
+  <shortname>FlexSpaces WCM Copy</shortname>
+  <description>Copies avm file or folder into the target avm folder</description>
+  <url>/flexspaces/wcm/crossRepoCopy?sourcestoreid={sourceAvmStoreId}&amp;sourceavmpath={sourceAvmPath}&amp;targetadmpath={targetAdmPath}</url>
+  <url>/flexspaces/wcm/crossRepoCopy?sourcenodeid={sourceAdmNodeId}&amp;targetstoreid={targetAvmStoreId}&amp;targetavmpath={targetAvmPath}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

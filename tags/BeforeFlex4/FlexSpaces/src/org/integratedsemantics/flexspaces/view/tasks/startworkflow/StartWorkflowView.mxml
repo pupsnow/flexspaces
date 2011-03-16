@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<startworkflow:StartWorkflowViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:startworkflow="org.integratedsemantics.flexspaces.view.tasks.startworkflow.*"
+    title="{resourceManager.getString('StartWorkflowView', 'title')}" 
+    width="468" height="280" styleName="dialog" showCloseButton="true">
+
+    <mx:Metadata>[ResourceBundle("StartWorkflowView")]</mx:Metadata>
+
+    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+    
+    <mx:Form styleName="mainArea">
+    
+        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'workflowFormItem_label' )}" width="400" styleName="mainArea" id="workflowFormItem">      
+            <mx:ComboBox id="workflowTypeCombo" width="249" styleName="combo" dataProvider="{startWorkflowPresModel.workflowTypes}"
+            	change="onChangeWorkflowType(event)"/>
+        </mx:FormItem>
+
+        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'assignToFormItem_label' )}" width="400" styleName="mainArea" id="assignToFormItem">  
+            <mx:TextInput id="assignToTextInput" text="{startWorkflowPresModel.assignToText}" width="250" styleName="input"
+            	change="onChangeAssignToText(event)"/>      
+        </mx:FormItem>
+        
+        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'dueOnFormItem_label' )}" width="400" styleName="mainArea" id="dueOnFormItem"
+        	visible="{startWorkflowPresModel.dueOnVisible}" includeInLayout="{startWorkflowPresModel.dueOnVisible}">  
+        	    
+            <mx:DateField id="dueDateField"  width="264" styleName="input" change="onChangedDueDate(event)"/>
+            
+        </mx:FormItem>
+
+        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'descriptionFormItem_label' )}" width="400" styleName="mainArea" id="descriptionFormItem">      
+            <mx:TextArea id="descTextArea" width="250" height="59" styleName="input"
+            	change="onChangeDescText(event)"/>
+        </mx:FormItem>
+        
+    </mx:Form>
+    
+    <mx:HBox width="100%" styleName="buttonArea"> 
+        <mx:Button id="okBtn" label="{resourceManager.getString('StartWorkflowView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <mx:Button id="cancelBtn" label="{resourceManager.getString('StartWorkflowView', 'cancelBtn_label' )}"/>    
+    </mx:HBox> 
+
+</startworkflow:StartWorkflowViewBase>

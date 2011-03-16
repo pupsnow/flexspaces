@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<results:SearchResultsViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:results="org.integratedsemantics.flexspaces.view.search.results.*"
+    xmlns:breadcrumb="com.decoursey.components.*"
+    xmlns:gridview="org.integratedsemantics.flexspaces.view.folderview.gridview.*"
+    xmlns:iconview="org.integratedsemantics.flexspaces.view.folderview.iconview.*"
+    xmlns:coverflow="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
+    xmlns:viewmodebar="org.integratedsemantics.flexspaces.view.folderview.viewmodebar.*"
+    xmlns:paging="org.integratedsemantics.flexspaces.view.folderview.paging.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">
+    
+    <mx:Metadata>[ResourceBundle("FolderView")]</mx:Metadata>
+
+    <mx:Metadata>
+    [Event(name="folderListContextMenu",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewContextMenuEvent")]          
+    [Event(name="folderListOnDrop",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent")]          
+    [Event(name="folderListChangePath",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewChangePathEvent")]          
+    [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
+    [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
+    </mx:Metadata>
+ 
+    <paging:Pager id="pager" pageIndex="0" pageSize="{searchResultsPresModel.model.flexSpacesPresModel.searchPageSize}" 
+        totalPages="{Math.max(Math.ceil(searchResultsPresModel.totalSize/searchResultsPresModel.model.flexSpacesPresModel.searchPageSize),1)}" 
+    	dataProvider="{nodeListViewPresModel.nodeCollection}" />  
+
+    <mx:VBox height="100%" width="100%">
+        
+        <!-- bread crumb and icon/grid view mode toggle buttons -->
+        <mx:HBox width="100%">
+            <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="left" id="breadCrumbAreaBox">
+                <mx:Label id="resultsCountLabel" color="0xFFFFFF" fontSize="11" text="{searchResultsPresModel.resultsCountLabel}"/>               
+            </mx:HBox>
+            <viewmodebar:ViewModeBarView id="viewModeBar" />
+        </mx:HBox>
+        
+        <!-- icon and grid views of folder  -->
+        <mx:ViewStack id="folderViewStack" width="100%" height="100%">
+        
+            <!-- folder icon view -->
+            <mx:Box height="100%" width="100%" visible="true">
+                <iconview:FolderIconView id="folderIconView" nodeListViewPresModel="{searchResultsPresModel}" dataProvider="{dataProvider}"/>
+            </mx:Box>
+
+            <!-- folder grid view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <gridview:FolderGridView  id="folderGridView" nodeListViewPresModel="{searchResultsPresModel}" dataProvider="{dataProvider}"/>
+            </mx:Box>
+
+            <!-- coverflow view -->
+            <mx:Box height="100%" width="100%" visible="false">
+                <coverflow:CoverFlowView  id="coverFlowView" nodeListViewPresModel="{searchResultsPresModel}" dataProvider="{dataProvider}"/>
+            </mx:Box>
+
+        </mx:ViewStack>
+        
+        <mx:HBox horizontalAlign="center" width="100%">
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'pagenumLabel_page')} {pager.pageIndex+1} {resourceManager.getString('FolderIconView', 'pagenumLabel_of')} {pager.totalPages}" 
+                      styleName="pageNumStyle" id="pagenumLabel"/>    
+            <mx:Spacer width="4"/>    
+            <paging:PagerBar id="pageBar"  pager="{pager}" totalPages="{pager.totalPages}"
+                             maxVisiblePages="10" buttonWidth="45" buttonMode="true"/>
+            <mx:Spacer width="4"/>                
+            <mx:Label text="{resourceManager.getString('FolderIconView', 'itemsPerPageLabel_text')}" styleName="itemsPerPageStyle" id="itemsPerPageLabel"/>
+            <mx:Spacer width="4"/>                
+            <mx:ComboBox id="pageSizeCombo" styleName="pageSizeComboStyle" dataProvider="{searchResultsPresModel.model.flexSpacesPresModel.pageSizeList}"
+                change="onPageSizeChange(event)"/>
+        </mx:HBox>
+
+    </mx:VBox>    
+
+</results:SearchResultsViewBase>

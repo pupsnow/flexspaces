@@ -1,13 +1,14 @@
 package org.integratedsemantics.flexspaces.view.menu.menubar
 {
-    import flash.events.Event;
     import flash.net.URLLoader;
     import flash.net.URLRequest;
     
     import mx.collections.XMLListCollection;
     import mx.controls.MenuBar;
+    import mx.core.ClassFactory;
     import mx.events.FlexEvent;
     
+    import org.integratedsemantics.flexspaces.skin.MenuBarItem2;
     import org.integratedsemantics.flexspaces.view.menu.event.MenuConfiguredEvent;
 
     /**
@@ -44,6 +45,8 @@ package org.integratedsemantics.flexspaces.view.menu.menubar
 
             loader = new URLLoader();
             loader.addEventListener(Event.COMPLETE, onLoadSuccess);   
+
+            menuBarItemRenderer = new ClassFactory(MenuBarItem2);            
         }
         
         protected function onCreationComplete(event:FlexEvent):void
@@ -75,7 +78,7 @@ package org.integratedsemantics.flexspaces.view.menu.menubar
             configurationDone = true;
             
             var configuredEvent:MenuConfiguredEvent = new MenuConfiguredEvent(MenuConfiguredEvent.MENU_CONFIGURED);
-            this.dispatchEvent(configuredEvent);            
+            this.dispatchEvent(configuredEvent);              
         }
         
         public function enableMenuItem(menuData:String, menuItemData:String, enable:Boolean):void
@@ -83,6 +86,12 @@ package org.integratedsemantics.flexspaces.view.menu.menubar
             var menuXMLList:XMLList = xmlData.menuitem.(@data == menuData);
             menuXMLList..menuitem.(@data == menuItemData).@enabled = enable;
         }
-                
+        
+        // test todo remove
+        override protected function updateDisplayList(unscaledWidth:Number,
+                                                      unscaledHeight:Number):void
+        {
+            super.updateDisplayList(unscaledWidth, unscaledHeight);        
+        }       
     }
 }

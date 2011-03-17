@@ -22,17 +22,19 @@ SOFTWARE.
 */
 package flexlib.containers {
 	import flash.events.MouseEvent;
-    import flexlib.events.WindowShadeEvent;
+	
+	import flexlib.events.WindowShadeEvent;
 	
 	import mx.controls.Button;
 	import mx.core.EdgeMetrics;
+	import mx.core.FlexGlobals;
 	import mx.core.IFactory;
 	import mx.core.LayoutContainer;
 	import mx.core.ScrollPolicy;
 	import mx.effects.Resize;
-    import mx.effects.effectClasses.ResizeInstance;
-    import mx.events.EffectEvent;
-    import mx.events.PropertyChangeEvent;
+	import mx.effects.effectClasses.ResizeInstance;
+	import mx.events.EffectEvent;
+	import mx.events.PropertyChangeEvent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.StyleManager;
 	import mx.utils.StringUtil;
@@ -171,7 +173,9 @@ package flexlib.containers {
 
         private static function constructClass():Boolean {
 
-            var css:CSSStyleDeclaration = StyleManager.getStyleDeclaration("WindowShade")
+            // flex4 var css:CSSStyleDeclaration = StyleManager.getStyleDeclaration("WindowShade")
+            var css:CSSStyleDeclaration = FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("WindowShade")
+
             var changed:Boolean = false;
             if(!css) {
                 // If there is no CSS definition for WindowShade,
@@ -182,14 +186,16 @@ package flexlib.containers {
 
             // make sure we have a valid values for each style. If not, set the defaults.
             for(var styleProp:String in styleDefaults) {
-                if(!StyleManager.isValidStyleValue(css.getStyle(styleProp))) {
+                // flex4 if(!StyleManager.isValidStyleValue(css.getStyle(styleProp))) {
+                if(!FlexGlobals.topLevelApplication.styleManager.isValidStyleValue(css.getStyle(styleProp))) {
                     css.setStyle(styleProp, styleDefaults[styleProp]);
                     changed = true;
                 }
             }
 
             if(changed) {
-                StyleManager.setStyleDeclaration("WindowShade", css, true);
+                // flex4 StyleManager.setStyleDeclaration("WindowShade", css, true);
+                FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("WindowShade", css, true);
             }
 
             return true;

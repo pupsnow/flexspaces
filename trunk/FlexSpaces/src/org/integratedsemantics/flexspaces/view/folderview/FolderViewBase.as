@@ -14,6 +14,8 @@ package org.integratedsemantics.flexspaces.view.folderview
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewChangePathEvent;
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
 
 
     /**
@@ -292,7 +294,10 @@ package org.integratedsemantics.flexspaces.view.folderview
 
         protected function onPageSizeChange(event:Event):void
         {
-            folderViewPresModel.model.flexSpacesPresModel.docLibPageSize = event.target.value;
+            var dropDownList:DropDownList = event.target as DropDownList;
+            var selectedItem:int = dropDownList.selectedItem;
+
+            folderViewPresModel.model.flexSpacesPresModel.docLibPageSize = selectedItem;
             
             resetPaging();
             

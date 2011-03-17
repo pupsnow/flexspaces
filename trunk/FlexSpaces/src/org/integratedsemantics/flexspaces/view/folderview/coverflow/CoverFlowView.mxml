@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<coverflowview:CoverFlowViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<coverflowview:CoverFlowViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:coverflowview="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
     xmlns:coverflow="com.dougmccune.containers.*"
     creationComplete="onCreationComplete(event)" height="100%" width="100%">    
     
-    <mx:Metadata>[ResourceBundle("CoverFlowView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("CoverFlowView")]</fx:Metadata>
     
     <mx:VDividedBox width="100%" height="100%">
     
         <coverflow:CoverFlowContainer id="coverFlowContainer" backgroundColor="0x000000" width="100%" height="40%"
                                       horizontalGap="40" borderStyle="inset" segments="6" reflectionEnabled="false">       
             <mx:Repeater id="coverFlowRepeater" dataProvider="{dataProvider}">
+                <!-- flex4 todo convert VBox/HBox to spark and fix hardcoded backgroundColor -->
                 <mx:VBox width="200" height="175" verticalAlign="middle" horizontalAlign="center" backgroundColor="0xffffff" horizontalScrollPolicy="off" verticalScrollPolicy="off">                    
                     <mx:HBox verticalAlign="middle" horizontalAlign="center" height="100%" width="100%">
                         <mx:Image source="@Embed('images/icons/locked.gif')"  visible="{coverFlowRepeater.currentItem.isLocked}" includeInLayout="{coverFlowRepeater.currentItem.isLocked}"/>
@@ -28,9 +32,9 @@
             <mx:columns>        
                 <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
                     <mx:itemRenderer>
-                        <mx:Component>
+                        <fx:Component>
                             <mx:Image source="{data.icon16}" scaleContent="false"/>
-                        </mx:Component>
+                        </fx:Component>
                     </mx:itemRenderer>
                 </mx:DataGridColumn>             
                 <mx:DataGridColumn headerText="{resourceManager.getString('CoverFlowView', 'nameColumn_headerText')}" dataField="name" width="200" id="nameColumn"/>        

@@ -2,20 +2,21 @@ package org.integratedsemantics.flexspaces.view.tasks.tasklist
 {
     import flash.events.MouseEvent;
     
-    import mx.containers.VBox;
-    import mx.controls.Button;
     import mx.controls.DataGrid;
     import mx.events.ListEvent;
     
     import org.integratedsemantics.flexspaces.presmodel.tasks.tasklist.TaskListPresModel;
     import org.integratedsemantics.flexspaces.view.tasks.event.ClickTaskEvent;
     
+    import spark.components.Button;
+    import spark.components.VGroup;
+    
         
     /**
      * Base class for task listviews  
      * 
      */
-    public class TaskListViewBase extends VBox
+    public class TaskListViewBase extends VGroup
     {                
         public var refeshTasks:Button;
         public var taskGrid:DataGrid;

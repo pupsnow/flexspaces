@@ -3,10 +3,8 @@ package org.integratedsemantics.flexspaces.view.search.basic
     import flash.events.Event;
     import flash.events.MouseEvent;
     
-    import mx.containers.Box;
     import mx.controls.Button;
     import mx.controls.LinkButton;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     import mx.rpc.Responder;
     
@@ -15,16 +13,20 @@ package org.integratedsemantics.flexspaces.view.search.basic
     import org.integratedsemantics.flexspaces.view.search.advanced.AdvancedSearchEvent;
     import org.integratedsemantics.flexspaces.view.search.event.SearchResultsEvent;
     
+    import spark.components.Group;
+    import spark.components.HGroup;
+    import spark.components.TextInput;
+    
         
     /**
      * Base class for one box basic search views  
      * 
      */
-    public class SearchViewBase extends Box
+    public class SearchViewBase extends HGroup
     {
         public var searchTextInput:TextInput;
         public var searchBtn:Button;
-        public var advancedLink:LinkButton
+        public var advancedLink:LinkButton;
         
         [Bindable]
         public var searchPresModel:SearchPresModel;
@@ -49,7 +51,7 @@ package org.integratedsemantics.flexspaces.view.search.basic
 			focusManager.setFocus(searchTextInput);
 			
             // add search btn, adv search link, and enter key handlers
-            ObserveUtil.observeButtonClick(searchBtn, onSearchBtn);            
+            ObserveUtil.observeMxButtonClick(searchBtn, onSearchBtn);            
             searchTextInput.addEventListener(FlexEvent.ENTER, onSearchBtn);         
 			advancedLink.addEventListener(MouseEvent.CLICK, onAdvancedSearchLink);
 		}

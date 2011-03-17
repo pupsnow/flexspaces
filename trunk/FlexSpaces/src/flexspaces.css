@@ -1,14 +1,9 @@
 
-global
-{
-    themeColor: #999999;        
-}
+/* styles for both air and in browser version */
 
-Application
-{
-    color:           #ffffff;    
-    backgroundColor: #333333;
-}
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
 
 .logoText
 {
@@ -16,78 +11,76 @@ Application
     color:    #ffffff;      
 }
 
-.logoutLink
-{
-    color: #0E9EE5;
-    rollOverColor: #0E9EE5;
-    text-decoration: underline;
-}
-
-Tree
+mx|Tree
 {
     color:              #ffffff;
     textSelectedColor:  #ffffff;
     textRollOverColor:  #ffffff;
-    backgroundColor:    #333333;
-    rollOverColor:      #000000;
+    contentBackgroundColor: #333333;
+    rollOverColor:      #0E7EC5;
     selectionColor:     #000000;    
 }
 
 .fileTileListStyle
 {
     color:              #000000;
-    backgroundColor:    #e6e6e6;
-    rollOverColor:      #b0b0b0;
-    selectionColor:     #b0b0b0;    
+    backgroundColor:    #ffffff;
+    contentBackgroundColor: #ffffff;
+    rollOverColor:      #0E7EC5;
+    selectionColor:     #bbbbbb;    
 }
 
 .fileGridStyle 
 {          
-    alternatingItemColors:  #e6e6e6, #dedfde;               
+    alternatingItemColors:  #ffffff, #eeeeee;               
     color:                  #000000; 
-    selectionColor:         #b0b0b0;
-    rollOverColor:          #b0b0b0; 
+    selectionColor:         #666666;
+    rollOverColor:          #0E7EC5; 
     vertical-grid-lines:    false;
     horizontalGridLineColor: #999999;
     horizontalGridLines:    true;
 }
 
-MenuBar
+mx|MenuBar
 {
     color:                  #0E9EE5;
-    fillColors:             #333333,#333333;
-    rollOverColor:          #000000;
-    selectionColor:         #000000;
-    borderColor:            #333333;
-    backgroundSkin:         ClassReference("org.integratedsemantics.flexspaces.skin.ListTransparentSkin");
+    textRollOverColor:      #ffffff;
+    textSelectedColor:      #ffffff;
+    chromeColor:            #333333;
+    contentBackgroundColor: #333333;    
+    backgroundSkin:         ClassReference("org.integratedsemantics.flexspaces.skin.ListTransparentSkin");   
 }
 
-Menu
+mx|Menu
 {
     color:                  #ffffff;
+    symbolColor:            #ffffff;
     disabledColor:          #bbbbbb;      
     textSelectedColor:      #ffffff;
     textRollOverColor:      #ffffff;
-    backgroundColor:        #333333;
-    rollOverColor:          #000000;
+    chromeColor:            #333333;
+    contentBackgroundColor: #333333;    
+    rollOverColor:          #0E7EC5;
     selectionColor:         #000000;
     borderColor:            #333333;
 }
 
 .viewTab 
 {
-    upSkin:                 ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");
-    overSkin:               ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");    
-    selectedUpSkin:         ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");   
-    selectedOverSkin:       ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin");    
     color:                  #ffffff;
-    tabBackgroundColors:    #6e6e6e, #ffffff;
-    tabBackgroundAlphas:    0.0, 1.0;       
+    /* upSkin:              ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin"); */
+    /* overSkin:            ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin"); */  
+    /* selectedUpSkin:      ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin"); */ 
+    /* selectedOverSkin:    ClassReference("org.integratedsemantics.flexspaces.skin.TabSkin"); */   
+    /* tabBackgroundColors: #666666, #ffffff; */
+    /* tabBackgroundAlphas: 0.0, 1.0; */    
+    tabBackgroundColors:    #666666, #666666;
+    tabBackgroundAlphas:    1.0, 1.0;       
 }
 
 .viewTabs
 {
-    backgroundColor:          #ededed;    
+    backgroundColor:          #666666;    
     tabHeight:                35;
     horizontalGap:            0;  
     selectedTabTextStyleName: selectedTabText;
@@ -98,7 +91,13 @@ Menu
     fontSize:               10px;
     fontWeight:             normal;
     color:                  #ffffff;
-}  
+} 
+
+.tabCloseButtonStyleName
+{
+    color:              #ff0000;
+    backgroundColor:    #000000;
+}
 
 .viewStyle
 {
@@ -117,42 +116,91 @@ Menu
 
 .pageSizeComboStyle
 {
-    color:              #000000;  
-    textRollOverColor:  #ffffff;     
-    textSelectedColor:  #ffffff;
-    rollOverColor:      #000000;     
-    selectionColor:     #000000;     
+    color:              #ffffff;  
+    symbolColor:        #ffffff; 
+    selectionColor:     #000000;
+    rollOverColor:      #0E7EC5; 
+    contentBackgroundColor: #666666;
 }
 
 TextInput
 {
-    backgroundColor: #ffffff;
+    contentBackgroundColor: #ffffff;    
     color: #000000;
     borderStyle: solid;
-    borderThickness: 1;
     borderColor: #000000;
 }  
 
 TextArea
 {
-    backgroundColor: #ffffff;
+    contentBackgroundColor: #ffffff;
     color: #000000;
 } 
 
-Accordion
+mx|Accordion
 {
     color:              #ffffff;
+    chromeColor:        #333333;  
+    backgroundColor:    #333333;    
+}
+
+mx|ProgressBar
+{
+    chromeColor:        #0E7EC5;
+    trackSkin:          ClassReference("org.integratedsemantics.flexspaces.skin.ProgressBarTrackSkin2"); 
+}
+
+Button
+{
+    color:              #ffffff;
+    textRollOverColor:  #ffffff; 
+    textSelectedColor:  #ffffff;
+    disabledColor:      #666666; 
+    chromeColor:        #666666;        
+}
+
+mx|Button
+{
+    color:              #ffffff;
+    textRollOverColor:  #ffffff; 
+    textSelectedColor:  #ffffff;
+    disabledColor:      #666666; 
+    chromeColor:        #666666;        
+}
+
+TitleWindow
+{
+    symbolColor: #ffffff;
+    chromeColor: #666666; 
+    borderColor: #000000;
+}
+
+.breadCrumb
+{
+    crumbBackgroundColor: #333333;
+    hoverBackgroundColor: #0E7EC5;
+    crumbBackgroundAlpha: 1.0;
+    hoverBackgroundAlpha: 1.0;
+    padding: 1;
+    cornerRadius: 14;
+    textDecoration: "underline";
+    fontSize: 11;
+    color: #ffffff;    
+}
+
+.tagCloudStyle
+{
+    color:              #ffffff;
+    backgroundColor: 	#333333;
+    rollOverColor:      #0E7EC5;        
+}
+
+mx|Alert
+{
+    color:              #ffffff;
+    borderColor:        #000000;
     backgroundColor:    #333333;
+    chromeColor:        #666666;
 }
 
-.tabCloseButtonStyleName
-{
-    color:              #ff0000;
-    backgroundColor:    #000000;
-}
-
-ProgressBar
-{
-    barColor:   #0E9EE5;
-}
 

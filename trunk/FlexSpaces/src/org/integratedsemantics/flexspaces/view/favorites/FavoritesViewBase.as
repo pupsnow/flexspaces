@@ -9,6 +9,8 @@ package org.integratedsemantics.flexspaces.view.favorites
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewOnDropEvent;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
 
 	
 	/**
@@ -144,7 +146,10 @@ package org.integratedsemantics.flexspaces.view.favorites
 
         protected function onPageSizeChange(event:Event):void
         {
-            favoritesPresModel.model.flexSpacesPresModel.favoritesPageSize = event.target.value;            
+            var dropDownList:DropDownList = event.target as DropDownList;
+            var selectedItem:int = dropDownList.selectedItem;
+            
+            favoritesPresModel.model.flexSpacesPresModel.favoritesPageSize = selectedItem;            
             pageBar.curPageIndex = 0;
         }
 

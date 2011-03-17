@@ -2,7 +2,7 @@ package org.integratedsemantics.flexspaces.app
 {
 	import flash.events.Event;
 	
-	import mx.core.Application;
+	//flex4 import mx.core.Application;
 	import mx.managers.PopUpManager;
 	
 	import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
@@ -19,8 +19,10 @@ package org.integratedsemantics.flexspaces.app
 	import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
 	import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
 	
+	import spark.components.Application;
+	
 	        
-	public class AppBase extends Application
+	public class AppBase extends spark.components.Application
 	{
         protected var model:AppModelLocator = AppModelLocator.getInstance();
             

@@ -4,7 +4,6 @@ package org.integratedsemantics.flexspaces.view.folderview.coverflow
     
     import flash.events.Event;
     
-    import mx.containers.VBox;
     import mx.controls.DataGrid;
     import mx.controls.NumericStepper;
     import mx.core.Repeater;
@@ -12,13 +11,15 @@ package org.integratedsemantics.flexspaces.view.folderview.coverflow
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.paging.Pager;
     import org.integratedsemantics.flexspaces.view.folderview.paging.PagerBar;
+    
+    import spark.components.VGroup;
 
         
     /**
      * Folder grid base view class 
      * 
      */
-    public class CoverFlowViewBase extends  VBox
+    public class CoverFlowViewBase extends VGroup
     {
         [Bindable] public var nodeListViewPresModel:NodeListViewPresModel;
         

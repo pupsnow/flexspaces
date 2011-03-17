@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<startworkflow:StartWorkflowViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+<startworkflow:StartWorkflowViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:startworkflow="org.integratedsemantics.flexspaces.view.tasks.startworkflow.*"
     title="{resourceManager.getString('StartWorkflowView', 'title')}" 
-    width="468" height="280" styleName="dialog" showCloseButton="true">
+    width="468" height="280" styleName="dialog">
 
-    <mx:Metadata>[ResourceBundle("StartWorkflowView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("StartWorkflowView")]</fx:Metadata>
 
-    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+    <fx:Style source="../../../framework/presmodel/dialog.css"/>
+    
+    <s:VGroup horizontalAlign="left" verticalAlign="top" styleName="mainArea" width="100%" height="100%" 
+              paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
     
     <mx:Form styleName="mainArea">
     
         <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'workflowFormItem_label' )}" width="400" styleName="mainArea" id="workflowFormItem">      
-            <mx:ComboBox id="workflowTypeCombo" width="249" styleName="combo" dataProvider="{startWorkflowPresModel.workflowTypes}"
-            	change="onChangeWorkflowType(event)"/>
+            <s:DropDownList id="workflowTypeCombo" width="249" styleName="combo" dataProvider="{startWorkflowPresModel.workflowTypes}"
+            	change="onChangeWorkflowType(event)" requireSelection="true" />
         </mx:FormItem>
 
         <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'assignToFormItem_label' )}" width="400" styleName="mainArea" id="assignToFormItem">  
-            <mx:TextInput id="assignToTextInput" text="{startWorkflowPresModel.assignToText}" width="250" styleName="input"
+            <s:TextInput id="assignToTextInput" text="{startWorkflowPresModel.assignToText}" width="250" styleName="input"
             	change="onChangeAssignToText(event)"/>      
         </mx:FormItem>
         
-        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'dueOnFormItem_label' )}" width="400" styleName="mainArea" id="dueOnFormItem"
+        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'dueOnFormItem_label' )}" width="425" styleName="mainArea" id="dueOnFormItem"
         	visible="{startWorkflowPresModel.dueOnVisible}" includeInLayout="{startWorkflowPresModel.dueOnVisible}">  
         	    
-            <mx:DateField id="dueDateField"  width="264" styleName="input" change="onChangedDueDate(event)"/>
+            <mx:DateField id="dueDateField"  width="275" styleName="input" change="onChangedDueDate(event)"/>
             
         </mx:FormItem>
 
         <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'descriptionFormItem_label' )}" width="400" styleName="mainArea" id="descriptionFormItem">      
-            <mx:TextArea id="descTextArea" width="250" height="59" styleName="input"
+            <s:TextArea id="descTextArea" width="250" height="59" styleName="input"
             	change="onChangeDescText(event)"/>
         </mx:FormItem>
         
     </mx:Form>
     
-    <mx:HBox width="100%" styleName="buttonArea"> 
-        <mx:Button id="okBtn" label="{resourceManager.getString('StartWorkflowView', 'okBtn_label' )}"/>    
+    <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="okBtn" label="{resourceManager.getString('StartWorkflowView', 'okBtn_label' )}"/>    
         <mx:Spacer width="20"/>
-        <mx:Button id="cancelBtn" label="{resourceManager.getString('StartWorkflowView', 'cancelBtn_label' )}"/>    
-    </mx:HBox> 
+        <s:Button id="cancelBtn" label="{resourceManager.getString('StartWorkflowView', 'cancelBtn_label' )}"/>    
+    </s:HGroup> 
 
+    </s:VGroup>
+    
 </startworkflow:StartWorkflowViewBase>

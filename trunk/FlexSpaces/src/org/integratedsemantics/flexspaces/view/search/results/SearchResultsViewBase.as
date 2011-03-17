@@ -4,12 +4,14 @@ package org.integratedsemantics.flexspaces.view.search.results
     
     import mx.binding.utils.ChangeWatcher;
     import mx.collections.ArrayCollection;
-    import mx.controls.Label;
     import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
+    import spark.components.Label;
 
 	
 	public class SearchResultsViewBase extends NodeListViewBase
@@ -139,7 +141,10 @@ package org.integratedsemantics.flexspaces.view.search.results
 
         protected function onPageSizeChange(event:Event):void
         {
-            searchResultsPresModel.model.flexSpacesPresModel.searchPageSize = event.target.value;
+            var dropDownList:DropDownList = event.target as DropDownList;
+            var selectedItem:int = dropDownList.selectedItem;
+            
+            searchResultsPresModel.model.flexSpacesPresModel.searchPageSize = selectedItem;
             
             resetPaging();
             

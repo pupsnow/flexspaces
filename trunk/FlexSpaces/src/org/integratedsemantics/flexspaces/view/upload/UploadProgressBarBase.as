@@ -1,11 +1,12 @@
 package org.integratedsemantics.flexspaces.view.upload
 {
-    import mx.containers.VBox;
-    import mx.controls.Label;
     import mx.controls.ProgressBar;
+    
+    import spark.components.Label;
+    import spark.components.VGroup;
 
 
-    public class UploadProgressBarBase extends VBox
+    public class UploadProgressBarBase extends VGroup
     {
         public var progressBar:ProgressBar;
         public var filenameLabel:Label;

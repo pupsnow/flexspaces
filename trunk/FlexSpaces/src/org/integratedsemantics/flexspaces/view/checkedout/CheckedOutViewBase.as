@@ -2,12 +2,14 @@ package org.integratedsemantics.flexspaces.view.checkedout
 {   
     import flash.events.Event;
     
-    import org.integratedsemantics.flexspaces.presmodel.checkedout.CheckedOutPresModel;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
+    import org.integratedsemantics.flexspaces.presmodel.checkedout.CheckedOutPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
     import org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent;
     import org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
 
         
     /**
@@ -70,7 +72,10 @@ package org.integratedsemantics.flexspaces.view.checkedout
         
         protected function onPageSizeChange(event:Event):void
         {
-            checkedOutPresModel.model.flexSpacesPresModel.checkedOutPageSize = event.target.value;            
+            var dropDownList:DropDownList = event.target as DropDownList;
+            var selectedItem:int = dropDownList.selectedItem;
+            
+            checkedOutPresModel.model.flexSpacesPresModel.checkedOutPageSize = selectedItem;            
             pageBar.curPageIndex = 0;
         }
         

@@ -1,20 +1,22 @@
 package org.integratedsemantics.flexspaces.view.tasks.taskcontrol
 {
-    import mx.containers.HBox;
-    import mx.controls.Button;
-    import mx.controls.Label;
+    import mx.controls.Alert;
     import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.presmodel.tasks.taskcontrol.TaskButtonsPresModel;
     import org.integratedsemantics.flexspaces.util.ObserveUtil;
     import org.integratedsemantics.flexspaces.view.tasks.event.RefreshTaskListEvent;
     
+    import spark.components.Button;
+    import spark.components.HGroup;
+    import spark.components.Label;
+    
         
     /**
      * Base class for task control button bar views  
      * 
      */
-    public class TaskButtonsViewBase extends HBox
+    public class TaskButtonsViewBase extends HGroup
     {
         public var adhocDone:Button;
         public var approveTask:Button;
@@ -135,7 +137,7 @@ package org.integratedsemantics.flexspaces.view.tasks.taskcontrol
          */
         protected function onResultEndTask(info:Object):void
         {
-            mx.controls.Alert.show(taskButtonsPresModel.transitionLabel + " Completed.");
+            Alert.show(taskButtonsPresModel.transitionLabel + " Completed.");
             
             // request refresh of task list
             var event:RefreshTaskListEvent = new RefreshTaskListEvent(RefreshTaskListEvent.REFRESH_TASK_LIST);

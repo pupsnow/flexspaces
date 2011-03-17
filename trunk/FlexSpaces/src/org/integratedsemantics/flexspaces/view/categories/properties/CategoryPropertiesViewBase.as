@@ -3,14 +3,15 @@ package org.integratedsemantics.flexspaces.view.categories.properties
     import flash.events.Event;
     import flash.events.MouseEvent;
     
-    import mx.controls.Button;
-    import mx.controls.List;
     import mx.events.FlexEvent;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.FormBase;
     import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
     import org.integratedsemantics.flexspaces.presmodel.categories.properties.CategoryPropertiesPresModel;
     import org.integratedsemantics.flexspaces.view.categories.tree.CategoryTreeViewBase;
+    
+    import spark.components.Button;
+    import spark.components.List;
 
 
     /**

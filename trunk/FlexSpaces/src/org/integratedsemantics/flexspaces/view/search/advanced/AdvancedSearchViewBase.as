@@ -3,12 +3,7 @@ package org.integratedsemantics.flexspaces.view.search.advanced
         
     import flash.events.MouseEvent;
     
-    import mx.controls.Button;
-    import mx.controls.CheckBox;
-    import mx.controls.ComboBox;
     import mx.controls.DateField;
-    import mx.controls.List;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     import mx.events.ListEvent;
     import mx.managers.PopUpManager;
@@ -21,6 +16,12 @@ package org.integratedsemantics.flexspaces.view.search.advanced
     import org.integratedsemantics.flexspaces.util.ObserveUtil;
     import org.integratedsemantics.flexspaces.view.categories.tree.CategoryTreeViewBase;
     import org.integratedsemantics.flexspaces.view.tree.TreeViewBase;
+    
+    import spark.components.Button;
+    import spark.components.CheckBox;
+    import spark.components.DropDownList;
+    import spark.components.List;
+    import spark.components.TextInput;
 
 
     /**
@@ -33,13 +34,13 @@ package org.integratedsemantics.flexspaces.view.search.advanced
 
         public var searchText:TextInput;
         
-        public var resultsForCombo:ComboBox;        
+        public var resultsForCombo:DropDownList;        
         
-        public var folderTypeCombo:ComboBox;        
-        public var contentTypeCombo:ComboBox;        
-        public var formatCombo:ComboBox;        
+        public var folderTypeCombo:DropDownList;        
+        public var contentTypeCombo:DropDownList;        
+        public var formatCombo:DropDownList;        
 
-        public var locationCombo:ComboBox;                
+        public var locationCombo:DropDownList;                
         public var treeView:TreeViewBase;
         public var includeChildSpacesCheckbox:CheckBox;        
         

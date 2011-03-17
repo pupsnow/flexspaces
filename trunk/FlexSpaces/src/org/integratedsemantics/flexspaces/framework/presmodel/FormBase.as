@@ -1,11 +1,12 @@
 package org.integratedsemantics.flexspaces.framework.presmodel
 {
 	import mx.containers.Form;
-	import mx.controls.Button;
-	import mx.controls.TextInput;
 	import mx.core.UIComponent;
 	
 	import org.integratedsemantics.flexspaces.util.ObserveUtil;
+	
+	import spark.components.Button;
+	import spark.components.TextInput;
 
 	public class FormBase extends Form
 	{

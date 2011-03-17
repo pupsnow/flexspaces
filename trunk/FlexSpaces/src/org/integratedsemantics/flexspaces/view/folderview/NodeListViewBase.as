@@ -4,10 +4,7 @@ package org.integratedsemantics.flexspaces.view.folderview
     
     import flash.events.Event;
     
-    import mx.containers.Canvas;
-    import mx.containers.HBox;
     import mx.containers.ViewStack;
-    import mx.controls.ComboBox;
     import mx.controls.ToggleButtonBar;
     import mx.events.IndexChangedEvent;
     import mx.events.ItemClickEvent;
@@ -26,18 +23,22 @@ package org.integratedsemantics.flexspaces.view.folderview
     import org.integratedsemantics.flexspaces.view.folderview.paging.PagerBar;
     import org.integratedsemantics.flexspaces.view.folderview.viewmodebar.ViewModeBarViewBase;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
+    import spark.components.Group;
+    import spark.components.HGroup;
 
 
     /**
      * Node list view base class 
      * 
      */
-    public class NodeListViewBase extends Canvas
+    public class NodeListViewBase extends Group
     {       
         protected var fileContextMenu:ConfigurableContextMenu;
         protected var folderContextMenu:ConfigurableContextMenu;
 
-        public var breadCrumbAreaBox:HBox;
+        public var breadCrumbAreaBox:HGroup;
         public var breadCrumb:BreadcrumbDisplay;
         
         public var viewModeBar:ViewModeBarViewBase;
@@ -55,7 +56,7 @@ package org.integratedsemantics.flexspaces.view.folderview
         
         [Bindable] public var pager:Pager;
         public var pageBar:PagerBar;
-        public var pageSizeCombo:ComboBox;        
+        public var pageSizeCombo:DropDownList;        
         
                   
         /**

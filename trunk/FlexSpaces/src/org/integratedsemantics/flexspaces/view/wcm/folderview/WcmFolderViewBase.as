@@ -7,6 +7,8 @@ package org.integratedsemantics.flexspaces.view.wcm.folderview
     import org.integratedsemantics.flexspaces.presmodel.wcm.folderview.WcmFolderViewPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.FolderViewBase;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
 
 
     /**
@@ -75,7 +77,10 @@ package org.integratedsemantics.flexspaces.view.wcm.folderview
         
         override protected function onPageSizeChange(event:Event):void
         {
-            folderViewPresModel.model.flexSpacesPresModel.wcmPageSize = event.target.value;            
+            var dropDownList:DropDownList = event.target as DropDownList;
+            var selectedItem:int = dropDownList.selectedItem;
+            
+            folderViewPresModel.model.flexSpacesPresModel.wcmPageSize = selectedItem;            
             pageBar.curPageIndex = 0;            
         }
         

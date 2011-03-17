@@ -2,16 +2,16 @@ package org.integratedsemantics.flexspaces.view.wcm.createfolder
 {
     import flash.events.MouseEvent;
     
+    import mx.containers.FormItem;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
-    import mx.containers.FormItem;
-    import mx.controls.TextInput;
-    
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.wcm.createfolder.WcmCreateFolderPresModel;
     import org.integratedsemantics.flexspaces.view.createspace.AddedFolderEvent;
+    
+    import spark.components.TextInput;
 
     /**
      * Base class for wcm create folder views  

@@ -1,15 +1,17 @@
 package com.decoursey.components {
-	import mx.core.UITextField;
+	import com.decoursey.components.event.BreadcrumbDisplayEvent;
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.text.TextLineMetrics;
+	
 	import mx.core.Container;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
-	import com.decoursey.components.event.BreadcrumbDisplayEvent;
-	import mx.containers.Canvas;
+	import mx.core.FlexGlobals;
 	import mx.core.UIComponent;
-	import flash.display.DisplayObject;
+	import mx.core.UITextField;
+	import mx.styles.CSSStyleDeclaration;
+	
+	import spark.components.Group;
 	
 	
 	[Style(name="crumbBackgroundColor",type="Number",format="Color",inherit="no")]
@@ -20,6 +22,8 @@ package com.decoursey.components {
 	[Style(name="cornerRadius",type="Number",format="int",inherit="no")]
 	[Event(name="breadcrumbAction", type="com.decoursey.components.event.BreadcrumbDisplayEvent")]
 	
+    // flex4 todo convert to use spark Group instead of Container
+    
 	public class BreadcrumbDisplay extends Container {
 		
 		
@@ -277,10 +281,16 @@ package com.decoursey.components {
     
         // Define a static method.
         private static function classConstruct():Boolean {
-            if (!StyleManager.getStyleDeclaration("BreadcrumbDisplay")) {
+            
+            // flex4 if (!StyleManager.getStyleDeclaration("BreadcrumbDisplay")) {
+            if (!FlexGlobals.topLevelApplication.styleManager.getStyleDeclaration("BreadcrumbDisplay")) {
+            
                 // If there is no CSS definition for BreadcrumbDisplay, 
                 // then create one and set the default value.
                 var newStyleDeclaration:CSSStyleDeclaration = new CSSStyleDeclaration();
+
+                // flex4 todo: note style setting here worked flex3, didn't work / had no impact when swiched to flex4/spark app,
+                // only setting style in flexspaces.css got to work on flex4 
                 
                 // sreiner quick fix to have diffrent style
                 newStyleDeclaration.setStyle("crumbBackgroundColor", 0x333333);
@@ -303,7 +313,8 @@ package com.decoursey.components {
                 //newStyleDeclaration.setStyle("fontSize", 13);
                 
                 
-	         	StyleManager.setStyleDeclaration("BreadcrumbDisplay", newStyleDeclaration, true);
+	         	// flex4 StyleManager.setStyleDeclaration("BreadcrumbDisplay", newStyleDeclaration, true);
+                FlexGlobals.topLevelApplication.styleManager.setStyleDeclaration("BreadcrumbDisplay", newStyleDeclaration, true);                                                
             }
             return true;
         }

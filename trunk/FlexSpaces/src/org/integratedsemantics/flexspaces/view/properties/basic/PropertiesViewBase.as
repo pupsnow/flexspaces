@@ -4,7 +4,6 @@ package org.integratedsemantics.flexspaces.view.properties.basic
     
     import mx.containers.FormItem;
     import mx.controls.Text;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
@@ -12,6 +11,8 @@ package org.integratedsemantics.flexspaces.view.properties.basic
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
+    
+    import spark.components.TextInput;
 
 
     /**
@@ -55,7 +56,7 @@ package org.integratedsemantics.flexspaces.view.properties.basic
 
         [Bindable]
         public var propPresModel:PropertiesPresModel;
-
+        
                 
         /**
          * Constructor

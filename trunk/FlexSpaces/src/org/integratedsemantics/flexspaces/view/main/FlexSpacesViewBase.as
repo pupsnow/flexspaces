@@ -11,14 +11,11 @@ package org.integratedsemantics.flexspaces.view.main
     import flexlib.events.SuperTabEvent;
     
     import mx.binding.utils.ChangeWatcher;
-    import mx.containers.Box;
-    import mx.containers.HBox;
     import mx.containers.HDividedBox;
     import mx.containers.VBox;
     import mx.containers.VDividedBox;
     import mx.containers.ViewStack;
     import mx.controls.Button;
-    import mx.controls.Label;
     import mx.events.FlexEvent;
     import mx.events.IndexChangedEvent;
     import mx.events.MenuEvent;
@@ -69,6 +66,11 @@ package org.integratedsemantics.flexspaces.view.main
     import org.integratedsemantics.flexspaces.view.tasks.taskspanel.TasksPanelViewBase;
     import org.integratedsemantics.flexspaces.view.versions.versionlist.VersionListViewBase;
     import org.integratedsemantics.flexspaces.view.wcm.browser.WcmRepoBrowserViewBase;
+    
+    import spark.components.HGroup;
+    import spark.components.Label;
+    import spark.components.NavigatorContent;
+    import spark.components.VGroup;
 
 
     /**
@@ -90,10 +92,10 @@ package org.integratedsemantics.flexspaces.view.main
         public var tasksTabIndex:int = -1;
         public var wcmTabIndex:int = -1;             
 
-        public var flexspacesviews:VBox;
+        public var flexspacesviews:VGroup;
         
-        public var loginPage:VBox;
-        public var header:HBox;
+        public var loginPage:NavigatorContent;
+        public var header:HGroup;
         
         public var searchView:SearchViewBase;
         public var logoutView:LogoutViewBase;
@@ -102,7 +104,7 @@ package org.integratedsemantics.flexspaces.view.main
         
         public var viewStack:ViewStack;
         
-        public var loginPanel:Box;
+        public var loginPanel:VGroup;
         public var loginView:LoginViewBase;
         
         public var navPanelAndTabs:HDividedBox;
@@ -125,7 +127,7 @@ package org.integratedsemantics.flexspaces.view.main
         public var wcmTab:VBox;
         public var wcmBrowserView:WcmRepoBrowserViewBase;
             
-        public var toolbar1:HBox;
+        public var toolbar1:HGroup;
         
         public var createSpaceBtn:Button;
         public var uploadFileBtn:Button;
@@ -964,12 +966,13 @@ package org.integratedsemantics.flexspaces.view.main
                 {
                     // add tab for file
                     var count:int = tabNav.numChildren;
+                    // flex4 spark todo: change VBox to VGroup but would need label                    
                     var tab:VBox = new VBox();
                     tab.percentHeight = 100;
                     tab.percentWidth = 100;
                     tab.label = selectedItem.name;
                     tab.id = selectedItem.name;
-                    tab.setStyle("backgroundColor", 0x000000);
+                    tab.setStyle("backgroundColor", 0x333333);
                     tabNav.addChild(tab);                       
                     tabNav.selectedIndex = count;            
                             
@@ -1002,12 +1005,13 @@ package org.integratedsemantics.flexspaces.view.main
                 {
                     // add tab for file
                     var count:int = tabNav.numChildren;
+                    // flex4 spark todo: change VBox to VGroup but would need label
                     var tab:VBox = new VBox();
                     tab.percentHeight = 100;
                     tab.percentWidth = 100;
                     tab.label = selectedItem.name;
                     tab.id = selectedItem.name;
-                    tab.setStyle("backgroundColor", 0x000000);
+                    tab.setStyle("backgroundColor", 0x333333);
                     tabNav.addChild(tab);                       
                     tabNav.selectedIndex = count;            
                             
@@ -1608,6 +1612,7 @@ package org.integratedsemantics.flexspaces.view.main
                         mainMenu.enableMenuItem("edit", "properties", readPermission);                        
                         wcmBrowserView.enableContextMenuItem("rename", writePermission, fileContextMenu);  
                         wcmBrowserView.enableContextMenuItem("properties", readPermission, fileContextMenu);  
+                        this.propertiesBtn.enabled = readPermission;                        
 
                         if (selectedItem.isFolder != true)
                         {                                                    

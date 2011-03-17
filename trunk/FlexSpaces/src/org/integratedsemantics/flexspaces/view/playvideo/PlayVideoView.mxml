@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<playvideo:PlayVideoViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+<playvideo:PlayVideoViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:playvideo="org.integratedsemantics.flexspaces.view.playvideo.*"
-    creationComplete="onCreationComplete(event)" verticalGap="4" borderStyle="solid" verticalAlign="middle">
+    creationComplete="onCreationComplete(event)"  verticalAlign="middle" 
+     contentBackgroundColor="#333333"  width="100%" height="100%" 
+     paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10">
 
-    <mx:Metadata>[ResourceBundle("PlayVideoView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("PlayVideoView")]</fx:Metadata>
   
-    <mx:Canvas width="100%" height="100%" horizontalScrollPolicy="off">
-        <mx:Panel title="" id="contentPanel" width="100%"  height="100%" horizontalScrollPolicy="off"> 
-            <mx:VideoDisplay id="videoDisplay" width="100%" height="100%"/>   
-        </mx:Panel> 
-    </mx:Canvas>
+    <s:VGroup width="100%" height="100%" contentBackgroundColor="#333333">
 
-    <mx:HBox width="100%" id="videoTabbar" color="#ffffff" backgroundColor="#777777"  height="40" borderStyle="solid" verticalAlign="middle">                         
-        <mx:HBox horizontalGap="0" verticalCenter="0">
-            <mx:Button id="playBtn" label="{resourceManager.getString('PlayVideoView', 'playBtn_label' )}" click="videoDisplay.play();"/>      
-            <mx:Spacer width="5"/>
-            <mx:Button id="pauseBtn" label="{resourceManager.getString('PlayVideoView', 'pauseBtn_label' )}" click="videoDisplay.pause();"/>      
-            <mx:Spacer width="5"/>
-            <mx:Button id="stopBtn" label="{resourceManager.getString('PlayVideoView', 'stopBtn_label' )}" click="videoDisplay.stop();"/>      
-        </mx:HBox>
-    </mx:HBox> 
+        <mx:VideoDisplay id="videoDisplay" width="100%"  height="95%" contentBackgroundColor="#333333" />   
 
+        <s:HGroup width="100%" height="40"  verticalAlign="middle" horizontalAlign="center" contentBackgroundColor="#333333">                         
+            <s:Button id="playBtn" label="{resourceManager.getString('PlayVideoView', 'playBtn_label' )}" click="videoDisplay.play();"/>      
+            <mx:Spacer width="5"/>
+            <s:Button id="pauseBtn" label="{resourceManager.getString('PlayVideoView', 'pauseBtn_label' )}" click="videoDisplay.pause();"/>      
+            <mx:Spacer width="5"/>
+            <s:Button id="stopBtn" label="{resourceManager.getString('PlayVideoView', 'stopBtn_label' )}" click="videoDisplay.stop();"/>      
+        </s:HGroup> 
+
+    </s:VGroup>
+        
 </playvideo:PlayVideoViewBase>

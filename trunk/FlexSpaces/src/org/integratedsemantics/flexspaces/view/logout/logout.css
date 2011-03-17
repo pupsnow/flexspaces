@@ -1,15 +1,18 @@
 /* CSS file for logout form */
 
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
 .logout
 {
    border-style:solid;
    border-thickness:0;
-   border-color:#FFFFFF;   
+   border-color: #333333;   
 }
 
 .logoutLink
 {
 	color: #0E9EE5;
-    rollOverColor: #0E9EE5;
+    rollOverColor: #0E7EC5;
     text-decoration: underline;
 }

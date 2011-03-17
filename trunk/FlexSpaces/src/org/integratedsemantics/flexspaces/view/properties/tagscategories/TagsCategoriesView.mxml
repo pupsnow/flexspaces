@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tagscategories:TagsCategoriesViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+<tagscategories:TagsCategoriesViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:semantictags="org.integratedsemantics.flexspaces.view.semantictags.properties.*"   
     xmlns:tags="org.integratedsemantics.flexspaces.view.tags.properties.*"   
     xmlns:categories="org.integratedsemantics.flexspaces.view.categories.properties.*"   
     xmlns:tagscategories="org.integratedsemantics.flexspaces.view.properties.tagscategories.*"
-    width="520" height="600" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog" showCloseButton="true">
+    width="520" height="600" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog">
 
-    <mx:Metadata>[ResourceBundle("TagsCategoriesView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("TagsCategoriesView")]</fx:Metadata>
     
-    <mx:Style source="../../../framework/presmodel/dialog.css"/>
+    <fx:Style source="../../../framework/presmodel/dialog.css"/>
 
-    <mx:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="400" styleName="mainArea" id="nameFormItem">    
-        <mx:Label id="nameLabel" width="250"/>
-    </mx:FormItem>
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
+
+    <s:HGroup width="100%" styleName="mainArea" verticalAlign="middle">        
+        <mx:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="400" styleName="mainArea" id="nameFormItem">    
+            <s:Label id="nameLabel" width="250"/>
+        </mx:FormItem>        
+    </s:HGroup>
     
     <mx:Spacer height="5"/>
     
@@ -28,8 +36,10 @@
 
     <mx:Spacer height="5"/>
     
-    <mx:HBox width="100%" styleName="buttonArea"> 
-        <mx:Button id="closeBtn" label="{resourceManager.getString('TagsCategoriesView', 'closeBtn_label' )}"/>    
-    </mx:HBox> 
+    <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="closeBtn" label="{resourceManager.getString('TagsCategoriesView', 'closeBtn_label' )}"/>    
+    </s:HGroup> 
 
+    </s:VGroup>
+        
 </tagscategories:TagsCategoriesViewBase>

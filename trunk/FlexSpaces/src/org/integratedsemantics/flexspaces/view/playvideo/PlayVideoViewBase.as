@@ -2,25 +2,24 @@ package org.integratedsemantics.flexspaces.view.playvideo
 {
     import flash.events.Event;
     
-    import mx.containers.Panel;
-    import mx.containers.VBox;
-    import mx.controls.Button;
     import mx.controls.VideoDisplay;
     
     import org.integratedsemantics.flexspaces.presmodel.playvideo.PlayVideoPresModel;
+    
+    import spark.components.Button;
+    import spark.components.VGroup;
     
         
     /**
      * Base class for play video views  
      * 
      */
-    public class PlayVideoViewBase extends VBox
+    public class PlayVideoViewBase extends VGroup
     {
-        public var playBtn:Button
-        public var pauseBtn:Button
-        public var stopBtn:Button
+        public var playBtn:Button;
+        public var pauseBtn:Button;
+        public var stopBtn:Button;
         
-        public var contentPanel:Panel;
         public var videoDisplay:VideoDisplay;
         
         [Bindable]

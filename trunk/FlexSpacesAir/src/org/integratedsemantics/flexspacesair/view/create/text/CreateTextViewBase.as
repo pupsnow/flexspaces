@@ -2,13 +2,14 @@ package org.integratedsemantics.flexspacesair.view.create.text
 {
     import flash.events.MouseEvent;
     
-    import mx.controls.TextArea;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspacesair.presmodel.create.CreateTextPresModel;
+    
+    import spark.components.TextArea;
+    import spark.components.TextInput;
 
 
     /**

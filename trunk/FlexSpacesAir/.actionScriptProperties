@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="FlexSpacesAir.mxml" version="3">
-  <compiler additionalCompilerArguments="-source-path+=locale/{locale} -locale=en_US -allow-source-path-overlap=true" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.28" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="true" warn="true">
+<actionScriptProperties analytics="false" mainApplicationPath="FlexSpacesAir.mxml" version="6">
+  <compiler additionalCompilerArguments="-source-path+=locale/{locale} -locale=en_US -allow-source-path-overlap=true" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/FlexSpaces/src"/>
     </compilerSourcePath>
@@ -11,7 +11,9 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="FlexSpacesAir.mxml"/>
+    <application path="FlexSpacesAir.mxml">
+      <airExcludes/>
+    </application>
   </applications>
   <modules/>
   <buildCSSFiles/>

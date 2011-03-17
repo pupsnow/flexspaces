@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<createhtml:CreateHtmlViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+<createhtml:CreateHtmlViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:createhtml="org.integratedsemantics.flexspacesair.view.create.html.*"
-    width="750" height="600" title="Create Content - HTML" styleName="dialog" showCloseButton="true">
+    width="750" height="600" title="Create Content - HTML" styleName="dialog">
 
-    <mx:Style source="../create.css"/>
-    
+    <fx:Style source="../create.css"/>
+
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
+       
     <mx:Form styleName="mainArea">
         <mx:FormItem label="Name:"  width="400"  styleName="mainArea">
-            <mx:TextInput id="nodename" width="250" text="New HTML Doc.html" styleName="input"/>
+            <s:TextInput id="nodename" width="250" text="New HTML Doc.html" styleName="input"/>
         </mx:FormItem>
     </mx:Form>
     
@@ -15,10 +21,12 @@
     
     <mx:Spacer height="20"/>
                   
-    <mx:HBox width="100%" styleName="buttonArea"> 
-        <mx:Button id="okBtn" label="OK"/> 
+    <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="okBtn" label="OK"/> 
         <mx:Spacer width="20"/>
-        <mx:Button id="cancelBtn" label="Cancel"/>
-    </mx:HBox> 
-    
+        <s:Button id="cancelBtn" label="Cancel"/>
+    </s:HGroup> 
+        
+    </s:VGroup>
+
 </createhtml:CreateHtmlViewBase>

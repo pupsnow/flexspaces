@@ -4,12 +4,13 @@ package org.integratedsemantics.flexspacesair.view.create.html
     import flash.filesystem.File;
     
     import mx.controls.HTML;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspacesair.presmodel.create.CreateHtmlPresModel;
+    
+    import spark.components.TextInput;
 
 
     /**

@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspacesair.app
 {
     import flash.events.Event;
     
-    import mx.core.WindowedApplication;
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
@@ -18,6 +17,8 @@ package org.integratedsemantics.flexspacesair.app
     import org.integratedsemantics.flexspaces.presmodel.search.results.SearchResultsPresModel;
     import org.integratedsemantics.flexspaces.view.error.ErrorDialogView;
     import org.springextensions.actionscript.context.support.FlexXMLApplicationContext;
+    
+    import spark.components.WindowedApplication;
         
         
     public class AirAppBase extends WindowedApplication

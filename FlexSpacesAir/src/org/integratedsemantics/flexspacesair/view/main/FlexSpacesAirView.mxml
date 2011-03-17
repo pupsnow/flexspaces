@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<view:FlexSpacesAirViewBase xmlns:mx="http://www.adobe.com/2006/mxml" 
+<view:FlexSpacesAirViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:view="org.integratedsemantics.flexspacesair.view.main.*"
     xmlns:flexlib="flexlib.containers.*"
     xmlns:menu="org.integratedsemantics.flexspaces.view.menu.menubar.*"
@@ -15,85 +18,87 @@
     xmlns:nav="org.integratedsemantics.flexspaces.view.nav.*"
     creationComplete="onCreationComplete(event)">
 
-    <mx:Metadata>[ResourceBundle("FlexSpacesView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("FlexSpacesView")]</fx:Metadata>
 
-    <mx:VBox width="100%" height="100%" id="flexspacesviews">
+    <s:VGroup width="100%" height="100%" id="flexspacesviews">
                     
         <mx:ViewStack id="viewStack" width="100%" height="100%">
         
             <!-- before login, getting config -->
-            <mx:VBox width="100%" height="100%"/>
+            <s:NavigatorContent width="100%" height="100%"/>
 
             <!-- login view mode -->
-            <mx:VBox width="100%" height="100%" id="loginPage" visible="false">
+            <s:NavigatorContent width="100%" height="100%" id="loginPage" visible="false">
                 <!-- top header area-->
-                <mx:HBox width="100%" height="40">
+                <s:HGroup width="100%" height="40">
                     <!-- flexspaces logo -->
-                    <mx:HBox width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
+                    <s:HGroup width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
                         <!--mx:Image source="@Embed(source='/images/flexspaces/alfrescologo35_black.png')"/-->
-                        <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLoginLabel_text')}" styleName="logoText" id="alfrescoLoginLabel"/-->            
+                        <!--s:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLoginLabel_text')}" styleName="logoText" id="alfrescoLoginLabel"/-->            
                         <mx:Spacer width="5"/>
-                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLoginLabel_text')}" styleName="logoText" id="flexspacesLoginLabel"/>            
-                        <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLcLoginLabel_text')}" styleName="logoText" id="flexspacesLoginLabel"/-->            
-                    </mx:HBox>
+                        <s:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLoginLabel_text')}" styleName="logoText" id="flexspacesLoginLabel"/>            
+                        <!--s:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLcLoginLabel_text')}" styleName="logoText" id="flexspacesLoginLabel"/-->            
+                    </s:HGroup>
                     <!-- integrated semantics logo -->
-                    <mx:HBox width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
-                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLoginLabel_text')}" styleName="logoText" id="integratedsemanticsLoginLabel"/>            
+                    <s:HGroup width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
+                        <s:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLoginLabel_text')}" styleName="logoText" id="integratedsemanticsLoginLabel"/>            
                         <mx:Spacer width="5"/>
-                    </mx:HBox>
-                </mx:HBox>
+                    </s:HGroup>
+                </s:HGroup>
                 <!-- login panel -->
-                <mx:Box id="loginPanel" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+                <s:VGroup id="loginPanel" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
                     <login:LoginView id="loginView" loginPresModel="{flexSpacesPresModel.loginPresModel}" creationComplete="onLoginViewCreated(event)"/>
-                </mx:Box>
-            </mx:VBox>
+                </s:VGroup>
+            </s:NavigatorContent>
 
             <!-- after login, getting info -->
-            <mx:VBox width="100%" height="100%"/>
+            <s:NavigatorContent width="100%" height="100%"/>
                               
             <!-- after login, after get info, main view mode -->
             <mx:VBox width="100%" height="100%">
                 
                 <!-- logos -->
-                <mx:HBox id="header" width="100%" height="40">
+                <s:HGroup id="header" width="100%" height="40">
                     <!-- flexspaces logo -->
-                    <mx:HBox width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
+                    <s:HGroup width="100%" height="100%" horizontalAlign="left" verticalAlign="middle">
                         <!--mx:Image source="@Embed(source='/images/flexspaces/alfrescologo35_black.png')"/-->
-                        <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLabel_text')}" styleName="logoText" id="alfrescoLabel"/-->            
+                        <!--s:Label text="{resourceManager.getString('FlexSpacesView', 'alfrescoLabel_text')}" styleName="logoText" id="alfrescoLabel"/-->            
                         <mx:Spacer width="5"/>
-                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLabel_text')}" styleName="logoText" id="flexspacesLabel"/>            
-                        <!--mx:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLcLabel_text')}" styleName="logoText" id="flexspacesLabel"/-->            
-                    </mx:HBox>
+                        <s:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLabel_text')}" styleName="logoText" id="flexspacesLabel"/>            
+                        <!--s:Label text="{resourceManager.getString('FlexSpacesView', 'flexspacesLcLabel_text')}" styleName="logoText" id="flexspacesLabel"/-->            
+                    </s:HGroup>
                     <!-- integrated semantics logo -->
-                    <mx:HBox width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
-                        <mx:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLabel_text')}" styleName="logoText" id="integratedsemanticsLabel"/>            
+                    <s:HGroup width="100%" height="100%" horizontalAlign="right" verticalAlign="middle">
+                        <s:Label text="{resourceManager.getString('FlexSpacesView', 'integratedsemanticsLabel_text')}" styleName="logoText" id="integratedsemanticsLabel"/>            
                         <mx:Spacer width="5"/>
-                    </mx:HBox>
-                </mx:HBox>
+                    </s:HGroup>
+                </s:HGroup>
 
                 <!-- menu basic search logout  -->
-                <mx:HBox id="menussearchlogout" width="100%" height="30" verticalAlign="top">
+                <s:HGroup id="menussearchlogout" width="100%" height="30" verticalAlign="top">
                     <!-- main menu toolbar -->
                     <menu:ConfigurableMenuBar id="mainMenu" labelField="@label" height="30"
                         configPath="{model.appConfig.srcPath + 'config/' + model.appConfig.locale + '/menubar/mainMenuAir.xml'}"/>
-                    <mx:HBox height="100%" horizontalAlign="right">
+                    <s:HGroup height="100%" horizontalAlign="right">
                         <mx:Spacer width="10"/>
                         <!-- one box search -->   
                         <search:SearchView id="searchView" searchPresModel="{flexSpacesPresModel.searchPresModel}" height="100%" width="100%" verticalAlign="bottom" horizontalAlign="right" />      
-                    </mx:HBox>
-                    <mx:HBox height="100%" horizontalAlign="right">
+                    </s:HGroup>
+                    <s:HGroup height="100%" horizontalAlign="right">
                         <mx:Spacer width="10"/>
                         <!-- logout link  -->   
                         <logout:LogoutView id="logoutView" logoutPresModel="{flexSpacesPresModel.logoutPresModel}" height="100%" width="100%" verticalAlign="bottom" horizontalAlign="right"/>
-                        <mx:Spacer width="5"/>
+                        <mx:Spacer width="10"/>
+                    </s:HGroup>
+                    <s:HGroup height="100%" width="100%" horizontalAlign="right">
                         <!--  logged in as: username -->  
-                        <mx:Label id="welcomeText" color="#0E9EE5" fontStyle="italic"/> 
+                        <s:Label id="welcomeText" color="#0E9EE5" fontStyle="italic"/>                             
                         <mx:Spacer width="5"/>                                                    
-                    </mx:HBox>
-                </mx:HBox>
+                    </s:HGroup>
+                </s:HGroup>
 
                 <!-- buttons toolbar -->
-                <mx:HBox id="toolbar1" height="70" width="100%" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">              
+                <s:HGroup id="toolbar1" height="70" width="100%" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">              
                     <mx:Spacer width="5"/>
                     <mx:Button label="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="createSpaceBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'createSpaceBtn_tooltip' )}" width="90" height="60" icon="@Embed('images/flexspaces/new_folder32.png')"/>            
                     <mx:Button label="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="uploadFileBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'uploadFileBtn_tooltip' )}" width="70" height="60" icon="@Embed('images/icons/add_item_large.gif')"/>            
@@ -112,9 +117,9 @@
                     <mx:Spacer width="5"/>
                     <mx:Button label="{resourceManager.getString('FlexSpacesView', 'propertiesBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="propertiesBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'propertiesBtn_tooltip' )}" width="85" height="60" icon="@Embed('images/icons/category.gif')"/>            
                     <mx:Button label="{resourceManager.getString('FlexSpacesView', 'tagsBtn_label' )}" visible="true" includeInLayout="true" labelPlacement="bottom" id="tagsBtn" toolTip="{resourceManager.getString('FlexSpacesView', 'tagsBtn_tooltip' )}" width="55" height="60" icon="@Embed('images/icons/category.gif')"/>            
-                </mx:HBox>   
+                </s:HGroup>   
 
-                <mx:HDividedBox id="navPanelAndTabs" height="100%" width="100%" styleName="viewStyle" creationPolicy="all">
+                <mx:HDividedBox id="navPanelAndTabs" height="100%" width="100%" creationPolicy="all">
                     
                     <!-- navigation panel with company home tree, user home tree, categories tag cloud, semantics tag clouds/map, favorites -->
                     <nav:NavPanel id="navPanel" navPanelPresModel="{flexSpacesPresModel.navPanelPresModel}" height="100%" width="25%"
@@ -157,6 +162,6 @@
 
         </mx:ViewStack>    
         
-    </mx:VBox>
+    </s:VGroup>
     
 </view:FlexSpacesAirViewBase>

@@ -131,12 +131,13 @@ package org.integratedsemantics.flexspacesair.view.main
             if ((model.ecmServerConfig.serverVersionNum() >= 3.0) && (flexSpacesAirPresModel.showShare == true))
             {
                 // add tab after other tabs
+                // flex4 spark todo: change VBox to VGroup but would need label                 
                 var tab:VBox = new VBox();
                 tab.percentHeight = 100;
                 tab.percentWidth = 100;
                 tab.label = "Share";
                 tab.id = "shareTab";
-                tab.setStyle("backgroundColor", 0x000000);
+                tab.setStyle("backgroundColor", 0x333333);
                 tabNav.addChild(tab); 
                 this.shareTabIndex = tabNav.getChildIndex(tab);
                 tabNav.setClosePolicyForTab(shareTabIndex, SuperTab.CLOSE_NEVER);                        
@@ -147,7 +148,9 @@ package org.integratedsemantics.flexspacesair.view.main
                 browser.percentHeight = 100;
                 var urlBegin:String;
                 urlBegin = model.ecmServerConfig.protocol + "://" + model.ecmServerConfig.domain + ":" + model.ecmServerConfig.port + "/share/";
-                browser.location = urlBegin + "login?username=" + model.userInfo.loginUserName + "&password=" + model.userInfo.loginPassword + "&success=" + urlBegin + "&failure=" + urlBegin;
+                //todo: get single sign on to work with newer share versions
+                //browser.location = urlBegin + "login?username=" + model.userInfo.loginUserName + "&password=" + model.userInfo.loginPassword + "&success=" + urlBegin + "&failure=" + urlBegin;
+                browser.location = urlBegin;
                 tab.addChild(browser);
                 browser.visible = true;
                 browser.includeInLayout = true;

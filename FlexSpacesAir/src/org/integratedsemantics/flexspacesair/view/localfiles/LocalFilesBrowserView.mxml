@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<localfiles:LocalFilesBrowserViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<localfiles:LocalFilesBrowserViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:localfiles="org.integratedsemantics.flexspacesair.view.localfiles.*"
     xmlns:breadcrumb="com.decoursey.components.*"
     creationComplete="onCreationComplete(event)"> 
@@ -10,10 +13,10 @@
     </mx:FileSystemTree>  
           
     <!-- air local files folder list/grid with navigation buttons -->
-    <mx:VBox id="localfilesfolderlist" width="100%" height="100%">
+    <s:VGroup id="localfilesfolderlist" width="100%" height="100%">
 
         <!-- navigation buttons -->
-        <mx:HBox>
+        <s:HGroup horizontalAlign="center">
             <mx:FileSystemHistoryButton id="backBtn" icon="@Embed(source='images/air/back_arrow.png')" dataProvider="{localFileGrid.backHistory}" 
                 enabled="{localFileGrid.canNavigateBack}" click="localFileGrid.navigateBack();" 
                 itemClick="localFileGrid.navigateBack(event.index)"/>
@@ -31,13 +34,13 @@
             
             <mx:Spacer width="10"/>
             
-            <breadcrumb:BreadcrumbDisplay id="localFileBreadCrumb" displayDivider="{File.separator}" delimeter="{File.separator}"/>
-        </mx:HBox>
+            <breadcrumb:BreadcrumbDisplay id="localFileBreadCrumb" displayDivider="{File.separator}" delimeter="{File.separator}" styleName="breadCrumb"/>
+        </s:HGroup>
         
         <!-- folder file grid -->        
         <mx:FileSystemDataGrid id="localFileGrid" width="100%" height="100%" dragEnabled="true" dropEnabled="false"
             dragMoveEnabled="true" allowMultipleSelection="true" directory="{File.documentsDirectory}" styleName="fileGridStyle" />
 
-    </mx:VBox>  
+    </s:VGroup>  
 
 </localfiles:LocalFilesBrowserViewBase>

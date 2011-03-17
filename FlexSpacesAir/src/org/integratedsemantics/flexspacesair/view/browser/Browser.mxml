@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="init()">
-    <mx:Script>
+<mx:VBox 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    creationComplete="init()">
+    
+    <fx:Script>
         <![CDATA[
             import org.integratedsemantics.flexspacesair.view.browser.CustomHtmlHost;
             
@@ -36,17 +41,17 @@
                 urlTextInput.text = location;
             }
         ]]>
-    </mx:Script>
+    </fx:Script>
         
-    <mx:HBox width="100%"> 
+    <s:HGroup width="100%"> 
         <mx:Button id="backBtn" icon="@Embed(source='images/air/back_arrow.png')" click="goBack()"/>
         <mx:Spacer width="3"/>
         <mx:Button id="forwardBtn" icon="@Embed(source='images/air/forward_arrow.png')" click="goForward()"/>
         <mx:Spacer width="3"/>
-        <mx:TextInput id="urlTextInput" width="50%" />    
+        <s:TextInput id="urlTextInput" width="50%" />    
         <mx:Spacer width="3"/>
-        <mx:Button label="Go" click="go()"/>    
-    </mx:HBox>    
+        <s:Button label="Go" click="go()"/>    
+    </s:HGroup>    
     <mx:HTML id="html" width="100%" height="100%"  complete="loadComplete(event)" />    
     
 </mx:VBox>

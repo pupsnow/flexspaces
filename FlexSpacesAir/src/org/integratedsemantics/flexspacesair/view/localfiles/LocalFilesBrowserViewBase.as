@@ -7,7 +7,6 @@ package org.integratedsemantics.flexspacesair.view.localfiles
     import flash.filesystem.File;
     
     import mx.containers.HDividedBox;
-    import mx.containers.VBox;
     import mx.controls.Button;
     import mx.controls.FileSystemDataGrid;
     import mx.controls.FileSystemHistoryButton;
@@ -15,6 +14,8 @@ package org.integratedsemantics.flexspacesair.view.localfiles
     import mx.events.FileEvent;
     
     import org.integratedsemantics.flexspacesair.presmodel.localfiles.LocalFilesBrowserPresModel;
+    
+    import spark.components.VGroup;
     
 
     /**
@@ -25,7 +26,7 @@ package org.integratedsemantics.flexspacesair.view.localfiles
     {
         public var localfilestree:FileSystemTree;
         
-        public var localfilesfolderlist:VBox;       
+        public var localfilesfolderlist:VGroup;       
         
         public var backBtn:FileSystemHistoryButton;        
         public var forwardBtn:FileSystemHistoryButton;

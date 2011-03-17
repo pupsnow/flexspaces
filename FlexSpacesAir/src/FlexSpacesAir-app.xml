@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<application xmlns="http://ns.adobe.com/air/application/1.5">
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<application xmlns="http://ns.adobe.com/air/application/2.0">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
-	Specifies parameters for identifying, installing, and launching AIR applications.
-	See http://www.adobe.com/go/air_1.0_application_descriptor for complete documentation.
+    Specifies parameters for identifying, installing, and launching AIR applications.
 
-	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/1.0.M6 
-			The last segment of the namespace specifies the version 
-			of the AIR runtime required for this application to run.
-			
-	minimumPatchLevel - The minimum patch level of the AIR runtime required to run 
-			the application. Optional.
+    xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/1.5
+            The last segment of the namespace specifies the version 
+            of the AIR runtime required for this application to run.
+            
+    minimumPatchLevel - The minimum patch level of the AIR runtime required to run 
+            the application. Optional.
 -->
 
 	<!-- The application identifier string, unique to this application. Required. -->
@@ -30,7 +29,7 @@
 	<!-- <description>FlexSpacesAir for Alfresco</description> -->
 
 	<!-- Copyright information. Optional -->
-	<!-- <copyright>IntegratedSemantics</copyright> -->
+	<!-- <copyright>Integrated Semantics</copyright> -->
 
 	<!-- Settings for the application's initial window. Required. -->
 	<initialWindow>

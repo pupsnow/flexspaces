@@ -3,20 +3,21 @@ package org.integratedsemantics.flexspaces.view.logout
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import mx.containers.Box;
 	import mx.controls.Alert;
 	import mx.controls.LinkButton;
 	import mx.events.CloseEvent;
 	import mx.rpc.Responder;
 	
 	import org.integratedsemantics.flexspaces.presmodel.logout.LogoutPresModel;
+	
+	import spark.components.VGroup;
     
         
     /**
      * Base class for logout views  
      * 
      */
-    public class LogoutViewBase extends Box
+    public class LogoutViewBase extends VGroup
     {
         public var logoutBtn:LinkButton;
 
@@ -58,12 +59,6 @@ package org.integratedsemantics.flexspaces.view.logout
 			var a:Alert = Alert.show("Are you sure to Logout ?", "Confirmation", 
 								      Alert.YES|Alert.NO, this, logout,	confirmIcon, Alert.NO);
 			
-			// modify the look of the Alert box
-			a.setStyle("backgroundColor", 0xffffff);
-			a.setStyle("backgroundAlpha", 0.50);
-			a.setStyle("borderColor", 0xffffff);
-			a.setStyle("borderAlpha", 0.75);
-			a.setStyle("color", 0x000000); // text color
 		}
 		
 		/**

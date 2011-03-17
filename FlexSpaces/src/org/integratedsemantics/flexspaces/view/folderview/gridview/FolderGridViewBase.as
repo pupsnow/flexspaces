@@ -1,19 +1,20 @@
 package org.integratedsemantics.flexspaces.view.folderview.gridview
 {
-    import mx.containers.VBox;
     import mx.controls.DataGrid;
     import mx.controls.NumericStepper;
     
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.paging.Pager;
     import org.integratedsemantics.flexspaces.view.folderview.paging.PagerBar;
+    
+    import spark.components.VGroup;
 
         
     /**
      * Folder grid base view class 
      * 
      */
-    public class FolderGridViewBase extends  VBox
+    public class FolderGridViewBase extends VGroup
     {
         [Bindable] public var nodeListViewPresModel:NodeListViewPresModel;
 

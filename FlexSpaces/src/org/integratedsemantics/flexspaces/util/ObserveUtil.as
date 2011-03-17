@@ -4,9 +4,12 @@ package org.integratedsemantics.flexspaces.util
     import flash.events.MouseEvent;
     
     import mx.controls.Button;
-    import mx.controls.TextInput;
+    import mx.controls.LinkButton;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
+    
+    import spark.components.Button;
+    import spark.components.TextInput;
 
 
     /**
@@ -22,10 +25,28 @@ package org.integratedsemantics.flexspaces.util
          * @param handler event listener handler to hook up
          * 
          */
-        public static function observeButtonClick(button:Button, handler:Function):void
+        public static function observeButtonClick(button:spark.components.Button, handler:Function):void
         {
             button.addEventListener(MouseEvent.CLICK, handler);
         }    
+
+        public static function observeMxButtonClick(button:mx.controls.Button, handler:Function):void
+        {
+            button.addEventListener(MouseEvent.CLICK, handler);
+        }    
+        
+        /**
+         * Hook up event listener for a button click
+         *  
+         * @param button  button to add click listener for
+         * @param handler event listener handler to hook up
+         * 
+         */
+        public static function observeLinkButtonClick(button:LinkButton, handler:Function):void
+        {
+            button.addEventListener(MouseEvent.CLICK, handler);
+        }    
+        
         
         /**
          * Hook up event listener for a text input field change

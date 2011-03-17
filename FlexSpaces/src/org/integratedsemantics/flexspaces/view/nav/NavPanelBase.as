@@ -306,14 +306,8 @@ package org.integratedsemantics.flexspaces.view.nav
          */
         protected function onAddRemoveFolder(event:Event):void
         {
-            if (companyHomeTreeActive == true)
-            {
-                companyHomeTreeView.refreshCurrentFolder();
-            }
-            if (userHomeTreeActive == true)
-            {
-                userHomeTreeView.refreshCurrentFolder();
-            }
+            companyHomeTreeView.refreshCurrentFolder();
+            userHomeTreeView.refreshCurrentFolder();
         }  
         
     }

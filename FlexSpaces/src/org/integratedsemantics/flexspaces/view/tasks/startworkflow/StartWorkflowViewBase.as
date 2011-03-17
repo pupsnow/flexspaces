@@ -4,16 +4,17 @@ package org.integratedsemantics.flexspaces.view.tasks.startworkflow
     import flash.events.MouseEvent;
     
     import mx.containers.FormItem;
-    import mx.controls.ComboBox;
     import mx.controls.DateField;
-    import mx.controls.TextArea;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.tasks.startworkflow.StartWorkflowPresModel;
+    
+    import spark.components.DropDownList;
+    import spark.components.TextArea;
+    import spark.components.TextInput;
 
 
     /**
@@ -24,7 +25,7 @@ package org.integratedsemantics.flexspaces.view.tasks.startworkflow
     {
         public var onComplete:Function;
 
-        public var workflowTypeCombo:ComboBox;
+        public var workflowTypeCombo:DropDownList;
         
         public var assignToTextInput:TextInput;
         

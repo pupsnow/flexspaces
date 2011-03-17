@@ -19,7 +19,7 @@
 
         <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->   
         <!-- for livecycle  content services ES2 9.0, use the version of alfresco included (3.1)  -->               
-        <property name="serverVersion" value="3.2"/>     
+        <property name="serverVersion" value="3.4"/>     
            
     </object>
 

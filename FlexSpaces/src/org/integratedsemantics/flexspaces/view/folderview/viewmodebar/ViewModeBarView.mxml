@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<viewmodebar:ViewModeBarViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<viewmodebar:ViewModeBarViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:viewmodebar="org.integratedsemantics.flexspaces.view.folderview.viewmodebar.*">
 
-    <mx:Metadata>[ResourceBundle("ViewModeBarView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("ViewModeBarView")]</fx:Metadata>
 
     <mx:ToggleButtonBar id="toggleButtonBar" buttonWidth="30" buttonHeight="30" horizontalGap="8" 
         selectedIndex="0" horizontalAlign="right">
         <mx:dataProvider>
-            <mx:Object icon="@Embed(source='/images/flexspaces/icon_view.png')"/>
-            <mx:Object icon="@Embed(source='/images/flexspaces/detail_view.png')"/>
-            <mx:Object icon="@Embed(source='/images/flexspaces/coverflow_view.png')"/>
+            <fx:Object icon="@Embed(source='/images/flexspaces/icon_view.png')"/>
+            <fx:Object icon="@Embed(source='/images/flexspaces/detail_view.png')"/>
+            <fx:Object icon="@Embed(source='/images/flexspaces/coverflow_view.png')"/>
         </mx:dataProvider>            
     </mx:ToggleButtonBar>            
 

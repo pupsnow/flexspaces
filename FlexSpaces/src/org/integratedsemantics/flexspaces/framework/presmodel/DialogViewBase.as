@@ -2,15 +2,17 @@ package org.integratedsemantics.flexspaces.framework.presmodel
 {
     import flash.events.MouseEvent;
     
-    import mx.containers.TitleWindow;
     import mx.controls.Button;
-    import mx.controls.TextInput;
     import mx.core.UIComponent;
     import mx.events.CloseEvent;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.util.ObserveUtil;
+    
+    import spark.components.Button;
+    import spark.components.TextInput;
+    import spark.components.TitleWindow;
 
 
     /**
@@ -19,9 +21,9 @@ package org.integratedsemantics.flexspaces.framework.presmodel
      */
     public class DialogViewBase extends TitleWindow
     {
-        public var okBtn:Button;
-        public var cancelBtn:Button;
-        public var closeBtn:Button;
+        public var okBtn:spark.components.Button;
+        public var cancelBtn:spark.components.Button;
+        public var closeBtn:spark.components.Button;
         
         /**
          * Constructor 
@@ -114,11 +116,16 @@ package org.integratedsemantics.flexspaces.framework.presmodel
          * @param handler event listener handler to hook up
          * 
          */
-        protected function observeButtonClick(button:Button, handler:Function):void
+        protected function observeButtonClick(button:spark.components.Button, handler:Function):void
         {
             ObserveUtil.observeButtonClick(button, handler);
         }       
 
+        protected function observeMxButtonClick(button:mx.controls.Button, handler:Function):void
+        {
+            ObserveUtil.observeMxButtonClick(button, handler);
+        }               
+        
         /**
          * Hook up event listener for a text input field change
          *  

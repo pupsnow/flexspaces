@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<browser:BrowserViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<browser:BrowserViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:browser="org.integratedsemantics.flexspaces.view.browser.*"
     xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*"         
     xmlns:folderview="org.integratedsemantics.flexspaces.view.folderview.*"
     xmlns:versionlist="org.integratedsemantics.flexspaces.view.versions.versionlist.*"
     creationComplete="onCreationComplete(event)">
   
-    <mx:Metadata>[ResourceBundle("RepoBrowserView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("RepoBrowserView")]</fx:Metadata>
     
 	<!-- dual repository folder lists -->
 	<mx:HDividedBox width="100%" height="100%" resizeToContent="true" dividerThickness="10">

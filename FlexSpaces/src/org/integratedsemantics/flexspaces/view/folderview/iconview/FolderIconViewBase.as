@@ -1,18 +1,19 @@
 package org.integratedsemantics.flexspaces.view.folderview.iconview
 {
-    import mx.containers.VBox;
     import mx.controls.NumericStepper;
     import mx.controls.TileList;
     
     import org.integratedsemantics.flexspaces.presmodel.folderview.NodeListViewPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.paging.Pager;
     import org.integratedsemantics.flexspaces.view.folderview.paging.PagerBar;
+    
+    import spark.components.VGroup;
 
     /**
      * Folder grid base view class 
      * 
      */
-    public class FolderIconViewBase extends VBox
+    public class FolderIconViewBase extends VGroup
     {
         [Bindable] public var nodeListViewPresModel:NodeListViewPresModel;
         

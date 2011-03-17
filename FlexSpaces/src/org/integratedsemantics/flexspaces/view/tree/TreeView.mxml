@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tree:TreeViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<tree:TreeViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*"
     dataProvider="{treePresModel.rootNode}" creationComplete="onCreationComplete(event)" >
     
-    <mx:Metadata>[ResourceBundle("TreeView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("TreeView")]</fx:Metadata>
   
 </tree:TreeViewBase>

@@ -3,12 +3,13 @@ package org.integratedsemantics.flexspaces.view.error
     import flash.events.MouseEvent;
     
     import mx.controls.Text;
-    import mx.controls.TextArea;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.error.ErrorDialogPresModel;
+    
+    import spark.components.TextArea;
 
 
     public class ErrorDialogViewBase extends DialogViewBase

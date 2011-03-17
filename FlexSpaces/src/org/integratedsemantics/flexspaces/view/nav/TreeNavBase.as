@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspaces.view.nav
 {
     import flash.events.Event;
     
-    import mx.containers.Box;
     import mx.events.FlexEvent;
     import mx.events.ListEvent;
     
@@ -10,9 +9,11 @@ package org.integratedsemantics.flexspaces.view.nav
     import org.integratedsemantics.flexspaces.view.createspace.AddedFolderEvent;
     import org.integratedsemantics.flexspaces.view.deletion.DeletedFolderEvent;
     import org.integratedsemantics.flexspaces.view.tree.TreeViewBase;
+    
+    import spark.components.Group;
 
 
-    public class TreeNavBase extends Box
+    public class TreeNavBase extends Group
     {
         public var treeView:TreeViewBase;
 

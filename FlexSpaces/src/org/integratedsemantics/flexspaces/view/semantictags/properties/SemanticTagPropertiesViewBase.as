@@ -3,14 +3,15 @@ package org.integratedsemantics.flexspaces.view.semantictags.properties
     import flash.events.MouseEvent;
     
     import mx.containers.Form;
-    import mx.controls.Button;
-    import mx.controls.List;
     import mx.events.FlexEvent;
     
     import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
     import org.integratedsemantics.flexspaces.presmodel.semantictags.properties.SemanticTagPropertiesPresModel;
     import org.integratedsemantics.flexspaces.util.ObserveUtil;
     import org.integratedsemantics.flexspaces.view.semantictags.tree.SemanticTagTreeViewBase;
+    
+    import spark.components.Button;
+    import spark.components.List;
 
 
     /**

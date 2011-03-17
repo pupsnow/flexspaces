@@ -1,7 +1,5 @@
 package org.integratedsemantics.flexspaces.view.upload
 {
-    import flash.net.FileReference;
-    
     import flash.events.DataEvent;
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;
@@ -11,20 +9,20 @@ package org.integratedsemantics.flexspaces.view.upload
     import flash.events.SecurityErrorEvent;
     import flash.net.FileReference;
     
-    import mx.containers.VBox;
     import mx.events.FlexEvent;
     import mx.formatters.NumberFormatter;
     import mx.managers.PopUpManager;
     
     import org.integratedsemantics.flexspaces.control.command.IUploadHandlers;
-    
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.upload.UploadStatusPresModel;
+    
+    import spark.components.VGroup;
 
 
     public class UploadStatusViewBase extends DialogViewBase implements IUploadHandlers
     {
-        public var progressBarsArea:VBox;
+        public var progressBarsArea:VGroup;
 
         public var uploadProgressBars:Array;
 
@@ -53,7 +51,7 @@ package org.integratedsemantics.flexspaces.view.upload
             {
                 var uploadProgressBar:UploadProgressBarBase = new UploadProgressBar();
                 uploadProgressBars.push(uploadProgressBar);
-                progressBarsArea.addChild(uploadProgressBar);
+                progressBarsArea.addElement(uploadProgressBar);
                 // todo i18n
                 uploadProgressBar.filenameLabel.text = file.name + ",  Uploading";
                 uploadProgressBar.progressBar.maximum = file.size;

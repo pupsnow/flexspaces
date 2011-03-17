@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tasklist:TaskListViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<tasklist:TaskListViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:tasklist="org.integratedsemantics.flexspaces.view.tasks.tasklist.*"
     creationComplete="onCreationComplete(event)" height="100%" width="100%">
 
-    <mx:Metadata>[ResourceBundle("TaskListView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("TaskListView")]</fx:Metadata>
 
-    <mx:Metadata>
+    <fx:Metadata>
     [Event(name="clickTask",type="org.integratedsemantics.flexspaces.view.tasks.event.ClickTaskEvent")]          
-    </mx:Metadata>
+    </fx:Metadata>
                 
-    <mx:Button id="refeshTasks" label="{resourceManager.getString('TaskListView', 'refeshTasks_label' )}"/>
+    <s:Button id="refeshTasks" label="{resourceManager.getString('TaskListView', 'refeshTasks_label' )}"/>
     
     <mx:DataGrid dataProvider="{taskListPresModel.taskList}" id="taskGrid" styleName="fileGridStyle"        
         height="100%" width="100%" rowHeight="25">

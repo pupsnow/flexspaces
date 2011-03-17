@@ -2,8 +2,6 @@ package org.integratedsemantics.flexspaces.view.createspace
 {
     import flash.events.MouseEvent;
     
-    import mx.controls.ComboBox;
-    import mx.controls.TextInput;
     import mx.controls.TileList;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
@@ -11,6 +9,9 @@ package org.integratedsemantics.flexspaces.view.createspace
     
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.createspace.CreateSpacePresModel;
+    
+    import spark.components.DropDownList;
+    import spark.components.TextInput;
 
 
     /**
@@ -22,7 +23,7 @@ package org.integratedsemantics.flexspaces.view.createspace
         public var foldername:TextInput;
         public var nodetitle:TextInput;
         public var description:TextInput;
-        public var templatecombo:ComboBox;
+        public var templatecombo:DropDownList;
         public var iconlist:TileList;
         
         public var onComplete:Function;
@@ -59,7 +60,7 @@ package org.integratedsemantics.flexspaces.view.createspace
 			
 			createSpacePresModel.updateFolderName(foldername.text);
 			
-			createSpacePresModel.getSpaceTemplates();
+			createSpacePresModel.getSpaceTemplates();            
         }
 
         /**

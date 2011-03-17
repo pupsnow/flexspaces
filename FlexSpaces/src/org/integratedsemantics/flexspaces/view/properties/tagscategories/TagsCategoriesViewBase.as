@@ -2,16 +2,16 @@ package org.integratedsemantics.flexspaces.view.properties.tagscategories
 {
     import flash.events.MouseEvent;
     
-    import mx.controls.Label;
-
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
-        
+    
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.properties.tagscategories.TagsCategoriesPresModel;
     import org.integratedsemantics.flexspaces.view.categories.properties.CategoryPropertiesViewBase;
     import org.integratedsemantics.flexspaces.view.semantictags.properties.SemanticTagPropertiesViewBase;
     import org.integratedsemantics.flexspaces.view.tags.properties.TagPropertiesViewBase;
+    
+    import spark.components.Label;
 
 
     /**

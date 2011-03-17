@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nav:NavPanelBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<nav:NavPanelBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:nav="org.integratedsemantics.flexspaces.view.nav.*"    
     xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*"         
     xmlns:categories="org.integratedsemantics.flexspaces.view.categories.tree.*"   
@@ -9,7 +12,7 @@
     xmlns:favorites="org.integratedsemantics.flexspaces.view.favorites.*"
     creationComplete="onCreationComplete(event)" selectedIndex="1">
     
-    <mx:Metadata>[ResourceBundle("NavPanel")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("NavPanel")]</fx:Metadata>
   
     <mx:Box id="companyHomeSection" label="{resourceManager.getString('NavPanel', 'companyHomeSection_label')}" height="100%" width="100%">
         <tree:TreeView id="companyHomeTreeView" treePresModel="{navPanelPresModel.companyHomeTreePresModel}" width="100%" height="100%" 
@@ -25,21 +28,21 @@
         <categories:CategoryTreeView id="categoriesTreeView" categoryTreePresModel="{navPanelPresModel.categoryTreePresModel}" height="100%" width="100%"/>
     </mx:Box>
 
-    <tags:TagCloudView id="tagCloudView" tagCloudPresModel="{navPanelPresModel.tagCloudPresModel}" 
+    <tags:TagCloudView id="tagCloudView" tagCloudPresModel="{navPanelPresModel.tagCloudPresModel}" styleName="tagCloudStyle"
         label="{resourceManager.getString('NavPanel', 'tagCloudView_label' )}" width="100%" height="100%"/>  
 
     <mx:Accordion id="semanticSection" label="{resourceManager.getString('NavPanel', 'semanticSection_label')}" height="100%" width="100%">
         <semantictags:SemanticTagCloudView id="semanticTagCloudView" tagCloudPresModel="{navPanelPresModel.semanticTagCloudPresModel}" 
-            label="{'     ' + resourceManager.getString('NavPanel', 'semanticTagCloudView_label' )}" width="100%" height="100%"/>  
+            label="{'     ' + resourceManager.getString('NavPanel', 'semanticTagCloudView_label' )}" styleName="tagCloudStyle" width="100%" height="100%"/>  
         <semantictags:SemanticTagCloudView  id="companySemanticTagCloudView" tagCloudPresModel="{navPanelPresModel.companySemanticTagCloudPresModel}"
-        	label="{'     ' + resourceManager.getString('NavPanel', 'companySemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+        	label="{'     ' + resourceManager.getString('NavPanel', 'companySemanticTagCloudView_label' )}" styleName="tagCloudStyle" width="100%" height="100%"/>  
         <semantictags:SemanticTagCloudView id="personSemanticTagCloudView" tagCloudPresModel="{navPanelPresModel.personSemanticTagCloudPresModel}"
-        	label="{'     ' + resourceManager.getString('NavPanel', 'personSemanticTagCloudView_label' )}" width="100%" height="100%"/>  
+        	label="{'     ' + resourceManager.getString('NavPanel', 'personSemanticTagCloudView_label' )}" styleName="tagCloudStyle" width="100%" height="100%"/>  
         <mx:Box label="{'     ' + resourceManager.getString('NavPanel', 'mapSection_label' )}" height="100%" width="100%" id="mapSection">      
         </mx:Box>
     </mx:Accordion>
 
-    <mx:Box label="{resourceManager.getString('NavPanel', 'favoritesSection_label' )}" height="100%" width="100%" id="favoritesSection">      
+    <mx:Box id="favoritesSection" label="{resourceManager.getString('NavPanel', 'favoritesSection_label' )}" styleName="viewStyle" height="100%" width="100%">      
         <favorites:FavoritesView id="favoritesView" favoritesPresModel="{navPanelPresModel.favoritesPresModel}" height="100%" width="100%"/>
     </mx:Box>
     

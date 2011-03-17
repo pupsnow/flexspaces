@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspaces.view.versions.versionlist
 {   
     import flash.events.Event;
     
-    import mx.containers.VBox;
     import mx.controls.DataGrid;
     import mx.events.ListEvent;
     
@@ -11,13 +10,15 @@ package org.integratedsemantics.flexspaces.view.versions.versionlist
     import org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent;
     import org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.VGroup;
 
         
     /**
      * Folder grid base view class 
      * 
      */
-    public class VersionListViewBase extends  VBox
+    public class VersionListViewBase extends VGroup
     {
         public var versionListGrid:DataGrid;
 

@@ -4,8 +4,6 @@ package org.integratedsemantics.flexspaces.view.preview
     import flash.events.Event;
     import flash.events.MouseEvent;
     
-    import mx.containers.Panel;
-    import mx.containers.VBox;
     import mx.controls.Button;
     import mx.controls.HSlider;
     import mx.controls.LinkButton;
@@ -19,21 +17,24 @@ package org.integratedsemantics.flexspaces.view.preview
     import org.integratedsemantics.flexspaces.presmodel.preview.PreviewPresModel;
     import org.integratedsemantics.flexspaces.util.ObserveUtil;
     
+    import spark.components.Panel;
+    import spark.components.VGroup;
+    
         
     /**
      * Base class for preview views  
      * 
      */
-    public class PreviewViewBase extends VBox
+    public class PreviewViewBase extends VGroup
     {
         public var printBtn:LinkButton;
         
         public var zoomSlider:HSlider;
         
-        public var previousPageBtn:Button
+        public var previousPageBtn:Button;
         public var nextPageBtn:Button;
         
-        public var zoomOutButton:Button
+        public var zoomOutButton:Button;
         public var zoomInButton:Button;
         
         public var contentPanel:Panel;
@@ -61,11 +62,11 @@ package org.integratedsemantics.flexspaces.view.preview
             swfLoader.addEventListener(Event.INIT, onLoadSwfComplete);
             swfLoader.addEventListener(Event.COMPLETE, onLoadSwfComplete);
             
-            ObserveUtil.observeButtonClick(printBtn, onPrint);
-            ObserveUtil.observeButtonClick(previousPageBtn, onPreviousPageClick);
-            ObserveUtil.observeButtonClick(nextPageBtn, onNextPageClick);
-            ObserveUtil.observeButtonClick(zoomInButton, onZoomIn);
-            ObserveUtil.observeButtonClick(zoomOutButton, onZoomOut);
+            ObserveUtil.observeLinkButtonClick(printBtn, onPrint);
+            ObserveUtil.observeMxButtonClick(previousPageBtn, onPreviousPageClick);
+            ObserveUtil.observeMxButtonClick(nextPageBtn, onNextPageClick);
+            ObserveUtil.observeMxButtonClick(zoomInButton, onZoomIn);
+            ObserveUtil.observeMxButtonClick(zoomOutButton, onZoomOut);
 
             zoomSlider.addEventListener(SliderEvent.CHANGE, onZoomSliderChange);  
                 

@@ -2,22 +2,23 @@ package org.integratedsemantics.flexspaces.view.login
 {
 	import flash.events.Event;
 	
-	import mx.containers.VBox;
-	import mx.controls.Button;
 	import mx.controls.Text;
-	import mx.controls.TextInput;
 	import mx.events.FlexEvent;
 	import mx.rpc.Responder;
 	
 	import org.integratedsemantics.flexspaces.presmodel.login.LoginPresModel;
 	import org.integratedsemantics.flexspaces.util.ObserveUtil;
+	
+	import spark.components.BorderContainer;
+	import spark.components.Button;
+	import spark.components.TextInput;
     
         
     /**
      * Base class for login views  
      * 
      */
-    public class LoginViewBase  extends VBox
+    public class LoginViewBase extends BorderContainer
     {
         public var errorMessage:Text;
         public var username:TextInput;

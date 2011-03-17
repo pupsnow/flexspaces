@@ -1,32 +1,45 @@
 /* CSS file for dialogs */
 
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
 .dialog
 {
-    backgroundColor: #333333; 
-    borderColor: #000000; 
-    borderStyle: solid; 
-    borderThickness: 3; 
     color: #ffffff; 
+    backgroundColor: #333333; 
+/*    
+    borderColor: #333333; 
+    borderStyle: solid; 
+    borderThickness: 0; 
     cornerRadius: 0; 
+*/
     fontSize: 12; 
     fontWeight: bold; 
 }
 
 .mainArea
 {
+/* 
+    color: #ffffff; 
+    backgroundColor: #333333; 
     borderColor: #333333;
     borderStyle: solid;
     borderThickness: 0;
-    fontSize: 10;
+*/
+    fontSize: 10; 
+
 }
 
 .dialogTabs
 {
+    color: #ffffff; 
+    backgroundColor: #666666;     
+/*    
     borderColor: #000000;
     borderStyle: outset;
     borderThickness: 0;
+*/
     fontSize: 10;
-    backgroundColor: #777777;
 }
 
 
@@ -40,7 +53,12 @@
 
 .combo
 {
-    color: #000000;
+    /* color: #000000; */
+    symbolColor:        #ffffff; 
+    selectionColor:     #000000;
+    rollOverColor:      #0E7EC5; 
+    contentBackgroundColor: #666666;
+    color:              #ffffff;      
 }
 
 .list
@@ -56,4 +74,5 @@
     borderStyle: solid;
     borderThickness: 0;
     horizontalAlign: center;
+    borderColor: #333333;    
 }

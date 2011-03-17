@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<gridview:FolderGridViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<gridview:FolderGridViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:gridview="org.integratedsemantics.flexspaces.view.folderview.gridview.*"
     creationComplete="onCreationComplete(event)" height="100%" width="100%">    
         
-    <mx:Metadata>[ResourceBundle("FolderGridView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("FolderGridView")]</fx:Metadata>
 
-    <mx:VBox verticalGap="0" height="100%" width="100%">
+    <s:VGroup height="100%" width="100%">
     
         <mx:DataGrid id="folderGrid" height="100%" width="100%" rowHeight="25"
             dataProvider="{dataProvider}" styleName="fileGridStyle" doubleClickEnabled="true"         
@@ -15,18 +18,18 @@
             <mx:columns>        
                 <mx:DataGridColumn dataField="lock" headerText="" width="25" sortable="false">
                     <mx:itemRenderer>
-                        <mx:Component>
+                        <fx:Component>
                             <mx:Box>
                                 <mx:Image source="@Embed('images/icons/locked.gif')" includeInLayout="{data.isLocked}"  visible="{data.isLocked}" scaleContent="false" />                                                        
                             </mx:Box>
-                        </mx:Component>
+                        </fx:Component>
                     </mx:itemRenderer>
                 </mx:DataGridColumn>    
                 <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
                     <mx:itemRenderer>
-                        <mx:Component>
+                        <fx:Component>
                             <mx:Image source="{data.icon16}" scaleContent="false"/>
-                        </mx:Component>
+                        </fx:Component>
                     </mx:itemRenderer>
                 </mx:DataGridColumn>    
                 <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'nameColumn_headerText')}" dataField="name" width="200" id="dgcolumn0"/>      
@@ -39,6 +42,6 @@
     
         </mx:DataGrid>  
 
-    </mx:VBox>
+    </s:VGroup>
       
 </gridview:FolderGridViewBase>    

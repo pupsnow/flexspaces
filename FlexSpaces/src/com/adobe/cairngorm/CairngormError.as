@@ -31,17 +31,21 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 package com.adobe.cairngorm
 {
-	import mx.utils.StringUtil;
-	import mx.resources.ResourceBundle;
-	import mx.resources.ResourceManager;	
+    import mx.resources.IResourceManager;
+    import mx.resources.ResourceBundle;
+    import mx.resources.ResourceManager;
+    import mx.utils.StringUtil;
 	
-	/**
+    //sreiner flex4 move here instead on rb static variable
+    [ResourceBundle("CairngormMessages")] 
+    
+    /**
 	 * Error class thrown when a Cairngorm error occurs.
 	 * Used to substitute data in error messages.
 	 */
 	public class CairngormError extends Error
 	{
-		[ResourceBundle("CairngormMessages")] 
+
 	 	private static var rb : ResourceBundle;
 		
 		public function CairngormError( errorCode : String, ... rest )
@@ -53,6 +57,10 @@ package com.adobe.cairngorm
 		{
 			// sreiner var message : String =  StringUtil.substitute( resourceBundle.getString( errorCode ), rest );
 			var message : String =  StringUtil.substitute( ResourceManager.getInstance().getString("CairngormMessages", errorCode), rest );
+
+            var rMngr     : IResourceManager = ResourceManager.getInstance();
+            var bndlText  : String           = rMngr.getString(rb.bundleName,errorCode);
+            
 			return StringUtil.substitute( "{0}: {1}", errorCode, message);
 		}
 		

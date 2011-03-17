@@ -2,14 +2,15 @@ package org.integratedsemantics.flexspaces.view.tags.properties
 {
     import flash.events.MouseEvent;
     
-    import mx.controls.Button;
-    import mx.controls.List;
-    import mx.controls.TextInput;
     import mx.events.FlexEvent;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.FormBase;
     import org.integratedsemantics.flexspaces.model.vo.TagVO;
     import org.integratedsemantics.flexspaces.presmodel.tags.properties.TagPropertiesPresModel;
+    
+    import spark.components.Button;
+    import spark.components.List;
+    import spark.components.TextInput;
 
 
     /**

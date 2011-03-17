@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<gridview:VersionListViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+<gridview:VersionListViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:gridview="org.integratedsemantics.flexspaces.view.versions.versionlist.*"
     creationComplete="onCreationComplete(event)" height="100%" width="100%">    
         
-    <mx:Metadata>[ResourceBundle("VersionListView")]</mx:Metadata>
+    <fx:Metadata>[ResourceBundle("VersionListView")]</fx:Metadata>
 
-    <mx:Metadata>
+    <fx:Metadata>
     [Event(name="folderListContextMenu",type="org.integratedsemantics.flexspaces.view.folderview.event.FolderViewContextMenuEvent")]          
     [Event(name="doubleClickDoc",type="org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent")]          
     [Event(name="clickNode",type="org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent")]          
-    </mx:Metadata>
+    </fx:Metadata>
         
     <mx:DataGrid id="versionListGrid" height="100%" width="100%" rowHeight="25" 
         dataProvider="{versionListPresModel.nodeCollection}" styleName="fileGridStyle" doubleClickEnabled="true"         
@@ -18,9 +21,9 @@
         <mx:columns>        
             <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
                 <mx:itemRenderer>
-                    <mx:Component>
+                    <fx:Component>
                         <mx:Image source="{data.icon16}" scaleContent="false"/>
-                    </mx:Component>
+                    </fx:Component>
                 </mx:itemRenderer>
             </mx:DataGridColumn>             
             <mx:DataGridColumn headerText="{resourceManager.getString('VersionListView', 'nameColumn_headerText')}" dataField="name" width="200" id="dgcolumn0"/>      

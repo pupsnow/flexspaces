@@ -5,6 +5,8 @@ package org.integratedsemantics.flexspaces.view.tasks.attachments
     import org.integratedsemantics.flexspaces.presmodel.tasks.attachments.TaskAttachmentsPresModel;
     import org.integratedsemantics.flexspaces.view.folderview.NodeListViewBase;
     import org.integratedsemantics.flexspaces.view.menu.contextmenu.ConfigurableContextMenu;
+    
+    import spark.components.DropDownList;
 
 	
 	public class TaskAttachmentsViewBase extends NodeListViewBase
@@ -69,7 +71,10 @@ package org.integratedsemantics.flexspaces.view.tasks.attachments
         
         protected function onPageSizeChange(event:Event):void
         {
-            taskAttachmentsPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize = event.target.value;            
+            var dropDownList:DropDownList = event.target as DropDownList;
+            var selectedItem:int = dropDownList.selectedItem;
+            
+            taskAttachmentsPresModel.model.flexSpacesPresModel.taskAttachmentsPageSize = selectedItem;            
             pageBar.curPageIndex = 0;
         }
           

@@ -2,8 +2,6 @@ package org.integratedsemantics.flexspaces.view.semantictags.suggest
 {
     import flash.events.MouseEvent;
     
-    import mx.controls.Button;
-    import mx.controls.List;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     
@@ -11,6 +9,9 @@ package org.integratedsemantics.flexspaces.view.semantictags.suggest
     import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
     import org.integratedsemantics.flexspaces.presmodel.semantictags.suggest.SemanticTagSuggestPresModel;
     import org.integratedsemantics.flexspaces.view.semantictags.suggesttree.SemanticTagSuggestionTreeViewBase;
+    
+    import spark.components.Button;
+    import spark.components.List;
 
 
     /**

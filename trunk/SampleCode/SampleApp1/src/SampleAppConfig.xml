@@ -17,7 +17,7 @@
         <property name="isLiveCycleContentServices" value="false"/>
 
         <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->                  
-        <property name="serverVersion" value="3.0"/>        
+        <property name="serverVersion" value="3.4"/>        
     </object>
 
     <object id="appConfig" class="org.integratedsemantics.flexspaces.model.global.AppConfig">

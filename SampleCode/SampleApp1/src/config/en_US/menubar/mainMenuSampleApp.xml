@@ -27,7 +27,7 @@
         <menuitem label="Tags / Categories" data="tags" enabled="false"/>
     </menuitem>
     <menuitem label="View" data="view">
-        <menuitem label="Tree" type="check" toggled="true"  data="repotree"/>
+        <!-- menuitem label="Tree" type="check" toggled="true"  data="repotree"/-->
         <!-- menuitem label="Dual Panes" type="check" toggled="false"  data="secondrepofolder"/-->
         <!-- menuitem type="separator" data=""/-->
         <!-- menuitem label="WCM Tree" type="check" toggled="true"  data="wcmrepotree" enabled="false"/-->

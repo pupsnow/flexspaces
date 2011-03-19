@@ -1,25 +1,8 @@
 package org.integratedsemantics.sampleapp.view.main
 {
-    import flash.events.KeyboardEvent;
-    import flash.events.MouseEvent;
-    
-    import flexlib.containers.SuperTabNavigator;
-    import flexlib.controls.tabBarClasses.SuperTab;
-    import flexlib.events.SuperTabEvent;
-    
     import mx.events.FlexEvent;
-    import mx.events.IndexChangedEvent;
-    import mx.events.MenuEvent;
     
-    import org.integratedsemantics.flexspaces.view.browser.RepoBrowserChangePathEvent;
-    import org.integratedsemantics.flexspaces.view.folderview.event.ClickNodeEvent;
-    import org.integratedsemantics.flexspaces.view.folderview.event.DoubleClickDocEvent;
-    import org.integratedsemantics.flexspaces.view.folderview.event.FolderViewContextMenuEvent;
-    import org.integratedsemantics.flexspaces.view.logout.LogoutDoneEvent;
     import org.integratedsemantics.flexspaces.view.main.FlexSpacesViewBase;
-    import org.integratedsemantics.flexspaces.view.menu.event.MenuConfiguredEvent;
-    import org.integratedsemantics.flexspaces.view.search.advanced.AdvancedSearchEvent;
-    import org.integratedsemantics.flexspaces.view.search.event.SearchResultsEvent;
     import org.integratedsemantics.sampleapp.presmodel.main.SampleAppPresModel;
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <contextmenu>
      
-     <menuitem label="コピピー" data="copy" />
+     <menuitem label="コピー" data="copy" />
      
      <menuitem label="名前の変更" data="rename" seperatorBefore="true" />
      <menuitem label="プロパティ" data="properties"/>

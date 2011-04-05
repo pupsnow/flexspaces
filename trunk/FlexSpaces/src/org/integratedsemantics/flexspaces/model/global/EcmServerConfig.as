@@ -15,9 +15,14 @@ package org.integratedsemantics.flexspaces.model.global
         public var port:String;
         public var alfrescoUrlPart:String;
 
-        // configured webscript serviced url parts put together
+        // configured url to alfresco share, used for getting form config data, and for share tab in air version
+        public var shareUrl:String;
+        public var loggedInToShare:Boolean = false;
+        
+        // webscript service url put together from configured parts
         public var urlPrefix:String = null;
 
+        
 		public function EcmServerConfig()
 		{
 		}

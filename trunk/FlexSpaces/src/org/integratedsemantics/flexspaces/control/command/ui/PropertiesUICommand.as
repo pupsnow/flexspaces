@@ -11,6 +11,7 @@ package org.integratedsemantics.flexspaces.control.command.ui
     import org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel;
     import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
     import org.integratedsemantics.flexspaces.view.properties.basic.PropertiesView;
+    import org.integratedsemantics.flexspaces.view.properties.configured.ConfiguredPropertiesView;
 
 
     /**
@@ -60,12 +61,23 @@ package org.integratedsemantics.flexspaces.control.command.ui
             
             if (selectedItem != null)
             {
-                var propertiesView:PropertiesView = PropertiesView(PopUpManager.createPopUp(event.parent, PropertiesView, false));
+                var modelLocator:AppModelLocator = AppModelLocator.getInstance();
+
                 var propertiesPresModel:PropertiesPresModel = new PropertiesPresModel(selectedItem as IRepoNode, model.wcmMode);
-                propertiesView.propPresModel = propertiesPresModel;
-                propertiesView.onComplete = event.onComplete;
-            }
-                       
+                
+                if (modelLocator.appConfig.useConfiguredProperties == true)
+                {
+                    var configuredPropertiesView:ConfiguredPropertiesView = ConfiguredPropertiesView(PopUpManager.createPopUp(event.parent, ConfiguredPropertiesView, false));                    
+                    configuredPropertiesView.propPresModel = propertiesPresModel;
+                    configuredPropertiesView.onComplete = event.onComplete;
+                }
+                else
+                {
+                    var propertiesView:PropertiesView = PropertiesView(PopUpManager.createPopUp(event.parent, PropertiesView, false));                    
+                    propertiesView.propPresModel = propertiesPresModel;
+                    propertiesView.onComplete = event.onComplete;
+                }                                
+            }                       
         }
         
     }

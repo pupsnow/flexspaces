@@ -12,6 +12,7 @@ package org.integratedsemantics.flexspaces.view.properties.basic
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
     
+    import spark.components.TextArea;
     import spark.components.TextInput;
 
 
@@ -28,7 +29,7 @@ package org.integratedsemantics.flexspaces.view.properties.basic
         public var titleItem:FormItem;
         public var nodetitle:TextInput;        
         public var descriptionItem:FormItem;
-        public var description:TextInput;
+        public var description:TextArea;
         public var authorItem:FormItem;
         public var author:TextInput;
 

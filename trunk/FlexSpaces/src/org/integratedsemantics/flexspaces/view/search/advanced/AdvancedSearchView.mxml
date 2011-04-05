@@ -8,7 +8,9 @@
     xmlns:tree="org.integratedsemantics.flexspaces.view.tree.*" 
     xmlns:categoriestree="org.integratedsemantics.flexspaces.view.categories.tree.*"
     title="{resourceManager.getString('AdvancedSearchView', 'title')}" 
-    width="750" height="650" styleName="dialog">
+    skinClass="flex.utils.spark.resize.ResizableDraggableTitleWindowSkin"    
+    width="750" height="650" minWidth="500" minHeight="400" 
+    styleName="dialog">
 
     <fx:Metadata>[ResourceBundle("AdvancedSearchView")]</fx:Metadata>
 

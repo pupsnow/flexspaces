@@ -4,7 +4,9 @@
     xmlns:s="library://ns.adobe.com/flex/spark" 
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:properties="org.integratedsemantics.flexspaces.view.properties.basic.*"
-    width="468" height="420" title="{resourceManager.getString('PropertiesView', 'title')}"
+    title="{resourceManager.getString('PropertiesView', 'title')}"
+    width="500" height="600" minWidth="400" minHeight="500" 
+    skinClass="flex.utils.spark.resize.ResizableDraggableTitleWindowSkin"
     styleName="dialog">
     
     <fx:Metadata>[ResourceBundle("PropertiesView")]</fx:Metadata>
@@ -15,53 +17,53 @@
               paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
         
     <mx:Form width="100%" height="100%">
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'nameItem_label' )}" id="nameItem" width="400">      
-            <s:TextInput id="nodename" text="{propPresModel.vo.name}" styleName="input" width="250"
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'nameItem_label' )}" id="nameItem" width="100%">      
+            <s:TextInput id="nodename" text="{propPresModel.vo.name}" styleName="input" width="100%"
             	change="propPresModel.updateName(nodename.text)" editable="{propPresModel.nameEditable}" />                  
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'titleItem_label' )}" id="titleItem" width="400"
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'titleItem_label' )}" id="titleItem" width="100%"
         	visible="{propPresModel.titleVisible}" includeInLayout="{propPresModel.titleVisible}">      
-            <s:TextInput id="nodetitle" text="{propPresModel.vo.title}" styleName="input" width="250"
+            <s:TextInput id="nodetitle" text="{propPresModel.vo.title}" styleName="input" width="100%"
             	change="propPresModel.updateTitle(nodetitle.text)" editable="{propPresModel.titleEditable}"/>                  
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'descriptionItem_label' )}" id="descriptionItem" width="400"
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'descriptionItem_label' )}" id="descriptionItem" width="100%"
         	visible="{propPresModel.descriptionVisible}" includeInLayout="{propPresModel.descriptionVisible}">      
-            <s:TextInput id="description" text="{propPresModel.vo.description}" styleName="input" width="250"
+            <s:TextArea id="description" text="{propPresModel.vo.description}" styleName="input" width="100%"
             	change="propPresModel.updateDescription(description.text)"  editable="{propPresModel.descriptionEditable}"/>                  
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'authorItem_label' )}" width="400" id="authorItem"
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'authorItem_label' )}" width="100%" id="authorItem"
         	visible="{propPresModel.authorVisible}" includeInLayout="{propPresModel.authorVisible}">      
-            <s:TextInput id="author" text="{propPresModel.vo.author}" styleName="input" width="250"
+            <s:TextInput id="author" text="{propPresModel.vo.author}" styleName="input" width="100%"
             	change="propPresModel.updateAuthor(author.text)"/>                  
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'sizeItem_label' )}" width="400" id="sizeItem"
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'sizeItem_label' )}" width="100%" id="sizeItem"
         	visible="{propPresModel.sizeVisible}" includeInLayout="{propPresModel.sizeVisible}" >      
             <mx:Text id="size" text="{propPresModel.vo.size}" />
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'creatorItem_label' )}" id="creatorItem" width="400">      
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'creatorItem_label' )}" id="creatorItem" width="100%">      
             <mx:Text id="creator" text="{propPresModel.vo.creator}" />
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'createdItem_label' )}" id="createdItem" width="400">      
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'createdItem_label' )}" id="createdItem" width="100%">      
             <mx:Text id="created" text="{propPresModel.vo.created}" />
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'modifierItem_label' )}" id="modifierItem" width="400">      
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'modifierItem_label' )}" id="modifierItem" width="100%">      
             <mx:Text id="modifier" text="{propPresModel.vo.modifier}" />
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'modifiedItem_label' )}" id="modifiedItem" width="400">      
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'modifiedItem_label' )}" id="modifiedItem" width="100%">      
             <mx:Text id="modified" text="{propPresModel.vo.modified}" />
         </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'mimetypeItem_label' )}" width="400" id="mimetypeItem"
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'mimetypeItem_label' )}" width="100%" id="mimetypeItem"
         	visible="{propPresModel.mimetypeVisible}" includeInLayout="{propPresModel.mimetypeVisible}">      
             <mx:Text id="mimetype" text="{propPresModel.vo.mimetype}" />
         </mx:FormItem>
-        <!--mx:FormItem label="Encoding:"  width="400" id="encodingItem">
+        <!--mx:FormItem label="Encoding:"  width="100%" id="encodingItem">
             <mx:Text id="encoding"/>
         </mx:FormItem-->       
-        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'emailidItem_label' )}" id="emailidItem" width="400"     
+        <mx:FormItem label="{resourceManager.getString('PropertiesView', 'emailidItem_label' )}" id="emailidItem" width="100%"     
         	visible="{propPresModel.emailIdVisible}" includeInLayout="{propPresModel.emailIdVisible}">      
             <mx:Text id="emailid" text="{propPresModel.vo.emailid}" />
         </mx:FormItem>
-        <!--mx:FormItem label="Edit Inline:"  width="400" id="editinlineItem">
+        <!--mx:FormItem label="Edit Inline:"  width="100%" id="editinlineItem">
             <s:CheckBox label="Enabled" id="editinline" />
         </mx:FormItem -->
     </mx:Form>

@@ -146,11 +146,17 @@ package org.integratedsemantics.flexspacesair.view.main
                 var browser:Browser = new Browser();
                 browser.percentWidth = 100;
                 browser.percentHeight = 100;
-                var urlBegin:String;
-                urlBegin = model.ecmServerConfig.protocol + "://" + model.ecmServerConfig.domain + ":" + model.ecmServerConfig.port + "/share/";
-                //todo: get single sign on to work with newer share versions
-                //browser.location = urlBegin + "login?username=" + model.userInfo.loginUserName + "&password=" + model.userInfo.loginPassword + "&success=" + urlBegin + "&failure=" + urlBegin;
-                browser.location = urlBegin;
+                var urlBegin:String = model.ecmServerConfig.shareUrl;
+                if (model.ecmServerConfig.loggedInToShare == false)
+                {
+                    var loginUrl:String = urlBegin + "/page/dologin?username=" + model.userInfo.loginUserName + "&password=" + model.userInfo.loginPassword; 
+                    loginUrl += "&success=" + urlBegin + "/page/site-index" + "&failure=" + urlBegin + "/page/type/login?error=true";
+                    browser.location = loginUrl;
+                }
+                else
+                {
+                    browser.location = urlBegin;
+                }
                 tab.addChild(browser);
                 browser.visible = true;
                 browser.includeInLayout = true;

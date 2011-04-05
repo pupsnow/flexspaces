@@ -28,6 +28,18 @@ package org.integratedsemantics.flexspaces.model.global
         // air only, when using less step editing, whether to do auto update online, when user saves in app
         public var autoUpdateOnlineOnAppSave:Boolean = false;
 
+        // whether to use configured properties form dialog using configuration from share, otherwise original fixed properties dialog will be used               
+        public var useConfiguredProperties:Boolean = false;
+        // what form configuration to use from share for properties, when empty string, default share form config used             
+        public var propertiesFormName:String = "";      
+        //whether to use configured properties for properties portion of advanced search, using configuration from share, 
+        // otherwise original fixed search properties will be used -->                
+        public var useConfiguredAdvancedSearchProperties:Boolean = false;
+        // what form configuration to use from share for advanced search properties               
+        public var searchFormName:String = "search";      
+        
+        
+        
 		public function AppConfig()
 		{
 		}

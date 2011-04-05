@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
-<objects xmlns="http://www.pranaframework.org/objects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.pranaframework.org/objects
-                             http://www.pranaframework.org/schema/objects/prana-objects-0.6.xsd">
+<objects
+    xmlns="http://www.springactionscript.org/schema/objects"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springactionscript.org/schema/objects http://www.springactionscript.org/schema/objects/spring-actionscript-objects-1.0.xsd">
 
     <object id="ecmServerConfig" class="org.integratedsemantics.flexspaces.model.global.EcmServerConfig">
 

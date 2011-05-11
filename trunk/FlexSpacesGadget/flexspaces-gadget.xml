@@ -13,7 +13,7 @@
 <UserPref
    name="swfUrl"
    display_name="SWF URL"
-   default_value="http://localhost:9080/flexspaces/FlexSpaces.swf"
+   default_value="http://localhost:8080/flexspaces/FlexSpaces.swf"
    required="true" />
 
 <UserPref
@@ -55,7 +55,7 @@
 <UserPref
    name="alfrescoUrl"
    display_name="Alfresco URL"
-   default_value="http://localhost:9080/alfresco/service"
+   default_value="http://localhost:8080/alfresco/service"
    required="true" />   
 
 <UserPref
@@ -98,7 +98,7 @@
    function showFlexSpaces()
    {
       gadgets.flash.embedFlash(flexspacesSwfUrl, "flexspacescontainer", {
-         swf_version: 9,
+         swf_version: 10,
          id: "flexspacesid",
          width: flashWidth,
          height: flashHeight,

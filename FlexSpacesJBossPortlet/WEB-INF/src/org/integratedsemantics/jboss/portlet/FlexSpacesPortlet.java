@@ -94,8 +94,8 @@ public class FlexSpacesPortlet extends GenericPortlet
    {
       PortletPreferences prefs = request.getPreferences();
       
-      request.setAttribute("flexspacesSwfUrl", prefs.getValue("flexspacesSwfUrl", "/flexspaces-jboss-portlet/FlexSpaces.swf"));
-      request.setAttribute("flexspacesBaseUrl", prefs.getValue("flexspacesBaseUrl", "/flexspaces-jboss-portlet"));
+      request.setAttribute("flexspacesSwfUrl", prefs.getValue("flexspacesSwfUrl", "http://localhost:8080/flexspaces/FlexSpaces.swf"));
+      request.setAttribute("flexspacesBaseUrl", prefs.getValue("flexspacesBaseUrl", "http://localhost:8080/flexspaces/"));
       request.setAttribute("flashWidth", prefs.getValue("flashWidth", "100%"));
       request.setAttribute("flashHeight", prefs.getValue("flashHeight", "700"));
       request.setAttribute("showDocLib", prefs.getValue("showDocLib", "true"));
@@ -104,8 +104,7 @@ public class FlexSpacesPortlet extends GenericPortlet
       request.setAttribute("showWcm", prefs.getValue("showWcm", "false"));
       request.setAttribute("showHeader", prefs.getValue("showHeader", "true"));
       request.setAttribute("haveCoverFlow", prefs.getValue("haveCoverFlow", "false"));
-      request.setAttribute("alfrescoUrl", prefs.getValue("alfrescoUrl", "true"));
-      
+      request.setAttribute("alfrescoUrl", prefs.getValue("alfrescoUrl", "http://localhost:8080/alfresco/service"));
    }
 }
 

@@ -17,11 +17,11 @@
       <portlet-preferences>
          <preference>
             <name>flexspacesSwfUrl</name>
-            <value>/flexspaces-jboss-portlet/FlexSpaces.swf</value>
+            <value>http://localhost:8080/flexspaces/FlexSpaces.swf</value>
          </preference>
          <preference>
             <name>flexspacesBaseUrl</name>
-            <value>/flexspaces-jboss-portlet</value>
+            <value>http://localhost:8080/flexspaces/</value>
          </preference>
          <preference>
             <name>flashWidth</name>

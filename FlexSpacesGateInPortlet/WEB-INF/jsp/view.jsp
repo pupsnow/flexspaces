@@ -6,12 +6,12 @@
 
 <%
       String align = "middle";
-      String allowScriptAccess = "sameDomain";
+      String allowScriptAccess = "always";
       String bgcolor = "#000000";
       String devicefont = "true";
       String loop = "true";
       String menu = "false";
-      String play = "true";
+      String play = "false";
       String quality = "best";
       String salign = "";
       String scale = "showall";
@@ -32,16 +32,19 @@
 
       String flashVariables = "doclib=" + showDocLib + "&search=" + showSearch + "&tasks=" + showTasks + "&wcm=" + showWcm + "&header=" + showHeader 
                               + "&coverflow=" + haveCoverFlow + "&alfrescourl=" + alfrescoUrl;
-      //                      + "&coverflow=" + haveCoverFlow + "&alfrescourl=" + alfrescoUrl + "&user=admin&pw=admin&autologin=false";
+                           // + "&coverflow=" + haveCoverFlow + "&alfrescourl=" + alfrescoUrl + "&user=x&pw=y&autologin=false";
 %>
 
 
 
 <center>
-   <object width="<%= flashWidth %>" height="<%= flashHeight %>">
-   
+   <div style="width:100%; height:<%= flashHeight %>px;">
+   <object width="<%= flashWidth %>" height="<%= flashHeight %>">   
       <param name="movie" value="<%= flexspacesSwfUrl %>"/>
-      
+      <param name="base" value="<%= flexspacesBaseUrl %>"/>
+      <param name="flashvars" value="<%= flashVariables %>"/>
+      <param name="allowScriptAccess" value="<%= allowScriptAccess %>"/>      
+      <param name="wmode" value="<%= wmode %>"/>      
       <embed      
          align="<%= align %>"
          allowScriptAccess="<%= allowScriptAccess %>"
@@ -59,8 +62,10 @@
          src="<%= flexspacesSwfUrl %>"          
          swliveconnect="<%= swliveconnect %>"
          width="<%= flashWidth %>" 
-         wmode="<%= wmode %>"         
-      </embed>
-   </object>
+         wmode="<%= wmode %>"     
+         >    
+      </embed>   
+   </object>   
+   </div>   
 </center>
 

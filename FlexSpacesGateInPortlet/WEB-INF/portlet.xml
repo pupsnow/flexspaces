@@ -7,8 +7,8 @@
       <portlet-class>org.integratedsemantics.gatein.portlet.FlexSpacesPortlet</portlet-class>
       <supports>
          <mime-type>text/html</mime-type>
-         <portlet-mode>VIEW</portlet-mode>
-         <portlet-mode>EDIT</portlet-mode>
+         <portlet-mode>view</portlet-mode>
+         <portlet-mode>edit</portlet-mode>
       </supports>
       <portlet-info>
          <title>FlexSpaces Portlet</title>
@@ -16,11 +16,11 @@
       <portlet-preferences>
          <preference>
             <name>flexspacesSwfUrl</name>
-            <value>/flexspaces-gatein-portlet/FlexSpaces.swf</value>
+            <value>http://localhost:8080/flexspaces/FlexSpaces.swf</value>
          </preference>
          <preference>
             <name>flexspacesBaseUrl</name>
-            <value>/flexspaces-gatein-portlet</value>
+            <value>http://localhost:8080/flexspaces/</value>
          </preference>
          <preference>
             <name>flashWidth</name>
@@ -56,7 +56,7 @@
          </preference>
          <preference>
             <name>alfrescoUrl</name>
-            <value>http://localhost:9080/alfresco/service</value>
+            <value>http://localhost:8080/alfresco/service</value>
          </preference>
       </portlet-preferences>
    </portlet>

@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspaces.app
 {
 	import flash.events.Event;
 	
-	//flex4 import mx.core.Application;
 	import mx.managers.PopUpManager;
 	
 	import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
@@ -22,7 +21,7 @@ package org.integratedsemantics.flexspaces.app
 	import spark.components.Application;
 	
 	        
-	public class AppBase extends spark.components.Application
+	public class AppBase extends Application
 	{
         protected var model:AppModelLocator = AppModelLocator.getInstance();
             
@@ -82,7 +81,7 @@ package org.integratedsemantics.flexspaces.app
         
         protected function onApplicationContextComplete(event:Event):void
         {
-            //trace("onApplicationContextComplete");
+            trace("onApplicationContextComplete");
             
             var ecmServerConfig:EcmServerConfig = model.applicationContext.getObject("ecmServerConfig"); 
             
@@ -128,10 +127,15 @@ package org.integratedsemantics.flexspaces.app
             {
                 flexSpacesPresModel.showSearch = (search == "true");
             }
-            var tasks:String = this.parameters.tasks;
-            if ((tasks != null) && (tasks.length != 0))
+            var tasks:Object = this.parameters.tasks;
+            trace("tasks: " + tasks);
+            if ((tasks is String) && (tasks != null) && (tasks.length != 0))
             {
                 flexSpacesPresModel.showTasks = (tasks == "true");
+            }
+            else if (tasks is Boolean)
+            {
+                flexSpacesPresModel.showTasks = tasks;    
             }
             var wcm:String = this.parameters.wcm;
             if ((wcm != null) && (wcm.length != 0))

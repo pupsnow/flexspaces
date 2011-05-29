@@ -1,5 +1,7 @@
 package org.integratedsemantics.flexspaces.view.folderview.gridview
 {
+    import flash.events.Event;
+    
     import mx.controls.DataGrid;
     import mx.controls.NumericStepper;
     

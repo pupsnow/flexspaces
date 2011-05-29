@@ -1,5 +1,7 @@
 package org.integratedsemantics.flexspaces.view.folderview.iconview
 {
+    import flash.events.Event;
+    
     import mx.controls.NumericStepper;
     import mx.controls.TileList;
     

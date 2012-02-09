@@ -7,7 +7,7 @@
    <description>${t.description!""}</description>
    <type>${t.type}</type>
    <taskid>${t.id}</taskid>
-   <startdate>${t.startDate}</startdate>
+   <startdate>${t.startDate?date}</startdate>
    <priority>${t.properties["bpm:priority"]}</priority>
    <status>${t.properties["bpm:status"]}</status>
    <percentcomplete>${t.properties["bpm:percentComplete"]}</percentcomplete>

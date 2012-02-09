@@ -1,11 +1,20 @@
 
+var version = server.version;
+var versionNum = parseFloat(version);
+
 var nodeId = args.nodeid;
 
 var node = search.findNode("workspace://SpacesStore/" + nodeId);
 
 if (node != null)
 {
+
     var workflowType = "jbpm$wf:" + args.type;
+
+    if (versionNum >= 4)
+    {
+        workflowType = "activiti$activiti" + args.type;
+    }
 
     var assignTo = people.getPerson(args.assignto);
 

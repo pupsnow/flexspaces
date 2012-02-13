@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspaces.view.wcm.createfolder
 {
     import flash.events.MouseEvent;
     
-    import mx.containers.FormItem;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
@@ -11,6 +10,7 @@ package org.integratedsemantics.flexspaces.view.wcm.createfolder
     import org.integratedsemantics.flexspaces.presmodel.wcm.createfolder.WcmCreateFolderPresModel;
     import org.integratedsemantics.flexspaces.view.createspace.AddedFolderEvent;
     
+    import spark.components.FormItem;
     import spark.components.TextInput;
 
     /**

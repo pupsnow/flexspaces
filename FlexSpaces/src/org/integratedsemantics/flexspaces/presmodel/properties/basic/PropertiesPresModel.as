@@ -30,7 +30,7 @@ package org.integratedsemantics.flexspaces.presmodel.properties.basic
         public var closeVisible:Boolean = false;
 
         public var authorVisible:Boolean = true;
-        public var emailIdVisible:Boolean = true;
+        public var emailIdVisible:Boolean = false;
 
         public var titleVisible:Boolean = true;
         public var descriptionVisible:Boolean = true;

@@ -55,8 +55,8 @@ package org.integratedsemantics.flexspaces.presmodel.properties.tagscategories
                 tagPropertiesPresModel = new TagPropertiesPresModel(repoNode);                   
             }   
             
-            // only setup semantic tags if Calias tagging features enabling has been configured
-            if (model.calaisConfig.enableCalias == true)
+            // only setup semantic tags if Calais tagging features enabling has been configured
+            if (model.calaisConfig.enableCalais == true)
             {
                 semanticTagPropertiesPresModel = new SemanticTagPropertiesPresModel(repoNode);                   		    	        	
             }                       

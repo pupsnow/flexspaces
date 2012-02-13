@@ -29,6 +29,7 @@ package org.integratedsemantics.flexspaces.view.map
 	        
             this.url = model.googleMapConfig.googleMapUrl;
             this.key = model.googleMapConfig.googleMapKey;
+            this.sensor = "false";
         }
         
         /**

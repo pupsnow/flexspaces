@@ -3,7 +3,6 @@ package org.integratedsemantics.flexspaces.view.tasks.startworkflow
     import flash.events.Event;
     import flash.events.MouseEvent;
     
-    import mx.containers.FormItem;
     import mx.controls.DateField;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
@@ -13,6 +12,7 @@ package org.integratedsemantics.flexspaces.view.tasks.startworkflow
     import org.integratedsemantics.flexspaces.presmodel.tasks.startworkflow.StartWorkflowPresModel;
     
     import spark.components.DropDownList;
+    import spark.components.FormItem;
     import spark.components.TextArea;
     import spark.components.TextInput;
 

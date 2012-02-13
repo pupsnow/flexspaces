@@ -5,7 +5,7 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:startworkflow="org.integratedsemantics.flexspaces.view.tasks.startworkflow.*"
     title="{resourceManager.getString('StartWorkflowView', 'title')}" 
-    width="468" height="280" styleName="dialog">
+    width="468" height="400" styleName="dialog">
 
     <fx:Metadata>[ResourceBundle("StartWorkflowView")]</fx:Metadata>
 
@@ -14,31 +14,31 @@
     <s:VGroup horizontalAlign="left" verticalAlign="top" styleName="mainArea" width="100%" height="100%" 
               paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
     
-    <mx:Form styleName="mainArea">
+    <s:Form styleName="mainArea">
     
-        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'workflowFormItem_label' )}" width="400" styleName="mainArea" id="workflowFormItem">      
+        <s:FormItem label="{resourceManager.getString('StartWorkflowView', 'workflowFormItem_label' )}" width="400" styleName="mainArea" id="workflowFormItem">      
             <s:DropDownList id="workflowTypeCombo" width="249" styleName="combo" dataProvider="{startWorkflowPresModel.workflowTypes}"
             	change="onChangeWorkflowType(event)" requireSelection="true" />
-        </mx:FormItem>
+        </s:FormItem>
 
-        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'assignToFormItem_label' )}" width="400" styleName="mainArea" id="assignToFormItem">  
+        <s:FormItem label="{resourceManager.getString('StartWorkflowView', 'assignToFormItem_label' )}" width="400" styleName="mainArea" id="assignToFormItem">  
             <s:TextInput id="assignToTextInput" text="{startWorkflowPresModel.assignToText}" width="250" styleName="input"
             	change="onChangeAssignToText(event)"/>      
-        </mx:FormItem>
+        </s:FormItem>
         
-        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'dueOnFormItem_label' )}" width="425" styleName="mainArea" id="dueOnFormItem"
+        <s:FormItem label="{resourceManager.getString('StartWorkflowView', 'dueOnFormItem_label' )}" width="425" styleName="mainArea" id="dueOnFormItem"
         	visible="{startWorkflowPresModel.dueOnVisible}" includeInLayout="{startWorkflowPresModel.dueOnVisible}">  
         	    
             <mx:DateField id="dueDateField"  width="275" styleName="input" change="onChangedDueDate(event)"/>
             
-        </mx:FormItem>
+        </s:FormItem>
 
-        <mx:FormItem label="{resourceManager.getString('StartWorkflowView', 'descriptionFormItem_label' )}" width="400" styleName="mainArea" id="descriptionFormItem">      
+        <s:FormItem label="{resourceManager.getString('StartWorkflowView', 'descriptionFormItem_label' )}" width="400" styleName="mainArea" id="descriptionFormItem">      
             <s:TextArea id="descTextArea" width="250" height="59" styleName="input"
             	change="onChangeDescText(event)"/>
-        </mx:FormItem>
+        </s:FormItem>
         
-    </mx:Form>
+    </s:Form>
     
     <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
         <s:Button id="okBtn" label="{resourceManager.getString('StartWorkflowView', 'okBtn_label' )}"/>    

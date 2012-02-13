@@ -77,7 +77,7 @@ package org.integratedsemantics.flexspaces.view.tags.tagcloud
                 linkButton.label = tag.name;
                 linkButton.setStyle("paddingLeft", 1);
                 linkButton.setStyle("paddingRight", 1);
-                var size:int = 10 + Math.round((count - countMin) / scale);              
+                var size:int = 12 + Math.round((count - countMin) / scale);              
                 linkButton.setStyle("fontSize", size);
                 linkButton.addEventListener(MouseEvent.CLICK, onTagClick);      
                 addChild(linkButton);     

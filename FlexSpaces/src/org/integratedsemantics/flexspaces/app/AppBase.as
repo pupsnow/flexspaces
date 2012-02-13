@@ -1,6 +1,7 @@
 package org.integratedsemantics.flexspaces.app
 {
 	import flash.events.Event;
+	import flash.net.SharedObject;
 	
 	import mx.managers.PopUpManager;
 	
@@ -111,12 +112,6 @@ package org.integratedsemantics.flexspaces.app
             flexSpacesPresModel = model.applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesPresModel;    
                    
-            // setup search results
-            flexSpacesPresModel.searchResultsPresModel = new SearchResultsPresModel();                     
-            
-            // setup nav panel pres model after all the config done 
-            flexSpacesPresModel.navPanelPresModel.setupSubViews();        
-
             var doclib:String = this.parameters.doclib;
             if ((doclib != null) && (doclib.length != 0))
             {
@@ -178,14 +173,37 @@ package org.integratedsemantics.flexspaces.app
             {
                 model.userInfo.autoLogin = (autologin == "true");
             } 
-                                    
+                                                
+            // use user prefs if avail
+            var userPrefs:SharedObject = SharedObject.getLocal("userPrefs");
+            if (userPrefs.data.domain != undefined)
+            {
+                model.ecmServerConfig.domain = userPrefs.data.domain;
+                model.ecmServerConfig.protocol = userPrefs.data.protocol;
+                model.ecmServerConfig.port = userPrefs.data.port;            
+                model.ecmServerConfig.urlPrefix = userPrefs.data.protocol + "://" 
+                    + userPrefs.data.domain + ":" + userPrefs.data.port + model.ecmServerConfig.alfrescoUrlPart;
+                
+                model.flexSpacesPresModel.showTasks = userPrefs.data.showTasks;
+                
+                model.calaisConfig.enableCalais = userPrefs.data.enableCalais;
+                model.calaisConfig.calaisKey = userPrefs.data.calaisKey;
+                model.googleMapConfig.enableGoogleMap = userPrefs.data.enableGoogleMap;
+            }
+            
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
                 flexSpacesPresModel.showTasks = false;
                 flexSpacesPresModel.showWCM = false;
             }    
             
-            model.configComplete = true;                                                       		
+            model.configComplete = true;           
+            
+            // setup search results
+            flexSpacesPresModel.searchResultsPresModel = new SearchResultsPresModel();                     
+            
+            // setup nav panel pres model after all the config done 
+            flexSpacesPresModel.navPanelPresModel.setupSubViews();                    
         }
         		
     }

@@ -502,7 +502,7 @@ package org.integratedsemantics.flexspaces.presmodel.main
         }
 
         /**
-         * Auto-Tag selected documents using Calias 
+         * Auto-Tag selected documents using Calais 
          *  
          * @param selectedItems selected nodes
          * 

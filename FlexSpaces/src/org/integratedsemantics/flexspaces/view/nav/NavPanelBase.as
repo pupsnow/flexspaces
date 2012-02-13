@@ -76,7 +76,7 @@ package org.integratedsemantics.flexspaces.view.nav
                 tagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
             }
             
-            if (navPanelPresModel.model.calaisConfig.enableCalias == true)
+            if (navPanelPresModel.model.calaisConfig.enableCalais == true)
             {    
                 if (onSearchResults != null)
                 {

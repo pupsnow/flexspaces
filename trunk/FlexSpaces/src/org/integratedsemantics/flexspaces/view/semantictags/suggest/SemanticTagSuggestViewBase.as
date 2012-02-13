@@ -55,8 +55,8 @@ package org.integratedsemantics.flexspaces.view.semantictags.suggest
         {
             super.onCreationComplete(event);
     
-            // only setup semantic tags if Calias tagging features enabling has been configured
-            if (semanticTagSuggestPresModel.model.calaisConfig.enableCalias == true)
+            // only setup semantic tags if Calais tagging features enabling has been configured
+            if (semanticTagSuggestPresModel.model.calaisConfig.enableCalais == true)
 			{
 	            observeButtonClick(addExistingCategoryBtn, onAddSuggestedTagBtn);
 	            observeButtonClick(removeCategoryBtn, onRemoveTagBtn);

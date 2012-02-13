@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspaces.view.semantictags.properties
 {
     import flash.events.MouseEvent;
     
-    import mx.containers.Form;
     import mx.events.FlexEvent;
     
     import org.integratedsemantics.flexspaces.model.vo.CategoryVO;
@@ -11,6 +10,7 @@ package org.integratedsemantics.flexspaces.view.semantictags.properties
     import org.integratedsemantics.flexspaces.view.semantictags.tree.SemanticTagTreeViewBase;
     
     import spark.components.Button;
+    import spark.components.Form;
     import spark.components.List;
 
 

@@ -74,7 +74,10 @@ package org.integratedsemantics.flexspaces.view.semantictags.map
 
             var responder:Responder = new Responder(onResultGetTags, onFaultGetTags);
 
-            semanticTagMapPresModel.refresh(responder);
+            if (semanticTagMapPresModel != null)
+            {
+                semanticTagMapPresModel.refresh(responder);
+            }
         }
         
         /**

@@ -4,7 +4,7 @@
     xmlns:s="library://ns.adobe.com/flex/spark" 
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:createspace="org.integratedsemantics.flexspaces.view.createspace.*"
-    width="462" height="378" styleName="dialog" title="{resourceManager.getString('CreateSpaceView', 'title')}" >
+    width="462" height="420" styleName="dialog" title="{resourceManager.getString('CreateSpaceView', 'title')}" >
     
     <fx:Metadata>[ResourceBundle("CreateSpaceView")]</fx:Metadata>
     
@@ -15,29 +15,29 @@
     
     <mx:Spacer height="10"/>
     
-    <mx:Form width="100%" height="100%" styleName="mainArea">
+    <s:Form width="100%" height="100%" styleName="mainArea">
 
-        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'spaceNameFormItem_label' )}" width="348" styleName="mainArea" id="spaceNameFormItem">      
+        <s:FormItem label="{resourceManager.getString('CreateSpaceView', 'spaceNameFormItem_label' )}" width="348" styleName="mainArea" id="spaceNameFormItem">      
             <s:TextInput id="foldername" width="250" text="{resourceManager.getString('CreateSpaceView', 'foldername_text')}" styleName="input"
             	change="createSpacePresModel.updateFolderName(foldername.text)"/>      
-        </mx:FormItem>
+        </s:FormItem>
  
-        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'titleFormItem_label' )}" width="346" styleName="mainArea" id="titleFormItem">      
+        <s:FormItem label="{resourceManager.getString('CreateSpaceView', 'titleFormItem_label' )}" width="346" styleName="mainArea" id="titleFormItem">      
             <s:TextInput id="nodetitle" width="250" styleName="input"
             	change="createSpacePresModel.updateTitle(nodetitle.text)"/>                  
-        </mx:FormItem>
+        </s:FormItem>
 
-        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'descriptionFormItem_label' )}" width="346" styleName="mainArea" id="descriptionFormItem">      
+        <s:FormItem label="{resourceManager.getString('CreateSpaceView', 'descriptionFormItem_label' )}" width="346" styleName="mainArea" id="descriptionFormItem">      
             <s:TextInput id="description" width="250" styleName="input"
             	change="createSpacePresModel.updateDescription(description.text)"/>                  
-        </mx:FormItem>
+        </s:FormItem>
         
-        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'templateFormItem_label' )}" styleName="mainArea" id="templateFormItem">      
+        <s:FormItem label="{resourceManager.getString('CreateSpaceView', 'templateFormItem_label' )}" styleName="mainArea" id="templateFormItem">      
             <s:DropDownList width="250" id="templatecombo"  labelField="name" dataProvider="{createSpacePresModel.templates}" styleName="combo"
             	change="createSpacePresModel.changeSelectedTemplate(templatecombo.selectedItem)" requireSelection="true"  />
-        </mx:FormItem>
+        </s:FormItem>
 
-        <mx:FormItem label="{resourceManager.getString('CreateSpaceView', 'iconFormItem_label' )}" styleName="mainArea" id="iconFormItem">     
+        <s:FormItem label="{resourceManager.getString('CreateSpaceView', 'iconFormItem_label' )}" styleName="mainArea" id="iconFormItem">     
             <mx:TileList width="250" id="iconlist"  dataProvider="{createSpacePresModel.icons}" height="81" selectedIndex="0"
             	change="createSpacePresModel.changeSelectedIcon(iconlist.selectedItem)">
                 <mx:itemRenderer>
@@ -46,9 +46,9 @@
                     </fx:Component>
                 </mx:itemRenderer>            
             </mx:TileList>
-        </mx:FormItem>
+        </s:FormItem>
 
-    </mx:Form>
+    </s:Form>
 
     <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
         <s:Button id="okBtn" label="{resourceManager.getString('CreateSpaceView', 'okBtn_label' )}"/>    

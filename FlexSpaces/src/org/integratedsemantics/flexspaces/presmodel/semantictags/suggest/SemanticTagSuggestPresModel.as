@@ -55,7 +55,7 @@ package org.integratedsemantics.flexspaces.presmodel.semantictags.suggest
                 enableRemove = false;
             }                                                                               
 
-            if (model.calaisConfig.enableCalias == true)
+            if (model.calaisConfig.enableCalais == true)
 			{
 	            semanticTagTreePresModel = new SemanticTagSuggestionTreePresModel(repoNode);    
 			}            

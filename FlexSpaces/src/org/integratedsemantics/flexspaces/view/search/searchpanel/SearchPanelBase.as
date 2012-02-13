@@ -66,7 +66,7 @@ package org.integratedsemantics.flexspaces.view.search.searchpanel
                 tagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
             }
             
-            if (searchPanelPresModel.model.calaisConfig.enableCalias == true)
+            if (searchPanelPresModel.model.calaisConfig.enableCalais == true)
             {    
                 semanticTagCloudView.addEventListener(SearchResultsEvent.SEARCH_RESULTS_AVAILABLE, onSearchResults);                             
                 

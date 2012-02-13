@@ -57,8 +57,13 @@
         <s:VGroup width="50%">
                                      
             <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'typesSection_label' )}" opened="true" styleName="linkButtonWindowShade" width="100%" id="typesSection">        
-                <mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6"> 
-                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'resultsForFormItem_label' )}" styleName="mainArea" width="100%" id="resultsForFormItem">            
+                <!--mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6"--> 
+                <s:Form width="100%"> 
+                    <s:layout>
+                        <s:FormLayout gap="-10" />
+                    </s:layout>        
+                    
+                <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'resultsForFormItem_label' )}" styleName="mainArea" width="100%" id="resultsForFormItem">            
                     <s:DropDownList id="resultsForCombo" styleName="combo" width="100%" requireSelection="true"
                     	change="advancedSearchPresModel.resultsForSelection = resultsForCombo.selectedItem" >
                         <s:dataProvider>
@@ -70,8 +75,8 @@
                             </mx:ArrayCollection>                                               
                         </s:dataProvider>
                     </s:DropDownList>
-                </mx:FormItem>
-                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'folderTypeFormItem_label' )}" styleName="mainArea" width="100%" id="folderTypeFormItem">            
+                </s:FormItem>
+                <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'folderTypeFormItem_label' )}" styleName="mainArea" width="100%" id="folderTypeFormItem">            
                     <s:DropDownList id="folderTypeCombo" styleName="combo" width="100%" requireSelection="true"
 						change="advancedSearchPresModel.folderTypeSelection = folderTypeCombo.selectedItem">                    
                         <s:dataProvider>
@@ -81,9 +86,9 @@
                             </mx:ArrayCollection>                                               
                         </s:dataProvider>
                     </s:DropDownList>
-                </mx:FormItem>
+                </s:FormItem>
     
-                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'contentTypeFormItem_label' )}" styleName="mainArea" width="100%" id="contentTypeFormItem">            
+                <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'contentTypeFormItem_label' )}" styleName="mainArea" width="100%" id="contentTypeFormItem">            
                     <s:DropDownList id="contentTypeCombo" styleName="combo" width="100%" requireSelection="true"
 						change="advancedSearchPresModel.contentTypeSelection = contentTypeCombo.selectedItem">                                        
                         <s:dataProvider>
@@ -93,9 +98,9 @@
                             </mx:ArrayCollection>                                               
                         </s:dataProvider>
                     </s:DropDownList>
-                </mx:FormItem>
+                </s:FormItem>
 
-                <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'contentFormatFormItem_label' )}" styleName="mainArea" width="100%" id="contentFormatFormItem">            
+                <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'contentFormatFormItem_label' )}" styleName="mainArea" width="100%" id="contentFormatFormItem">            
                     <s:DropDownList id="formatCombo" styleName="combo" width="100%" requireSelection="true"
 						change="advancedSearchPresModel.formatSelection = formatCombo.selectedItem">                                                            
                         <s:dataProvider>
@@ -202,39 +207,44 @@
                             </mx:ArrayCollection>                                               
                         </s:dataProvider>
                     </s:DropDownList>
-                </mx:FormItem>
-                </mx:Form>                
+                </s:FormItem>
+                </s:Form>                
             </flexlib:WindowShade2>            
             
             <mx:Spacer height="4"/>
 
             <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'datesSection_label' )}" opened="true" styleName="linkButtonWindowShade" width="100%" id="datesSection">        
-                <mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6">
-                    <mx:FormItem label="" styleName="mainArea" width="100%">
+                <!-- mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6"-->
+                <s:Form width="100%">
+                    <s:layout>
+                        <s:FormLayout gap="-10" />
+                    </s:layout>        
+                    
+                    <s:FormItem label="" styleName="mainArea" width="100%">
                         <s:CheckBox id="modifiedDateCheckBox" label="Modified Date:" selected="false" width="100%"
                                     change="advancedSearchPresModel.modifiedDateCheckState = modifiedDateCheckBox.selected"/>                                                                                                       
-                    </mx:FormItem>
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'modifiedFromFormItem_label' )}" styleName="mainArea" width="100%" id="modifiedFromFormItem">            
+                    </s:FormItem>
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'modifiedFromFormItem_label' )}" styleName="mainArea" width="100%" id="modifiedFromFormItem">            
                         <mx:DateField id="modifiedFromDate" styleName="input" width="100%"
                                       change="advancedSearchPresModel.modifiedFromDate = modifiedFromDate.text"/>                                                                                                                               
-                    </mx:FormItem>
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'modifiedToFormItem_label' )}" styleName="mainArea" width="100%" id="modifiedToFormItem">            
+                    </s:FormItem>
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'modifiedToFormItem_label' )}" styleName="mainArea" width="100%" id="modifiedToFormItem">            
                         <mx:DateField id="modifiedToDate" styleName="input" width="100%"
                                       change="advancedSearchPresModel.modifiedToDate = modifiedToDate.text"/>                                                                                                                                                       
-                    </mx:FormItem>
-                    <mx:FormItem label="" styleName="mainArea" width="100%">
+                    </s:FormItem>
+                    <s:FormItem label="" styleName="mainArea" width="100%">
                         <s:CheckBox id="createdDateCheckBox" label="Created Date:" selected="false" width="100%"
                                     change="advancedSearchPresModel.createdDateCheckState = createdDateCheckBox.selected"/>                                                                                                                               
-                    </mx:FormItem>
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'createdFromFormItem_label' )}" styleName="mainArea" width="100%" id="createdFromFormItem">            
+                    </s:FormItem>
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'createdFromFormItem_label' )}" styleName="mainArea" width="100%" id="createdFromFormItem">            
                         <mx:DateField id="createdFromDate"  styleName="input" width="100%"
                                       change="advancedSearchPresModel.createdFromDate = createdFromDate.text"/>                                                                                                                                                       
-                    </mx:FormItem>    
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'createdToFormItem_label' )}" styleName="mainArea" width="100%" id="createdToFormItem">            
+                    </s:FormItem>    
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'createdToFormItem_label' )}" styleName="mainArea" width="100%" id="createdToFormItem">            
                         <mx:DateField id="createdToDate" styleName="input" width="100%"
                                       change="advancedSearchPresModel.createdToDate = createdToDate.text"/>                                                                                                                                                                               
-                    </mx:FormItem>                            
-                </mx:Form>
+                    </s:FormItem>                            
+                </s:Form>
             </flexlib:WindowShade2>
                                                
         </s:VGroup>
@@ -246,20 +256,25 @@
         <s:VGroup width="50%">
                                     
             <flexlib:WindowShade2 label="{resourceManager.getString('AdvancedSearchView', 'attributesSection_label' )}" opened="true" styleName="linkButtonWindowShade" width="100%" id="attributesSection">        
-                <mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6">                
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'titleFormItem_label' )}" styleName="mainArea" width="100%" id="titleFormItem">            
+                <!--mx:Form width="100%" paddingLeft="6" paddingRight="6" paddingTop="6" paddingBottom="6" verticalGap="6"-->                
+                <s:Form width="100%">  
+                    <s:layout>
+                        <s:FormLayout gap="-10" />
+                    </s:layout>        
+                    
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'titleFormItem_label' )}" styleName="mainArea" width="100%" id="titleFormItem">            
                         <s:TextInput id="titleText" styleName="input" width="100%"
                                      change="advancedSearchPresModel.titleText = titleText.text"/>                                                                               
-                    </mx:FormItem>
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'descriptionFormItem_label' )}" styleName="mainArea" width="100%" id="descriptionFormItem">            
+                    </s:FormItem>
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'descriptionFormItem_label' )}" styleName="mainArea" width="100%" id="descriptionFormItem">            
                         <s:TextInput id="descriptionText" styleName="input" width="100%"
                                      change="advancedSearchPresModel.descriptionText = descriptionText.text"/>                                                                                                      
-                    </mx:FormItem>
-                    <mx:FormItem label="{resourceManager.getString('AdvancedSearchView', 'authorFormItem_label' )}" styleName="mainArea" width="100%" id="authorFormItem">            
+                    </s:FormItem>
+                    <s:FormItem label="{resourceManager.getString('AdvancedSearchView', 'authorFormItem_label' )}" styleName="mainArea" width="100%" id="authorFormItem">            
                         <s:TextInput id="authorText" styleName="input" width="100%"
                                      change="advancedSearchPresModel.authorText = authorText.text"/>                                                                                                       
-                    </mx:FormItem>
-                </mx:Form>
+                    </s:FormItem>
+                </s:Form>
             </flexlib:WindowShade2>
                         
             <mx:Spacer height="4"/>

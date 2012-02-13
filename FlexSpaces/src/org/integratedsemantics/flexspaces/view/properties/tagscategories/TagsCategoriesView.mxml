@@ -9,7 +9,12 @@
     xmlns:tagscategories="org.integratedsemantics.flexspaces.view.properties.tagscategories.*"
     width="520" height="600" title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog">
 
-    <fx:Metadata>[ResourceBundle("TagsCategoriesView")]</fx:Metadata>
+    <fx:Metadata>
+        [ResourceBundle("TagsCategoriesView")]
+        [ResourceBundle("TagPropertiesView")]        
+        [ResourceBundle("CategoryPropertiesView")]
+        [ResourceBundle("SemanticTagPropertiesView")]
+    </fx:Metadata>
     
     <fx:Style source="../../../framework/presmodel/dialog.css"/>
 
@@ -17,20 +22,26 @@
               paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
 
     <s:HGroup width="100%" styleName="mainArea" verticalAlign="middle">        
-        <mx:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="400" styleName="mainArea" id="nameFormItem">    
+        <s:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="400" styleName="mainArea" id="nameFormItem">    
             <s:Label id="nameLabel" width="250"/>
-        </mx:FormItem>        
+        </s:FormItem>        
     </s:HGroup>
     
     <mx:Spacer height="5"/>
     
     <mx:TabNavigator creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" styleName="dialogTabs">
         
-        <tags:TagPropertiesView id="tagPropertiesView" tagPropertiesPresModel="{tagCategoriesPresModel.tagPropertiesPresModel}" />
+        <s:NavigatorContent label="{ resourceManager.getString('TagPropertiesView', 'title' ) }">        
+            <tags:TagPropertiesView id="tagPropertiesView" tagPropertiesPresModel="{tagCategoriesPresModel.tagPropertiesPresModel}" />
+        </s:NavigatorContent>
     
-        <categories:CategoryPropertiesView categoryPropertiesPresModel="{tagCategoriesPresModel.categoryPropertiesPresModel}" id="categoryPropertiesView" />
+        <s:NavigatorContent label="{ resourceManager.getString('CategoryPropertiesView', 'title') }">
+            <categories:CategoryPropertiesView categoryPropertiesPresModel="{tagCategoriesPresModel.categoryPropertiesPresModel}" id="categoryPropertiesView" />
+        </s:NavigatorContent>
 
-        <semantictags:SemanticTagPropertiesView semanticTagPropertiesPresModel="{tagCategoriesPresModel.semanticTagPropertiesPresModel}" id="semanticTagPropertiesView" />
+        <s:NavigatorContent label="{ resourceManager.getString('SemanticTagPropertiesView', 'title' ) }">
+            <semantictags:SemanticTagPropertiesView semanticTagPropertiesPresModel="{tagCategoriesPresModel.semanticTagPropertiesPresModel}" id="semanticTagPropertiesView" />
+        </s:NavigatorContent>
         
     </mx:TabNavigator>
 

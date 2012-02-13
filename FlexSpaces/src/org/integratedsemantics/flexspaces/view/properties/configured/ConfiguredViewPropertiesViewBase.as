@@ -1,8 +1,7 @@
 package org.integratedsemantics.flexspaces.view.properties.configured
 {
-    import com.adobe.serialization.json.JSON;
+    //import com.adobe.serialization.json.JSON;
     
-    import mx.containers.FormItem;
     import mx.events.FlexEvent;
     import mx.rpc.AsyncToken;
     import mx.rpc.events.FaultEvent;
@@ -14,6 +13,7 @@ package org.integratedsemantics.flexspaces.view.properties.configured
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
     
+    import spark.components.FormItem;
     import spark.components.Label;
     
 
@@ -79,7 +79,7 @@ package org.integratedsemantics.flexspaces.view.properties.configured
         private function onGetFormPropertiesComplete(event:ResultEvent):void
         {
             var dataStr:String = String(event.result);
-            formDefinition = JSON.decode(dataStr);                  
+            formDefinition = JSON.parse(dataStr);                  
 
             var fields:Object = formDefinition.fields as Object;
             var structures:* = formDefinition.structure;
@@ -104,7 +104,7 @@ package org.integratedsemantics.flexspaces.view.properties.configured
                         formItem.percentWidth = 100;
                         formItem.label = field.label + ":";
                         formItem.id = field.dataKeyName + "_item";
-                        var control:UIComponent;
+                        var control:Label;
                         control = new Label();
                         control.percentWidth = 100;
                         control.id = field.dataKeyName;

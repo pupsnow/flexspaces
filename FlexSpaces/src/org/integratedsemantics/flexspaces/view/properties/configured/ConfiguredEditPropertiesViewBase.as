@@ -1,6 +1,6 @@
 package org.integratedsemantics.flexspaces.view.properties.configured
 {
-    import com.adobe.serialization.json.JSON;
+    //import com.adobe.serialization.json.JSON;
     
     import flash.events.Event;
     import flash.events.IOErrorEvent;
@@ -9,8 +9,6 @@ package org.integratedsemantics.flexspaces.view.properties.configured
     
     import flex.utils.spark.resize.ResizableTextAreaSkin;
     
-    import mx.containers.Form;
-    import mx.containers.FormItem;
     import mx.controls.DateField;
     import mx.events.CalendarLayoutChangeEvent;
     import mx.events.FlexEvent;
@@ -27,6 +25,7 @@ package org.integratedsemantics.flexspaces.view.properties.configured
     import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
     
     import spark.components.CheckBox;
+    import spark.components.FormItem;
     import spark.components.TextArea;
     import spark.components.TextInput;
     import spark.events.TextOperationEvent;
@@ -96,7 +95,7 @@ package org.integratedsemantics.flexspaces.view.properties.configured
         private function onGetFormPropertiesComplete(event:ResultEvent):void
         {
             var dataStr:String = String(event.result);
-            formDefinition = JSON.decode(dataStr);                  
+            formDefinition = JSON.parse(dataStr);                  
 
             var fields:Object = formDefinition.fields as Object;
             var structures:* = formDefinition.structure;
@@ -224,7 +223,7 @@ package org.integratedsemantics.flexspaces.view.properties.configured
             var url:String = model.ecmServerConfig.urlPrefix + "/api/node/" + itemId + "/formprocessor";
             url = url + "?alf_ticket=" + model.userInfo.loginTicket + "&alf_method=POST";
             
-            var jsonStr:String = JSON.encode(changedData);      
+            var jsonStr:String = JSON.stringify(changedData);      
             
             var request:URLRequest = new URLRequest(url);
             request.contentType = "application/json";

@@ -1,6 +1,7 @@
 package org.integratedsemantics.flexspacesair.app
 {
     import flash.events.Event;
+    import flash.net.SharedObject;
     
     import mx.managers.PopUpManager;
     
@@ -101,21 +102,37 @@ package org.integratedsemantics.flexspacesair.app
             
             flexSpacesAirPresModel = model.applicationContext.getObject("presModel");
             model.flexSpacesPresModel = flexSpacesAirPresModel;            
-
-            // setup search results
-            flexSpacesAirPresModel.searchResultsPresModel = new SearchResultsPresModel();                     
-
-            // setup nav panel after all the config done
-            flexSpacesAirPresModel.navPanelPresModel.setupSubViews();        
-
-
+            
+            // use user prefs if avail
+            var userPrefs:SharedObject = SharedObject.getLocal("userPrefs");
+            if (userPrefs.data.domain != undefined)
+            {
+                model.ecmServerConfig.domain = userPrefs.data.domain;
+                model.ecmServerConfig.protocol = userPrefs.data.protocol;
+                model.ecmServerConfig.port = userPrefs.data.port;            
+                model.ecmServerConfig.urlPrefix = userPrefs.data.protocol + "://" 
+                    + userPrefs.data.domain + ":" + userPrefs.data.port + model.ecmServerConfig.alfrescoUrlPart;
+                
+                model.flexSpacesPresModel.showTasks = userPrefs.data.showTasks;
+                
+                model.calaisConfig.enableCalais = userPrefs.data.enableCalais;
+                model.calaisConfig.calaisKey = userPrefs.data.calaisKey;
+                model.googleMapConfig.enableGoogleMap = userPrefs.data.enableGoogleMap;
+            }
+                        
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
             {
                 flexSpacesAirPresModel.showTasks = false;
                 flexSpacesAirPresModel.showWCM = false;
-            }    
+            }  
+
+            model.configComplete = true;   
             
-            model.configComplete = true;                    
+            // setup search results
+            flexSpacesAirPresModel.searchResultsPresModel = new SearchResultsPresModel();                     
+            
+            // setup nav panel after all the config done
+            flexSpacesAirPresModel.navPanelPresModel.setupSubViews();                    
         }                
         		
 	}

@@ -54,8 +54,17 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.startworkflow
             
 			var reviewAndApproveType:Object = new Object();
 			reviewAndApproveType.label = ResourceManager.getInstance().getString('StartWorkflowView', 'reviewAndApprove_label');
-			reviewAndApproveType.workflowType = "review";
-			reviewAndApproveType.id = "reviewAndApprove";			            
+			
+            if (model.ecmServerConfig.serverVersionNum() >= 4)
+            {    
+                reviewAndApproveType.workflowType = "Review";
+            }
+            else
+            {
+                reviewAndApproveType.workflowType = "review";
+            }
+            
+            reviewAndApproveType.id = "reviewAndApprove";			            
 			workflowTypes.addItem(reviewAndApproveType);
             
             if (model.ecmServerConfig.isLiveCycleContentServices == true)
@@ -67,8 +76,18 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.startworkflow
             {
 				var adhocType:Object = new Object();
 				adhocType.label = ResourceManager.getInstance().getString('StartWorkflowView', 'adhocTask_label');
-				adhocType.workflowType = "adhoc";
-				adhocType.id = "adhocTask";			            
+                
+
+                if (model.ecmServerConfig.serverVersionNum() >= 4)
+                {    
+                    adhocType.workflowType = "Adhoc";
+                }
+                else
+                {
+                    adhocType.workflowType = "adhoc";
+                }                                
+
+                adhocType.id = "adhocTask";			            
 				workflowTypes.addItem(adhocType);
             }            
         }

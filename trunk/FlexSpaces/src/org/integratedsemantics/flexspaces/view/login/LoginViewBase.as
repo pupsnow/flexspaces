@@ -2,15 +2,18 @@ package org.integratedsemantics.flexspaces.view.login
 {
 	import flash.events.Event;
 	
-	import mx.controls.Text;
 	import mx.events.FlexEvent;
+	import mx.managers.PopUpManager;
 	import mx.rpc.Responder;
 	
 	import org.integratedsemantics.flexspaces.presmodel.login.LoginPresModel;
+	import org.integratedsemantics.flexspaces.presmodel.preferences.PreferencesPresModel;
 	import org.integratedsemantics.flexspaces.util.ObserveUtil;
+	import org.integratedsemantics.flexspaces.view.preferences.PreferencesView;
 	
 	import spark.components.BorderContainer;
 	import spark.components.Button;
+	import spark.components.Label;
 	import spark.components.TextInput;
     
         
@@ -20,7 +23,7 @@ package org.integratedsemantics.flexspaces.view.login
      */
     public class LoginViewBase extends BorderContainer
     {
-        public var errorMessage:Text;
+        public var errorMessage:Label;
         public var username:TextInput;
         public var password:TextInput;
         public var loginBtn:Button;
@@ -130,6 +133,13 @@ package org.integratedsemantics.flexspaces.view.login
 			// Set the new error message
 			errorMessage.text = message;			
 		}
+            
+        protected function onPreferences():void
+        {
+            var preferencesView:PreferencesView = PreferencesView(PopUpManager.createPopUp(this, PreferencesView, false));
+            var preferencesPresModel:PreferencesPresModel = new PreferencesPresModel();
+            preferencesView.preferencesPresModel = preferencesPresModel;
+        }
             
     }
 }

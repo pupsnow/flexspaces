@@ -15,20 +15,20 @@
     
     <mx:Spacer height="10"/>
     
-    <mx:Form width="388" height="133" styleName="mainArea">
-        <mx:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'nameItem_label' )}" id="nameItem" width="348" styleName="mainArea">      
+    <s:Form width="388" height="133" styleName="mainArea">
+        <s:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'nameItem_label' )}" id="nameItem" width="348" styleName="mainArea">      
             <s:TextInput id="foldername" width="250" text="" styleName="input"
             	change="wcmCreateFolderPresModel.updateFolderName(foldername.text)"/>
-        </mx:FormItem> 
-        <mx:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'titleItem_label' )}" id="titleItem" width="346" styleName="mainArea">      
+        </s:FormItem> 
+        <s:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'titleItem_label' )}" id="titleItem" width="346" styleName="mainArea">      
             <s:TextInput id="nodetitle" width="250" styleName="input"
             	change="wcmCreateFolderPresModel.updateTitle(nodetitle.text)"/>
-        </mx:FormItem>
-        <mx:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'descriptionItem_label' )}" id="descriptionItem" width="346" styleName="mainArea">      
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('WcmCreateFolderView', 'descriptionItem_label' )}" id="descriptionItem" width="346" styleName="mainArea">      
             <s:TextInput id="description" width="250" styleName="input"
             	change="wcmCreateFolderPresModel.updateDescription(description.text)"/>
-        </mx:FormItem>        
-    </mx:Form>
+        </s:FormItem>        
+    </s:Form>
     
     <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center"> 
         <s:Button id="okBtn" label="{resourceManager.getString('WcmCreateFolderView', 'okBtn_label' )}"/>    

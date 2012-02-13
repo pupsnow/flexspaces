@@ -1526,7 +1526,7 @@ package org.integratedsemantics.flexspaces.view.main
                             mainMenu.enableMenuItem("tools", "startworkflow", readPermission);
                             
                             // auto-tag, suggest tags
-                            if ((model.calaisConfig.enableCalias == true) && (writePermission == true))
+                            if ((model.calaisConfig.enableCalais == true) && (writePermission == true))
                             {
                                 mainMenu.enableMenuItem("tools", "autoTag", true);
                                 mainMenu.enableMenuItem("tools", "suggestTags", true);

@@ -14,9 +14,9 @@
               paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
     
     <s:VGroup height="160" width="470" styleName="mainArea">
-        <mx:Text text="{resourceManager.getString('DeleteView', 'confirmMessage_text')}" width="450" height="40" id="confirmMessage"/>    
+        <s:Label text="{resourceManager.getString('DeleteView', 'confirmMessage_text')}" width="450" height="40" id="confirmMessage"/>    
         <mx:Spacer height="15"/>
-        <mx:Text id="filelist" width="450" height="77" text="{resourceManager.getString('DeleteView', 'filelist_text')}"/>    
+        <s:Label id="filelist" width="450" height="77" text="{resourceManager.getString('DeleteView', 'filelist_text')}"/>    
     </s:VGroup>
     
     <mx:Spacer height="15"/>

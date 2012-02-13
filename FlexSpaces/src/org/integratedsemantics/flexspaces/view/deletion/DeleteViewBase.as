@@ -2,13 +2,14 @@ package org.integratedsemantics.flexspaces.view.deletion
 {   
     import flash.events.MouseEvent;
     
-    import mx.controls.Text;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
     
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.deletion.DeletePresModel;
+    
+    import spark.components.Label;
 
 
     /**
@@ -17,7 +18,7 @@ package org.integratedsemantics.flexspaces.view.deletion
      */
     public class DeleteViewBase extends DialogViewBase
     {
-        public var filelist:Text;
+        public var filelist:Label;
         
         [Bindable]
         public var deletePresModel:DeletePresModel;

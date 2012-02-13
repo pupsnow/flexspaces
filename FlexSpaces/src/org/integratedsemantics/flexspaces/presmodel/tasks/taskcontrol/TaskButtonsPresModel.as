@@ -5,6 +5,7 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.taskcontrol
     
     import org.integratedsemantics.flexspaces.control.event.task.EndTaskEvent;
     import org.integratedsemantics.flexspaces.framework.presmodel.PresModel;
+    import org.integratedsemantics.flexspaces.model.AppModelLocator;
     import org.integratedsemantics.flexspaces.view.tasks.event.RefreshTaskListEvent;
 
     
@@ -18,6 +19,8 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.taskcontrol
         public var taskItem:Object;
         public var transitionLabel:String;
         
+        protected var model:AppModelLocator = AppModelLocator.getInstance();                            
+
         
         /**
          * Constructor
@@ -36,7 +39,14 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.taskcontrol
          */
         public function adhocDone(responder:Responder):void
         {            
-            var endTaskEvent:EndTaskEvent = new EndTaskEvent(EndTaskEvent.END_TASK, responder, taskItem.taskId, "");
+            var transitionId:String = "";
+            if (model.ecmServerConfig.serverVersionNum() >= 4)
+            {    
+                transitionId = "Next";
+            }
+
+            var endTaskEvent:EndTaskEvent = new EndTaskEvent(EndTaskEvent.END_TASK, responder, taskItem.taskId, transitionId);
+                                   
             endTaskEvent.dispatch();
 
 			// todo i18n
@@ -51,7 +61,13 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.taskcontrol
          */
         public function approveTask(responder:Responder):void
         {
-            var endTaskEvent:EndTaskEvent = new EndTaskEvent(EndTaskEvent.END_TASK, responder, taskItem.taskId, "approve");
+            var transitionId:String = "approve";
+            if (model.ecmServerConfig.serverVersionNum() >= 4)
+            {    
+                transitionId = "Approve";
+            }
+            
+            var endTaskEvent:EndTaskEvent = new EndTaskEvent(EndTaskEvent.END_TASK, responder, taskItem.taskId, transitionId);
             endTaskEvent.dispatch();
 
 			// todo i18n
@@ -66,7 +82,13 @@ package org.integratedsemantics.flexspaces.presmodel.tasks.taskcontrol
          */        
         public function rejectTask(responder:Responder):void
         {
-            var endTaskEvent:EndTaskEvent = new EndTaskEvent(EndTaskEvent.END_TASK, responder, taskItem.taskId, "reject");
+            var transitionId:String = "reject";
+            if (model.ecmServerConfig.serverVersionNum() >= 4)
+            {    
+                transitionId = "Reject";
+            }
+            
+            var endTaskEvent:EndTaskEvent = new EndTaskEvent(EndTaskEvent.END_TASK, responder, taskItem.taskId, transitionId);
             endTaskEvent.dispatch();
 
 			// todo i18n

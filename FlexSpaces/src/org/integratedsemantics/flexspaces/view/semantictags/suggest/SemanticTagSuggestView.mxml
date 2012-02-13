@@ -15,7 +15,10 @@
     <s:VGroup horizontalAlign="left" verticalAlign="top" styleName="mainArea" width="100%" height="100%" 
               paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
         
-    <mx:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'categoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" id="categoriesFormItem">
+    <s:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'categoriesFormItem_label' )}" width="100%" styleName="mainArea" id="categoriesFormItem">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>     
 
         <s:List id="categoryList" dataProvider="{semanticTagSuggestPresModel.categories}" labelField="{resourceManager.getString('SemanticTagSuggestView', 'categoryList_labelField')}" height="120" styleName="list" width="100%"
         	change="onChangeSemanticTagList(event)"/>
@@ -23,16 +26,19 @@
         <s:Button label="{resourceManager.getString('SemanticTagSuggestView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"
         	enabled="{semanticTagSuggestPresModel.enableRemove}" visible="{semanticTagSuggestPresModel.enableRemove}"/>
 
-    </mx:FormItem>    
+    </s:FormItem>    
     
-    <mx:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'allCategoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+    <s:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'allCategoriesFormItem_label' )}" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>     
 
         <tree:SemanticTagSuggestionTreeView id="semanticTagTreeView" semanticTagSuggestionTreePresModel="{semanticTagSuggestPresModel.semanticTagTreePresModel}" height="217" width="100%"/>
     
         <s:Button label="{resourceManager.getString('SemanticTagSuggestView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"
         	enabled="{semanticTagSuggestPresModel.enableAdd}" visible="{semanticTagSuggestPresModel.enableAdd}"/>
 
-    </mx:FormItem>
+    </s:FormItem>
     
     <mx:Spacer height="10"/>
     

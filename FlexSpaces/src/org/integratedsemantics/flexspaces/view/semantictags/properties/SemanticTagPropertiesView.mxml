@@ -4,32 +4,39 @@
     xmlns:s="library://ns.adobe.com/flex/spark" 
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:properties="org.integratedsemantics.flexspaces.view.semantictags.properties.*"
-    xmlns:tree="org.integratedsemantics.flexspaces.view.semantictags.tree.*"
-    label="{resourceManager.getString('SemanticTagPropertiesView', 'title' )}" 
+    xmlns:tree="org.integratedsemantics.flexspaces.view.semantictags.tree.*"     
     creationComplete="onCreationComplete(event)" 
-    styleName="mainArea" height="100%" width="100%" creationPolicy="all" borderColor="#000000">
+    styleName="mainArea" height="100%" width="100%" creationPolicy="all">
     
     <fx:Metadata>[ResourceBundle("SemanticTagPropertiesView")]</fx:Metadata>
     
     <fx:Style source="../../../framework/presmodel/dialog.css"/>
 
-    <mx:FormItem label="{resourceManager.getString('SemanticTagPropertiesView', 'categoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" id="categoriesFormItem">
-
+    <properties:layout>
+        <s:FormLayout gap="-5"/>
+    </properties:layout>  
+    
+    <s:FormItem label="{resourceManager.getString('SemanticTagPropertiesView', 'categoriesFormItem_label' )}" width="100%" styleName="mainArea" id="categoriesFormItem">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>     
         <s:List id="categoryList" dataProvider="{semanticTagPropertiesPresModel.categories}" labelField="{resourceManager.getString('SemanticTagPropertiesView', 'categoryList_labelField')}" 
                 height="100" styleName="list" width="100%" change="onChangeSemanticTagList(event)"/>
     
         <s:Button label="{resourceManager.getString('SemanticTagPropertiesView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"
         	enabled="{semanticTagPropertiesPresModel.enableRemove}" visible="{semanticTagPropertiesPresModel.enableRemove}"/>
 
-    </mx:FormItem>    
+    </s:FormItem>    
     
-    <mx:FormItem label="{resourceManager.getString('SemanticTagPropertiesView', 'allCategoriesFormItem_label' )}" direction="vertical" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
-
+    <s:FormItem label="{resourceManager.getString('SemanticTagPropertiesView', 'allCategoriesFormItem_label' )}" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>     
         <tree:SemanticTagTreeView id="semanticTagTreeView" semanticTagTreePresModel="{semanticTagPropertiesPresModel.semanticTagTreePresModel}" height="217" width="100%"/>
     
         <s:Button label="{resourceManager.getString('SemanticTagPropertiesView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"
         	enabled="{semanticTagPropertiesPresModel.enableAdd}" visible="{semanticTagPropertiesPresModel.enableAdd}"/>
 
-    </mx:FormItem>
+    </s:FormItem>
         
 </properties:SemanticTagPropertiesViewBase>

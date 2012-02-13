@@ -14,7 +14,6 @@
         <property name="alfrescoUrlPart" value="/alfresco/service"/>
         <!-- for livecycle content services use next line and comment out previous line -->
         <!-- property name="alfrescoUrlPart" value="/contentspace/wcservice" -->
-
         <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
         <property name="isLiveCycleContentServices" value="false"/>
 
@@ -94,18 +93,18 @@
 
     <object id="calaisConfig" class="org.integratedsemantics.flexspaces.model.global.CalaisConfig">
         <!-- whether to enable calais features -->  
-        <property name="enableCalias" value="false"/>        
+        <property name="enableCalais" value="false"/>        
         <!--  calais api key --> 
-        <property name="calaisKey" value="value"/>                               
+        <property name="calaisKey" value=""/>                               
     </object>
 
    <object id="googleMapConfig" class="org.integratedsemantics.flexspaces.model.global.GoogleMapConfig">
       <!-- whether to enable google map feature -->  
       <property name="enableGoogleMap" value="false"/>      
       <!--  url of ip address or domain google api key is for --> 
-      <property name="googleMapUrl" value="value"/>      
+      <property name="googleMapUrl" value="http://code.google.com/p/flexspaces/"/>      
       <!--  google map api key --> 
-      <property name="googleMapKey" value="value"/>                           
+      <property name="googleMapKey" value="ABQIAAAACg3Is1M2_kx4_0w8rbzYXhRHSyI1hNIz7gIwjgv76Wl0zREZFxRtt1l6iZPeloE6NoXscRA1M5l6yQ"/>                           
    </object>
 
 </objects>

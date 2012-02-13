@@ -64,7 +64,7 @@ package org.integratedsemantics.flexspaces.presmodel.navpanel
                 tagCloudPresModel.doSearchOnClick = true;
             }
             
-            if (model.calaisConfig.enableCalias == true)
+            if (model.calaisConfig.enableCalais == true)
             {    
                 semanticTagCloudPresModel = new SemanticTagCloudPresModel(null);            
                 semanticTagCloudPresModel.doSearchOnClick = true;                                    

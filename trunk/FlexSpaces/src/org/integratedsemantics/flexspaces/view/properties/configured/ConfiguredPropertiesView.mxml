@@ -19,9 +19,14 @@
 
         <mx:TabNavigator  creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" styleName="dialogTabs">
             
-            <properties:ConfiguredViewPropertiesView id="viewPropertiesView" propPresModel="{propPresModel}" />
+            
+            <s:NavigatorContent label="{ resourceManager.getString('PropertiesView', 'viewPropertiesTab_label') }">
+                <properties:ConfiguredViewPropertiesView id="viewPropertiesView" propPresModel="{propPresModel}" />                
+            </s:NavigatorContent>
 
-            <properties:ConfiguredEditPropertiesView id="editPropertiesView" propPresModel="{propPresModel}" />            
+            <s:NavigatorContent label="{ resourceManager.getString('PropertiesView', 'editPropertiesTab_label') }">
+                <properties:ConfiguredEditPropertiesView id="editPropertiesView" propPresModel="{propPresModel}" />            
+            </s:NavigatorContent>
             
         </mx:TabNavigator>        
         

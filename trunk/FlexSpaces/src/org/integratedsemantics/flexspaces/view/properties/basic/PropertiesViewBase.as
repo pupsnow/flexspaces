@@ -2,8 +2,6 @@ package org.integratedsemantics.flexspaces.view.properties.basic
 {
     import flash.events.MouseEvent;
     
-    import mx.containers.FormItem;
-    import mx.controls.Text;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
@@ -12,6 +10,8 @@ package org.integratedsemantics.flexspaces.view.properties.basic
     import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.presmodel.properties.basic.PropertiesPresModel;
     
+    import spark.components.FormItem;
+    import spark.components.Label;
     import spark.components.TextArea;
     import spark.components.TextInput;
 
@@ -34,26 +34,26 @@ package org.integratedsemantics.flexspaces.view.properties.basic
         public var author:TextInput;
 
         public var sizeItem:FormItem;
-        public var size:Text;
+        public var size:Label;
 
         public var creatorItem:FormItem;
-        public var creator:Text;
+        public var creator:Label;
         public var createdItem:FormItem;
-        public var created:Text;
+        public var created:Label;
         public var modifierItem:FormItem;
-        public var modifier:Text;
+        public var modifier:Label;
         public var modifiedItem:FormItem;
-        public var modified:Text;
+        public var modified:Label;
 
         public var mimetypeItem:FormItem;
-        public var mimetype:Text;
+        public var mimetype:Label;
         public var encodingItem:FormItem;
-        public var encoding:Text;
+        public var encoding:Label;
         public var emailidItem:FormItem;
-        public var emailid:Text;
+        public var emailid:Label;
         
         public var editinlineItem:FormItem;
-        public var editinline:Text;
+        public var editinline:Label;
 
         [Bindable]
         public var propPresModel:PropertiesPresModel;

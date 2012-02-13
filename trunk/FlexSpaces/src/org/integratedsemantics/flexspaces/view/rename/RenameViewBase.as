@@ -2,7 +2,6 @@ package org.integratedsemantics.flexspaces.view.rename
 {
     import flash.events.MouseEvent;
     
-    import mx.containers.FormItem;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.rpc.Responder;
@@ -10,6 +9,7 @@ package org.integratedsemantics.flexspaces.view.rename
     import org.integratedsemantics.flexspaces.framework.presmodel.DialogViewBase;
     import org.integratedsemantics.flexspaces.presmodel.rename.RenamePresModel;
     
+    import spark.components.FormItem;
     import spark.components.TextInput;
 
 

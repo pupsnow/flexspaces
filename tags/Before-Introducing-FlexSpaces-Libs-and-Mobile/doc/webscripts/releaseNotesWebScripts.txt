@@ -1,0 +1,54 @@
+
+7/11/09
+Steve Reiner
+integratedsemantics.org
+integratedsemantics.com
+
+FlexSpaces WebScripts release notes
+
+0.91
+1. changed move webscript to use move operation
+
+0.9
+1. folderlist (doclib) and search can do paging in the webscripts ("server side")
+2. added favorites (shortcuts) webscripts added (same as in alfresco "explorer" web client)
+note one of the favorites webscripts uses a javascript api added in alfresco 3.0
+3. folderlist has filtering out of content rule nodes now
+
+0.8
+1. Web scripts were unchanged in 0.8. Additional web scripts for auto tagging,  semantic tags 
+were added to the Calais Integration forge project
+
+0.7
+1. type arg added to upLoadeNew web script
+2. Added livecycle/tasks/startWorkflow web script for LiveCycle Content Services ES
+3. Added versions/versionlist webscript for version history panel
+
+0.6
+1. Fixed to uploadNew, uploadExisitng to for pre 2.9 alfresco (tested 2.2.0 enterprise) (webscripts need 2.1 at least)
+2. endTask won't give exception on pre 2.9 but needs at least 2.9 to endTask
+3. added util/info web script to get server version , company home, etc.
+
+
+0.5
+1. added category webscripts (get levels of category tree, category properties on node, remove/add category to node)
+2. added tagging webscripts (get all tags / tags on node, add new/existing tag to node, remove tag from node)
+3. folder list/tree, wcm folderlist/tree now return permission info (Read,Write,Delete, CreateChildren) for nodes
+4. folderlist returns isWorkingCopy info
+
+0.4 release
+1. Added search webscripts
+2. Minor changes to have folder lists have noderefs, isLocked, etc.
+
+0.3 prototype
+Added web scripts to support WCM AVM
+1. New AVM specific webscripts in integratedsemantics/wcm folder:
+copy, crossRepoCopy (ADM to AVM), folder/createFolder, folderlist, move, stores, tree
+2. Modified existing webscripts to work with both ADM and AVM:
+delete, properties get/set (AVM set name only), upload/uploadNew, upload/uploadExisting
+
+0.2 prototype
+separate download of webscripts for use with html/ajax or flex applications, etc.
+
+0.1 prototype
+webscripts with flexspaces+air prototype

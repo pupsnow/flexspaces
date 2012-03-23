@@ -1,0 +1,41 @@
+
+/* override any flexspaces styles here */
+
+
+
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
+Application
+{
+    backgroundColor: #ffffff;
+}
+
+.viewStyle
+{
+    backgroundColor:    #ffffff; 
+}
+
+.viewTabs
+{
+    backgroundColor:          #ffffff;    
+}
+
+.breadCrumb
+{
+    crumbBackgroundColor: #ffffff;
+    color: #000000;    
+}
+
+.itemsPerPageStyle
+{
+    color:  #000000;      
+}
+
+.pageSizeComboStyle
+{
+    color:              #000000;  
+    symbolColor:        #000000; 
+    selectionColor:     #ffffff;
+    contentBackgroundColor: #ffffff;
+}

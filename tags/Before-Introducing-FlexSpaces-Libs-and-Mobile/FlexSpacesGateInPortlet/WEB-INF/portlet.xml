@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0" xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"> 
+   <portlet>
+      <portlet-name>FlexSpacesPortlet</portlet-name>
+      <portlet-class>org.integratedsemantics.gatein.portlet.FlexSpacesPortlet</portlet-class>
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>view</portlet-mode>
+         <portlet-mode>edit</portlet-mode>
+      </supports>
+      <portlet-info>
+         <title>FlexSpaces Portlet</title>
+      </portlet-info>
+      <portlet-preferences>
+         <preference>
+            <name>flexspacesSwfUrl</name>
+            <value>http://localhost:8080/flexspaces/FlexSpaces.swf</value>
+         </preference>
+         <preference>
+            <name>flexspacesBaseUrl</name>
+            <value>http://localhost:8080/flexspaces/</value>
+         </preference>
+         <preference>
+            <name>flashWidth</name>
+            <value>100%</value>
+         </preference>
+         <preference>
+            <name>flashHeight</name>
+            <value>700</value>
+         </preference>
+         <preference>
+            <name>showDocLib</name>
+            <value>true</value>
+         </preference>
+         <preference>
+            <name>showSearch</name>
+            <value>true</value>
+         </preference>
+         <preference>
+            <name>showTasks</name>
+            <value>true</value>
+         </preference>
+         <preference>
+            <name>showWcm</name>
+            <value>false</value>
+         </preference>
+         <preference>
+            <name>showHeader</name>
+            <value>true</value>
+         </preference>
+         <preference>
+            <name>haveCoverFlow</name>
+            <value>false</value>
+         </preference>
+         <preference>
+            <name>alfrescoUrl</name>
+            <value>http://localhost:8080/alfresco/service</value>
+         </preference>
+      </portlet-preferences>
+   </portlet>
+</portlet-app>

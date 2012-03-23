@@ -1,0 +1,14 @@
+
+/* air version specific styles */
+
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
+WindowedApplication
+{
+    color:           #ffffff;    
+    backgroundColor: #333333;
+}
+
+
+

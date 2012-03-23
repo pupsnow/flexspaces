@@ -1,0 +1,78 @@
+/* CSS file for dialogs */
+
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
+.dialog
+{
+    color: #ffffff; 
+    backgroundColor: #333333; 
+/*    
+    borderColor: #333333; 
+    borderStyle: solid; 
+    borderThickness: 0; 
+    cornerRadius: 0; 
+*/
+    fontSize: 12; 
+    fontWeight: bold; 
+}
+
+.mainArea
+{
+/* 
+    color: #ffffff; 
+    backgroundColor: #333333; 
+    borderColor: #333333;
+    borderStyle: solid;
+    borderThickness: 0;
+*/
+    fontSize: 10; 
+
+}
+
+.dialogTabs
+{
+    color: #ffffff; 
+    backgroundColor: #666666;     
+/*    
+    borderColor: #000000;
+    borderStyle: outset;
+    borderThickness: 0;
+*/
+    fontSize: 10;
+}
+
+
+.input
+{
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}    
+
+.combo
+{
+    /* color: #000000; */
+    symbolColor:        #ffffff; 
+    selectionColor:     #000000;
+    rollOverColor:      #0E7EC5; 
+    contentBackgroundColor: #666666;
+    color:              #ffffff;      
+}
+
+.list
+{
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}
+
+.buttonArea
+{
+    borderStyle: solid;
+    borderThickness: 0;
+    horizontalAlign: center;
+    borderColor: #333333;    
+}

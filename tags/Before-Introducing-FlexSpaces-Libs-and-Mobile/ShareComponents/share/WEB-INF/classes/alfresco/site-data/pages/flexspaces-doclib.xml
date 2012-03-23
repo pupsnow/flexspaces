@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   <title>DocLib flexspaces</title>
+   <description>FlexSpaces DocLib view</description>
+   <template-instance>flexspaces-doclib</template-instance>
+   <authentication>user</authentication>
+</page>

@@ -1,0 +1,11 @@
+<webscript>
+   <shortname>FlexSpaces Make PDF</shortname>
+   <description>Create a PDF transform of document with given nodeid</description>
+   <url>/flexspaces/makePDF?nodeid={nodeid}</url>
+   <format default="xml">argument</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   <cache>
+      <never>false</never>
+   </cache>          
+</webscript>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   <title>FlexSpaces</title>
+   <description>FlexSpaces all views</description>
+   <template-instance>flexspaces-all</template-instance>
+   <authentication>user</authentication>
+</page>

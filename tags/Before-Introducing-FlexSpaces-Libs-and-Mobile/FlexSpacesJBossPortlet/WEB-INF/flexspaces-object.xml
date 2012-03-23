@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployments>
+   <deployment>
+      <if-exists>overwrite</if-exists>
+      <parent-ref>default</parent-ref>
+      <page>
+         <page-name>FlexSpaces</page-name>
+         <window>
+            <window-name>FlexSpacesPortletWindow</window-name>
+            <instance-ref>FlexSpacesPortletInstance</instance-ref>
+            <region>center</region>
+            <height>0</height>
+         </window>
+      </page>
+   </deployment>
+</deployments>

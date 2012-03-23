@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces get node category properties</shortname>
+  <description>Gets categories assigned to a doc or folder</description>
+  <url>/flexspaces/categoryProperties?noderef={nodeRef}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>         
+</webscript>

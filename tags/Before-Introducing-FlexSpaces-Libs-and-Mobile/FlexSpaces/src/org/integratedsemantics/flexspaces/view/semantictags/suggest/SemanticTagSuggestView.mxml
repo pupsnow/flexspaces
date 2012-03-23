@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<suggest:SemanticTagSuggestViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:suggest="org.integratedsemantics.flexspaces.view.semantictags.suggest.*"
+    xmlns:tree="org.integratedsemantics.flexspaces.view.semantictags.suggesttree.*"
+    title="{resourceManager.getString('SemanticTagSuggestView', 'title' )}" 
+    styleName="dialog" width="520" height="520">
+    
+    <fx:Metadata>[ResourceBundle("SemanticTagSuggestView")]</fx:Metadata>
+    
+    <fx:Style source="../../../framework/presmodel/dialog.css"/>
+
+    <s:VGroup horizontalAlign="left" verticalAlign="top" styleName="mainArea" width="100%" height="100%" 
+              paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
+        
+    <s:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'categoriesFormItem_label' )}" width="100%" styleName="mainArea" id="categoriesFormItem">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>     
+
+        <s:List id="categoryList" dataProvider="{semanticTagSuggestPresModel.categories}" labelField="{resourceManager.getString('SemanticTagSuggestView', 'categoryList_labelField')}" height="120" styleName="list" width="100%"
+        	change="onChangeSemanticTagList(event)"/>
+    
+        <s:Button label="{resourceManager.getString('SemanticTagSuggestView', 'removeCategoryBtn_label' )}" id="removeCategoryBtn"
+        	enabled="{semanticTagSuggestPresModel.enableRemove}" visible="{semanticTagSuggestPresModel.enableRemove}"/>
+
+    </s:FormItem>    
+    
+    <s:FormItem label="{resourceManager.getString('SemanticTagSuggestView', 'allCategoriesFormItem_label' )}" width="100%" styleName="mainArea" height="100%" id="allCategoriesFormItem">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>     
+
+        <tree:SemanticTagSuggestionTreeView id="semanticTagTreeView" semanticTagSuggestionTreePresModel="{semanticTagSuggestPresModel.semanticTagTreePresModel}" height="217" width="100%"/>
+    
+        <s:Button label="{resourceManager.getString('SemanticTagSuggestView', 'addExistingCategoryBtn_label' )}" id="addExistingCategoryBtn"
+        	enabled="{semanticTagSuggestPresModel.enableAdd}" visible="{semanticTagSuggestPresModel.enableAdd}"/>
+
+    </s:FormItem>
+    
+    <mx:Spacer height="10"/>
+    
+    <s:HGroup styleName="buttonArea" width="100%" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="closeBtn" label="{resourceManager.getString('SemanticTagSuggestView', 'closeBtn_label' )}"/>    
+    </s:HGroup> 
+    
+    </s:VGroup>        
+        
+</suggest:SemanticTagSuggestViewBase>

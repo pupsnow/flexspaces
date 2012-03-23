@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   <title>Tasks flexspaces</title>
+   <description>FlexSpaces Tasks view</description>
+   <template-instance>flexspaces-tasks</template-instance>
+   <authentication>user</authentication>
+</page>

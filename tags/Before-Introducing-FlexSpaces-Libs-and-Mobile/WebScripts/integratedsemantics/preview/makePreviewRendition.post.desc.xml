@@ -1,0 +1,12 @@
+<webscript>
+  <shortname>FlexSpaces make preview rendition</shortname>
+  <description>Make flash preview rendition via transformation</description>
+  <url>/flexspaces/makePreviewRendition?nodeid={nodeid}&amp;folderid={folderidForPreview}</url>
+  <url>/flexspaces/makePreviewRendition?nodepath={nodepath}&amp;folderpath={folderpathForPreview}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

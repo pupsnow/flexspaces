@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+     
+     <menuitem label="Αποκοπή" data="cut" />
+     <menuitem label="Αντιγραφή" data="copy" />
+     <menuitem label="Επικόλληση" data="paste" />
+     <menuitem label="Διαγραφή" data="delete" />
+     
+     <menuitem label="Μετονομάσία" data="rename" seperatorBefore="true" />
+     <menuitem label="Ιδιότητες" data="properties"/>
+     <menuitem label="Ετικέτες / Κατηγορίες" data="tags"/>
+          
+</contextmenu>    

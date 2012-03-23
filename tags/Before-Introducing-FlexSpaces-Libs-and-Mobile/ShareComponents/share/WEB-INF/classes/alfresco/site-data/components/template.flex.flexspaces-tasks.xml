@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+   <scope>template</scope>
+   <region-id>flex</region-id>
+   <source-id>flexspaces-tasks</source-id>
+   <url>/components/flexspaces/flexspaces-tasks</url>
+</component>

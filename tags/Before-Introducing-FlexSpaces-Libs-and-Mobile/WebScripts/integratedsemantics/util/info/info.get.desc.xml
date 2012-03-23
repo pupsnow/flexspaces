@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+   <shortname>Get info</shortname>
+   <description>Gets info on server, user</description>
+   <url>/flexspaces/info</url>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   <format default="xml">extension</format>
+   <cache>
+      <never>false</never>
+   </cache>          
+</webscript>

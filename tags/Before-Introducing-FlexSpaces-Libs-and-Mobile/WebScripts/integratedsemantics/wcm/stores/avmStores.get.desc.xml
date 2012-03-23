@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces get AVM Stores</shortname>
+  <description>Gets list of AVM Stores</description>
+  <url>/flexspaces/wcm/avmStores</url>
+  <format default="xml"/>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

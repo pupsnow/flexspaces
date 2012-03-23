@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+     
+     <menuitem label="Αντιγραφή" data="copy" />
+     
+     <menuitem label="Μετονομάσία" data="rename" seperatorBefore="true" />
+     <menuitem label="Ιδιότητες" data="properties"/>
+     <menuitem label="Ετικέτες/ Κατηγορίες" data="tags"/>
+     
+    <menuitem label="Άνοιγμα Φακέλου" data="gotoParent" seperatorBefore="true" />
+         
+</contextmenu>    

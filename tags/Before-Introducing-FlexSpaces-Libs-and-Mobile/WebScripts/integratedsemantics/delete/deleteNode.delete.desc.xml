@@ -1,0 +1,12 @@
+<webscript>
+   <shortname>FlexSpaces Delete Node</shortname>
+   <description>Deletes document or folder with given nodeid</description>
+   <url>/flexspaces/deleteNode?nodeid={nodeid}</url>
+   <url>/flexspaces/deleteNode?storeid={storeid}&amp;path={path}</url>
+   <format default="xml">argument</format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   <cache>
+      <never>false</never>
+   </cache>          
+</webscript>

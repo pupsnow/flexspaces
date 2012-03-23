@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<objects
+    xmlns="http://www.springactionscript.org/schema/objects"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springactionscript.org/schema/objects http://www.springactionscript.org/schema/objects/spring-actionscript-objects-1.0.xsd">
+
+    <object id="ecmServerConfig" class="org.integratedsemantics.flexspaces.model.global.EcmServerConfig">
+
+        <!-- configuration of parts of webscript service url -->
+        <property name="protocol" value="http"/>
+        <property name="domain" value="localhost"/>
+        <property name="port" value="8080"/>
+        <property name="alfrescoUrlPart" value="/alfresco/service"/>
+
+        <!-- url for livecycle (currently flexspaces needs recompile with client services-config.xml change if not localhost:8080 -->
+        <!-- property name="alfrescoUrlPart" value="/contentspace/service" /-->
+        <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
+        <property name="isLiveCycleContentServices" value="false"/>
+
+        <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->                  
+        <property name="serverVersion" value="3.4"/>        
+    </object>
+
+    <object id="appConfig" class="org.integratedsemantics.flexspaces.model.global.AppConfig">
+        <!-- default locale -->  
+        <property name="locale" value="en_US"/>        
+    </object>
+
+    <object id="thumbnailConfig" class="org.integratedsemantics.flexspaces.model.global.ThumbnailConfig">
+        <!-- thumbnail type name: doclib for alfresco 3.0 thumbnail service used in share  -->  
+        <property name="thumbnailName" value="doclib"/>  
+        <property name="thumbnailHeight" value="100"/>  
+        <property name="thumbnailWidth" value="100"/>             
+    </object>
+
+    <object id="presModel" class="org.integratedsemantics.sampleapp.presmodel.main.SampleAppPresModel">
+        <!-- configure what tab views to display -->
+        <property name="showDocLib" value="true"/>        
+        <property name="showSearch" value="true"/>                
+        <property name="showTasks" value="false"/>        
+        <property name="showWCM" value="false"/>        
+        <property name="showShare" value="false"/>  
+
+        <property name="haveCoverFlow" value="false"/>                
+
+        <!-- default page sizes for views --> 
+        <property name="docLibPageSize" value="10"/>    
+        <property name="searchPageSize" value="10"/>    
+        <property name="versionsPageSize" value="10"/>    
+        <property name="pageSizeList">
+            <array-collection>
+                <value>10</value>
+                <value>20</value>
+                <value>30</value>
+                <value>40</value>
+                <value>50</value>
+            </array-collection>
+        </property>                               
+    </object>
+
+    <object id="calaisConfig" class="org.integratedsemantics.flexspaces.model.global.CalaisConfig">
+        <property name="enableCalias" value="false"/>        
+    </object>
+
+    <object id="googleMapConfig" class="org.integratedsemantics.flexspaces.model.global.GoogleMapConfig">
+        <property name="enableGoogleMap" value="false"/>        
+    </object>
+
+</objects>

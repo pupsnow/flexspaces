@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preview:PreviewViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:preview="org.integratedsemantics.flexspaces.view.preview.*"
+    creationComplete="onCreationComplete(event)" >
+   
+    <fx:Metadata>[ResourceBundle("PreviewView")]</fx:Metadata>
+  
+    <s:HGroup width="100%" id="swfTabbar" color="#ffffff"  contentBackgroundColor="#666666"  height="40" verticalAlign="middle" clipAndEnableScrolling="false">               
+        <mx:Spacer width="10"/>
+        <mx:LinkButton icon="@Embed(source='/images/flexspaces/print_icon.png')" id="printBtn" toolTip="{resourceManager.getString('PreviewView', 'printBtn_tooltip' )}"/>    
+        <mx:Spacer width="20"/>
+        <s:Label text="{resourceManager.getString('PreviewView', 'smallLetterLabel_text')}" fontSize="9" color="#ffffff" id="smallLetterLabel"/>    
+        <mx:HSlider id="zoomSlider" width="50" liveDragging="true" minimum="0.75" maximum="1.5"/>
+        <s:Label text="{resourceManager.getString('PreviewView', 'largeLetterLabel_text')}" fontSize="14" color="#ffffff" id="largeLetterLabel"/>    
+        <mx:Spacer width="100%"/>                           
+        
+        <s:HGroup>
+            <!-- todo flex4: need spark btn with icons -->
+            <mx:Button id="previousPageBtn" width="22" height="22" icon="@Embed(source='/images/flexspaces/print_previous.png')" toolTip="{resourceManager.getString('PreviewView', 'previousPageBtn_tooltip' )}"/>      
+            <mx:Button id="nextPageBtn" width="22" height="22" icon="@Embed(source='/images/flexspaces/print_next.png')" toolTip="{resourceManager.getString('PreviewView', 'nextPageBtn_tooltip' )}"/>      
+        </s:HGroup>
+        <mx:Spacer width="20"/>
+        <s:HGroup id="zoomToolbar">
+            <!-- todo flex4: need spark btn with icons -->
+            <mx:Button id="zoomOutButton" width="22" height="22" icon="@Embed(source='/images/flexspaces/print_zoom_out.png')" toolTip="{resourceManager.getString('PreviewView', 'zoomOutButton_tooltip' )}"/>      
+            <mx:Button id="zoomInButton" icon="@Embed(source='/images/flexspaces/print_zoom_in.png')" toolTip="{resourceManager.getString('PreviewView', 'zoomInButton_tooltip' )}" height="22" width="22"/>      
+            <mx:Spacer width="10"/>
+        </s:HGroup>            
+    </s:HGroup> 
+
+    <s:Panel title="" id="contentPanel" width="100%"  height="100%">
+        <s:Scroller width="100%"  height="100%">
+            <s:Group width="100%" height="100%">
+                <mx:SWFLoader id="swfLoader"  autoLoad="true" />   
+            </s:Group>
+        </s:Scroller>
+    </s:Panel>             
+
+</preview:PreviewViewBase>

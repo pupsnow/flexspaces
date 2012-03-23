@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties:ConfiguredViewPropertiesViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:properties="org.integratedsemantics.flexspaces.view.properties.configured.*"
+    width="100%" height="100%"
+    styleName="mainArea">
+
+    <fx:Metadata>[ResourceBundle("PropertiesView")]</fx:Metadata>
+  
+    <fx:Style source="../../../framework/presmodel/dialog.css"/>
+    
+    <!--controls will be added dynamically here -->
+                        
+</properties:ConfiguredViewPropertiesViewBase>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties:ConfiguredPropertiesViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:properties="org.integratedsemantics.flexspaces.view.properties.configured.*"
+    width="500" height="600" minWidth="400" minHeight="400" 
+    title="{resourceManager.getString('PropertiesView', 'title')}"
+    skinClass="flex.utils.spark.resize.ResizableDraggableTitleWindowSkin"
+    styleName="dialog">
+
+    <fx:Metadata>[ResourceBundle("PropertiesView")]</fx:Metadata>
+  
+    <fx:Style source="../../../framework/presmodel/dialog.css"/>
+    
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="20" paddingTop="10" paddingRight="20" paddingBottom="20">
+                
+
+        <mx:TabNavigator  creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" styleName="dialogTabs">
+            
+            
+            <s:NavigatorContent label="{ resourceManager.getString('PropertiesView', 'viewPropertiesTab_label') }">
+                <properties:ConfiguredViewPropertiesView id="viewPropertiesView" propPresModel="{propPresModel}" />                
+            </s:NavigatorContent>
+
+            <s:NavigatorContent label="{ resourceManager.getString('PropertiesView', 'editPropertiesTab_label') }">
+                <properties:ConfiguredEditPropertiesView id="editPropertiesView" propPresModel="{propPresModel}" />            
+            </s:NavigatorContent>
+            
+        </mx:TabNavigator>        
+        
+        <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+            <s:Button id="closeBtn" label="{resourceManager.getString('PropertiesView', 'closeBtn_label' )}"
+            	enabled="{propPresModel.closeVisible}" visible="{propPresModel.closeVisible}" includeInLayout="{propPresModel.closeVisible}"/>    
+            <s:Button id="okBtn" label="{resourceManager.getString('PropertiesView', 'okBtn_label' )}"    
+            	enabled="{propPresModel.okVisible}" visible="{propPresModel.okVisible}" includeInLayout="{propPresModel.okVisible}"/>    
+            <mx:Spacer width="20"/>
+            <s:Button id="cancelBtn" label="{resourceManager.getString('PropertiesView', 'cancelBtn_label' )}"    
+            	enabled="{propPresModel.cancelVisible}" visible="{propPresModel.cancelVisible}" includeInLayout="{propPresModel.cancelVisible}"/>    
+        </s:HGroup> 
+        
+    </s:VGroup>
+        
+</properties:ConfiguredPropertiesViewBase>

@@ -1,0 +1,190 @@
+
+8/26/09
+Steve Reiner
+integratedsemantics.org
+integratedsemantics.com
+
+FlexSpaces+Browser release notes
+
+0.93
+1. Fix to progress bar color with new styling/skinning in 0.92
+2. Added short-term storage of state to support browser refresh, browser refresh (only configured to use in portlet
+packaging
+3. Additional parms/flashvars to support config in portlet preferences dialog
+4. Liferay portlet added 
+
+0.92 Release
+1. Styling and skinning: Default colors changed, more styles in css files (flexspaces.css, dialog.css) instead of hardcoded, 
+2. Tabs and menus skinned.
+3. Login: username and password fields are now initially blanked out
+
+0.91 Release
+1. Fixed WCM tree and WCM folder in WCM tab view  to work on Alfresco 3.2 Community (note wcm tab not shown
+unless configured in FlexSpacesConfig.xml)
+
+0.9 Release
+1. Code refactored to use presentation model pattern
+2. Using Spring Actionscript (formerly Prana) FlexSpacesConfig.xml instead of alfresco-config.xml
+3. Config file can configure what tab views to show
+4. Config file can configure default page size for views, and the page size pick list
+5. Config file can configure wtether to have the coverflow view mode
+6. Config file can configure thumbnail info
+6. server side paging in webscript (doclist, search results) for faster initial display
+7. more languages (engish, spanish, german, french, japanese, greek)
+8. filtering out display of content rule nodes
+9. goto containing folder in search better
+10. preview more usable/complete feature: on Alfresco 3.0+, flash preview of files uses same
+content model/rest api as preview in Share (no extra step doing make flash preview first needed)
+11. On Alfresco 3.0+, thumbnails now display correctly on recently uploaded files into FlexSpaces
+12. menu config in xml more usable now that all main menu enable/disable code is position independent
+(previously, this was only the case for context menus)
+13. tab view positions independent in the code now
+14. favorites/shortcuts (3.0 only, only available in the ui in search tab view)
+15. Changes FlexSpaces so CMIS Spaces can be built as with projects extending the flexspaces projects code
+
+0.8 Release
+1. Added semantic tagging / Calais features:
+a. tools/auto-tag menu
+b. tools/suggest tags menu/dialog
+c. semantic tags tab to tags/categories dialog
+d. multiple semantic tag clouds in search view
+e. geo-location tag map in search view
+2. general google map component
+3. fixed getting tag cloud and category tree search results with tags/categories with spaces in them
+
+0.7 Release
+
+1. UI strings in resource, Spanish translation (thanks Nuno Barrocas / OKHA Networks)
+2. German translation (thanks May Computer)
+3. Japanese translation (thanks Tetsuya Suga)
+4. (Flexspaces currently only built with English set of resource bundles. source code has all four languages)
+
+5. The locale/language set of menu xml files can be configured by setting default-locale in alfresco-config.xml
+
+6. Added paging support in folder views, search results
+
+7. Added play video support (only avail from context menu, which is always enabled) will launch video in a new tab view 
+with play, stop, pause buttons
+
+8. Added support for Adobe LiveCycle Content Services ES
+
+9. Added version history panel in doclib view (no wcm support) which shows versions of selected doc (if made versionable). 
+View / Version History menu toggle panel on/off
+
+10. tree fixes (select by path not name), refresh when add or delete folder
+
+11. friendlier error msg dialog (stack details collapsed down), Friendlier login error message.
+
+12. Although mainly support flash 9.x player. Did some testing with flash 10 player. Only issue: edit does checkout + download with
+flash 9.x player. With flash 10.x player, edit will only do the checkout. Can still do the download as a  separate step with flash 10.x player.
+
+13. Tested with Alfresco Enterprise 3.0 release
+
+
+
+0.6 Release
+
+1. Added support for pre 2.9 (tested with 2.2.0 enterprise, need at least 2.1 community/enterprise for webscripts)
+
+2. Tested with alfresco 3.0, and also added Share page site components for flexspaces views
+
+3. Added context menus enable/disable based on permissions (in addition to main menus)
+
+4. Added edit (checkout + download) and update existing features
+
+5. Finished adv search (all features as web client except for custom attribute config, saved searches)
+
+6. Added thumbnails support in folder/nodelist views (doclib, search, task attachments, wcm) turn on off in View/Thumbnails
+(avail only when running on 3.0 alfresco)  (in default icon view mode) 
+
+7. Added coverflow view in folder/nodelist views (doclib, search, task attachments, wcm) (use new 3rd coverflow view mode button after icon and details view mode buttons
+in upper right corner of folder views to get to, no menu)
+
+8. flexspaces (+browser, and site page components) added url args for alf_ticket login ticket to skip login dialog, true/false flags to
+control whether to have each of the 4 tab views (doclib, search, tasks, wcm)
+
+9. more of the url in alfresco-config.xml
+"/alfresco/service" part of url now  in alfresco-config.xml, not just "/alfresco/
+
+10. added dialog to display webscript errors
+(note: will also get this webscript errror dialog if username or password is wrong, need to fix)
+
+11. added toolbar tool tips
+
+12. added validate login ticket delegate/cmd
+
+
+0.5 Release
+
+1. Added Tag Cloud and Categories navigation in search view tab
+
+2. Added Tags/Categories properties dialog to view/edit tags and categories on nodes
+
+3. Added upload status dialog with progress bar/info for each file being uploaded
+(used for "File/Upload Files" menu and air desktop file drag/drop/clipboard)
+
+4. Added disabling/enabling main menus, ok in properties, add/remove in tags/categories, 
+based on user's permissions (for now, most of the time, additional context menus menus will enable)
+
+5. Correct check for working copy now used (previous temp way was English only, impacted enabling/disabling
+checkin/checkout menus for other languages)
+
+6. Made single pane folder the default (use "Dual Panes" and WCM Dual Panes" view menus to turn on)
+
+7. Search result count now displayed
+
+8. fixed stretching of icons in folder view grid mode.
+
+
+
+0.4 Release
+
+0. Flex and ActionScript source included for first time in this release
+
+1. Search results view now has icon/grid like other views, also has context menu
+
+2. Start on advanced search (UI only)
+
+3. Menus are now enabled/disabled based on selection state, etc.
+
+4. Added dockable toolbar and menubar now docks too
+
+5. Main menu and context menus are xml configurable (note: menu enabling/disabling code is position specific)
+
+6. Improved code structure, commented,  added use of Cairngorm (with UM extensions)
+
+7. Added open containing folder (in task attachments and seach results context menus
+
+8. Added filtering out some avm stores in WCM (no --workflow or --preview)
+
+
+0.3 Prototype
+
+1. Added support for browsing/navigating/working files and folders in AVM stores in new WCM tab view:
+a. tree navigates avm stores and folders
+b. one or two avm folder views for working with files and folders 
+   (note: currently has cifs like paths and all stores unfiltered)
+c. multiselect drag/drop between two avm folder views, multiselect cut/copy/paste between folder views 
+d. multiselect copy (not cut) from ADM to AVM (not AVM to ADM)
+e. create avm folder (File / Create Space menu)
+f. properties (can only change name), rename
+g. multiselect delete within AVM  (delete key or menu, ok to confirm)
+h. single select download and  multselect upload files to avm
+i. no web client update... of existing files. Use delete and file/upload files...
+j. previewing/viewing files with Preview File and View File menus (currently they are the same fpr avm files and so is Edit File for now)
+k. View menus to hide/show WCM tree, hide show second WCM folder view
+2. Ignore all the non AVM menus  for doc mgt (checkin/co/cco/makeversionable, make flashpreview, workflow, etc.)
+menus that should be disabled but are not yet
+(and ignore the air specific menus)
+3. Fixed: "Company Home" doesn't have to be "Company Home" 
+4. Fixed: tree will get data on demand on expand on names not just on the triangles
+5. Fixed: leftover vertical line afer drag / drop between folders
+6. Fixed: only doing move when doing drag/drop between two folder views on Mac (will copy by default, move with shift key)
+7. Fixed: Don't need /Company Home/Flash folder for "Make Flash Preview" (made in current folder)
+
+0.2 Prototype
+Added FlexSpaces+Browser for use with browser without AIR
+
+
+0.1 Prototype
+air only flexspaces+air prototype

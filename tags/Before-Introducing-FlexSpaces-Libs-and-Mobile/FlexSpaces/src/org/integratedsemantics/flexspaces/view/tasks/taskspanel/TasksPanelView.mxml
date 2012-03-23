@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<taskspanel:TasksPanelViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:taskspanel="org.integratedsemantics.flexspaces.view.tasks.taskspanel.*"
+    xmlns:tasklist="org.integratedsemantics.flexspaces.view.tasks.tasklist.*"
+    xmlns:taskcontrol="org.integratedsemantics.flexspaces.view.tasks.taskcontrol.*"
+    xmlns:attachments="org.integratedsemantics.flexspaces.view.tasks.attachments.*"
+    creationComplete="onCreationComplete(event)">
+    
+    <fx:Metadata>[ResourceBundle("TasksPanelView")]</fx:Metadata>
+  
+    <tasklist:TaskListView id="taskListView" taskListPresModel="{tasksPanelPresModel.taskListPresModel}" height="50%" width="100%"/>
+    
+    <s:VGroup height="50%" width="100%">
+    
+        <taskcontrol:TaskButtonsView id="taskButtonsView" taskButtonsPresModel="{tasksPanelPresModel.taskButtonsPresModel}" />
+    
+        <attachments:TaskAttachmentsView id="taskAttachmentsView" taskAttachmentsPresModel="{tasksPanelPresModel.taskAttachmentsPresModel}"/>
+    
+    </s:VGroup>      
+
+</taskspanel:TasksPanelViewBase>                        

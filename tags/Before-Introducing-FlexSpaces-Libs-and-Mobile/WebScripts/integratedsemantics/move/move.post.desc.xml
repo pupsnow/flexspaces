@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>FlexSpaces Move</shortname>
+  <description>Move doc or folder into the target folder</description>
+  <url>/flexspaces/move?nodeid={nodeid}&amp;path={targetpath}</url>
+  <format default="xml">argument</format>
+  <authentication>user</authentication>
+  <transaction>required</transaction>
+  <cache>
+    <never>false</never>
+  </cache>          
+</webscript>

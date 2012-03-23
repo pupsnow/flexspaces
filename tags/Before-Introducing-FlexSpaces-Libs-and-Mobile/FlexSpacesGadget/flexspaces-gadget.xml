@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module> 
+
+<ModulePrefs 
+   title="FlexSpaces" 
+   description="FlexSpaces for Alfresco"
+   author="Integrated Semantics"
+   height="700" width="900">
+   <Require feature="flash" />
+   <Require feature="dynamic-height" />
+</ModulePrefs>
+
+<UserPref
+   name="swfUrl"
+   display_name="SWF URL"
+   default_value="http://localhost:8080/flexspaces/FlexSpaces.swf"
+   required="true" />
+
+<UserPref
+   name="showDocLib"
+   display_name="Show DocLib"
+   default_value="true"
+   required="true" />
+
+<UserPref
+   name="showSearch"
+   display_name="Show Search"
+   default_value="true"
+   required="true" />
+
+<UserPref
+   name="showTasks"
+   display_name="Show Tasks"
+   default_value="true"
+   required="true" />
+
+<UserPref
+   name="showWcm"
+   display_name="Show WCM"
+   default_value="false"
+   required="true" />
+
+<UserPref
+   name="showHeader"
+   display_name="Show Header"
+   default_value="true"
+   required="true" />
+
+<UserPref
+   name="haveCoverFlow"
+   display_name="Show CoverFlow"
+   default_value="false"
+   required="true" />
+   
+<UserPref
+   name="alfrescoUrl"
+   display_name="Alfresco URL"
+   default_value="http://localhost:8080/alfresco/service"
+   required="true" />   
+
+<UserPref
+   name="flashWidth"
+   display_name="Width"
+   default_value="900"
+   required="true" />   
+
+<UserPref
+   name="flashHeight"
+   display_name="Height"
+   default_value="700"
+   required="true" />   
+
+
+<Content type="html">
+<![CDATA[
+
+<div id="flexspacescontainer" style="text-align: center;"></div> 
+
+<script type="text/javascript">
+
+   var prefs = new _IG_Prefs(__MODULE_ID__);
+   
+   var flexspacesSwfUrl = prefs.getString("swfUrl");
+   var showDocLib = prefs.getString("showDocLib"); 
+   var showSearch = prefs.getString("showSearch"); 
+   var showTasks = prefs.getString("showTasks"); 
+   var showWcm = prefs.getString("showWcm"); 
+   var showHeader = prefs.getString("showHeader"); 
+   var haveCoverFlow = prefs.getString("haveCoverFlow"); 
+   var alfrescoUrl = prefs.getString("alfrescoUrl"); 
+   var flashWidth = prefs.getString("flashWidth"); 
+   var flashHeight = prefs.getString("flashHeight"); 
+
+   var flashVariables = "doclib=" + showDocLib + "&search=" + showSearch + "&tasks=" + showTasks + "&wcm=" + showWcm + "&header=" + showHeader 
+                        + "&coverflow=" + haveCoverFlow + "&alfrescourl=" + alfrescoUrl;
+
+    
+   function showFlexSpaces()
+   {
+      gadgets.flash.embedFlash(flexspacesSwfUrl, "flexspacescontainer", {
+         swf_version: 10,
+         id: "flexspacesid",
+         width: flashWidth,
+         height: flashHeight,
+         flashvars: flashVariables});
+   }
+
+   gadgets.util.registerOnLoadHandler(showFlexSpaces);
+  
+  </script>
+  ]]>
+</Content>
+</Module>

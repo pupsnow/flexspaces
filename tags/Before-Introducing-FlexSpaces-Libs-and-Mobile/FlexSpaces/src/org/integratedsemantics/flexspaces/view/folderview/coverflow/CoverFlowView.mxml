@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverflowview:CoverFlowViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:coverflowview="org.integratedsemantics.flexspaces.view.folderview.coverflow.*"
+    xmlns:coverflow="com.dougmccune.containers.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">    
+    
+    <fx:Metadata>[ResourceBundle("CoverFlowView")]</fx:Metadata>
+    
+    <mx:VDividedBox width="100%" height="100%">
+    
+        <coverflow:CoverFlowContainer id="coverFlowContainer" backgroundColor="0x000000" width="100%" height="40%"
+                                      horizontalGap="40" borderStyle="inset" segments="6" reflectionEnabled="false">       
+            <mx:Repeater id="coverFlowRepeater" dataProvider="{dataProvider}">
+                <!-- flex4 todo convert VBox/HBox to spark and fix hardcoded backgroundColor -->
+                <mx:VBox width="200" height="175" verticalAlign="middle" horizontalAlign="center" backgroundColor="0xffffff" horizontalScrollPolicy="off" verticalScrollPolicy="off">                    
+                    <mx:HBox verticalAlign="middle" horizontalAlign="center" height="100%" width="100%">
+                        <mx:Image source="@Embed('images/icons/locked.gif')"  visible="{coverFlowRepeater.currentItem.isLocked}" includeInLayout="{coverFlowRepeater.currentItem.isLocked}"/>
+                        <mx:Image source="{coverFlowRepeater.currentItem.thumbnailUrl}"/>                       
+                    </mx:HBox>                                
+                    <mx:Label width="200" height="25" textAlign="center" text="{coverFlowRepeater.currentItem.name}"  fontSize="10" truncateToFit="true" />             
+                </mx:VBox>
+            </mx:Repeater>
+        </coverflow:CoverFlowContainer>    
+            
+        <mx:DataGrid id="coverFlowDataGrid" height="60%" width="100%" rowHeight="25"
+            dataProvider="{dataProvider}" styleName="fileGridStyle" doubleClickEnabled="true"         
+            dragEnabled="true" dropEnabled="true"  dragMoveEnabled="true" allowMultipleSelection="true"             
+            change="onChange(event)">
+            <mx:columns>        
+                <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
+                    <mx:itemRenderer>
+                        <fx:Component>
+                            <mx:Image source="{data.icon16}" scaleContent="false"/>
+                        </fx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>             
+                <mx:DataGridColumn headerText="{resourceManager.getString('CoverFlowView', 'nameColumn_headerText')}" dataField="name" width="200" id="nameColumn"/>        
+                <mx:DataGridColumn headerText="{resourceManager.getString('CoverFlowView', 'typeColumn_headerText')}" dataField="type" width="100" id="typeColumn"/>        
+                <mx:DataGridColumn headerText="{resourceManager.getString('CoverFlowView', 'sizeColumn_headerText')}" dataField="size" width="100" id="sizeColumn"/>        
+                <mx:DataGridColumn headerText="{resourceManager.getString('CoverFlowView', 'createdColumn_headerText')}" dataField="created" width="100" id="createdColumn"/>        
+                <mx:DataGridColumn headerText="{resourceManager.getString('CoverFlowView', 'modifiedColumn_headerText')}" dataField="modified" id="modifiedColumn"/>        
+            </mx:columns>
+        </mx:DataGrid>  
+      
+    </mx:VDividedBox>
+</coverflowview:CoverFlowViewBase>    

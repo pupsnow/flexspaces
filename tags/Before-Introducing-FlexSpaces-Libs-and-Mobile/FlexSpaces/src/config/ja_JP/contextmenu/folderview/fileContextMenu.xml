@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+     
+     <menuitem label="切り取り" data="cut" />
+     <menuitem label="コピー" data="copy" />
+     <menuitem label="貼り付け" data="paste" />
+     <menuitem label="消去" data="delete" />
+     
+     <menuitem label="チェック イン" data="checkin" seperatorBefore="true"/>
+     <menuitem label="チェック アウト" data="checkout"/>
+     <menuitem label="チェックアウトの取り消し" data="cancelcheckout"/>
+
+     <menuitem label="名前の変更" data="rename" seperatorBefore="true" />
+     <menuitem label="プロパティ" data="properties"/>
+     <menuitem label="タグ・カテゴリ" data="tags"/>
+     
+     <menuitem label="見る" data="view" seperatorBefore="true" />
+     
+     <menuitem label="ビデオの再生" data="playVideo"/>            
+</contextmenu>    

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+
+	<menuitem label="Copier Items" data="copy" />
+
+	<menuitem label="Renommer" data="rename" seperatorBefore="true" />
+	<menuitem label="Propriétés" data="properties" />
+	<menuitem label="Tags / Catégories" data="tags" />
+
+	<menuitem label="Voir" data="view" seperatorBefore="true" />
+
+	<menuitem label="Remonter répertoire parent" data="gotoParent"
+		seperatorBefore="true" />
+
+</contextmenu>

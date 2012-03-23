@@ -1,0 +1,128 @@
+
+8/26/09
+Steve Reiner
+integratedsemantics.org
+integratedsemantics.com
+
+FlexSpaces+AIR release notes
+
+0.93
+1. Fix to progress bar color with new styling/skinning in 0.92
+
+0.92 Release
+1. Styling and skinning: Default colors changed, more styles in css files (flexspacesair.css, dialog.css) instead of hardcoded, 
+2. Tabs and menus skinned.
+3. Login: username and password fields are now initially blanked out
+
+0.91 Release
+1. Fixed WCM tree and WCM folder in WCM tab view  to work on Alfresco 3.2 Community (note wcm tab not shown
+unless configured in FlexSpacesConfig.xml)
+
+0.9 Release
+1. No new AIR specific features, see new 0.9 features in releaseNotesFlexSpacesBrowser.txt
+2. Tested with AIR 1.5.1 with Alfresco Labs 3 final/stable
+
+0.8 Release
+1. No new AIR specific features, see new 0.8 features (semantic tagging, maps) in releaseNotesFlexSpacesBrowser.txt
+2. See readmeFlexSpacesForAir.txt for additional info on enabling/configuring Calais and Google Map api keys
+3. Tested with both AIR 1.1 and AIR 1.5 with Alfresco Enterprise 3.0
+
+0.7 Release
+
+1. FlexSpacesAir has added browser tab running Share (can also be used for running other web page)
+Previously this feature was a separate experimental download
+(note: for blog/wiki saving  needs share in air final fix in alfreso 3.0 enterprise
+or labs 3.0 with checkin from from 10/2/08, in alfresco labs 3c)
+
+2. See releaseNotesFlexSpacesBrowser.txt for non air specific features added in 0.7
+
+
+0.6 Release
+No new flexspaces+air specific features, see new 0.6 features in releaseNotesFlexSpacesBrowser.txt
+
+
+0.5 Release
+
+1. Added Tag Cloud and Categories navigation in search view tab
+
+2. Added Tags/Categories properties dialog to view/edit tags and categories on nodes
+
+3. Added upload status dialog with progress bar/info for each file being uploaded
+(used for "File/Upload Files" menu and air desktop file drag/drop/clipboard)
+
+4. Added disabling/enabling main menus, ok in properties, add/remove in tags/categories, 
+based on user's permissions (for now, most of the time, additional context menus menus will enable)
+
+5. Correct check for working copy now used (previous temp way was English only, impacted enabling/disabling
+checkin/checkout menus for other languages)
+
+6. Made single pane folder the default (use "Dual Panes" and WCM Dual Panes" view menus to turn on)
+
+7. Search result count now displayed
+
+8. Fixed stretching of icons in folder view grid mode.
+
+9. Disabled menu for the ajax ui sample
+
+
+
+0.4 Release
+
+0. Flex and ActionScript source included in this release
+
+1. Search results view now has icon/grid like other views, als has context menu
+
+2. Start on advanced search (UI only)
+
+3. Menus are now enabled/disabled based on selection state, etc.
+
+4. Added dockable toolbar and menubar now docks too
+
+5. Main menu and context menus are xml configurable (note: menu enabling/disabling code is position specific)
+
+6. Improved code structure, commented,  added use of Cairngorm (with UM extensions)
+
+7. Added open containing folder (in task attachments and seach results context menus
+
+8. Added filtering out some avm stores in WCM (no --workflow or --preview)
+
+9. Added confirm dialogs for make available offline and offline upload
+
+
+0.3 Prototype
+
+1. Added support for browsing/navigating/working files and folders in AVM stores in new WCM tab view:
+a. tree navigates avm stores and folders
+b. one or two avm folder views for working with files and folders 
+   (note: currently has cifs like paths and all stores unfiltered)
+c. multiselect drag/drop between two avm folder views, multiselect cut/copy/paste between folder views 
+d. multiselect copy (not cut) from ADM to AVM (not AVM to ADM)
+e. create avm folder (File / Create Space menu)
+f. properties (can only change name), rename
+g. multiselect delete within AVM  (delete key or menu, ok to confirm)
+h. single select download and  multselect upload files to avm
+i. no web client update... of existing files. Use delete and file/upload files...
+j. previewing/viewing files with Preview File and View File menus (currently they are the same fpr avm files and so is Edit File for now)
+k. View menus to hide/show WCM tree, hide show second WCM folder view
+l. Native copy/paste from desktop shell into AVM folders in addition to into ADM folders
+m. Native drag/drop of files from desktop shell into AVM folders in addition to into ADM folders
+o. drag into avm and avm files from View / Local Files Browser pane turned off by default
+p. multiselect tools/make available offline (files downloaded one time to documents\flexspaces\avm )
+q. a file that was downloaded with "make available offline", and the file was edited in the file system, 
+can use the "Edit / Offline Upload" menu
+2. Ignore all the non AVM menus  for doc mgt (checkin/co/cco/makeversionable, make flashpreview, workflow, etc.)
+menus that should be disabled but are not yet
+3. Fixed: "Company Home" doesn't have to be "Company Home" 
+4. Fixed: tree will get data on demand on expand on names not just on the triangles
+5. Fixed: leftover vertical line afer drag / drop between folders
+6. Fixed: only doing move when doing drag/drop between two folder views on Mac (will copy by default, move with shift key)
+7. Fixed: Don't need /Company Home/Flash folder for "Make Flash Preview" (made in current folder)
+8. Fixed: Made AIR install file more compact than 0.2 prototype
+
+0.2 Prototype
+Added FlexSpaces+Browser for use with browser without AIR
+
+
+0.1 Prototype
+air only flexspaces+air prototype first release
+

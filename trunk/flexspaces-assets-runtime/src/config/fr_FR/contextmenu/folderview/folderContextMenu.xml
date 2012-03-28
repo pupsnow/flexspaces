@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+
+	<menuitem label="Cut Items" data="cut" />
+	<menuitem label="Copy Items" data="copy" />
+	<menuitem label="Paste Items" data="paste" />
+	<menuitem label="Delete Items" data="delete" />
+
+	<menuitem label="Rename" data="rename" seperatorBefore="true" />
+	<menuitem label="Properties" data="properties" />
+	<menuitem label="Tags / Categories" data="tags" />
+
+</contextmenu>

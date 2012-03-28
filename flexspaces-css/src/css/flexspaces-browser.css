@@ -1,0 +1,11 @@
+
+/* in browser version specific styles */
+
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
+
+Application
+{
+    backgroundColor: #333333;
+}

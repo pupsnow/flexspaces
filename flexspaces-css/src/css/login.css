@@ -1,0 +1,28 @@
+/* CSS file for Login View */
+
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace "library://ns.adobe.com/flex/spark";
+
+.login
+{
+    backgroundColor: #444444;
+    borderColor:     #000000;
+    borderWeight:    2;    
+}	
+
+.loginText
+{
+	color: #ffffff;
+	font-weight:bold;
+}
+
+.errorText
+{
+	color: #ea6363;
+	font-weight: bold;
+}
+
+.loginInputText
+{
+	color: #000000;
+}

@@ -1,0 +1,62 @@
+/* CSS file for dialogs */
+
+/* todo: for create dialogs, if this is different than regular dialog.css, need to have different style name(s) */
+
+.dialog
+{
+    color: #ffffff; 
+    backgroundColor: #333333; 
+/*    
+    backgroundColor: #999999; 
+    borderColor: #000000; 
+    borderStyle: solid; 
+    borderThickness: 3; 
+    color: #000000; 
+    cornerRadius: 0; 
+*/
+    fontSize: 12; 
+    fontWeight: bold; 
+}
+
+.mainArea
+{
+/*    
+    borderColor: #999999;
+    borderStyle: solid;
+    borderThickness: 0;
+*/
+    fontSize: 10;
+}
+
+.input
+{
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}    
+
+.combo
+{
+    /* color: #000000; */
+    symbolColor:        #ffffff; 
+    selectionColor:     #000000;
+    rollOverColor:      #0E7EC5; 
+    contentBackgroundColor: #666666;
+    color:              #ffffff;      
+}
+
+.list
+{
+    color: #000000;
+    borderStyle: solid;
+    borderThickness: 1;
+    borderColor: #000000;
+}
+
+.buttonArea
+{
+    borderStyle: solid;
+    borderThickness: 0;
+    horizontalAlign: center;
+}

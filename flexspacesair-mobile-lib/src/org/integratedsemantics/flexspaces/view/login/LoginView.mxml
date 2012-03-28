@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<login:LoginViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:login="org.integratedsemantics.flexspaces.view.login.*"
+    width="400" height="350" styleName="login"
+    creationComplete="onCreationComplete(event)">
+
+    <fx:Metadata>[ResourceBundle("LoginView")]</fx:Metadata>
+  
+    <!--fx:Style source="login.css"/--> 
+        
+	<s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" 
+              paddingLeft="0" paddingTop="0" paddingRight="0" paddingBottom="0">
+
+        <s:Form id="loginForm" width="100%" height="100%" >
+            <s:layout>
+                <s:FormLayout gap="-5"/>
+            </s:layout>        
+			<s:FormItem>
+                <s:Label id="errorMessage" styleName="errorText" text="{resourceManager.getString('LoginView', 'errorMessage_text')}"/>            
+			</s:FormItem>	
+            <s:FormItem label="{resourceManager.getString('LoginView', 'userNameFormItem_label' )}" styleName="loginText" id="userNameFormItem">            
+                <s:TextInput text="{resourceManager.getString('LoginView', 'username_text')}" id="username" styleName="loginInputText" width="180" height="30"
+  	            	change="loginPresModel.updateUserName(username.text)"/>            
+			</s:FormItem>	
+            <mx:Spacer height="14"/>
+            <s:FormItem label="{resourceManager.getString('LoginView', 'passwordFormItem_label' )}" styleName="loginText" id="passwordFormItem">            
+		        <s:TextInput text="" id="password" styleName="loginInputText" displayAsPassword="true" width="180" height="30"
+  	            	change="loginPresModel.updatePassword(password.text)"/>            
+			</s:FormItem>
+            <s:FormItem label="Settings:" styleName="loginText" id="urlFormItem">            
+                <s:Button label="Preferences" click="onPreferences()"/>       
+            </s:FormItem>
+            
+        </s:Form>
+        
+        <mx:Spacer height="10"/>
+        
+        <s:HGroup horizontalAlign="left" verticalAlign="bottom" width="100%">
+            <mx:Spacer width="10"/>
+            <s:Button label="{resourceManager.getString('LoginView', 'loginBtn_label' )}" id="loginBtn" width="90"/>                        
+        </s:HGroup>            
+
+        <mx:Spacer height="10"/>
+
+    </s:VGroup>
+	
+</login:LoginViewBase>

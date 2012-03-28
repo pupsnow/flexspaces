@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<deletion:DeleteViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:deletion="org.integratedsemantics.flexspaces.view.deletion.*"
+    width="440" height="300" title="{resourceManager.getString('DeleteView', 'title')}" styleName="dialog">
+    
+    <fx:Metadata>[ResourceBundle("DeleteView")]</fx:Metadata>
+    
+    <!--fx:Style source="../../framework/presmodel/dialog.css"/-->
+
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10">
+    
+    <s:VGroup height="100%" width="100%" styleName="mainArea">
+        <s:Label text="{resourceManager.getString('DeleteView', 'confirmMessage_text')}" width="100%" height="40" id="confirmMessage"/>    
+        <mx:Spacer height="15"/>
+        <s:Label id="filelist" width="100%" height="100%" text="{resourceManager.getString('DeleteView', 'filelist_text')}"/>    
+    </s:VGroup>
+    
+    <mx:Spacer height="10"/>
+
+    <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="okBtn" label="{resourceManager.getString('DeleteView', 'okBtn_label' )}"/>    
+        <mx:Spacer width="20"/>
+        <s:Button id="cancelBtn" label="{resourceManager.getString('DeleteView', 'cancelBtn_label' )}"/>    
+    </s:HGroup> 
+
+    </s:VGroup>
+    
+</deletion:DeleteViewBase>

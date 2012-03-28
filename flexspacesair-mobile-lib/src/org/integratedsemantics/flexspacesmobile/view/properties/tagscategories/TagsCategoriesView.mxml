@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tagscategories:TagsCategoriesViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:semantictags="org.integratedsemantics.flexspaces.view.semantictags.properties.*"   
+    xmlns:tags="org.integratedsemantics.flexspaces.view.tags.properties.*"   
+    xmlns:categories="org.integratedsemantics.flexspaces.view.categories.properties.*"   
+    xmlns:tagscategories="org.integratedsemantics.flexspaces.view.properties.tagscategories.*"
+    width="450" height="460" minWidth="440" minHeight="440" 
+    skinClass="flex.utils.spark.resize.mobile.ResizableDraggableTitleWindowSkin"    
+    title="{resourceManager.getString('TagsCategoriesView', 'title')}" styleName="dialog">
+
+    <fx:Metadata>
+        [ResourceBundle("TagsCategoriesView")]
+        [ResourceBundle("TagPropertiesView")]        
+        [ResourceBundle("CategoryPropertiesView")]
+        [ResourceBundle("SemanticTagPropertiesView")]
+    </fx:Metadata>
+    
+    <!--fx:Style source="../../../framework/presmodel/dialog.css"/-->
+
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5">
+
+    <!--s:HGroup width="100%" styleName="mainArea" verticalAlign="middle">        
+        <s:FormItem label="{resourceManager.getString('TagsCategoriesView', 'nameFormItem_label' )}" width="100%" styleName="mainArea" id="nameFormItem">    
+            <s:Label id="nameLabel" width="250"/>
+        </s:FormItem>        
+    </s:HGroup-->
+    
+    <!--mx:Spacer height="5"/-->
+    
+    <mx:TabNavigator creationPolicy="all" height="100%" width="100%" tabStyleName="mainArea" styleName="dialogTabs">
+        
+        <s:NavigatorContent label="{ resourceManager.getString('TagPropertiesView', 'title' ) }" height="100%" width="100%" >        
+            <tags:TagPropertiesView id="tagPropertiesView" tagPropertiesPresModel="{tagCategoriesPresModel.tagPropertiesPresModel}" />
+        </s:NavigatorContent>
+    
+        <s:NavigatorContent label="{ resourceManager.getString('CategoryPropertiesView', 'title') }" height="100%" width="100%" >
+            <categories:CategoryPropertiesView categoryPropertiesPresModel="{tagCategoriesPresModel.categoryPropertiesPresModel}" id="categoryPropertiesView" />
+        </s:NavigatorContent>
+
+        <s:NavigatorContent label="{ resourceManager.getString('SemanticTagPropertiesView', 'title' ) }" height="100%" width="100%">
+            <semantictags:SemanticTagPropertiesView semanticTagPropertiesPresModel="{tagCategoriesPresModel.semanticTagPropertiesPresModel}" id="semanticTagPropertiesView" />
+        </s:NavigatorContent>
+        
+    </mx:TabNavigator>
+    
+    <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="closeBtn" label="{resourceManager.getString('TagsCategoriesView', 'closeBtn_label' )}"/>    
+    </s:HGroup> 
+
+    </s:VGroup>
+        
+</tagscategories:TagsCategoriesViewBase>

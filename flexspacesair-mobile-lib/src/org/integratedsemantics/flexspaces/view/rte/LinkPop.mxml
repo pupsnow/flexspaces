@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!-- A TitleWindow that displays the X close button.
+        Clicking the close button only generates a CloseEvent event, so it
+        must handle the event to close the control. -->
+<s:TitleWindow 
+        xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark" 
+        xmlns:mx="library://ns.adobe.com/flex/mx"   
+		title="Insert Link" close="closeDialog();" 
+		creationComplete = "initialFocus();">
+    
+    <fx:Script>
+        <![CDATA[
+            import mx.controls.TextArea;
+            import mx.managers.PopUpManager;
+            import mx.managers.FocusManager;
+            import flash.text.TextFormat;
+
+            //the namespace is used as the getTextField() etc method is not available in the default  namespace...
+            use namespace mx_internal;  
+            
+            // Reference to the RichTextArea textArea subcontrol.
+            // This must be set by the RTE as it creates the popup.
+            public var RTETextArea:TextArea;
+            
+            // This function sets the inital focus in the TextField
+            public function initialFocus():void
+            {
+            	focusManager.setFocus(userLink);
+            	// by default, shifting the focus selects all of the text ('http://')
+            	// we need to move the carat to the end...
+            	//userLink.selectRange(userLink.text.length, userLink.text.length);
+            	
+            	//listen for the 'enter' button to submit insted of the button click
+            	userLink.addEventListener('enter',insertLink);
+            }
+
+            
+            // The event handler for the Insert button's click event.
+            // Replace the text in the RichTextEditor TextArea and
+            // close the dialog box.
+            public function insertLink(event:Event = null):void{
+        		
+            	var tf:TextFormat  = new TextFormat(); 
+            	
+            	var beginIndex:int = RTETextArea.getTextField().selectionBeginIndex;
+            	var endIndex:int   = RTETextArea.getTextField().selectionEndIndex;
+
+            	//shouldn't be here... should only be able to insert
+            	//a link on actual text!
+            	if (beginIndex == endIndex) return;
+            	
+            	tf["url"] = userLink.text;
+            	tf["target"] = "_blank";
+            	
+            	RTETextArea.getTextField().setTextFormat(tf,beginIndex,endIndex);
+    		
+                PopUpManager.removePopUp(this);
+            }
+
+            // The event handler for the TitleWindow close button.
+            public function closeDialog():void {
+                PopUpManager.removePopUp(this);
+            }
+
+        ]]>
+    </fx:Script>
+
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
+            
+        <s:FormItem label="URL:" width="100%">
+        	<s:TextInput id="userLink" text="http://"/>
+        </s:FormItem>
+
+        <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+            <s:Button label="Insert Link" click="insertLink();"/>
+        </s:HGroup> 
+        
+    </s:VGroup>
+        
+    
+</s:TitleWindow>

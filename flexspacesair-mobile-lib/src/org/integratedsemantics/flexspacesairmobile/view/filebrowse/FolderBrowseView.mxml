@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<filebrowse:FolderBrowseViewBase
+        xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:filebrowse="org.integratedsemantics.flexspacesairmobile.view.filebrowse.*"
+        width="450" height="450" minWidth="430" minHeight="430" 
+        skinClass="flex.utils.spark.resize.mobile.ResizableDraggableTitleWindowSkin"  
+        title="Select Folder for Download">
+
+    <s:VGroup horizontalAlign="left" verticalAlign="top" styleName="mainArea" width="100%" height="100%" 
+              paddingLeft="20" paddingTop="20" paddingRight="20" paddingBottom="20">
+        
+        <s:Rect width="1" height="10" />
+        
+        <s:HGroup width="100%"  horizontalAlign="left" verticalAlign="middle"> 
+            <s:Button label="Up"
+                      click="up();"
+                      width="50"
+                      enabled="{currentDirectory.parent != null}"/>
+            <s:Rect width="20" height="1" />
+            <s:Label id="dirLabel" width="90%" height="75"/>
+        </s:HGroup>
+        
+        <s:List id="fileList"
+                width="100%" height="100%"
+                allowMultipleSelection="true"
+                itemRendererFunction="rendererFunction"
+                dataProvider="{files}"
+                doubleClick="doubleClick();"
+                doubleClickEnabled="true"
+                labelField="name">
+        </s:List>
+        
+        <s:Rect width="1" height="20" />
+        
+        <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+            <s:Button id="okBtn" label="Download"/>    
+            <s:Rect width="20" height="1" />
+            <s:Button id="cancelBtn" label="Cancel"/>    
+        </s:HGroup>
+        
+    </s:VGroup>
+    
+</filebrowse:FolderBrowseViewBase>

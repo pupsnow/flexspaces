@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<logout:LogoutViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:logout="org.integratedsemantics.flexspaces.view.logout.*"
+    creationComplete="onCreationComplete(event)" height="100%" horizontalAlign="right" verticalAlign="middle" styleName="logout" >	
+	
+    <fx:Metadata>[ResourceBundle("LogoutView")]</fx:Metadata>
+  
+    <!--fx:Style source="logout.css"/--> 
+
+            
+    <mx:LinkButton id="logoutBtn" label="{resourceManager.getString('LogoutView', 'logoutBtn_label' )}" styleName="logoutLink"
+                   fontSize="14"/>
+  
+	
+</logout:LogoutViewBase>
+				            

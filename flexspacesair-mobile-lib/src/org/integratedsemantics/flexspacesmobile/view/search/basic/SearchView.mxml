@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<basic:SearchViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:basic="org.integratedsemantics.flexspacesmobile.view.search.basic.*"
+    creationComplete="onCreationComplete(event)" styleName="search">	
+
+    <fx:Metadata>[ResourceBundle("SearchView")]</fx:Metadata>
+  
+    <!--fx:Style source="search.css"/--> 
+      		
+    <s:HGroup width="100%" height="100%"  horizontalAlign="center" verticalAlign="middle">
+		
+        <s:TextInput id="searchTextInput" width="170" height="30"
+        	change="updateSearchText(searchTextInput.text)"/>
+		
+        <!--mx:Spacer width="2"/--> 
+        
+        <!-- flex4 spark todo: need spark btn with icon support -->
+        <mx:Button id="searchBtn" width="35" height="35" 
+            icon="@Embed('images/flexspaces/search_dark.gif')" toolTip="{resourceManager.getString('SearchView', 'searchBtn_tooltip' )}"/>
+		
+        <!--mx:Spacer width="2"/-->  
+		
+        <mx:LinkButton id="advancedLink" label="{resourceManager.getString('SearchView', 'advancedLink_label' )}" styleName="advancedSeachLink"
+                       fontSize="14"/>
+					
+    </s:HGroup>
+	
+</basic:SearchViewBase>			

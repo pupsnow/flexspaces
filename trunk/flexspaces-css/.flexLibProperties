@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="true" version="3">
+  <includeClasses/>
+  <includeResources>
+    <resourceEntry destPath="css/create.css" sourcePath="css/create.css"/>
+    <resourceEntry destPath="css/dialog.css" sourcePath="css/dialog.css"/>
+    <resourceEntry destPath="css/flexspaces-browser.css" sourcePath="css/flexspaces-browser.css"/>
+    <resourceEntry destPath="css/flexspaces.css" sourcePath="css/flexspaces.css"/>
+    <resourceEntry destPath="css/flexspacesair.css" sourcePath="css/flexspacesair.css"/>
+    <resourceEntry destPath="css/flexspacesmobile.css" sourcePath="css/flexspacesmobile.css"/>
+    <resourceEntry destPath="css/login.css" sourcePath="css/login.css"/>
+    <resourceEntry destPath="css/logout.css" sourcePath="css/logout.css"/>
+    <resourceEntry destPath="css/search.css" sourcePath="css/search.css"/>
+  </includeResources>
+  <namespaceManifests/>
+</flexLibProperties>

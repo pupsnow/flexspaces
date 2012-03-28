@@ -1,0 +1,53 @@
+
+/* styles for both air and in browser version */
+
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace s "library://ns.adobe.com/flex/spark";
+
+
+mx|ProgressBar
+{
+    /* chromeColor:        #0E7EC5; */
+    trackSkin:          ClassReference("org.integratedsemantics.flexspaces.skin.ProgressBarTrackSkin2"); 
+}
+
+.breadCrumb
+{
+    crumbBackgroundColor: #ffffff;
+    hoverBackgroundColor: #0E7EC5;
+    crumbBackgroundAlpha: 1.0;
+    hoverBackgroundAlpha: 1.0;
+    padding: 1;
+    cornerRadius: 14;
+    textDecoration: "underline";
+    fontSize: 12;
+    color: #000000;    
+}
+
+.tagCloudStyle
+{
+    color:              #000000;
+    /* backgroundColor: 	#ffffff; */
+    rollOverColor:      #0E7EC5;        
+}
+
+s|List
+{
+    borderVisible: true;
+}
+
+
+s|TextInput
+{
+    skinClass: ClassReference("spark.skins.mobile.TextInputSkin");
+    height: 30;
+}
+
+
+/*  make Lists in tags dialog resizeable */
+/*
+s|Scroller 
+{
+skin-class: ClassReference("flex.utils.spark.resize.ResizableScrollerSkin");
+}
+*/

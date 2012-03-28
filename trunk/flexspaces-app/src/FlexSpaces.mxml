@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app:AppBase       
+        xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark" 
+        xmlns:mx="library://ns.adobe.com/flex/mx"
+        xmlns:app="org.integratedsemantics.flexspaces.app.*"
+        xmlns:business="org.integratedsemantics.flexspaces.control.delegate.*"
+        xmlns:control="org.integratedsemantics.flexspaces.control.*"
+        xmlns:view="org.integratedsemantics.flexspaces.view.main.*"
+        minWidth="600" minHeight="500"
+        creationComplete="onCreationComplete(event)">
+         
+    <fx:Declarations>
+        <business:Services id="services"/>
+        <control:AppController id="appController"/>
+    </fx:Declarations>
+    
+    <fx:Metadata>[ResourceBundle("FlexSpaces")]</fx:Metadata>  
+
+    <fx:Style source="css/flexspaces.css"/>
+    <fx:Style source="css/dialog.css"/>
+    <fx:Style source="css/login.css"/>
+    <fx:Style source="css/logout.css"/>
+    <fx:Style source="css/search.css"/>
+    <fx:Style source="css/flexspaces-browser.css"/>
+    
+    <app:layout>
+        <s:VerticalLayout
+            paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" 
+            verticalAlign="middle" horizontalAlign="center" />               
+    </app:layout>
+
+    <view:FlexSpacesView id="flexSpacesView" flexSpacesPresModel="{flexSpacesPresModel}" width="100%" height="100%"/>
+	
+</app:AppBase>
+

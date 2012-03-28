@@ -13,6 +13,8 @@
     <resourceEntry destPath="images/air/forward_large_arrow.png" sourcePath="images/air/forward_large_arrow.png"/>
     <resourceEntry destPath="images/air/up_arrow.png" sourcePath="images/air/up_arrow.png"/>
     <resourceEntry destPath="images/air/up_large_arrow.png" sourcePath="images/air/up_large_arrow.png"/>
+    <resourceEntry destPath="images/filetypes/_default.gif" sourcePath="images/filetypes/_default.gif"/>
+    <resourceEntry destPath="images/filetypes/_default.png" sourcePath="images/filetypes/_default.png"/>
     <resourceEntry destPath="images/filetypes32/_default.gif" sourcePath="images/filetypes32/_default.gif"/>
     <resourceEntry destPath="images/flexspaces/alfrescologo35_black.png" sourcePath="images/flexspaces/alfrescologo35_black.png"/>
     <resourceEntry destPath="images/flexspaces/back_to_list.png" sourcePath="images/flexspaces/back_to_list.png"/>
@@ -366,6 +368,8 @@
     <resourceEntry destPath="images/icons/sort_down.gif" sourcePath="images/icons/sort_down.gif"/>
     <resourceEntry destPath="images/icons/sort_flat.gif" sourcePath="images/icons/sort_flat.gif"/>
     <resourceEntry destPath="images/icons/sort_up.gif" sourcePath="images/icons/sort_up.gif"/>
+    <resourceEntry destPath="images/icons/space-icon-default-16.gif" sourcePath="images/icons/space-icon-default-16.gif"/>
+    <resourceEntry destPath="images/icons/space-icon-default-16.png" sourcePath="images/icons/space-icon-default-16.png"/>
     <resourceEntry destPath="images/icons/submit.gif" sourcePath="images/icons/submit.gif"/>
     <resourceEntry destPath="images/icons/submit_all.gif" sourcePath="images/icons/submit_all.gif"/>
     <resourceEntry destPath="images/icons/submit_all_large.gif" sourcePath="images/icons/submit_all_large.gif"/>
@@ -420,6 +424,7 @@
     <resourceEntry destPath="images/icons/workflow_large.gif" sourcePath="images/icons/workflow_large.gif"/>
     <resourceEntry destPath="images/icons/workflow_task.gif" sourcePath="images/icons/workflow_task.gif"/>
     <resourceEntry destPath="images/icons/workflow_task_large.gif" sourcePath="images/icons/workflow_task_large.gif"/>
+    <resourceEntry destPath="mobile/FlexSpacesMobileSplash.png" sourcePath="mobile/FlexSpacesMobileSplash.png"/>
   </includeResources>
   <namespaceManifests/>
 </flexLibProperties>

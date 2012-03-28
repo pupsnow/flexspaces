@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<taskcontrol:TaskButtonsViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:taskcontrol="org.integratedsemantics.flexspaces.view.tasks.taskcontrol.*"
+    creationComplete="onCreationComplete(event)" verticalAlign="middle">
+
+    <fx:Metadata>[ResourceBundle("TaskButtonsView")]</fx:Metadata>
+    
+    <mx:Spacer width="10" />
+    
+    <s:Button id="adhocDone" label="{resourceManager.getString('TaskButtonsView', 'adhocDone_label' )}"/>
+    
+    <mx:Spacer width="10" />
+    
+    <s:Button id="approveTask" label="{resourceManager.getString('TaskButtonsView', 'approveTask_label' )}"/>
+    
+    <mx:Spacer width="5" />
+    
+    <s:Button id="rejectTask" label="{resourceManager.getString('TaskButtonsView', 'rejectTask_label' )}"/>
+    
+    <mx:Spacer width="20" />
+    
+    <mx:Label id="taskLabel" text="{resourceManager.getString('TaskButtonsView', 'taskLabel_text')}" color="#ffffff"/>
+    
+    <mx:Spacer width="5" />
+    
+    <s:Label id="taskDescription" color="#ffffff" />
+    
+    <mx:Spacer width="20" />
+    
+    <s:Label id="listTitle" text="{resourceManager.getString('TaskButtonsView', 'listTitle_text')}" color="#ffffff"/>
+                        
+</taskcontrol:TaskButtonsViewBase>

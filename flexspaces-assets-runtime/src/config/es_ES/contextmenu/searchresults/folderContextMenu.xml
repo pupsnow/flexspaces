@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+     
+     <menuitem label="Copiar elementos" data="copy" />
+     
+     <menuitem label="Renombrar" data="rename" seperatorBefore="true" />
+     <menuitem label="Propiedades" data="properties"/>
+     <menuitem label="Etiquetas / Categorías" data="tags"/>
+     
+    <menuitem label="Abrir carpeta contenedora" data="gotoParent" seperatorBefore="true" />
+         
+</contextmenu>    

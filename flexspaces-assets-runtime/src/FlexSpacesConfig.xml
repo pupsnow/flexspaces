@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<objects
+    xmlns="http://www.springactionscript.org/schema/objects"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springactionscript.org/schema/objects http://www.springactionscript.org/schema/objects/spring-actionscript-objects-1.0.xsd">
+
+    <object id="ecmServerConfig" class="org.integratedsemantics.flexspaces.model.global.EcmServerConfig">
+
+        <!-- configuration of parts of webscript service url -->
+        <property name="protocol" value="http"/>
+        <property name="domain" value="localhost"/>
+        <property name="port" value="8080"/>
+        
+        <property name="alfrescoUrlPart" value="/alfresco/service"/>
+        <!-- for livecycle content services use next line and comment out previous line -->
+        <!-- property name="alfrescoUrlPart" value="/contentspace/wcservice" -->
+        <!-- isLiveCycleContentServices: false for regular alfresco, true for adobe livecycle content services -->  
+        <property name="isLiveCycleContentServices" value="false"/>
+
+        <!-- alfresco server version, allows early enable/disable of features, before getting from version from server -->   
+        <!-- for livecycle  content services ES2 9.0, use the version of alfresco included (3.1)  -->               
+        <property name="serverVersion" value="3.4"/> 
+        
+        <!-- url to alfresco share, used for getting form config data, and for share tab in air version -->
+        <property name="shareUrl" value="http://localhost:8080/share"/>
+           
+    </object>
+
+    <object id="appConfig" class="org.integratedsemantics.flexspaces.model.global.AppConfig">
+        <!-- default locale -->  
+        <property name="locale" value="en_US"/>    
+
+        <!-- whether store to locally short term store ticket / docLibPath / tabIndex -->
+        <!-- allows restoring state after browser refresh, portlet resize, and re-running app -->
+        <property name="useSessionData" value="false"/>                 
+        <!-- when short term data storage is used (useSessionData true), how long (in minutes) -->
+        <!-- can data still be used to restore state when app restarts -->
+        <property name="sessionDataValidTime" value="30"/>  
+        
+        <!-- air only, less steps editing (edit button saves offline without prompt or browse dialog, launches app -->
+        <property name="useLessStepsEdit" value="false"/>                 
+        <!-- air only, when using less step editing, whether to do auto update online, when user saves in app -->
+        <property name="autoUpdateOnlineOnAppSave" value="false"/> 
+        
+        <!-- whether to use configured properties form dialog using configuration from share, otherwise original fixed properties dialog will be used -->                
+        <property name="useConfiguredProperties" value="false"/>
+        <!-- what form configuration to use from share for properties, when empty string, default share form config used -->                
+        <property name="propertiesFormName" value="" />        
+        <!-- whether to use configured properties for properties portion of advanced search, using configuration from share, otherwise original fixed search properties will be used -->                
+        <property name="useConfiguredAdvancedSearchProperties" value="false"/>
+        <!-- what form configuration to use from share for advanced search properties -->                
+        <property name="searchFormName" value="search" />        
+
+    </object>
+
+    <object id="thumbnailConfig" class="org.integratedsemantics.flexspaces.model.global.ThumbnailConfig">
+        <!-- thumbnail type name: doclib for alfresco 3.0 thumbnail service used in share  -->  
+        <property name="thumbnailName" value="doclib"/>  
+        <property name="thumbnailHeight" value="100"/>  
+        <property name="thumbnailWidth" value="100"/>             
+    </object>
+
+    <object id="presModel" class="org.integratedsemantics.flexspaces.presmodel.main.FlexSpacesPresModel">
+        <!-- configure what tab views to display -->
+        <property name="showDocLib" value="true"/>        
+        <property name="showSearch" value="true"/>                
+        <property name="showTasks" value="true"/>        
+        <property name="showWCM" value="false"/>        
+        <!-- show share tab is only used in air version -->
+        <property name="showShare" value="false"/>  
+
+        <!-- whether to have coverflow view mode in views -->  
+        <property name="haveCoverFlow" value="false"/>                
+
+        <!-- default page sizes for views --> 
+        <property name="docLibPageSize" value="10"/>    
+        <property name="wcmPageSize" value="10"/>    
+        <property name="searchPageSize" value="10"/>    
+        <property name="taskAttachmentsPageSize" value="10"/>    
+        <property name="versionsPageSize" value="10"/>    
+        <property name="favoritesPageSize" value="10"/>    
+        <property name="checkedOutPageSize" value="10"/>    
+        <property name="pageSizeList">
+            <array-collection>
+                <value>10</value>
+                <value>20</value>
+                <value>30</value>
+                <value>40</value>
+                <value>50</value>
+            </array-collection>
+        </property>                               
+    </object>
+
+    <object id="calaisConfig" class="org.integratedsemantics.flexspaces.model.global.CalaisConfig">
+        <!-- whether to enable calais features -->  
+        <property name="enableCalais" value="false"/>        
+        <!--  calais api key --> 
+        <property name="calaisKey" value=""/>                               
+    </object>
+
+   <object id="googleMapConfig" class="org.integratedsemantics.flexspaces.model.global.GoogleMapConfig">
+      <!-- whether to enable google map feature -->  
+      <property name="enableGoogleMap" value="false"/>      
+      <!--  url of ip address or domain google api key is for --> 
+      <property name="googleMapUrl" value="http://code.google.com/p/flexspaces/"/>      
+      <!--  google map api key --> 
+      <property name="googleMapKey" value="ABQIAAAACg3Is1M2_kx4_0w8rbzYXhRHSyI1hNIz7gIwjgv76Wl0zREZFxRtt1l6iZPeloE6NoXscRA1M5l6yQ"/>                           
+   </object>
+
+   <!-- DI config of views / dialogs -->
+   <object id="advancedSearchView" lazy-init="true" singleton="true" class="org.integratedsemantics.flexspaces.view.search.advanced.AdvancedSearchView"/>
+   <object id="tagsCategoriesView" lazy-init="true" singleton="false" class="org.integratedsemantics.flexspaces.view.properties.tagscategories.TagsCategoriesView"/>   
+
+</objects>

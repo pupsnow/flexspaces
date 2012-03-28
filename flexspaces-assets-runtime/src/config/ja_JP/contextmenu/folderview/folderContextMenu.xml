@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contextmenu>
+     
+     <menuitem label="切り取り" data="cut" />
+     <menuitem label="コピー" data="copy" />
+     <menuitem label="貼り付け" data="paste" />
+     <menuitem label="消去" data="delete" />
+     
+     <menuitem label="名前の変更" data="rename" seperatorBefore="true" />
+     <menuitem label="プロパティ" data="properties"/>
+     <menuitem label="タグ・カテゴリ" data="tags"/>
+          
+</contextmenu>    

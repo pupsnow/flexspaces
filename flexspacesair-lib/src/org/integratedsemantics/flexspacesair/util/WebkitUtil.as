@@ -50,8 +50,6 @@ package org.integratedsemantics.flexspacesair.util
                 //case "ftl":
                 case "java":
                 case "jsp":
-				// added pdf and jpg in mobile
-                case "pdf":
                 case "jpg":    
                     isWebKitViewable = true;
                     break;

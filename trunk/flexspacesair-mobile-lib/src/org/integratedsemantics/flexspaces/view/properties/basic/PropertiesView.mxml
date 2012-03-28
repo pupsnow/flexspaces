@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties:PropertiesViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:properties="org.integratedsemantics.flexspaces.view.properties.basic.*"
+    title="{resourceManager.getString('PropertiesView', 'title')}"
+    width="440" height="450" minWidth="400" minHeight="450" 
+    skinClass="flex.utils.spark.resize.mobile.ResizableDraggableTitleWindowSkin"
+    styleName="dialog">
+    
+    <fx:Metadata>[ResourceBundle("PropertiesView")]</fx:Metadata>
+  
+    <!--fx:Style source="../../../framework/presmodel/dialog.css"/-->
+    <fx:Script>
+        <![CDATA[
+            import flex.utils.spark.resize.ResizableTextAreaSkin;
+        ]]>
+    </fx:Script>
+    
+    <s:VGroup horizontalAlign="left" verticalAlign="top" width="100%" height="100%" styleName="mainArea"
+              paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5">
+        
+    <s:Form width="100%" height="100%">
+        <s:layout>
+            <s:FormLayout gap="-10"/>
+        </s:layout>        
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'nameItem_label' )}" id="nameItem" width="100%">      
+            <s:TextInput id="nodename" text="{propPresModel.vo.name}" styleName="input" width="100%" height="30"
+            	change="propPresModel.updateName(nodename.text)" editable="{propPresModel.nameEditable}" />                  
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'titleItem_label' )}" id="titleItem" width="100%"
+        	visible="{propPresModel.titleVisible}" includeInLayout="{propPresModel.titleVisible}">      
+            <s:TextInput id="nodetitle" text="{propPresModel.vo.title}" styleName="input" width="100%" height="30"
+            	change="propPresModel.updateTitle(nodetitle.text)" editable="{propPresModel.titleEditable}"/>                  
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'descriptionItem_label' )}" id="descriptionItem" width="100%"
+        	visible="{propPresModel.descriptionVisible}" includeInLayout="{propPresModel.descriptionVisible}">      
+            <s:TextArea id="description" text="{propPresModel.vo.description}" styleName="input" width="100%" heightInLines="1" height="60"
+            	change="propPresModel.updateDescription(description.text)"  editable="{propPresModel.descriptionEditable}"/>                  
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'authorItem_label' )}" width="100%" id="authorItem"
+        	visible="{propPresModel.authorVisible}" includeInLayout="{propPresModel.authorVisible}">      
+            <s:TextInput id="author" text="{propPresModel.vo.author}" styleName="input" width="100%" height="30"
+            	change="propPresModel.updateAuthor(author.text)"/>                  
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'sizeItem_label' )}" width="100%" id="sizeItem"
+        	visible="{propPresModel.sizeVisible}" includeInLayout="{propPresModel.sizeVisible}" >      
+            <s:Label id="size" text="{propPresModel.vo.size}" />
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'creatorItem_label' )}" id="creatorItem" width="100%" visible="false" includeInLayout="false">      
+            <s:Label id="creator" text="{propPresModel.vo.creator}" />
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'createdItem_label' )}" id="createdItem" width="100%" visible="false" includeInLayout="false">      
+            <s:Label id="created" text="{propPresModel.vo.created}" />
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'modifierItem_label' )}" id="modifierItem" width="100%">      
+            <s:Label id="modifier" text="{propPresModel.vo.modifier}" />
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'modifiedItem_label' )}" id="modifiedItem" width="100%">      
+            <s:Label id="modified" text="{propPresModel.vo.modified}" />
+        </s:FormItem>
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'mimetypeItem_label' )}" width="100%" id="mimetypeItem"
+        	visible="{propPresModel.mimetypeVisible}" includeInLayout="{propPresModel.mimetypeVisible}">      
+            <s:Label id="mimetype" text="{propPresModel.vo.mimetype}" />
+        </s:FormItem>
+        <!--s:FormItem label="Encoding:"  width="100%" id="encodingItem">
+            <s:Label id="encoding"/>
+        </s:FormItem-->       
+        <s:FormItem label="{resourceManager.getString('PropertiesView', 'emailidItem_label' )}" id="emailidItem" width="100%"     
+        	visible="{propPresModel.emailIdVisible}" includeInLayout="{propPresModel.emailIdVisible}">      
+            <s:Label id="emailid" text="{propPresModel.vo.emailid}" />
+        </s:FormItem>
+        <!--s:FormItem label="Edit Inline:"  width="100%" id="editinlineItem">
+            <s:CheckBox label="Enabled" id="editinline" />
+        </s:FormItem -->
+    </s:Form>
+    
+    <s:HGroup width="100%" styleName="buttonArea" horizontalAlign="center" verticalAlign="bottom"> 
+        <s:Button id="closeBtn" label="{resourceManager.getString('PropertiesView', 'closeBtn_label' )}"
+        	enabled="{propPresModel.closeVisible}" visible="{propPresModel.closeVisible}" includeInLayout="{propPresModel.closeVisible}"/>    
+        <s:Button id="okBtn" label="{resourceManager.getString('PropertiesView', 'okBtn_label' )}"    
+        	enabled="{propPresModel.okVisible}" visible="{propPresModel.okVisible}" includeInLayout="{propPresModel.okVisible}"/>    
+        <mx:Spacer width="20"/>
+        <s:Button id="cancelBtn" label="{resourceManager.getString('PropertiesView', 'cancelBtn_label' )}"    
+        	enabled="{propPresModel.cancelVisible}" visible="{propPresModel.cancelVisible}" includeInLayout="{propPresModel.cancelVisible}"/>    
+    </s:HGroup> 
+        
+    </s:VGroup>
+        
+</properties:PropertiesViewBase>

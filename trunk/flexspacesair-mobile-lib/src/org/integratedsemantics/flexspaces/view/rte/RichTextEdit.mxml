@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<mx:RichTextEditor
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"   
+    showToolTips="true"
+    creationComplete="init()"  headerHeight="0">
+
+	<fx:Script>
+		<![CDATA[
+		
+		import mx.controls.*;
+		import mx.containers.*;
+		import flash.events.*;
+		import mx.managers.PopUpManager;
+		import mx.core.IFlexDisplayObject;
+		
+		//the namespace is used as the getTextField() etc method is not available in the default  namespace...
+        use namespace mx_internal;
+
+        [Embed(source='assets/linkButton.png')] [Bindable] public var linkIcon:Class;
+		[Embed(source='assets/breakLinkButton.png')] [Bindable] public var breakLinkIcon:Class;
+		
+		// The variable for the pop-up dialog box.
+		public var w:IFlexDisplayObject;
+		
+		// The two link buttons
+		public var linkButton:Button;
+		public var deleteLinkButton:Button;
+
+		// Add the link buttons to the Rich Text Editor control's
+		// tool bar container.
+		public function addLinkButtons():void {
+			
+			var linkBox:HBox = new HBox();
+			linkBox.id = "linkButtons";
+			linkBox.setStyle("horizontalGap",0); //horizontalGap="0";
+			
+			linkButton = new Button();
+			linkButton.width=25;
+			linkButton.setStyle("icon",linkIcon);
+			linkButton.addEventListener("click",linkPop);
+			linkButton.toolTip = "Add Link";
+			linkBox.addChild(linkButton);
+			    
+			deleteLinkButton = new Button();
+			deleteLinkButton.width=25;
+			deleteLinkButton.height=23;
+			deleteLinkButton.setStyle("icon",breakLinkIcon);
+			deleteLinkButton.addEventListener("click",killLink);
+			deleteLinkButton.toolTip = "Remove Link";
+			linkBox.addChild(deleteLinkButton);
+			
+			var spacer:VRule = new VRule();
+			spacer.height = 23;
+			toolbar.addChild(spacer);
+			toolbar.addChild(linkBox);
+
+                        // add a function to test whether or not
+                        // the link button should be enabled
+                        addEventListener("change",testLink);
+                        addEventListener("click",testLink);
+                        addEventListener("keyUp",testLink);
+		}
+
+                public function testLink(event:Event):void{
+                    
+                    var beginIndex:int = textArea.getTextField().selectionBeginIndex;
+                    var endIndex:int   = textArea.getTextField().selectionEndIndex;
+	
+                    if (beginIndex == endIndex) 
+                    {                       
+                        linkButton.enabled = false;
+                    }else{
+                        linkButton.enabled = true;
+                    }
+                }
+
+		// The event listener for the insert-link button's click event
+		// creates a pop-up with a LinkPop custom control.
+		public function linkPop(event:Event):void {
+			var w:LinkPop = LinkPop(PopUpManager.createPopUp
+		    	(this, LinkPop, true));
+		    w.height= 189;
+		    w.width= 400;
+		    // Pass the a reference to the textArea subcontrol
+		    // so that the custom control can replace the text.
+		    w.RTETextArea = textArea;
+		    PopUpManager.centerPopUp(w);
+		}
+		
+		/* The killLink function needs to do two things:
+		*	1) Remove link formatting from highlighted text 
+		*	-OR-
+		*	2) If no text is highlighted, but the current cursor position is at a link, remove the whole link.
+		*/
+		public function killLink(event:Event):void {
+			var tf:TextFormat  = new TextFormat();
+			tf["url"] = "";
+			tf["target"] = "";
+    	
+	    	var beginIndex:int = textArea.getTextField().selectionBeginIndex;
+	    	var endIndex:int   = textArea.getTextField().selectionEndIndex;
+	
+	    	if (beginIndex == endIndex) 
+	    	{
+	    		var up:int = endIndex;
+	    		var down:int = beginIndex;
+				while (up < textArea.getTextField().length - 1)
+				{
+					var tfNext:TextFormat=textArea.getTextField().getTextFormat(up, up + 1);
+					if (!tfNext.url || tfNext.url == "")
+					{		
+						break;
+					}else{
+						up++;
+					}
+				}
+				
+				while(down > 0)
+				{
+					var tfPre:TextFormat=textArea.getTextField().getTextFormat(down-1, down);
+					if (!tfPre.url || tfPre.url == "")
+					{		
+						break;
+					}else{
+						down--;
+					}
+				}
+				beginIndex = down;
+				endIndex = up;
+	    	}
+	
+	    	//if we have a link...kill it
+	    	if(beginIndex != endIndex) textArea.getTextField().setTextFormat(tf,beginIndex,endIndex);
+		}
+
+		//it would also be cool to bind keyboard commands like CTRL + B to some of the buttons...
+		public function init():void
+		{
+			//there is a no-identity VRule whose height is bound to the linkTextInput, but which
+			//occurs directly before it in the child list...  leaving it creates an ugly gap as its
+			//height drops to 0 as soon as the linkTextInput is removed
+			var i:int = toolbar.getChildIndex(linkTextInput);
+			//now drop that one twice (one for the linkText, one for the VRule)
+			toolbar.removeChildAt(i-1);
+			toolbar.removeChildAt(i-1);
+			
+			addLinkButtons();
+		}
+	
+		]]>
+	</fx:Script>           	
+    	
+</mx:RichTextEditor>

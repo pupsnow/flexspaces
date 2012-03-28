@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties:TagPropertiesViewBase 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:properties="org.integratedsemantics.flexspaces.view.tags.properties.*"
+    styleName="mainArea"
+    height="100%" width="100%" creationPolicy="all"
+    creationComplete="onCreationComplete(event)">
+
+    <fx:Metadata>[ResourceBundle("TagPropertiesView")]</fx:Metadata>
+    
+    <!--fx:Style source="../../../framework/presmodel/dialog.css"/-->
+
+    <properties:layout>
+        <s:FormLayout gap="-10" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0"/>
+    </properties:layout>        
+    
+    <s:FormItem label="{resourceManager.getString('TagPropertiesView', 'taggedWithFormItem_label' )}" width="100%" height="40%" styleName="mainArea" id="taggedWithFormItem">            
+        <s:layout>
+            <s:HorizontalLayout />
+        </s:layout>        
+        <s:List id="tagList" dataProvider="{tagPropertiesPresModel.tags}" labelField="{resourceManager.getString('TagPropertiesView', 'tagList_labelField')}"  styleName="input" 
+        	change="onChangeTagList(event)" height="90%" width="100%">
+            <s:itemRenderer>
+                <fx:Component>
+                    <s:LabelItemRenderer fontSize="20" height="25"/>
+                </fx:Component>
+            </s:itemRenderer>            
+            <s:layout>
+                <s:VerticalLayout  requestedMaxRowCount="4" requestedMinRowCount="2"/>
+            </s:layout>            
+        </s:List>    
+        <s:Button label="{resourceManager.getString('TagPropertiesView', 'removeTagBtn_label' )}" id="removeTagBtn" 
+        	enabled="{tagPropertiesPresModel.enableRemove}" visible="{tagPropertiesPresModel.enableRemove}"/>
+    </s:FormItem>    
+
+    <s:FormItem label="{resourceManager.getString('TagPropertiesView', 'newTagFormItem_label' )}" width="100%" styleName="mainArea" id="newTagFormItem"> 
+        <s:layout>
+            <s:HorizontalLayout />
+        </s:layout>        
+        <s:TextInput id="tagName" width="100%" styleName="input" change="onChangeNewTagText(event)" height="30"/>
+        <s:Button label="{resourceManager.getString('TagPropertiesView', 'addNewTagBtn_label' )}" id="addNewTagBtn" 
+        	enabled="{tagPropertiesPresModel.enableNew}" visible="{tagPropertiesPresModel.enableNew}"/>
+    </s:FormItem>
+
+    <s:FormItem label="{resourceManager.getString('TagPropertiesView', 'allTagsFormItem_label' )}" width="100%" height="50%" styleName="mainArea"  id="allTagsFormItem"> 
+        <s:layout>
+            <s:HorizontalLayout />
+        </s:layout>        
+        <s:List id="allTagsList" dataProvider="{tagPropertiesPresModel.allTags}" labelField="{resourceManager.getString('TagPropertiesView', 'allTagsList_labelField')}" 
+            styleName="input" height="90%" width="100%" change="onChangeAllTagsList(event)">
+            <s:itemRenderer>
+                <fx:Component>
+                    <s:LabelItemRenderer fontSize="20" height="25"/>
+                </fx:Component>
+            </s:itemRenderer>                        
+            <s:layout>
+                <s:VerticalLayout  requestedMaxRowCount="5" requestedMinRowCount="3"/>
+            </s:layout>            
+        </s:List>
+        <s:Button label="{resourceManager.getString('TagPropertiesView', 'addExistingTagBtn_label' )}" id="addExistingTagBtn"
+        	enabled="{tagPropertiesPresModel.enableAdd}" visible="{tagPropertiesPresModel.enableAdd}"/>
+    </s:FormItem>    
+
+</properties:TagPropertiesViewBase>

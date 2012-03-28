@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gridview:FolderGridViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:gridview="org.integratedsemantics.flexspaces.view.folderview.gridview.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">    
+        
+    <fx:Metadata>[ResourceBundle("FolderGridView")]</fx:Metadata>
+
+    <s:VGroup height="100%" width="100%">
+    
+        <mx:DataGrid id="folderGrid" height="100%" width="100%" rowHeight="25"
+            dataProvider="{dataProvider}" styleName="fileGridStyle" doubleClickEnabled="true"         
+            dragEnabled="true" dropEnabled="true"  dragMoveEnabled="true" allowMultipleSelection="true"
+            change="onChange(event)">
+    
+            <mx:columns>        
+                <mx:DataGridColumn dataField="lock" headerText="" width="25" sortable="false">
+                    <mx:itemRenderer>
+                        <fx:Component>
+                            <mx:Box>
+                                <mx:Image source="@Embed('images/icons/locked.gif')" includeInLayout="{data.isLocked}"  visible="{data.isLocked}" scaleContent="false" />                                                        
+                            </mx:Box>
+                        </fx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>    
+                <mx:DataGridColumn dataField="icon" headerText="" width="25" sortable="false">
+                    <mx:itemRenderer>
+                        <fx:Component>
+                            <mx:Image source="{data.icon16}" scaleContent="false"/>
+                        </fx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>    
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'nameColumn_headerText')}" dataField="name" width="200" id="dgcolumn0"/>      
+                <!--<mx:DataGridColumn headerText="Description" dataField="desc" width="100" /> -->            
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'typeColumn_headerText')}" dataField="type" width="100" id="dgcolumn1"/>      
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'sizeColumn_headerText')}" dataField="size" width="100" id="dgcolumn2"/>      
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'createdColumn_headerText')}" dataField="created" width="100" id="dgcolumn3"/>      
+                <mx:DataGridColumn headerText="{resourceManager.getString('FolderGridView', 'modifiedColumn_headerText')}" dataField="modified" id="dgcolumn4"/>      
+            </mx:columns>
+    
+        </mx:DataGrid>  
+
+    </s:VGroup>
+      
+</gridview:FolderGridViewBase>    

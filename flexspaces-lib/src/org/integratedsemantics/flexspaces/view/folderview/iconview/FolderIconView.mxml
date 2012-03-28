@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<iconview:FolderIconViewBase
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:iconview="org.integratedsemantics.flexspaces.view.folderview.iconview.*"
+    creationComplete="onCreationComplete(event)" height="100%" width="100%">
+    
+    <fx:Metadata>[ResourceBundle("FolderIconView")]</fx:Metadata>
+
+    <s:VGroup height="100%" width="100%">
+    
+        <mx:TileList id="folderTileList" width="100%" height="100%" columnWidth="125" rowHeight="85"
+            dataProvider="{dataProvider}" doubleClickEnabled="true" 
+            dragEnabled="true" dropEnabled="true" dragMoveEnabled="true" allowMultipleSelection="true"  
+            change="onChange(event)" styleName="fileTileListStyle">
+            
+            <mx:itemRenderer>
+                <fx:Component>      
+                    <iconview:NodeView nodeName="{data.name}" icon32="{data.icon32}" isLocked="{data.isLocked}" showThumbnail="{data.showThumbnail}" thumbnailUrl="{data.thumbnailUrl}"/>
+                </fx:Component>
+            </mx:itemRenderer>
+        </mx:TileList>
+                
+    </s:VGroup>        
+    
+</iconview:FolderIconViewBase>

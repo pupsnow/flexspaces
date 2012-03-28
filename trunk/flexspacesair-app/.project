@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>flexspacesair-app</name>
+	<comment></comment>
+	<projects>
+		<project>flexspaces-locales</project>
+		<project>flexspacesair-lib</project>
+		<project>flexspaceslib</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.apollobuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.apollonature</nature>
+		<nature>com.adobe.flexbuilder.project.flexnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] flexspaces-assets-runtime-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/flexspaces-assets-runtime/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] flexspaces-css-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/flexspaces-css/src</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

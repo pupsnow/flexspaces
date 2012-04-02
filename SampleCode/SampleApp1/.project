@@ -17,9 +17,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>[source path] src</name>
+			<name>[source path] flexspaces-assets-runtime-src</name>
 			<type>2</type>
-			<locationURI>DOCUMENTS/FlexSpaces/src</locationURI>
+			<locationURI>DOCUMENTS/flexspaces-assets-runtime/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] flexspaces-css-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/flexspaces-css/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

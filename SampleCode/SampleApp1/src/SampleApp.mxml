@@ -18,6 +18,10 @@
     <fx:Metadata>[ResourceBundle("FlexSpaces")]</fx:Metadata>  
     
     <fx:Style source="css/flexspaces.css"/>
+	<fx:Style source="css/dialog.css"/>
+	<fx:Style source="css/login.css"/>
+	<fx:Style source="css/logout.css"/>
+	<fx:Style source="css/search.css"/>
     <fx:Style source="css/flexspaces-browser.css"/>
     <fx:Style source="sampleapp.css"/>
         

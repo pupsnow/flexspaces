@@ -35,5 +35,10 @@
 			<type>2</type>
 			<locationURI>DOCUMENTS/flexspaces-css/src</locationURI>
 		</link>
+		<link>
+			<name>[source path] flexspaces-tinymce-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/flexspaces-tinymce/src</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

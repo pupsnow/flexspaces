@@ -4,6 +4,7 @@
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/flexspaces-assets-runtime/src"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/flexspaces-css/src"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/flexspaces-tinymce/src"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path=""/>

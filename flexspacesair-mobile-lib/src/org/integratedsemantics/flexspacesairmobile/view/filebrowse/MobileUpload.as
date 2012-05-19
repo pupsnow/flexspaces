@@ -18,6 +18,7 @@ package org.integratedsemantics.flexspacesairmobile.view.filebrowse
     import org.integratedsemantics.flexspaces.control.command.IUploadHandlers;
     import org.integratedsemantics.flexspaces.control.error.ErrorMgr;
     import org.integratedsemantics.flexspaces.model.AppModelLocator;
+    import org.integratedsemantics.flexspaces.model.folder.Node;
     import org.integratedsemantics.flexspaces.model.repo.IRepoNode;
     import org.integratedsemantics.flexspaces.util.FormatUtil;
 
@@ -27,8 +28,9 @@ package org.integratedsemantics.flexspacesairmobile.view.filebrowse
         protected var model:AppModelLocator = AppModelLocator.getInstance();
         protected var onComplete:Function;
         protected var statusHandlers:IUploadHandlers;
-        private var parentNode:IRepoNode;
-
+        protected var parentNode:IRepoNode;
+		protected var existingNode:IRepoNode = null;		
+		
 
         /**
          * Constructor 
@@ -40,7 +42,6 @@ package org.integratedsemantics.flexspacesairmobile.view.filebrowse
         {
             this.statusHandlers = statusHandlers;
         }
-
         
         public function uploadBrowse(parent:DisplayObject, parentNode:IRepoNode, onComplete:Function=null):void
         {
@@ -50,13 +51,23 @@ package org.integratedsemantics.flexspacesairmobile.view.filebrowse
             var fileBrowseView:FileBrowseView = FileBrowseView(PopUpManager.createPopUp(parent, FileBrowseView, false));    
             fileBrowseView.onComplete = browseComplete;            
         }
+		
+		public function updateBrowse(parent:DisplayObject, parentNode:IRepoNode, repoNode:IRepoNode, onComplete:Function=null):void
+		{
+			this.onComplete = onComplete;
+			this.parentNode = parentNode;
+			this.existingNode = repoNode;
+			
+			var fileBrowseView:FileBrowseView = FileBrowseView(PopUpManager.createPopUp(parent, FileBrowseView, false));    
+			fileBrowseView.onComplete = browseComplete;            
+		}		
         
         private function browseComplete(files:Vector.<File>):void
         {
             for (var i:uint = 0; i < files.length; i++) 
             {
                 trace(files[i].nativePath);                
-                uploadAir(files[i], this.parentNode, this.onComplete);   
+                uploadAir(files[i], this.parentNode, this.onComplete, existingNode);   
             }            
         }
         

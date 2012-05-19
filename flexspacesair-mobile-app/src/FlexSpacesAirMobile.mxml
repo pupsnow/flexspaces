@@ -9,7 +9,6 @@
                 xmlns:view="org.integratedsemantics.flexspacesairmobile.view.main.*"
                 width="100%" height="100%"                        
                 fontSize="16"  
-                applicationDPI="160"
                 splashScreenImage="@Embed('mobile/FlexSpacesMobileSplash.png')"
                 creationComplete="onCreationComplete(event)">
     

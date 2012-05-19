@@ -1,5 +1,6 @@
 package org.integratedsemantics.flexspacesmobile.view.main
 {
+    import flash.display.DisplayObject;
     import flash.events.Event;
     import flash.events.KeyboardEvent;
     import flash.events.MouseEvent;
@@ -1318,7 +1319,8 @@ package org.integratedsemantics.flexspacesmobile.view.main
                     flexSpacesPresModel.makeVersionable(selectedItem);
                     break;
                 case 'update':
-                    flexSpacesPresModel.updateNode(selectedItem, this);
+                    //flexSpacesPresModel.updateNode(selectedItem, this);
+					mobileUpdateNode(selectedItem, this);
                     break;
                 case 'startworkflow':
                     flexSpacesPresModel.startWorkflow(selectedItem, this);
@@ -2218,7 +2220,18 @@ package org.integratedsemantics.flexspacesmobile.view.main
                 upload.uploadBrowse(this, parentNode, redraw);
             }                 
         }
-                        
+		
+		public function mobileUpdateNode(selectedItem:Object, parent:DisplayObject):void
+		{
+			if ( (selectedItem != null) && (flexSpacesPresModel.currentNodeList is Folder) )
+			{
+				var folder:Folder = flexSpacesPresModel.currentNodeList as Folder;
+				var parentNode:IRepoNode = folder.folderNode;
+				
+				var upload:MobileUpload = new MobileUpload(null);
+				upload.updateBrowse(this, parentNode, selectedItem as IRepoNode, redraw);
+			} 			
+		}		                        
         
     }
 }
